@@ -27,7 +27,7 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 import tk.wurst_client.utils.NetworkUtils;
 @Info(category = Category.COMBAT,
 description = "Automatically use splash healing potions.",
-name = "AutoSplashPot", tags = "AutoPot,AutoPotion,AutoSplash")
+name = "AutoSplashPotion", tags = "AutoPot,AutoPotion,AutoSplashPotion")
 public class AutoPotMod extends Mod implements UpdateListener{
 
 	public float normalHealth = 20F;
