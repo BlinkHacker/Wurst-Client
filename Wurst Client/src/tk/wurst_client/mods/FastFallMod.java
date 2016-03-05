@@ -45,7 +45,7 @@ public class FastFallMod extends Mod implements UpdateListener
 			&& !wurst.mods.flightMod.isEnabled()
 			&& !wurst.mods.safeWalkMod.isEnabled())
 		{
-			mc.thePlayer.motionY -= 5;
+			mc.thePlayer.motionY = -10;
 		}
 	}
 	
