@@ -42,6 +42,7 @@ public class ModManager
 	public final AutoRespawnMod autoRespawnMod = new AutoRespawnMod();
 	public final AutoSignMod autoSignMod = new AutoSignMod();
 	public final AutoSoupMod autoSoupMod = new AutoSoupMod();
+	public final AutoSplashPotionMod autosplashpotMod = new AutoSplashPotionMod();
 	public final AutoSprintMod autoSprintMod = new AutoSprintMod();
 	public final AutoStealMod autoStealMod = new AutoStealMod();
 	public final AutoSwitchMod autoSwitchMod = new AutoSwitchMod();
