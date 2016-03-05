@@ -13,8 +13,8 @@ import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MOVEMENT,
 	description = "Makes you fall very fast.",
-	name = "InstaFall")
-public class InstaFallMod extends Mod implements UpdateListener
+	name = "FastFall")
+public class FastFallMod extends Mod implements UpdateListener
 {
 	@Override
 	public void onEnable()

@@ -67,6 +67,7 @@ public class ModManager
 	public final FastBreakMod fastBreakMod = new FastBreakMod();
 	public final FastBowMod fastBowMod = new FastBowMod();
 	public final FastEatMod fastEatMod = new FastEatMod();
+	public final FastFallMod fastFallMod = new FastFallMod();
 	public final FastLadderMod fastLadderMod = new FastLadderMod();
 	public final FastPlaceMod fastPlaceMod = new FastPlaceMod();
 	public final FightBotMod fightBotMod = new FightBotMod();
@@ -85,7 +86,6 @@ public class ModManager
 	public final HighJumpMod highJumpMod = new HighJumpMod();
 	public final HomeMod homeMod = new HomeMod();
 	public final InstantBunkerMod instantBunkerMod = new InstantBunkerMod();
-	public final InstaFallMod instaFallMod = new InstaFallMod();
 	public final InvisibilityMod invisibilityMod = new InvisibilityMod();
 	public final ItemEspMod itemEspMod = new ItemEspMod();
 	public final JesusMod jesusMod = new JesusMod();
