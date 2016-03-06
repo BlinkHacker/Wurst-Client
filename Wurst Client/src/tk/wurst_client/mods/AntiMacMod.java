@@ -45,7 +45,6 @@ public class AntiMacMod extends Mod
 			blockedMods.remove(wurst.mods.regenMod);
 			blockedMods.remove(wurst.mods.spiderMod);
 			blockedMods.remove(wurst.mods.tpAuraMod);
-			blockedMods.remove(wurst.mods.fastFallMod)
 			
 			// block FancyChat because Mineplex disables special characters
 			blockedMods.add(wurst.mods.fancyChatMod);
