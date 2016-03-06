@@ -14,7 +14,8 @@ import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MOVEMENT,
 	description = "Makes you fall very fast.",
-	name = "FastFall")
+	name = "FastFall",
+	noCheatCompatible = false)
 public class FastFallMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting fastFallOnWater = new CheckboxSetting(
