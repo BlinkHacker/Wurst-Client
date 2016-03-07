@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.init.Items;
@@ -29,7 +30,8 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 @Info(category = Category.COMBAT,
 	description = "Automatically eats soup if your health is below the set value.",
 	name = "AutoSoup",
-	tags = "auto soup")
+	tags = "auto soup",
+	tutorial = "Mods/AutoSoup")
 public class AutoSoupMod extends Mod implements UpdateListener
 {
 	public float health = 20F;
@@ -46,7 +48,6 @@ public class AutoSoupMod extends Mod implements UpdateListener
 				health = (float)getValue();
 			}
 		});
-		
 	}
 	
 	@Override
@@ -65,7 +66,7 @@ public class AutoSoupMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		// check if no container is open
-		if(mc.currentScreen instanceof GuiContainer)
+		if(mc.currentScreen instanceof GuiContainer && !(mc.currentScreen instanceof GuiInventory))
 			return;
 		
 		EntityPlayerSP player = mc.thePlayer;
@@ -112,6 +113,12 @@ public class AutoSoupMod extends Mod implements UpdateListener
 		}else
 			// move soup in inventory to hotbar
 			playerController.windowClick(0, soupInInventory, 0, 1, player);
+	}
+	
+	@Override
+	public void onDisable()
+	{
+		wurst.events.remove(UpdateListener.class, this);
 	}
 	
 	private int findSoup(int startSlot, int endSlot)
