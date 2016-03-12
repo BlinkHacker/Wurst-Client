@@ -48,6 +48,8 @@ public class AimbotMod extends Mod implements UpdateListener {
 			wurst.mods.tpAuraMod.setEnabled(false);
     	if(wurst.mods.killauraLegitMod.isEnabled())
     		wurst.mods.killauraLegitMod.setEnabled(false);
+    	if(wurst.mods.tpAuraMod.isEnabled())
+    		wurst.mods.tpAuraMod.setEnabled(false);
         wurst.events.add(UpdateListener.class, this);
     }
 
