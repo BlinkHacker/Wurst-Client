@@ -10,26 +10,38 @@ package tk.wurst_client.mods;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MOVEMENT,
 	description = "Makes you fall very fast.",
-	name = "FastFall")
+	name = "FastFall",
+	noCheatCompatible = false)
 public class FastFallMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting fastFallOnWater = new CheckboxSetting(
 		"Fast fall on water", false);
 	
-	@Override
-	public void onEnable()
-	{
-		wurst.events.add(UpdateListener.class, this);
-	}
 	
 	@Override
 	public void initSettings()
 	{
 		settings.add(fastFallOnWater);
+	}
+	
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.mods.autoEatMod};
+	}
+	
+	@Override
+	public void onEnable()
+	{	
+		//disable glide if FastFall is enabled
+		if(wurst.mods.glideMod.isEnabled())
+			wurst.mods.glideMod.setEnabled(false);
+		wurst.events.add(UpdateListener.class, this);
 	}
 	
 	@Override
