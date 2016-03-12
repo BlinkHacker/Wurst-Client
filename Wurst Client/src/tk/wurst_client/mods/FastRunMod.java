@@ -23,7 +23,8 @@ import tk.wurst_client.mods.Mod.Category;
 @Info(category = Category.MOVEMENT,
 description = "Moves extremely fast while running straight and on a flat area. Only works on\n" +
  "vanilla servers. Best used with NoFall enabled aswell.",
-name = "FastRun")
+name = "FastRun",
+noCheatCompatible = false)
 public class FastRunMod extends Mod implements UpdateListener
 {	
 	private double currentX;
