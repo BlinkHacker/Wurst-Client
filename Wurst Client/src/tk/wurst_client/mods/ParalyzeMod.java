@@ -13,7 +13,10 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.utils.EntityUtils;
 
 @Mod.Info(category = Mod.Category.EXPLOITS,
-	description = "Kicks the running players towards you.",
+	description = "Makes the players near 1 block of you glitch.\n"
+	    + "Causes rapid hunger loss in vanilla servers\n"
+	    + "to either you or the player near you.\n"
+	    + "Extermely buggy.",
 	name = "Paralyze")
 public class ParalyzeMod extends Mod implements UpdateListener
 {
