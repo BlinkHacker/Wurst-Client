@@ -20,7 +20,9 @@ import tk.wurst_client.utils.EntityUtils;
  * Aimbot mod based off of Colony hacked client's aimbot
  * Credit to nulldev
  */
-@Mod.Info(name = "Aimbot", description = "Automatically aims to the nearest entity.", category = Mod.Category.COMBAT)
+@Mod.Info(category = Mod.Category.COMBAT,
+    description = "Automatically aims to the nearest entity.",
+    name = "Aimbot")
 public class AimbotMod extends Mod implements UpdateListener {
 
     @Override
