@@ -24,6 +24,7 @@ public class ModManager
 			}
 		});
 	
+	public final AimbotMod aimbotMod = new AimbotMod();
 	public final AntiAfkMod antiAfkMod = new AntiAfkMod();
 	public final AntiBlindMod antiBlindMod = new AntiBlindMod();
 	public final AntiCactusMod antiCactusMod = new AntiCactusMod();
