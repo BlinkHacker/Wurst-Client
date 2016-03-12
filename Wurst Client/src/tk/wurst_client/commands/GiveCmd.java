@@ -50,7 +50,7 @@ public class GiveCmd extends Cmd
 					+ "], display:{Name:§6One Hitter}, Unbreakable:1,"
 					+ "HideFlags:63}"),
 			
-			new ItemTemplate("Troll Crash Chestplate", Items.diamond_chestplate,
+			new ItemTemplate("Troll Speed Crash Chestplate", Items.diamond_chestplate,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:2147483647,"
@@ -58,7 +58,7 @@ public class GiveCmd extends Cmd
 					+ "], display:{Name:§6Magical Chestplate}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 			
-			new ItemTemplate("Troll Crash Axe", Items.wooden_axe,
+			new ItemTemplate("Troll Speed Crash Axe", Items.wooden_axe,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:2147483647,"
@@ -69,7 +69,7 @@ public class GiveCmd extends Cmd
 			new ItemTemplate("God Boots", Items.diamond_boots,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:10,"
+					+ "Name:generic.movementSpeed, Amount:7,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641},"
 					+ "{AttributeName:generic.attackDamage,"
 					+ "Name:generic.attackDamage, Amount:2147483647,"
@@ -78,6 +78,14 @@ public class GiveCmd extends Cmd
 					+ "Name:generic.knockbackResistance, Amount:1,"
 					+ "Operation:0, UUIDMost:84926, UUIDLeast:175435}"
 					+ "], display:{Name:§9GodBoots}, Unbreakable:1,"
+					+ "HideFlags:63}"),	
+			
+			new ItemTemplate("1000 Speed Legs", Items.diamond_leggings,
+				"{AttributeModifiers:["
+					+ "{AttributeName:generic.movementSpeed,"
+					+ "Name:generic.movementSpeed, Amount:1000,"
+					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
+					+ "], display:{Name:§o§SPEEDSTER}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 		
 		    new ItemTemplate("Super Bow", Items.bow, "{ench:["
