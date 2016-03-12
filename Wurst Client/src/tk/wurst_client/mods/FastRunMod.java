@@ -8,6 +8,7 @@
 package tk.wurst_client.mods;
 
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
@@ -24,6 +25,7 @@ import tk.wurst_client.mods.Mod.Category;
 description = "Moves extremely fast while running straight and on a flat area. Only works on\n" +
  "vanilla servers. Best used with NoFall enabled aswell.",
 name = "FastRun",
+tags = "speedhack,speed hack",
 noCheatCompatible = false)
 public class FastRunMod extends Mod implements UpdateListener
 {	
@@ -59,6 +61,12 @@ public class FastRunMod extends Mod implements UpdateListener
 				speed = (int)getValue()*10;
 			}
 		});
+	}
+	
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.mods.speedHackMod};
 	}
 	
 	@Override
