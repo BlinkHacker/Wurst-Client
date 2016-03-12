@@ -63,13 +63,13 @@ public class GiveCmd extends Cmd
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:2147483647,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
-					+ "], display:{Name:WorldEdit Axe}, Unbreakable:1,"
+					+ "], display:{Name:§4WorldEdit Axe}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 			
 			new ItemTemplate("God Boots", Items.diamond_boots,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:100,"
+					+ "Name:generic.movementSpeed, Amount:10,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641},"
 					+ "{AttributeName:generic.attackDamage,"
 					+ "Name:generic.attackDamage, Amount:2147483647,"
@@ -77,7 +77,7 @@ public class GiveCmd extends Cmd
 					+ "{AttributeName:generic.knockbackResistance,"
 					+ "Name:generic.knockbackResistance, Amount:1,"
 					+ "Operation:0, UUIDMost:84926, UUIDLeast:175435}"
-					+ "], display:{Name:GodBoots}, Unbreakable:1,"
+					+ "], display:{Name:§9GodBoots}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 		
 		    new ItemTemplate("Super Bow", Items.bow, "{ench:["
