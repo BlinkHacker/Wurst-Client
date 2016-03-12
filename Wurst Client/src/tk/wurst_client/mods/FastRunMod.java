@@ -37,19 +37,6 @@ public class FastRunMod extends Mod implements UpdateListener
 	private int speed = 1;
 	
 	@Override
-	public String getRenderName()
-	{	
-		String currentString = getName();
-		currentString = currentString + "[Is Flat: ";
-		if(isFlatArea()){
-			currentString = currentString + "True]";
-		}else{
-			currentString = currentString + "False]";
-		}
-		return currentString;
-	}
-	
-	@Override
 	public void initSettings()
 	{
 		settings.add(new SliderSetting("Run Speed", defaultSpeed, 1, 10, 1,
