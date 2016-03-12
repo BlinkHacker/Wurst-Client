@@ -72,6 +72,7 @@ public class ModManager
 	public final FastFallMod fastFallMod = new FastFallMod();
 	public final FastLadderMod fastLadderMod = new FastLadderMod();
 	public final FastPlaceMod fastPlaceMod = new FastPlaceMod();
+	public final FastRunMod fastRunMod = new FastRunMod();
 	public final FightBotMod fightBotMod = new FightBotMod();
 	public final FlightMod flightMod = new FlightMod();
 	public final FollowMod followMod = new FollowMod();
