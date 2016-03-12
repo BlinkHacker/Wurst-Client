@@ -85,7 +85,7 @@ public class GiveCmd extends Cmd
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:1000,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
-					+ "], display:{Name:§o§SPEEDSTER}, Unbreakable:1,"
+					+ "], display:{Name:§o§cSPEEDSTER}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 		
 		    new ItemTemplate("Super Bow", Items.bow, "{ench:["
