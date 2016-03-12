@@ -78,7 +78,7 @@ public class GiveCmd extends Cmd
 					+ "{id:7, lvl:9999}"
 					+ "], AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:0.3,"
+					+ "Name:generic.movementSpeed, Amount:1,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641},"
 					+ "{AtributeName:generic.maxHealth,"
 					+ "Name.generic.maxHealth, Amount:500,"
