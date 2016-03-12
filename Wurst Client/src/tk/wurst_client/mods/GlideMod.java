@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.NavigatorItem;
 
 @Info(category = Category.MOVEMENT,
 	description = "Makes you fall like if you had a hang glider.",
@@ -18,9 +19,19 @@ import tk.wurst_client.mods.Mod.Info;
 	noCheatCompatible = false)
 public class GlideMod extends Mod implements UpdateListener
 {
+	
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.mods.fastFallMod};
+	}
+	
 	@Override
 	public void onEnable()
 	{
+		//disable fastfall if enabled
+		if(wurst.mods.fastFallMod.isEnabled())
+			wurst.mods.fastFallMod.setEnabled(false);
 		wurst.events.add(UpdateListener.class, this);
 	}
 	

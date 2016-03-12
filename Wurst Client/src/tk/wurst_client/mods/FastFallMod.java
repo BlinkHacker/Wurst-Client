@@ -32,7 +32,7 @@ public class FastFallMod extends Mod implements UpdateListener
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.autoEatMod};
+		return new NavigatorItem[]{wurst.mods.glideMod};
 	}
 	
 	@Override
