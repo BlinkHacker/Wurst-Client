@@ -28,7 +28,7 @@ public class TriggerBotMod extends Mod implements UpdateListener
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.killauraLegitMod,
 			wurst.mods.multiAuraMod, wurst.mods.clickAuraMod,
-			wurst.mods.criticalsMod};
+			wurst.mods.criticalsMod, wurst.mods.aimbotMod};
 	}
 	
 	@Override

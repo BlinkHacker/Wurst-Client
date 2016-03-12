@@ -14,6 +14,7 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod;
+import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.EntityUtils;
 
 /**
@@ -25,8 +26,28 @@ import tk.wurst_client.utils.EntityUtils;
     name = "Aimbot")
 public class AimbotMod extends Mod implements UpdateListener {
 
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.special.targetSpf,
+			wurst.mods.killauraMod, wurst.mods.multiAuraMod,
+			wurst.mods.clickAuraMod, wurst.mods.triggerBotMod,
+			wurst.mods.killauraLegitMod};
+	}
+	
     @Override
     public void onEnable() {
+    	//Triggerbot is not disabled because Aimbot+Triggerbot could bypass anticheat plugins.
+    	if(wurst.mods.killauraMod.isEnabled())
+			wurst.mods.killauraMod.setEnabled(false);
+		if(wurst.mods.multiAuraMod.isEnabled())
+			wurst.mods.multiAuraMod.setEnabled(false);
+		if(wurst.mods.clickAuraMod.isEnabled())
+			wurst.mods.clickAuraMod.setEnabled(false);
+		if(wurst.mods.tpAuraMod.isEnabled())
+			wurst.mods.tpAuraMod.setEnabled(false);
+    	if(wurst.mods.killauraLegitMod.isEnabled())
+    		wurst.mods.killauraLegitMod.setEnabled(false);
         wurst.events.add(UpdateListener.class, this);
     }
 
