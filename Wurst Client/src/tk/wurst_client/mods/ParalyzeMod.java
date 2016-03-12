@@ -12,7 +12,7 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.utils.EntityUtils;
 
-@Mod.Info(category = Mod.Category.FUN,
+@Mod.Info(category = Mod.Category.EXPLOITS,
 	description = "Kicks the running players towards you.",
 	name = "Paralyze")
 public class ParalyzeMod extends Mod implements UpdateListener
