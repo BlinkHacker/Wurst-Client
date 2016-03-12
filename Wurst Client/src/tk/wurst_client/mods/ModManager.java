@@ -69,6 +69,7 @@ public class ModManager
 	public final FastBreakMod fastBreakMod = new FastBreakMod();
 	public final FastBowMod fastBowMod = new FastBowMod();
 	public final FastEatMod fastEatMod = new FastEatMod();
+	public final FastFallMod fastFallMod = new FastFallMod();
 	public final FastLadderMod fastLadderMod = new FastLadderMod();
 	public final FastPlaceMod fastPlaceMod = new FastPlaceMod();
 	public final FightBotMod fightBotMod = new FightBotMod();
