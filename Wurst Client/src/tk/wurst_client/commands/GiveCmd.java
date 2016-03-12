@@ -67,7 +67,16 @@ public class GiveCmd extends Cmd
 					+ "HideFlags:63}"),	
 			
 			new ItemTemplate("God Boots", Items.diamond_boots,
-				"{AttributeModifiers:["
+				"{ench:["
+				    + "{id:0, lvl:32767},"
+					+ "{id:1, lvl:32767},"
+				    + "{id:2, lvl:32767},"
+					+ "{id:3, lvl:32767},"
+					+ "{id:4, lvl:32767},"
+					+ "{id:5, lvl:32767},"
+					+ "{id:6, lvl:32767},"
+					+ "{id:7, lvl:32767}"
+					+ "], AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:4,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641},"
@@ -78,7 +87,7 @@ public class GiveCmd extends Cmd
 					+ "Name:generic.knockbackResistance, Amount:1,"
 					+ "Operation:0, UUIDMost:84926, UUIDLeast:175435},"
 					+ "{AttributeName:generic.armor,"
-					+ "Name:generic.armor, Amount:2147483647,"
+					+ "Name:generic.armor, Amount:30,"
 					+ "Operation:0, UUIDMost:83431, UUIDLeast:134568}"
 					+ "], display:{Name:§9GodBoots}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
@@ -86,7 +95,7 @@ public class GiveCmd extends Cmd
 			new ItemTemplate("1000 Speed Legs", Items.diamond_leggings,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:1000,"
+					+ "Name:generic.movementSpeed, Amount:30,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
 					+ "], display:{Name:§c§oSPEEDSTER}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
