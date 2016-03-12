@@ -68,14 +68,14 @@ public class GiveCmd extends Cmd
 			
 			new ItemTemplate("God Boots", Items.diamond_boots,
 				"{ench:["
-				    + "{id:0, lvl:32767},"
-					+ "{id:1, lvl:32767},"
-				    + "{id:2, lvl:32767},"
-					+ "{id:3, lvl:32767},"
-					+ "{id:4, lvl:32767},"
-					+ "{id:5, lvl:32767},"
-					+ "{id:6, lvl:32767},"
-					+ "{id:7, lvl:32767}"
+				    + "{id:0, lvl:9999},"
+					+ "{id:1, lvl:9999},"
+				    + "{id:2, lvl:9999},"
+					+ "{id:3, lvl:9999},"
+					+ "{id:4, lvl:9999},"
+					+ "{id:5, lvl:9999},"
+					+ "{id:6, lvl:9999},"
+					+ "{id:7, lvl:9999}"
 					+ "], AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
 					+ "Name:generic.movementSpeed, Amount:4,"
@@ -95,7 +95,7 @@ public class GiveCmd extends Cmd
 			new ItemTemplate("1000 Speed Legs", Items.diamond_leggings,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:30,"
+					+ "Name:generic.movementSpeed, Amount:1000,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
 					+ "], display:{Name:§c§oSPEEDSTER}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
