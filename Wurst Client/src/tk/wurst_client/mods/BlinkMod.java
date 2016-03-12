@@ -12,14 +12,16 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.network.Packet;
+import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.MOVEMENT,
 	description = "Suspends all motion updates while enabled.\n"
 		+ "Can be used for teleportation, instant picking up of items and more.",
 	name = "Blink")
-public class BlinkMod extends Mod
+public class BlinkMod extends Mod implements RenderListener
 {
 	private static ArrayList<Packet> packets = new ArrayList<Packet>();
 	private EntityOtherPlayerMP fakePlayer = null;
@@ -49,6 +51,13 @@ public class BlinkMod extends Mod
 		fakePlayer.copyLocationAndAnglesFrom(mc.thePlayer);
 		fakePlayer.rotationYawHead = mc.thePlayer.rotationYawHead;
 		mc.theWorld.addEntityToWorld(-69, fakePlayer);
+		wurst.events.add(RenderListener.class, this);
+	}
+	
+	@Override
+	public void onRender()
+	{
+		RenderUtils.tracerLine(fakePlayer, 1);
 	}
 	
 	@Override
@@ -60,6 +69,7 @@ public class BlinkMod extends Mod
 		mc.theWorld.removeEntityFromWorld(-69);
 		fakePlayer = null;
 		blinkTime = 0;
+		wurst.events.remove(RenderListener.class, this);
 	}
 	
 	public static void addToBlinkQueue(Packet packet)
