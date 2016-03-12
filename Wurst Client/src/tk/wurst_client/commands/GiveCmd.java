@@ -78,7 +78,7 @@ public class GiveCmd extends Cmd
 					+ "{id:7, lvl:9999}"
 					+ "], AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:4,"
+					+ "Name:generic.movementSpeed, Amount:1,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641},"
 					+ "{AttributeName:generic.attackDamage,"
 					+ "Name:generic.attackDamage, Amount:2147483647,"
@@ -87,7 +87,7 @@ public class GiveCmd extends Cmd
 					+ "Name:generic.knockbackResistance, Amount:1,"
 					+ "Operation:0, UUIDMost:84926, UUIDLeast:175435},"
 					+ "{AttributeName:generic.armor,"
-					+ "Name:generic.armor, Amount:30,"
+					+ "Name:generic.armor, Amount:10000,"
 					+ "Operation:0, UUIDMost:83431, UUIDLeast:134568}"
 					+ "], display:{Name:§9GodBoots}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
