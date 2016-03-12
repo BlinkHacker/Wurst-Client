@@ -29,7 +29,7 @@ public class ParalyzeMod extends Mod implements UpdateListener
 		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
 		if(mc.thePlayer.onGround && en != null
 			&& en.getDistanceToEntity(mc.thePlayer) < 1)
-			for(int i = 0; i < 50000; i++)
+			for(int i = 0; i < 1000; i++)
 				mc.thePlayer.sendQueue
 					.addToSendQueue(new C03PacketPlayer(true));
 	}
