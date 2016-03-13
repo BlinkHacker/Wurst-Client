@@ -32,7 +32,7 @@ public class AimbotMod extends Mod implements UpdateListener {
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.multiAuraMod,
 			wurst.mods.clickAuraMod, wurst.mods.triggerBotMod,
-			wurst.mods.killauraLegitMod};
+			wurst.mods.killauraLegitMod,wurst.mods.clickAimbotMod};
 	}
 	
     @Override
@@ -50,6 +50,8 @@ public class AimbotMod extends Mod implements UpdateListener {
     		wurst.mods.killauraLegitMod.setEnabled(false);
     	if(wurst.mods.tpAuraMod.isEnabled())
     		wurst.mods.tpAuraMod.setEnabled(false);
+    	if(wurst.mods.clickAimbotMod.isEnabled())
+			wurst.mods.clickAimbotMod.setEnabled(false);
         wurst.events.add(UpdateListener.class, this);
     }
 

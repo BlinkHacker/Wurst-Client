@@ -28,7 +28,8 @@ public class TriggerBotMod extends Mod implements UpdateListener
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.killauraLegitMod,
 			wurst.mods.multiAuraMod, wurst.mods.clickAuraMod,
-			wurst.mods.criticalsMod, wurst.mods.aimbotMod};
+			wurst.mods.criticalsMod, wurst.mods.aimbotMod,
+			wurst.mods.clickAimbotMod};
 	}
 	
 	@Override
@@ -45,6 +46,8 @@ public class TriggerBotMod extends Mod implements UpdateListener
 			wurst.mods.clickAuraMod.setEnabled(false);
 		if(wurst.mods.tpAuraMod.isEnabled())
 			wurst.mods.tpAuraMod.setEnabled(false);
+		if(wurst.mods.clickAimbotMod.isEnabled())
+			wurst.mods.clickAimbotMod.setEnabled(false);
 		wurst.events.add(UpdateListener.class, this);
 	}
 	
