@@ -55,27 +55,27 @@ public class AimbotMod extends Mod implements UpdateListener {
 
     
 
-    public void faceEntityBow(EntityLivingBase var0, float var1, float var2) {
-        double var3 = 0.0D;
-        double var5 = var0.posX - Minecraft.getMinecraft().thePlayer.posX;
-        double var7 = var0.posZ - Minecraft.getMinecraft().thePlayer.posZ;
-        double var9 = (var0.posY - Minecraft.getMinecraft().thePlayer.posY) + 1.2D;
+   //public void faceEntityBow(EntityLivingBase var0, float var1, float var2) {
+     //   double var3 = 0.0D;
+       // double var5 = var0.posX - Minecraft.getMinecraft().thePlayer.posX;
+       // double var7 = var0.posZ - Minecraft.getMinecraft().thePlayer.posZ;
+      //  double var9 = (var0.posY - Minecraft.getMinecraft().thePlayer.posY) + 1.2D;
 
-        if ((var7 > 0.0D) && (var5 > 0.0D)) {
-            var3 = Math.toDegrees(-Math.atan(var5 / var7));
-        } else if ((var7 > 0.0D) && (var5 < 0.0D)) {
-            var3 = Math.toDegrees(-Math.atan(var5 / var7));
-        } else if ((var7 < 0.0D) && (var5 > 0.0D)) {
-            var3 = -90.0D + Math.toDegrees(Math.atan(var7 / var5));
-        } else if ((var7 < 0.0D) && (var5 < 0.0D)) {
-            var3 = 90.0D + Math.toDegrees(Math.atan(var7 / var5));
-        }
+      //  if ((var7 > 0.0D) && (var5 > 0.0D)) {
+      //      var3 = Math.toDegrees(-Math.atan(var5 / var7));
+      //  } else if ((var7 > 0.0D) && (var5 < 0.0D)) {
+    //        var3 = Math.toDegrees(-Math.atan(var5 / var7));
+    //    } else if ((var7 < 0.0D) && (var5 > 0.0D)) {
+    //        var3 = -90.0D + Math.toDegrees(Math.atan(var7 / var5));
+    //    } else if ((var7 < 0.0D) && (var5 < 0.0D)) {
+   //         var3 = 90.0D + Math.toDegrees(Math.atan(var7 / var5));
+   //     }
 
-        float var11 = (float) Math.sqrt((var7 * var7) + (var5 * var5));
-        float var12 = (float) (-Math.toDegrees(Math.atan(var9 / var11)));
-        Minecraft.getMinecraft().thePlayer.rotationPitch = var12 - 3.0F;
-        Minecraft.getMinecraft().thePlayer.rotationYaw = (float) var3;
-    }
+    //    float var11 = (float) Math.sqrt((var7 * var7) + (var5 * var5));
+   //     float var12 = (float) (-Math.toDegrees(Math.atan(var9 / var11)));
+   //     Minecraft.getMinecraft().thePlayer.rotationPitch = var12 - 3.0F;
+   //     Minecraft.getMinecraft().thePlayer.rotationYaw = (float) var3;
+  //  }
 
     public void aimWithNoBow(EntityLivingBase e) {
         EntityUtils.faceEntityClient(e);
@@ -90,13 +90,13 @@ public class AimbotMod extends Mod implements UpdateListener {
 			&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange || !yesCheatMode
 			&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange)
 			&& EntityUtils.isCorrectEntity(en, true)) {
-            int curItem = Minecraft.getMinecraft().thePlayer.inventory.currentItem;
-            ItemStack item = Minecraft.getMinecraft().thePlayer.inventory.getStackInSlot(curItem);
-            if (item != null && item.getItem() instanceof ItemBow) {
-                faceEntityBow(en, 100, 100);
-            } else {
+        //    int curItem = Minecraft.getMinecraft().thePlayer.inventory.currentItem;
+       //     ItemStack item = Minecraft.getMinecraft().thePlayer.inventory.getStackInSlot(curItem);
+       //     if (item != null && item.getItem() instanceof ItemBow) {
+       //         faceEntityBow(en, 100, 100);
+       //     } else {
                 aimWithNoBow(en);
-            }
+            
         }
     }
      @Override
