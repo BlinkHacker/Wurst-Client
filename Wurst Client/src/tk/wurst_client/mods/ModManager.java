@@ -58,6 +58,7 @@ public class ModManager
 	public final BunnyHopMod bunnyHopMod = new BunnyHopMod();
 	public final CaveFinderMod caveFinderMod = new CaveFinderMod();
 	public final ChestEspMod chestEspMod = new ChestEspMod();
+	public final ClickAimbotMod clickAimbotMod = new ClickAimbotMod();
 	public final ClickAuraMod clickAuraMod = new ClickAuraMod();
 	public final ClickGuiMod clickGuiMod = new ClickGuiMod();
 	public final CmdBlockMod cmdBlockMod = new CmdBlockMod();
