@@ -16,6 +16,7 @@ import tk.wurst_client.navigator.settings.CheckboxSetting;
 @Info(category = Category.MOVEMENT,
 	description = "Makes you fall very fast.",
 	name = "FastFall",
+	tags = "InstaFall",
 	noCheatCompatible = false)
 public class FastFallMod extends Mod implements UpdateListener
 {

@@ -31,6 +31,7 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Mod.Info(name = "Trajectories",
 	description = "Predicts the flight path of arrows and throwable items.",
+	tags = "Projectiles",
 	category = Mod.Category.RENDER)
 public class TrajectoriesMod extends Mod implements RenderListener
 {

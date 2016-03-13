@@ -15,7 +15,8 @@ import tk.wurst_client.mods.Mod.Info;
 @Info(category = Category.MISC,
 	description = "Makes other mods bypass NoCheat+ or blocks them if\n"
 		+ "they can't.",
-	name = "YesCheat+")
+	name = "YesCheat+",
+	tags = "NoCheat bypass")
 public class YesCheatMod extends Mod
 {
 	private HashSet<Mod> blockedMods;

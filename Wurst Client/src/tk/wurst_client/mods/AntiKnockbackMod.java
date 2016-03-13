@@ -14,7 +14,8 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 @Mod.Info(category = Mod.Category.COMBAT,
 	description = "Protects you from getting pushed by players, mobs and\n"
 		+ "fluids.",
-	name = "AntiKnockback")
+	name = "AntiKnockback",
+	tags = "Velocity")
 public class AntiKnockbackMod extends Mod
 {
 	public float strength = 1F;
