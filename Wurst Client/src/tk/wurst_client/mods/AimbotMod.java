@@ -8,10 +8,7 @@
 
 package tk.wurst_client.mods;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod;
 import tk.wurst_client.navigator.NavigatorItem;
