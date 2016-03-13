@@ -8,6 +8,7 @@
 package tk.wurst_client.commands;
 
 import tk.wurst_client.commands.Cmd.Info;
+import tk.wurst_client.events.ChatOutputEvent;
 
 @Info(help = "Clears the chat completely.", name = "clear", syntax = {})
 public class ClearCmd extends Cmd
@@ -20,4 +21,16 @@ public class ClearCmd extends Cmd
 		else
 			syntaxError();
 	}
+	@Override
+	public String getPrimaryAction()
+	{
+		return "Clear chat";
+	}
+	
+	@Override
+	public void doPrimaryAction()
+	{
+		wurst.commands.onSentMessage(new ChatOutputEvent(".clear", true));
+	}
+	
 }
