@@ -83,12 +83,9 @@ public class AimbotMod extends Mod implements UpdateListener {
 
     @Override
     public void onUpdate() {
-    	boolean yesCheatMode = wurst.mods.yesCheatMod.isActive();
         EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
         if (en == null) return;
-        if((yesCheatMode
-			&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange || !yesCheatMode
-			&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange)
+        if( mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange
 			&& EntityUtils.isCorrectEntity(en, true)) {
         //    int curItem = Minecraft.getMinecraft().thePlayer.inventory.currentItem;
        //     ItemStack item = Minecraft.getMinecraft().thePlayer.inventory.getStackInSlot(curItem);
