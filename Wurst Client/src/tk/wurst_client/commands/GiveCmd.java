@@ -115,10 +115,10 @@ public class GiveCmd extends Cmd
 					+ "], display:{Name:§9GodBoots}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
 			
-			new ItemTemplate("1000 Speed Legs", Items.diamond_leggings,
+			new ItemTemplate("5 Speed Legs", Items.diamond_leggings,
 				"{AttributeModifiers:["
 					+ "{AttributeName:generic.movementSpeed,"
-					+ "Name:generic.movementSpeed, Amount:1000,"
+					+ "Name:generic.movementSpeed, Amount:5,"
 					+ "Operation:0, UUIDMost:43631, UUIDLeast:2641}"
 					+ "], display:{Name:§c§oSPEEDSTER}, Unbreakable:1,"
 					+ "HideFlags:63}"),	
