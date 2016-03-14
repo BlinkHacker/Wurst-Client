@@ -19,18 +19,18 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
         name = "BowSpam",
         noCheatCompatible = false)
 public class BowSpamMod extends Mod implements UpdateListener {
-	public int iters = 20;
+	public float delay = 20F;
 	
 	@Override
 	public void initSettings()
 	{
-		settings.add(new SliderSetting("BowSpam Delay", iters, 1, 20, 1,
+		settings.add(new SliderSetting("Delay", delay, 1, 20, 1,
 			ValueDisplay.INTEGER)
 		{
 			@Override
 			public void update()
 			{
-				iters = (int)getValue();
+				delay = (float)getValue();
 			}
 		});
 	}
@@ -65,7 +65,7 @@ public class BowSpamMod extends Mod implements UpdateListener {
                 //    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
       //          }
                 
-                if(hasTimePassedS(iters)) {
+                if(hasTimePassedS(delay)) {
                 Minecraft.getMinecraft().getNetHandler().addToSendQueue(
                         new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM,
                                 new BlockPos(0, 0, 0), EnumFacing.DOWN));
