@@ -16,6 +16,8 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.ModeSetting;
+import tk.wurst_client.navigator.settings.SliderSetting;
+import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 @Info(category = Category.COMBAT,
 	description = "Automatically leaves the server when your health is low.\n"
@@ -24,6 +26,7 @@ import tk.wurst_client.navigator.settings.ModeSetting;
 	tags = "AutoDisconnect")
 public class AutoLeaveMod extends Mod implements UpdateListener
 {
+	public float health = 19F;
 	private int mode = 0;
 	private String[] modes = new String[]{"Quit", "Chars", "TP", "SelfHurt"};
 	
@@ -45,6 +48,15 @@ public class AutoLeaveMod extends Mod implements UpdateListener
 				mode = getSelected();
 			}
 		});
+		settings.add(new SliderSetting("Health", health, 1, 19, 1,
+			ValueDisplay.INTEGER)
+		{
+			@Override
+			public void update()
+			{
+				health = (float)getValue();
+			}
+		});
 	}
 	
 	@Override
@@ -56,7 +68,7 @@ public class AutoLeaveMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		if(mc.thePlayer.getHealth() <= 8.0
+		if(mc.thePlayer.getHealth() <= health
 			&& !mc.thePlayer.capabilities.isCreativeMode
 			&& (!mc.isIntegratedServerRunning() || Minecraft.getMinecraft().thePlayer.sendQueue
 				.getPlayerInfo().size() > 1))
