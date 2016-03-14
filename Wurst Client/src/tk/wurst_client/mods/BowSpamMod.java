@@ -65,12 +65,14 @@ public class BowSpamMod extends Mod implements UpdateListener {
                 //    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
       //          }
                 
+                if(hasTimePassedS(iters)) {
                 Minecraft.getMinecraft().getNetHandler().addToSendQueue(
                         new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM,
                                 new BlockPos(0, 0, 0), EnumFacing.DOWN));
                 Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()
                         .onPlayerStoppedUsing(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem(),
                                 Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer, 10);
+                }
             }).start();}
         }
    // }
