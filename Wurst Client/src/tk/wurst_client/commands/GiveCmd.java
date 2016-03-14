@@ -67,7 +67,7 @@ public class GiveCmd extends Cmd
 					+ "HideFlags:63}"),	
 			
 			new ItemTemplate("Firework Smoke Bomb", Items.fireworks,
-				"Fireworks:{Flight:-1,Explosions:["
+				"{Flight:-1,Explosions:["
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:0,Colors:[16711680],FadeColors:[16711849]},"
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:1,Colors:[16776960],FadeColors:[16744319]},"
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:2,Colors:[38718],FadeColors:[60159]},"
