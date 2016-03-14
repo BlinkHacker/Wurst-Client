@@ -19,7 +19,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
         name = "BowSpam",
         noCheatCompatible = false)
 public class BowSpamMod extends Mod implements UpdateListener {
-	public float delay = 20F;
+	public long delay = 20;
 	
 	@Override
 	public void initSettings()
@@ -30,7 +30,7 @@ public class BowSpamMod extends Mod implements UpdateListener {
 			@Override
 			public void update()
 			{
-				delay = (float)getValue();
+				delay = (long)getValue();
 			}
 		});
 	}
@@ -55,24 +55,24 @@ public class BowSpamMod extends Mod implements UpdateListener {
                                 Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer);
       
                 
-       //         for (int i = 0; i < iters; i++) {
-      //              try {
+                for (int i = 0; i < delay; i++) {
+                   try {
                     	
-       //             }
-               //         Thread.sleep(getInt(iters, 10));
-                //   } catch (InterruptedException ignored) {
-             //       }
-                //    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
-      //          }
+                   
+                        Thread.sleep(delay,10);
+                   } catch (InterruptedException ignored) {
+                    }
+                    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
+                }
                 
-                if(hasTimePassedS(delay)) {
+               
                 Minecraft.getMinecraft().getNetHandler().addToSendQueue(
                         new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM,
                                 new BlockPos(0, 0, 0), EnumFacing.DOWN));
                 Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()
                         .onPlayerStoppedUsing(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem(),
                                 Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer, 10);
-                }
+                
             }).start();}
         }
    // }
