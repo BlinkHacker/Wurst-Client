@@ -396,7 +396,7 @@ public class GuiWurstMainMenu extends GuiMainMenu
 		drawString(fontRendererObj, "Wurst Client " + WurstClient.VERSION
 			+ (WurstClient.INSTANCE.updater.isOutdated() ? " (outdated)" : ""),
 			8, 8, 0xffffff);
-		drawString(fontRendererObj, "Copyright Alexander01998", 8, 18, 0xffffff);
+		drawString(fontRendererObj, "Copyright Alexander01998- Enchanced By ThisTestUser", 8, 18, 0xffffff);
 		drawString(fontRendererObj, "All rights reserved.", 8, 28, 0xffffff);
 		drawCenteredString(fontRendererObj, "§nwww.Wurst-Client.tk", width / 2,
 			height - 26, 0xffffff);
