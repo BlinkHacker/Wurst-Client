@@ -198,8 +198,8 @@ public class GiveCmd extends Cmd
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:2,Colors:[38718],FadeColors:[60159]},"
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:3,Colors:[3873557],FadeColors:[11708091]},"
 				    + "Explosion:{Flicker:1b,Trail:1b,Type:4,Colors:[11468981],FadeColors:[16711935]}"
-					+ "], display:{Name:§0Smoke§4Bomb},"
-					+ "HideFlags:63}}"),
+					+ "]}, display:{Name:§0Smoke§4Bomb},"
+					+ "HideFlags:63}"),
 			
 			new ItemTemplate("God Boots", Items.diamond_boots,
 				"{ench:["
