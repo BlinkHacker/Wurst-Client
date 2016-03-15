@@ -86,10 +86,15 @@ public class EnchantCmd extends Cmd
 			 				mc.thePlayer.sendQueue.addToSendQueue(
 			 						new C10PacketCreativeInventoryAction(
 			 								36+player.inventory.currentItem, currentItem));
-			 				
-			 				wurst.chat.message("Disenchanted 1 item.");
+			 			
+			 			}
 			 			} else if (args.length == 1) {
+			 				
+			 				ItemStack currentItem = player.inventory.getCurrentItem();
+				 			if(currentItem == null)
+				 				error("There is no item in your hand.");
 			 				if(MiscUtils.isInteger(args[0])) 
+			 					
 			 				for(Enchantment enchantment : Enchantment.enchantmentsList)
 			 					try
 			 					{
@@ -103,8 +108,8 @@ public class EnchantCmd extends Cmd
 			 				            mc.thePlayer.sendQueue.addToSendQueue(
 			 					 					new C10PacketCreativeInventoryAction(
 			 					 							36+player.inventory.currentItem, currentItem));
-			 			}
-		}else
+			 			
+			 			}else
 			syntaxError();
 	}
 	
