@@ -46,7 +46,7 @@ public class AddAltCmd extends Cmd
 				wurst.chat.message("Added " + alts + " alts to the alt list.");
 			GuiAltList.sortAlts();
 			wurst.files.saveAlts();
-		}else if(!args[0].equals("Alexander01998"))
+		}else 
 		{
 			GuiAltList.alts.add(new Alt(args[0]));
 			GuiAltList.sortAlts();

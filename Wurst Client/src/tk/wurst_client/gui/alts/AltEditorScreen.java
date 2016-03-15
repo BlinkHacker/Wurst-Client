@@ -49,11 +49,9 @@ public abstract class AltEditorScreen extends GuiScreen
 		passwordBox.updateCursorCounter();
 		((GuiButton)buttonList.get(0)).enabled =
 			emailBox.getText().trim().length() > 0
-				&& (!emailBox.getText().trim()
-					.equalsIgnoreCase("Alexander01998") || passwordBox
-					.getText().length() != 0);
-		((GuiButton)buttonList.get(3)).enabled =
-			!emailBox.getText().trim().equalsIgnoreCase("Alexander01998");
+				 || passwordBox
+					.getText().length() != 0;
+			
 	}
 	
 	protected abstract String getDoneButtonText();
