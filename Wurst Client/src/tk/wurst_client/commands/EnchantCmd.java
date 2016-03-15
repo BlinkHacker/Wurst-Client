@@ -94,7 +94,8 @@ public class EnchantCmd extends Cmd
 				 			if(currentItem == null)
 				 				error("There is no item in your hand.");
 			 				if(MiscUtils.isInteger(args[0])) 
-			 					
+			 				if(Integer.valueOf(args[0]) < -128 || Integer.valueOf(args[0]) < 127)
+			 					error("Enchantments cannot be higher than 127 or less than -128.");
 			 				for(Enchantment enchantment : Enchantment.enchantmentsList)
 			 					try
 			 					{
@@ -109,7 +110,7 @@ public class EnchantCmd extends Cmd
 			 					 					new C10PacketCreativeInventoryAction(
 			 					 							36+player.inventory.currentItem, currentItem));
 			 				            
-			 			} else if (args.length == 2 && args[1].equals("all")) {
+			 			} else if (args.length == 2 && args[0].equals("all")) {
 			 				int items = 0;
 			 				for(int i = 0; i < 40; i++)
 			 				{
@@ -119,6 +120,8 @@ public class EnchantCmd extends Cmd
 			 						continue;
 			 					items++;
 			 					if(MiscUtils.isInteger(args[1])) 
+			 					if(Integer.valueOf(args[0]) < -128 || Integer.valueOf(args[0]) < 127)
+					 				error("Enchantments cannot be higher than 127 or less than -128.");
 			 					for(Enchantment enchantment : Enchantment.enchantmentsList)
 			 						try
 			 						{
