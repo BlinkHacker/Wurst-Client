@@ -89,8 +89,7 @@ public class EnchantCmd extends Cmd
 			 				
 			 				wurst.chat.message("Disenchanted 1 item.");
 			 			} else if (args.length == 1) {
-			 				if(args[0] == null || !MiscUtils.isInteger(args[0])) 
-			 					error("Level must be a number.");
+			 				if(MiscUtils.isInteger(args[0])) 
 			 				for(Enchantment enchantment : Enchantment.enchantmentsList)
 			 					try
 			 					{
