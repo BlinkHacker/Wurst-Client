@@ -1,4 +1,4 @@
-package tk.wurst_client.mods;
+/*package tk.wurst_client.mods;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBow;
@@ -94,3 +94,4 @@ public class BowSpamMod extends Mod implements UpdateListener {
         WurstClient.INSTANCE.events.remove(UpdateListener.class, this);
     }
 }
+*/
