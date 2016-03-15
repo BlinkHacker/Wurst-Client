@@ -45,7 +45,7 @@ public class EnchantCmd extends Cmd
 			            mc.thePlayer.sendQueue.addToSendQueue(
 				 					new C10PacketCreativeInventoryAction(
 				 							36+player.inventory.currentItem, currentItem));
-		}else if(args[0].equals("all"))
+		}else if(args[0].equals("all") && args.length == 1)
 		{
 			int items = 0;
 			for(int i = 0; i < 40; i++)
@@ -108,7 +108,35 @@ public class EnchantCmd extends Cmd
 			 				            mc.thePlayer.sendQueue.addToSendQueue(
 			 					 					new C10PacketCreativeInventoryAction(
 			 					 							36+player.inventory.currentItem, currentItem));
-			 			
+			 				            
+			 			} else if (args.length == 2 && args[1].equals("all")) {
+			 				int items = 0;
+			 				for(int i = 0; i < 40; i++)
+			 				{
+			 					ItemStack currentItem =
+			 						mc.thePlayer.inventory.getStackInSlot(i);
+			 					if(currentItem == null)
+			 						continue;
+			 					items++;
+			 					if(MiscUtils.isInteger(args[1])) 
+			 					for(Enchantment enchantment : Enchantment.enchantmentsList)
+			 						try
+			 						{
+			 							if(enchantment == Enchantment.silkTouch)
+			 								continue;
+			 							currentItem.addEnchantment(enchantment, Integer.valueOf(args[1]));
+			 						}catch(Exception e)
+			 						{	
+			 							
+			 						}
+			 					mc.thePlayer.sendQueue.addToSendQueue(
+			 						 		new C10PacketCreativeInventoryAction(
+			 						 						i, currentItem));
+			 				}
+			 				if(items == 1)
+			 					wurst.chat.message("Enchanted 1 item.");
+			 				else
+			 					wurst.chat.message("Enchanted " + items + " items.");
 			 			}else
 			syntaxError();
 	}
