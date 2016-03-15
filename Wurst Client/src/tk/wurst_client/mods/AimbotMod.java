@@ -76,9 +76,6 @@ public class AimbotMod extends Mod implements UpdateListener {
    //     Minecraft.getMinecraft().thePlayer.rotationYaw = (float) var3;
   //  }
 
-    public void aimWithNoBow(EntityLivingBase e) {
-        EntityUtils.faceEntityClient(e);
-    }
 
     @Override
     public void onUpdate() {
@@ -91,7 +88,7 @@ public class AimbotMod extends Mod implements UpdateListener {
        //     if (item != null && item.getItem() instanceof ItemBow) {
        //         faceEntityBow(en, 100, 100);
        //     } else {
-                aimWithNoBow(en);
+        	EntityUtils.faceEntityClient(en);
             
         }
     }

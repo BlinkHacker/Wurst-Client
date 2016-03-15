@@ -26,7 +26,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 	tags = "AutoDisconnect")
 public class AutoLeaveMod extends Mod implements UpdateListener
 {
-	public float health = 19F;
+	public float health = 8F;
 	private int mode = 0;
 	private String[] modes = new String[]{"Quit", "Chars", "TP", "SelfHurt"};
 	

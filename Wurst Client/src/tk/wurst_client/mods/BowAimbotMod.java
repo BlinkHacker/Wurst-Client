@@ -41,7 +41,7 @@ public class BowAimbotMod extends Mod implements UpdateListener,
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.fastBowMod};
+		return new NavigatorItem[]{wurst.mods.fastBowMod,wurst.mods.trajectoriesMod};
 	}
 	
 	@Override
