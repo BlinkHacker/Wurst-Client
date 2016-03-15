@@ -19,21 +19,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
         name = "BowSpam",
         noCheatCompatible = false)
 public class BowSpamMod extends Mod implements UpdateListener {
-	public long delay = 20;
-	
-	@Override
-	public void initSettings()
-	{
-		settings.add(new SliderSetting("Delay", delay, 1, 20, 1,
-			ValueDisplay.INTEGER)
-		{
-			@Override
-			public void update()
-			{
-				delay = (long)getValue();
-			}
-		});
-	}
+	public long delay = 1;
     @Override
     public void onEnable() {
         WurstClient.INSTANCE.events.add(UpdateListener.class, this);
@@ -54,7 +40,10 @@ public class BowSpamMod extends Mod implements UpdateListener {
                         .onItemRightClick(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem(),
                                 Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer);
       
-                
+                if (delay > 20 || delay < 1) {
+                    delay = 1;
+                    
+                }
                 for (int i = 0; i < delay; i++) {
                    try {
                     	
