@@ -15,9 +15,9 @@ import tk.wurst_client.events.ChatOutputEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 
-@Info(help = "Enchants items with everything.",
+@Info(help = "Enchants items with everything, or removes enchantments.",
 	name = "enchant",
-	syntax = {"[all]"})
+	syntax = {"[all]","clear"})
 public class EnchantCmd extends Cmd
 {
 	@Override
