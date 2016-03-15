@@ -14,10 +14,11 @@ import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatOutputEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
+import tk.wurst_client.utils.MiscUtils;
 
 @Info(help = "Enchants items with everything, or removes enchantments.",
 	name = "enchant",
-	syntax = {"[all]","clear"})
+	syntax = {"all","clear", "<level>","all <level>"})
 public class EnchantCmd extends Cmd
 {
 	@Override
@@ -87,6 +88,22 @@ public class EnchantCmd extends Cmd
 			 								36+player.inventory.currentItem, currentItem));
 			 				
 			 				wurst.chat.message("Disenchanted 1 item.");
+			 			} else if (args.length == 1) {
+			 				if(args[0] == null || MiscUtils.isInteger(args[0])) 
+			 					error("Level must be a number.");
+			 				for(Enchantment enchantment : Enchantment.enchantmentsList)
+			 					try
+			 					{
+			 						if(enchantment == Enchantment.silkTouch)
+			 							continue;
+			 						currentItem.addEnchantment(enchantment, Integer.valueOf(args[0]));
+			 					}catch(Exception e)
+			 					{	
+			 						
+			 					}
+			 				            mc.thePlayer.sendQueue.addToSendQueue(
+			 					 					new C10PacketCreativeInventoryAction(
+			 					 							36+player.inventory.currentItem, currentItem));
 			 			}
 		}else
 			syntaxError();
