@@ -14,7 +14,7 @@ import tk.wurst_client.commands.Cmd.Info;
 @Info(help = "Allows you to replicate items from your hand or from an armor slot.\n"
 	+ "Requires creative mode.",
 	name = "duplicate",
-	syntax = {"<armor_slot>"})
+	syntax = {"(hand|chest|legs|feet)"})
 public class DuplicateCmd extends Cmd {
 	
 	@Override
