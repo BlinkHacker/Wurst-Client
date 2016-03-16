@@ -14,7 +14,7 @@ import tk.wurst_client.commands.Cmd.Info;
 @Info(help = "Allows you to replicate items from your hand or from an armor slot.\n"
 	+ "Requires creative mode.",
 	name = "duplicate",
-	syntax = {"(hand|chest|legs|feet)"})
+	syntax = {"(head|chest|legs|feet)"})
 public class DuplicateCmd extends Cmd {
 	
 	@Override
@@ -61,7 +61,7 @@ public class DuplicateCmd extends Cmd {
 				break;
 		}
 		if(item == null)
-			error("Armor could not be found in your " + args[0] + ".");
+			error("Armor could not be found in your " + args[0] + " slot.");
 		//copy the item
 		for(int i = 0; i < 9; i++)
 			if(mc.thePlayer.inventory.getStackInSlot(i) == null)
