@@ -61,7 +61,7 @@ public class DuplicateCmd extends Cmd {
 				break;
 		}
 		if(item == null)
-			error("Armor could not be found in your \" + args[0] + \" .");
+			error("Armor could not be found in your " + args[0] + ".");
 		//copy the item
 		for(int i = 0; i < 9; i++)
 			if(mc.thePlayer.inventory.getStackInSlot(i) == null)
