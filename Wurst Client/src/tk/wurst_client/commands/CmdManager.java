@@ -42,6 +42,7 @@ public class CmdManager implements ChatOutputListener
 	public final CopyItemCmd copyitemCmd = new CopyItemCmd();
 	public final DamageCmd damageCmd = new DamageCmd();
 	public final DropCmd dropCmd = new DropCmd();
+	public final DuplicateCmd duplicateCmd = new DuplicateCmd();
 	public final EnchantCmd enchantCmd = new EnchantCmd();
 	public final FakeMsgCmd fakeMsgCmd = new FakeMsgCmd();
 	public final FastBreakCmd fastBreakCmd = new FastBreakCmd();
