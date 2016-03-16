@@ -11,11 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.commands.Cmd.Info;
 
-@Info(help = "Allows you to replicate items from your hand.\n"
+@Info(help = "Allows you to replicate items from your hand or from an armor slot.\n"
 	+ "Requires creative mode.",
 	name = "duplicate",
-	syntax = {})
+	syntax = {"<armor_slot>"})
 public class DuplicateCmd extends Cmd {
+	
 	@Override
 	public void execute(String[] args) throws Error {
 		if(!mc.thePlayer.capabilities.isCreativeMode)
@@ -37,5 +38,44 @@ public class DuplicateCmd extends Cmd {
 					return;
 				}
 			error("Please clear a slot in your hotbar.");
-	}
+		
+	} else if(args.length == 1)
+	{
+		ItemStack item = null;
+		switch(args[0].toLowerCase())
+		{
+			case "head":
+				item = mc.thePlayer.inventory.armorItemInSlot(3);
+				break;
+			case "chest":
+				item = mc.thePlayer.inventory.armorItemInSlot(2);
+				break;
+			case "legs":
+				item = mc.thePlayer.inventory.armorItemInSlot(1);
+				break;
+			case "feet":
+				item = mc.thePlayer.inventory.armorItemInSlot(0);
+				break;
+			default:
+				syntaxError();
+				break;
+		}
+		if(item == null)
+			error("Armor could not be found in \"" + args[0] + "\" .");
+		//copy the item
+		for(int i = 0; i < 9; i++)
+			if(mc.thePlayer.inventory.getStackInSlot(i) == null)
+			{
+				mc.thePlayer.sendQueue
+					.addToSendQueue(new C10PacketCreativeInventoryAction(
+						36 + i, item));
+				wurst.chat.message("Item copied.");
+				return;
+			}
+		error("Please clear a slot in your hotbar.");
+		
+		
+		
+	} else
+		syntaxError();
 }}
