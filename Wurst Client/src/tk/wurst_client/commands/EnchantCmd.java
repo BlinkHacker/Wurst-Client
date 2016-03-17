@@ -18,7 +18,7 @@ import tk.wurst_client.utils.MiscUtils;
 
 @Info(help = "Enchants items with everything, or removes enchantments.",
 	name = "enchant",
-	syntax = {"all","clear", "<level>","all <level>"})
+	syntax = {"clear", "<level>","all <level>"})
 public class EnchantCmd extends Cmd
 {
 	@Override
@@ -27,53 +27,7 @@ public class EnchantCmd extends Cmd
 		if(!mc.thePlayer.capabilities.isCreativeMode)
 			error("Creative mode only.");
 		EntityPlayerSP player = mc.thePlayer;
-		if(args.length == 0)
-		{
-			ItemStack currentItem = mc.thePlayer.inventory.getCurrentItem();
-			if(currentItem == null)
-				error("There is no item in your hand.");
-			for(Enchantment enchantment : Enchantment.enchantmentsList)
-				try
-				{
-					if(enchantment == Enchantment.silkTouch)
-						continue;
-					currentItem.addEnchantment(enchantment, 127);
-				}catch(Exception e)
-				{	
-					
-				}
-			            mc.thePlayer.sendQueue.addToSendQueue(
-				 					new C10PacketCreativeInventoryAction(
-				 							36+player.inventory.currentItem, currentItem));
-		}else if(args[0].equals("all") && args.length == 1)
-		{
-			int items = 0;
-			for(int i = 0; i < 40; i++)
-			{
-				ItemStack currentItem =
-					mc.thePlayer.inventory.getStackInSlot(i);
-				if(currentItem == null)
-					continue;
-				items++;
-				for(Enchantment enchantment : Enchantment.enchantmentsList)
-					try
-					{
-						if(enchantment == Enchantment.silkTouch)
-							continue;
-						currentItem.addEnchantment(enchantment, 127);
-					}catch(Exception e)
-					{	
-						
-					}
-				mc.thePlayer.sendQueue.addToSendQueue(
-					 		new C10PacketCreativeInventoryAction(
-					 						i, currentItem));
-			}
-			if(items == 1)
-				wurst.chat.message("Enchanted 1 item.");
-			else
-				wurst.chat.message("Enchanted " + items + " items.");
-		}else if (args[0].equalsIgnoreCase("clear")) {
+		if (args[0].equalsIgnoreCase("clear") && args.length == 1) {
 			 			ItemStack currentItem = player.inventory.getCurrentItem();
 			 			if(currentItem == null)
 			 				error("There is no item in your hand.");
@@ -88,7 +42,7 @@ public class EnchantCmd extends Cmd
 			 								36+player.inventory.currentItem, currentItem));
 			 			
 			 			}
-			 			} else if (args.length == 1) {
+			 			} else if (args.length == 1 && MiscUtils.isInteger(args[0])) {
 			 				
 			 				ItemStack currentItem = player.inventory.getCurrentItem();
 				 			if(currentItem == null)
@@ -110,7 +64,7 @@ public class EnchantCmd extends Cmd
 			 					 					new C10PacketCreativeInventoryAction(
 			 					 							36+player.inventory.currentItem, currentItem));
 			 				            
-			 			} else if (args.length == 2 && args[0].equals("all")) {
+			 			} else if (args.length == 2 && args[0].equals("all") && MiscUtils.isInteger(args[1])) {
 			 				int items = 0;
 			 				for(int i = 0; i < 40; i++)
 			 				{
