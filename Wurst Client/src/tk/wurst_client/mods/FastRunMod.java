@@ -106,14 +106,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible0=true;
 					}
-					if(fastrunliquid.isChecked()) {
+					if(fastrunliquid.isChecked()) 
 
 						if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.lava)
 						{
 							isTravelPossible0=true;
 						}
-					} else {
+					else {
 						return;
 					}
 					if(isTravelPossible0)
@@ -129,14 +129,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible1=true;
 					}
-						if(fastrunliquid.isChecked()) {
+						if(fastrunliquid.isChecked()) 
 							
 							if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.lava)
 							{
 								isTravelPossible1=true;
 							}
-						} else {
+						 else {
 							return;
 						}
 				    if(isTravelPossible1)
@@ -152,14 +152,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible2=true;
 					}
-						if(fastrunliquid.isChecked()) {
+						if(fastrunliquid.isChecked()) 
 						
 							if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.lava)
 							{
 								isTravelPossible2=true;
 							}
-						} else {
+						 else {
 							return;
 						}
 				    if(isTravelPossible2)
@@ -175,14 +175,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible3=true;
 					}
-						if(fastrunliquid.isChecked()) {
+						if(fastrunliquid.isChecked()) 
 							
 							if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.lava)
 								{
 								    isTravelPossible3=true;
 								}
-						} else {
+						 else {
 							return;
 						}
 					if(isTravelPossible3)	
