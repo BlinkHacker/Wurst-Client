@@ -106,13 +106,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible0=true;
 					}
-					if(fastrunliquid.isChecked()) 
+					if(fastrunliquid.isChecked()) {
 
 						if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.lava)
 						{
 							isTravelPossible0=true;
 						}
+					}
 					else {
 						return;
 					}
@@ -129,13 +130,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible1=true;
 					}
-						if(fastrunliquid.isChecked()) 
+						if(fastrunliquid.isChecked()) {
 							
 							if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.lava)
 							{
 								isTravelPossible1=true;
 							}
+						}
 						 else {
 							return;
 						}
@@ -152,13 +154,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible2=true;
 					}
-						if(fastrunliquid.isChecked()) 
+						if(fastrunliquid.isChecked()) {
 						
 							if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.lava)
 							{
 								isTravelPossible2=true;
 							}
+						}
 						 else {
 							return;
 						}
@@ -175,13 +178,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					{
 						isTravelPossible3=true;
 					}
-						if(fastrunliquid.isChecked()) 
+						if(fastrunliquid.isChecked()) {
 							
 							if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.lava)
 								{
 								    isTravelPossible3=true;
 								}
+						}
 						 else {
 							return;
 						}
