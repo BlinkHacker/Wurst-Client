@@ -84,10 +84,6 @@ public class FastRunMod extends Mod implements UpdateListener
 			currentX = mc.thePlayer.posX;
 			currentY = mc.thePlayer.posY;
 			currentZ = mc.thePlayer.posZ;
-		    boolean isTravelPossible0 = false;
-		    boolean isTravelPossible1 = false;
-		    boolean isTravelPossible2 = false;
-		    boolean isTravelPossible3 = false;
 		    for(int i = 0; i < speed; i++){
 				double i2 = i;
 				if(direction == 0){
@@ -100,11 +96,9 @@ public class FastRunMod extends Mod implements UpdateListener
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.portal ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
 					{
-						isTravelPossible0=true;
 					} else {
 						return;
 					}
-					if (isTravelPossible0)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ+i2/10);
 				}else if(direction == 1){
 					if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.air || 
@@ -115,11 +109,9 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
 						{
-							isTravelPossible1=true;
 						} else {
 							return;
 						}
-					if (isTravelPossible1)
 					mc.thePlayer.setPosition(currentX-i2/10, currentY, currentZ);
 				}else if(direction == 2){
 					if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.air || 
@@ -130,11 +122,9 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.portal ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
 						{
-							isTravelPossible2=true;
 						} else {
 							return;
 						}
-					if (isTravelPossible2)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ-i2/10);
 				}else if(direction == 3){
 					if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.air || 
@@ -145,11 +135,9 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
 						{
-							isTravelPossible3=true;
 						} else {
 							return;
 						}
-					if (isTravelPossible3)
 					mc.thePlayer.setPosition(currentX+i2/10, currentY, currentZ);
 				}else{
 					return;
