@@ -97,7 +97,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.vine ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.fire ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.carpet ||
-					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.snow ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.portal ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
 					{
@@ -113,7 +112,6 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.vine ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.fire ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.carpet ||
-						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.snow ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
 						{
@@ -129,7 +127,6 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.vine ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.fire ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.carpet ||
-						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.snow ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.portal ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
 						{
@@ -145,7 +142,6 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.vine ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.fire ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.carpet ||
-						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.snow ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
 						{
@@ -180,7 +176,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[0] = true;
-					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[0] = true;
 				
@@ -190,7 +185,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.vine) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.fire) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.carpet) isPassable[1] = true;
-					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.snow) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.portal) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.web) isPassable[1] = true;
 				
@@ -200,7 +194,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.vine) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.fire) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.carpet) isPassable[2] = true;
-					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.snow) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.portal) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.web) isPassable[2] = true;
 			}else if(onThis == 3){
@@ -209,7 +202,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.vine) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.fire) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.carpet) isPassable[3] = true;
-					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.snow) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.portal) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.web) isPassable[3] = true;
 			}else if(onThis == 4){
@@ -218,7 +210,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.vine) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.fire) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.carpet) isPassable[4] = true;
-					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.snow) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.portal) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.web) isPassable[4] = true;
 			}else if(onThis == 5){
@@ -227,7 +218,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.vine) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.fire) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.carpet) isPassable[5] = true;
-					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.snow) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.portal) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.web) isPassable[5] = true;
 			}else if(onThis == 6){
@@ -236,7 +226,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.vine) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.fire) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.carpet) isPassable[6] = true;
-					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.snow) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.portal) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.web) isPassable[6] = true;
 			}else if(onThis == 7){
@@ -245,7 +234,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.vine) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.fire) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.carpet) isPassable[7] = true;
-					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.snow) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.portal) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.web) isPassable[7] = true;
 			}else if(onThis == 8){
@@ -254,7 +242,6 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.vine) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.fire) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.carpet) isPassable[8] = true;
-					if(getBlock(pX, pY, pZ).getMaterial() == Material.snow) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.portal) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.web) isPassable[8] = true;
 			}
