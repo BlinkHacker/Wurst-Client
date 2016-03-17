@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
@@ -35,6 +36,8 @@ public class FastRunMod extends Mod implements UpdateListener
 	
 	private int defaultSpeed = 1;
 	private int speed = 1;
+	public final CheckboxSetting fastrunliquid = new CheckboxSetting(
+		"FastRun On Liquids", false);
 	
 	@Override
 	public String getRenderName()
@@ -61,6 +64,7 @@ public class FastRunMod extends Mod implements UpdateListener
 				speed = (int)getValue()*10;
 			}
 		});
+		settings.add(fastrunliquid);
 	}
 	
 	@Override
@@ -84,6 +88,10 @@ public class FastRunMod extends Mod implements UpdateListener
 			currentX = mc.thePlayer.posX;
 			currentY = mc.thePlayer.posY;
 			currentZ = mc.thePlayer.posZ;
+			boolean isTravelPossible0 = false;
+		    boolean isTravelPossible1 = false;
+		    boolean isTravelPossible2 = false;
+		    boolean isTravelPossible3 = false;
 		    for(int i = 0; i < speed; i++){
 				double i2 = i;
 				if(direction == 0){
@@ -96,9 +104,19 @@ public class FastRunMod extends Mod implements UpdateListener
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.portal ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
 					{
+						isTravelPossible0=true;
+					}
+					if(fastrunliquid.isChecked()) {
+
+						if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.water ||
+							getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.lava)
+						{
+							isTravelPossible0=true;
+						}
 					} else {
 						return;
 					}
+					if(isTravelPossible0)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ+i2/10);
 				}else if(direction == 1){
 					if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.air || 
@@ -108,10 +126,20 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.carpet ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
-						{
+					{
+						isTravelPossible1=true;
+					}
+						if(fastrunliquid.isChecked()) {
+							
+							if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.water ||
+								getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.lava)
+							{
+								isTravelPossible1=true;
+							}
 						} else {
 							return;
 						}
+				    if(isTravelPossible1)
 					mc.thePlayer.setPosition(currentX-i2/10, currentY, currentZ);
 				}else if(direction == 2){
 					if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.air || 
@@ -121,10 +149,20 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.carpet ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.portal ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
-						{
+					{
+						isTravelPossible2=true;
+					}
+						if(fastrunliquid.isChecked()) {
+						
+							if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.water ||
+							getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.lava)
+							{
+								isTravelPossible2=true;
+							}
 						} else {
 							return;
 						}
+				    if(isTravelPossible2)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ-i2/10);
 				}else if(direction == 3){
 					if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.air || 
@@ -134,10 +172,20 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.carpet ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
-						{
+					{
+						isTravelPossible3=true;
+					}
+						if(fastrunliquid.isChecked()) {
+							
+							if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.water ||
+								getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.lava)
+								{
+								    isTravelPossible3=true;
+								}
 						} else {
 							return;
 						}
+					if(isTravelPossible3)	
 					mc.thePlayer.setPosition(currentX+i2/10, currentY, currentZ);
 				}else{
 					return;
