@@ -37,20 +37,7 @@ public class FastRunMod extends Mod implements UpdateListener
 	private int defaultSpeed = 1;
 	private int speed = 1;
 	public final CheckboxSetting fastrunliquid = new CheckboxSetting(
-		"FastRun On Liquids", false);
-	
-	@Override
-	public String getRenderName()
-	{	
-		String currentString = getName();
-		currentString = currentString + "[Is Flat: ";
-		if(isFlatArea()){
-			currentString = currentString + "True]";
-		}else{
-			currentString = currentString + "False]";
-		}
-		return currentString;
-	}
+		"FastRun On Liquids (only works when flying)", false);
 	
 	@Override
 	public void initSettings()
@@ -105,17 +92,14 @@ public class FastRunMod extends Mod implements UpdateListener
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
 					{
 						isTravelPossible0=true;
-					}
+					} else if(isTravelPossible0=false) {
 					if(fastrunliquid.isChecked()) {
 
 						if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.lava)
-						{
-							isTravelPossible0=true;
-						}
+						isTravelPossible0=true;
+						
 					}
-					else {
-						return;
 					}
 					if(isTravelPossible0)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ+i2/10);
@@ -129,18 +113,17 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
 					{
 						isTravelPossible1=true;
-					}
+					} else if(isTravelPossible1=false) {
 						if(fastrunliquid.isChecked()) {
 							
 							if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.lava)
-							{
+							
 								isTravelPossible1=true;
-							}
+							
 						}
-						 else {
-							return;
-						}
+					
+					}
 				    if(isTravelPossible1)
 					mc.thePlayer.setPosition(currentX-i2/10, currentY, currentZ);
 				}else if(direction == 2){
@@ -153,18 +136,17 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
 					{
 						isTravelPossible2=true;
-					}
+					} else if(isTravelPossible2=false) {
 						if(fastrunliquid.isChecked()) {
 						
 							if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.lava)
-							{
+							
 								isTravelPossible2=true;
-							}
+							
 						}
-						 else {
-							return;
-						}
+					}
+
 				    if(isTravelPossible2)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ-i2/10);
 				}else if(direction == 3){
@@ -177,18 +159,16 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
 					{
 						isTravelPossible3=true;
-					}
+					} else if(isTravelPossible3=false) {
 						if(fastrunliquid.isChecked()) {
 							
 							if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.lava)
-								{
+								
 								    isTravelPossible3=true;
-								}
+								
 						}
-						 else {
-							return;
-						}
+					}
 					if(isTravelPossible3)	
 					mc.thePlayer.setPosition(currentX+i2/10, currentY, currentZ);
 				}else{
