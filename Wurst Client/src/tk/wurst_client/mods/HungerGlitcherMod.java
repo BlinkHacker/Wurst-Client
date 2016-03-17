@@ -17,8 +17,8 @@ import tk.wurst_client.utils.EntityUtils;
 	    + "Causes rapid hunger loss in vanilla servers\n"
 	    + "to either you or the player near you.\n"
 	    + "Extermely buggy.",
-	name = "Paralyze")
-public class ParalyzeMod extends Mod implements UpdateListener
+	name = "HungerGlitcher")
+public class HungerGlitcherMod extends Mod implements UpdateListener
 {
 	@Override
 	public void onEnable()

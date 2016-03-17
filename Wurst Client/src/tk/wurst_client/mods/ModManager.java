@@ -89,6 +89,7 @@ public class ModManager
 	public final HeadRollMod headRollMod = new HeadRollMod();
 	public final HealthTagsMod healthTagsMod = new HealthTagsMod();
 	public final HighJumpMod highJumpMod = new HighJumpMod();
+	public final HungerGlitcherMod hungerGlitcherMod = new HungerGlitcherMod();
 	public final HomeMod homeMod = new HomeMod();
 	public final InstantBunkerMod instantBunkerMod = new InstantBunkerMod();
 	public final InvisibilityMod invisibilityMod = new InvisibilityMod();
@@ -119,7 +120,6 @@ public class ModManager
 	public final OpSignMod opSignMod = new OpSignMod();
 	public final OverlayMod overlayMod = new OverlayMod();
 	public final PanicMod panicMod = new PanicMod();
-	public final ParalyzeMod paralyzeMod = new ParalyzeMod();
 	public final PhaseMod phaseMod = new PhaseMod();
 	public final PlayerEspMod playerEspMod = new PlayerEspMod();
 	public final PlayerFinderMod playerFinderMod = new PlayerFinderMod();
