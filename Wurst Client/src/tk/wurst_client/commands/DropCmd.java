@@ -18,7 +18,7 @@ import tk.wurst_client.events.listeners.UpdateListener;
 
 @Info(help = "Drops all your items on the ground.",
 	name = "drop",
-	syntax = {"[infinite]"})
+	syntax = {"[infinite <on|off>]"})
 public class DropCmd extends Cmd implements UpdateListener
 {
 	private int timer;
@@ -28,15 +28,17 @@ public class DropCmd extends Cmd implements UpdateListener
 	@Override
 	public void execute(String[] args) throws Error
 	{
-		if(args.length > 1)
+		if(args.length > 2)
 			syntaxError();
-		if(args.length == 1)
-			if(args[0].equalsIgnoreCase("infinite"))
-				infinite = !infinite;
+		if(args.length == 2)
+			if(args[0].equalsIgnoreCase("infinite") && mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on"))
+				infinite = true;
+			else if(args[0].equalsIgnoreCase("infinite") && !mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on"))
+			error("Creative mode only.");
+			else if(args[0].equalsIgnoreCase("infinite") && args[1].equalsIgnoreCase("off"))
+				infinite = false;
 			else
 				syntaxError();
-		else
-			infinite = false;
 		timer = 0;
 		counter = 9;
 		wurst.events.add(UpdateListener.class, this);
@@ -47,6 +49,9 @@ public class DropCmd extends Cmd implements UpdateListener
 	{
 		if(infinite)
 		{
+			if(!mc.thePlayer.capabilities.isCreativeMode) {
+				infinite=false;
+			}
 			Item item = null;
 			while(item == null)
 				item = Item.getItemById(new Random().nextInt(431));
