@@ -20,7 +20,8 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 @Info(category = Category.COMBAT,
-	description = "Automatically leaves the server when your health is low.\n"
+	description = "Automatically leaves the server when your health is lower\n"
+	    + "lower than the configured amount."
 		+ "The Chars, TP and SelfHurt modes can bypass CombatLog and similar plugins.",
 	name = "AutoLeave",
 	tags = "AutoDisconnect")
