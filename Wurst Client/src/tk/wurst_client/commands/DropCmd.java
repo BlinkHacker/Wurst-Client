@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.commands.Cmd.Info;
+import tk.wurst_client.events.ChatOutputEvent;
 import tk.wurst_client.events.listeners.UpdateListener;
 
 @Info(help = "Drops all your items on the ground.",
@@ -71,5 +72,16 @@ public class DropCmd extends Cmd implements UpdateListener
 				mc.playerController.windowClick(0, i, 1, 4, mc.thePlayer);
 			wurst.events.remove(UpdateListener.class, this);
 		}
+	}
+	@Override
+	public String getPrimaryAction()
+	{
+		return "Drop all items";
+	}
+	
+	@Override
+	public void doPrimaryAction()
+	{
+		wurst.commands.onSentMessage(new ChatOutputEvent(".drop", true));
 	}
 }

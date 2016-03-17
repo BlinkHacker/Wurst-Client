@@ -10,6 +10,7 @@ package tk.wurst_client.commands;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.commands.Cmd.Info;
+import tk.wurst_client.events.ChatOutputEvent;
 
 @Info(help = "Allows you to replicate items from your hand or from an armor slot.\n"
 	+ "Requires creative mode.",
@@ -78,4 +79,16 @@ public class DuplicateCmd extends Cmd {
 		
 	} else
 		syntaxError();
-}}
+	}
+	@Override
+	public String getPrimaryAction()
+	{
+		return "Duplicate item in hand";
+	}
+	
+	@Override
+	public void doPrimaryAction()
+	{
+		wurst.commands.onSentMessage(new ChatOutputEvent(".duplicate", true));
+	}
+}
