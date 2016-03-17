@@ -71,19 +71,76 @@ public class FastRunMod extends Mod implements UpdateListener
 			currentX = mc.thePlayer.posX;
 			currentY = mc.thePlayer.posY;
 			currentZ = mc.thePlayer.posZ;
-			for(int i = 0; i < speed; i++){
+		    boolean isTravelPossible0 = false;
+		    boolean isTravelPossible1 = false;
+		    boolean isTravelPossible2 = false;
+		    boolean isTravelPossible3 = false;
+		    for(int i = 0; i < speed; i++){
 				double i2 = i;
 				if(direction == 0){
-					if(getBlock(currentX, currentY, currentZ+i2).getMaterial() != Material.air) return;
+					//TODO: Better way to do this
+					if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.air || 
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.plants ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.vine ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.fire ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.carpet ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.snow ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.portal ||
+					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
+					{
+						isTravelPossible0=true;
+					} else {
+						return;
+					}
+					if (isTravelPossible0)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ+i2/10);
 				}else if(direction == 1){
-					if(getBlock(currentX-i2, currentY, currentZ).getMaterial() != Material.air) return;
+					if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.air || 
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.plants ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.vine ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.fire ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.carpet ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.snow ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.portal ||
+						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
+						{
+							isTravelPossible1=true;
+						} else {
+							return;
+						}
+					if (isTravelPossible1)
 					mc.thePlayer.setPosition(currentX-i2/10, currentY, currentZ);
 				}else if(direction == 2){
-					if(getBlock(currentX, currentY, currentZ-i2).getMaterial() != Material.air) return;
+					if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.air || 
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.plants ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.vine ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.fire ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.carpet ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.snow ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.portal ||
+						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
+						{
+							isTravelPossible2=true;
+						} else {
+							return;
+						}
+					if (isTravelPossible2)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ-i2/10);
 				}else if(direction == 3){
-					if(getBlock(currentX+i2, currentY, currentZ).getMaterial() != Material.air) return;
+					if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.air || 
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.plants ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.vine ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.fire ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.carpet ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.snow ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.portal ||
+						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
+						{
+							isTravelPossible3=true;
+						} else {
+							return;
+						}
+					if (isTravelPossible3)
 					mc.thePlayer.setPosition(currentX+i2/10, currentY, currentZ);
 				}else{
 					return;
@@ -97,35 +154,125 @@ public class FastRunMod extends Mod implements UpdateListener
 		double pX = mc.thePlayer.posX;
 		double pY = mc.thePlayer.posY;
 		double pZ = mc.thePlayer.posZ;
-		boolean[] isAir = new boolean[9];
+		boolean[] isPassable = new boolean[9];
 		for(int i2 = 0; i2 < 9; i2++){
-			isAir[i2] = false;
+			isPassable[i2] = false;
 		}
-		isAir[8] = false;
+		isPassable[8] = false;
 		int onThis = 0;
 		for(int i = 0; i < 9; i++){
 			if(onThis == 0){
-				if(getBlock(pX+1, pY, pZ).getMaterial() == Material.air) isAir[0] = true;
+				if(getBlock(pX+1, pY, pZ).getMaterial() == Material.air) isPassable[0] = true;
+				if (isPassable[0] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[0] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[0] = true;
+				}
 			}else if(onThis == 1){
-				if(getBlock(pX-1, pY, pZ).getMaterial() == Material.air) isAir[1] = true;
+				if(getBlock(pX-1, pY, pZ).getMaterial() == Material.air) isPassable[1] = true;
+				if (isPassable[1] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[1] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[1] = true;
+				}
 			}else if(onThis == 2){
-				if(getBlock(pX, pY, pZ+1).getMaterial() == Material.air) isAir[2] = true;
+				if(getBlock(pX, pY, pZ+1).getMaterial() == Material.air) isPassable[2] = true;
+				if (isPassable[2] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[2] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[2] = true;
+				}
 			}else if(onThis == 3){
-				if(getBlock(pX, pY, pZ-1).getMaterial() == Material.air) isAir[3] = true;
+				if(getBlock(pX, pY, pZ-1).getMaterial() == Material.air) isPassable[3] = true;
+				if (isPassable[3] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[3] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[3] = true;
+				}
 			}else if(onThis == 4){
-				if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.air) isAir[4] = true;
+				if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.air) isPassable[4] = true;
+				if (isPassable[4] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[4] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[4] = true;
+				}
 			}else if(onThis == 5){
-				if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.air) isAir[5] = true;
+				if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.air) isPassable[5] = true;
+				if (isPassable[5] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[5] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[5] = true;
+				}
 			}else if(onThis == 6){
-				if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.air) isAir[6] = true;
+				if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.air) isPassable[6] = true;
+				if (isPassable[6] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[6] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[6] = true;
+				}
 			}else if(onThis == 7){
-				if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.air) isAir[7] = true;
+				if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.air) isPassable[7] = true;
+				if (isPassable[7] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[7] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[7] = true;
+				}
 			}else if(onThis == 8){
-				if(getBlock(pX, pY, pZ).getMaterial() == Material.air) isAir[8] = true;
+				if(getBlock(pX, pY, pZ).getMaterial() == Material.air) isPassable[8] = true;
+				if (isPassable[8] == false)
+				{
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.vine) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.fire) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.carpet) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.snow) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[8] = true;
+					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[8] = true;
+				}
 			}
 			onThis++;
 		}
-		if(isAir[0] == true && isAir[1] == true && isAir[2] == true && isAir[3] == true && isAir[4] == true && isAir[5] == true && isAir[6] == true && isAir[7] == true && isAir[8] == true) return true;
+		if(isPassable[0] == true && isPassable[1] == true && isPassable[2] == true && isPassable[3] == true && isPassable[4] == true && isPassable[5] == true && isPassable[6] == true && isPassable[7] == true && isPassable[8] == true) return true;
 		return false;
 	}
 	
