@@ -24,19 +24,26 @@ public class DropCmd extends Cmd implements UpdateListener
 	private int timer;
 	private int counter;
 	private boolean infinite;
-	
+	private boolean drop;
 	@Override
 	public void execute(String[] args) throws Error
 	{
-		if(args.length > 2)
+		if(args.length > 2 || args.length == 1)
 			syntaxError();
+		if(args.length == 0) {
+			drop = true;
+		}
 		if(args.length == 2)
-			if(args[0].equalsIgnoreCase("infinite") && mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on"))
+			if(args[0].equalsIgnoreCase("infinite") && mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on")) {
 				infinite = true;
-			else if(args[0].equalsIgnoreCase("infinite") && !mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on"))
+				drop = true;
+			}
+			else if(args[0].equalsIgnoreCase("infinite") && !mc.thePlayer.capabilities.isCreativeMode && args[1].equalsIgnoreCase("on")) {
 			error("Creative mode only.");
-			else if(args[0].equalsIgnoreCase("infinite") && args[1].equalsIgnoreCase("off"))
+			}
+			else if(args[0].equalsIgnoreCase("infinite") && args[1].equalsIgnoreCase("off")) {
 				infinite = false;
+			}
 			else
 				syntaxError();
 		timer = 0;
@@ -60,6 +67,7 @@ public class DropCmd extends Cmd implements UpdateListener
 					new ItemStack(item, 64)));
 			return;
 		}
+		if (drop) {
 		if(wurst.mods.yesCheatMod.isActive())
 		{
 			timer++;
@@ -68,15 +76,19 @@ public class DropCmd extends Cmd implements UpdateListener
 				mc.playerController.windowClick(0, counter, 1, 4, mc.thePlayer);
 				counter++;
 				timer = 0;
-				if(counter >= 45)
+				if(counter >= 45) {
 					wurst.events.remove(UpdateListener.class, this);
+					drop = false;
+				} 
 			}
 		}else
 		{
 			for(int i = 9; i < 45; i++)
 				mc.playerController.windowClick(0, i, 1, 4, mc.thePlayer);
 			wurst.events.remove(UpdateListener.class, this);
+			drop = false;
 		}
+	}
 	}
 	@Override
 	public String getPrimaryAction()
