@@ -17,6 +17,7 @@ import tk.wurst_client.mods.Mod.Info;
 @Info(category = Category.MISC,
 	description = "Blocks bad potion effects.",
 	name = "AntiPotion",
+	tags = "Firion",
 	noCheatCompatible = false)
 public class AntiPotionMod extends Mod implements UpdateListener
 {

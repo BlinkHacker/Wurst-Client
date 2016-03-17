@@ -17,6 +17,7 @@ import tk.wurst_client.mods.Mod.Info;
 		+ "Does NOT block damage from standing inside of fire.\n"
 		+ "Requires a full hunger bar.",
 	name = "AntiFire",
+	tags = "Firion",
 	noCheatCompatible = false)
 public class AntiFireMod extends Mod implements UpdateListener
 {
