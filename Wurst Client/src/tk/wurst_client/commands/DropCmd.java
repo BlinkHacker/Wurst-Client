@@ -81,7 +81,7 @@ public class DropCmd extends Cmd implements UpdateListener
 	@Override
 	public String getPrimaryAction()
 	{
-		return "Drop all items";
+		return "Drop All Items";
 	}
 	
 	@Override

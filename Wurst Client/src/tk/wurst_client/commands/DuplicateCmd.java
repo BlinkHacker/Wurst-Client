@@ -83,7 +83,7 @@ public class DuplicateCmd extends Cmd {
 	@Override
 	public String getPrimaryAction()
 	{
-		return "Duplicate item in hand";
+		return "Duplicate Item In Hand";
 	}
 	
 	@Override

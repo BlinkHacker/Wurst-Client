@@ -24,7 +24,7 @@ public class ClearCmd extends Cmd
 	@Override
 	public String getPrimaryAction()
 	{
-		return "Clear chat";
+		return "Clear Chat";
 	}
 	
 	@Override
