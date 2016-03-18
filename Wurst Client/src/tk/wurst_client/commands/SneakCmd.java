@@ -9,6 +9,7 @@ package tk.wurst_client.commands;
 
 import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatOutputEvent;
+import tk.wurst_client.mods.SneakMod;
 
 @Info(help = "Toggles Sneak or changes its mode.",
 	name = "sneak",
@@ -18,6 +19,7 @@ public class SneakCmd extends Cmd
 	@Override
 	public void execute(String[] args) throws Error
 	{
+		SneakMod sneak = wurst.mods.sneakMod;
 		if(args.length > 2)
 			syntaxError();
 		if(args.length == 0) {
@@ -43,10 +45,24 @@ public class SneakCmd extends Cmd
 		} else if(args.length == 2) {
 			if (args[0].equalsIgnoreCase("mode")) 
 			{
-				wurst.mods.sneakMod.setMode(parseMode(args[1]));
-				wurst.files.saveOptions();
-				wurst.chat
-					.message("Sneak mode set to \"" + args[1] + "\".");
+				// search mode by name
+				String[] modeNames = sneak.getModes();
+				String newModeName = args[1];
+				int newMode = -1;
+				for(int i = 0; i < modeNames.length; i++)
+					if(newModeName.equals(modeNames[i].toLowerCase()))
+						newMode = i;
+				
+				// syntax error if mode does not exist
+				if(newMode == -1)
+					syntaxError("Invalid mode");
+				
+				if(newMode != sneak.getMode())
+				{
+					sneak.setMode(newMode);
+					wurst.files.saveNavigatorData();
+				}   
+				wurst.chat.message("Sneak mode set to \"" + args[1] + "\".");
 			}
 		} else
 			syntaxError();
@@ -61,17 +77,5 @@ public class SneakCmd extends Cmd
 	public void doPrimaryAction()
 	{
 		wurst.commands.onSentMessage(new ChatOutputEvent(".sneak", true));
-	}
-	private int parseMode(String input) throws SyntaxError
-	{
-		// search mode by name
-		String[] modeNames = wurst.mods.sneakMod.getModes();
-		for(int i = 0; i < modeNames.length; i++)
-			if(input.equals(modeNames[i].toLowerCase()))
-				return i;
-		
-		// syntax error if mode does not exist
-		syntaxError("Invalid mode: " + input);
-		return 0;
 	}
 }
