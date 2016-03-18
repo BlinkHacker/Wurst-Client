@@ -21,6 +21,7 @@ import tk.wurst_client.navigator.settings.ModeSetting;
 	name = "Sneak")
 public class SneakMod extends Mod implements UpdateListener
 {
+	boolean hassneaked = false;
 	private int mode = 0;
 	private String[] modes = new String[]{"Packet", "Real"};
 	@Override
@@ -53,8 +54,11 @@ public class SneakMod extends Mod implements UpdateListener
 			sendQueue.addToSendQueue(new C0BPacketEntityAction(Minecraft
 				.getMinecraft().thePlayer, Action.STOP_SNEAKING));
 		}else 
+			if(hassneaked == false) {
 			mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 				Minecraft.getMinecraft().thePlayer, Action.START_SNEAKING));
+			hassneaked=true;
+			}
 		} else if (mode == 1) 
 		{
 			mc.gameSettings.keyBindSneak.pressed = true;
@@ -68,6 +72,7 @@ public class SneakMod extends Mod implements UpdateListener
 		mc.gameSettings.keyBindSneak.pressed = false;
 		mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 			mc.thePlayer, Action.STOP_SNEAKING));
+		hassneaked=false;
 	}
 	public int getMode()
 	{
