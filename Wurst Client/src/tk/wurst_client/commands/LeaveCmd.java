@@ -12,15 +12,17 @@ import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C02PacketUseEntity.Action;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import tk.wurst_client.events.ChatOutputEvent;
+import tk.wurst_client.mods.AutoLeaveMod;
 
 @Cmd.Info(help = "Leaves the current server or changes the mode of AutoLeave.",
 	name = "leave",
-	syntax = {"[chars|tp|selfhurt|quit]", "mode chars|tp|selfhurt|quit"})
+	syntax = {"[chars|tp|selfhurt|quit]", "mode chars|tp|selfhurt|quit|taco"})
 public class LeaveCmd extends Cmd
 {
 	@Override
 	public void execute(String[] args) throws Error
 	{
+		AutoLeaveMod leave = wurst.mods.autoLeaveMod;
 		if(args.length > 2)
 			syntaxError();
 		if(mc.isIntegratedServerRunning()
@@ -35,14 +37,37 @@ public class LeaveCmd extends Cmd
 				if(args[0].equalsIgnoreCase("taco"))
 					for(int i = 0; i < 128; i++)
 						mc.thePlayer.sendAutomaticChatMessage("Taco!");
-				else
-					disconnectWithMode(parseMode(args[0]));
+				else if(args[0].equalsIgnoreCase("quit")) {
+					disconnectWithMode(0);
+				} else if(args[0].equalsIgnoreCase("chars")) {
+					disconnectWithMode(1);
+				} else if(args[0].equalsIgnoreCase("tp")) {
+					disconnectWithMode(2);
+				} else if(args[0].equalsIgnoreCase("selfhurt")) {
+					disconnectWithMode(3);
+				} else 
+					syntaxError();
 				break;
 			case 2:
-				wurst.mods.autoLeaveMod.setMode(parseMode(args[1]));
-				wurst.files.saveOptions();
-				wurst.chat
-					.message("AutoLeave mode set to \"" + args[1] + "\".");
+				// search mode by name
+				String[] modeNames = leave.getModes();
+				String newModeName = args[1];
+				int newMode = -1;
+				for(int i = 0; i < modeNames.length; i++)
+					if(newModeName.equals(modeNames[i].toLowerCase()))
+						newMode = i;
+				
+				// syntax error if mode does not exist
+				if(newMode == -1)
+					syntaxError("Invalid mode");
+				
+				if(newMode != leave.getMode())
+				{
+					leave.setMode(newMode);
+					wurst.files.saveNavigatorData();
+				}
+				
+				wurst.chat.message("Leave mode set to \"" + args[1] + "\".");
 				break;
 			default:
 				break;
@@ -85,16 +110,5 @@ public class LeaveCmd extends Cmd
 		}
 	}
 	
-	private int parseMode(String input) throws SyntaxError
-	{
-		// search mode by name
-		String[] modeNames = wurst.mods.autoLeaveMod.getModes();
-		for(int i = 0; i < modeNames.length; i++)
-			if(input.equals(modeNames[i].toLowerCase()))
-				return i;
-		
-		// syntax error if mode does not exist
-		syntaxError("Invalid mode: " + input);
-		return 0;
-	}
+
 }
