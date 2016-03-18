@@ -65,13 +65,9 @@ public class SneakMod extends Mod implements UpdateListener
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
-		if (mode == 1) {
 		mc.gameSettings.keyBindSneak.pressed = false;
-		}
-		if (mode == 0) {
 		mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 			mc.thePlayer, Action.STOP_SNEAKING));
-		}
 	}
 	public int getMode()
 	{
