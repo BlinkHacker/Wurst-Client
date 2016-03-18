@@ -8,7 +8,6 @@
 package tk.wurst_client.commands;
 
 import tk.wurst_client.commands.Cmd.Info;
-import tk.wurst_client.commands.Cmd.SyntaxError;
 import tk.wurst_client.events.ChatOutputEvent;
 
 @Info(help = "Toggles Sneak or changes its mode.",
