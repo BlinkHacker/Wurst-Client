@@ -11,7 +11,7 @@ import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatOutputEvent;
 
 @Info(help = "Toggles Sneak or changes its mode.",
-	name = "rv",
+	name = "sneak",
 	syntax = {"[mode Packet|Real]", "[on|off|t]"})
 public class SneakCmd extends Cmd
 {
