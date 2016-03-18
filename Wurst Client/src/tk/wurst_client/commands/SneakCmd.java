@@ -13,7 +13,7 @@ import tk.wurst_client.mods.SneakMod;
 
 @Info(help = "Toggles Sneak or changes its mode.",
 	name = "sneak",
-	syntax = {"[mode Packet|Real]", "[on|off|t]"})
+	syntax = {"mode (packet|real)", "[on|off|t]"})
 public class SneakCmd extends Cmd
 {
 	@Override
@@ -41,7 +41,8 @@ public class SneakCmd extends Cmd
 					wurst.mods.sneakMod.setEnabled(false);
 				else
 				 wurst.mods.sneakMod.setEnabled(true);
-			}
+			} else
+				syntaxError();
 		} else if(args.length == 2) {
 			if (args[0].equalsIgnoreCase("mode")) 
 			{
