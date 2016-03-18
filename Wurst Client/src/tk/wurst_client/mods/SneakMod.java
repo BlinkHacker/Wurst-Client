@@ -52,7 +52,7 @@ public class SneakMod extends Mod implements UpdateListener
 				.getMinecraft().thePlayer, Action.START_SNEAKING));
 			sendQueue.addToSendQueue(new C0BPacketEntityAction(Minecraft
 				.getMinecraft().thePlayer, Action.STOP_SNEAKING));
-		}else
+		}else 
 			mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 				Minecraft.getMinecraft().thePlayer, Action.START_SNEAKING));
 		} else if (mode == 1) 
@@ -72,5 +72,19 @@ public class SneakMod extends Mod implements UpdateListener
 		mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 			mc.thePlayer, Action.STOP_SNEAKING));
 		}
+	}
+	public int getMode()
+	{
+		return mode;
+	}
+	
+	public void setMode(int mode)
+	{
+		((ModeSetting)settings.get(1)).setSelected(mode);
+	}
+	
+	public String[] getModes()
+	{
+		return modes;
 	}
 }
