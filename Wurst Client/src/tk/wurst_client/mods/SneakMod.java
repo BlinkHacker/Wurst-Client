@@ -14,12 +14,27 @@ import net.minecraft.network.play.client.C0BPacketEntityAction.Action;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.ModeSetting;
 
 @Info(category = Category.MOVEMENT,
 	description = "Automatically sneaks all the time.",
 	name = "Sneak")
 public class SneakMod extends Mod implements UpdateListener
 {
+	private int mode = 0;
+	private String[] modes = new String[]{"Packet", "Real"};
+	@Override
+	public void initSettings()
+	{
+		settings.add(new ModeSetting("Mode", modes, mode)
+		{
+			@Override
+			public void update()
+			{
+				mode = getSelected();
+			}
+		});
+	}
 	@Override
 	public void onEnable()
 	{
@@ -29,6 +44,7 @@ public class SneakMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		if(mode == 0) {
 		if(wurst.mods.yesCheatMod.isActive())
 		{
 			NetHandlerPlayClient sendQueue = mc.thePlayer.sendQueue;
@@ -39,14 +55,22 @@ public class SneakMod extends Mod implements UpdateListener
 		}else
 			mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 				Minecraft.getMinecraft().thePlayer, Action.START_SNEAKING));
+		} else if (mode == 1) 
+		{
+			mc.gameSettings.keyBindSneak.pressed = true;
+		}
 	}
 	
 	@Override
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+		if (mode == 1) {
 		mc.gameSettings.keyBindSneak.pressed = false;
+		}
+		if (mode == 0) {
 		mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
 			mc.thePlayer, Action.STOP_SNEAKING));
+		}
 	}
 }
