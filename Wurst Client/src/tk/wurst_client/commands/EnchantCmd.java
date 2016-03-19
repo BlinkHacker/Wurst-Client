@@ -63,10 +63,9 @@ public class EnchantCmd extends Cmd
 			 				            
 			 			} else if (args.length == 2 && args[0].equals("all") && MiscUtils.isInteger(args[1])) {
 			 				int items = 0;
-			 				for(int i = 0; i < 40; i++)
+			 				for(int i = 5; i < 45; i++)
 			 				{
-			 					ItemStack currentItem =
-			 						mc.thePlayer.inventory.getStackInSlot(i);
+			 					ItemStack currentItem = player.inventoryContainer.getSlot(i).getStack();
 			 					if(currentItem == null)
 			 						continue;
 			 					items++;
@@ -83,6 +82,9 @@ public class EnchantCmd extends Cmd
 			 						{	
 			 							
 			 						}
+			 					mc.thePlayer.sendQueue.addToSendQueue(
+			 						 						new C10PacketCreativeInventoryAction(
+			 						 								i, currentItem));
 			 				}
 			 				if(items == 1)
 			 					wurst.chat.message("Enchanted 1 item.");
