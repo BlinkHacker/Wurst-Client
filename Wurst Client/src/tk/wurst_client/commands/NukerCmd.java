@@ -48,7 +48,6 @@ public class NukerCmd extends Cmd
 			if(nuker.getMode() != 1)
 			{
 				nuker.setMode(1);
-				wurst.files.saveNavigatorData();
 				wurst.chat.message("Nuker mode set to \"" + args[0] + "\".");
 			}
 			
