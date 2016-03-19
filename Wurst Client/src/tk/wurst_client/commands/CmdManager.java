@@ -62,6 +62,7 @@ public class CmdManager implements ChatOutputListener
 	public final NothingCmd nothingCmd = new NothingCmd();
 	public final NukerCmd nukerCmd = new NukerCmd();
 	public final PathCmd pathCmd = new PathCmd();
+	public final PlaceSlotCmd placeSlotCmd = new PlaceSlotCmd();
 	public final PotionCmd potionCmd = new PotionCmd();
 	public final ProtectCmd protectCmd = new ProtectCmd();
 	public final RenameCmd renameCmd = new RenameCmd();
