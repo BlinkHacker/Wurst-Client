@@ -36,7 +36,7 @@ public class RemoteViewMod extends Mod implements UpdateListener
 	@Override
 	public void onEnable()
 	{
-		if(EntityUtils.getClosestEntityRaw(false) == null)
+		if(EntityUtils.getClosestEntityRaw(false,false) == null)
 		{
 			wurst.chat.message("There is no nearby entity.");
 			setEnabled(false);
