@@ -8,6 +8,7 @@
 package tk.wurst_client.commands;
 
 import tk.wurst_client.commands.Cmd.Info;
+import tk.wurst_client.mods.FastBreakMod;
 
 @Info(help = "Changes the settings of FastBreak.",
 	name = "fastbreak",
@@ -17,14 +18,15 @@ public class FastBreakCmd extends Cmd
 	@Override
 	public void execute(String[] args) throws Error
 	{
+		FastBreakMod fastbreak = wurst.mods.fastBreakMod;
 		if(args.length != 2)
 			syntaxError();
 		if(args[0].toLowerCase().equals("mode"))
 		{// 0=normal, 1=instant
 			if(args[1].toLowerCase().equals("normal"))
-				wurst.options.fastbreakMode = 0;
+				fastbreak.setMode(0);
 			else if(args[1].toLowerCase().equals("instant"))
-				wurst.options.fastbreakMode = 1;
+				fastbreak.setMode(1);
 			else
 				syntaxError();
 			wurst.files.saveOptions();

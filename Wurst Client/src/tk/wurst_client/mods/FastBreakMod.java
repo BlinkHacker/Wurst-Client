@@ -12,6 +12,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.ModeSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 @Info(category = Category.BLOCKS,
@@ -20,6 +21,8 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 	name = "FastBreak")
 public class FastBreakMod extends Mod
 {
+	private int mode = 0;
+	private String[] modes = new String[]{"Normal", "Instant"};
 	public float speed = 2;
 	
 	@Override
@@ -34,12 +37,33 @@ public class FastBreakMod extends Mod
 				speed = (float)getValue();
 			}
 		});
+		settings.add(new ModeSetting("Mode", modes, mode)
+		{
+			@Override
+			public void update()
+			{
+				mode = getSelected();
+			}
+		});
 	}
-	
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
 		return new NavigatorItem[]{wurst.mods.fastPlaceMod,
 			wurst.mods.autoMineMod, wurst.mods.nukerMod};
+	}
+	public int getMode()
+	{
+		return mode;
+	}
+	
+	public void setMode(int mode)
+	{
+		((ModeSetting)settings.get(1)).setSelected(mode);
+	}
+	
+	public String[] getModes()
+	{
+		return modes;
 	}
 }
