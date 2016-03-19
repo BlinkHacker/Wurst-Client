@@ -8,7 +8,6 @@
 package tk.wurst_client.commands;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.commands.Cmd.Info;
 
 @Info(help = "Duplicates items in your hand in a specified armor slot.\n"
@@ -33,29 +32,28 @@ public class PlaceSlotCmd extends Cmd
 			switch(args[0].toLowerCase())
 			{
 				case "head":
-					slotid = 39;
+					slotid = 3;
 					break;
 				case "chest":
-					slotid = 38;
+					slotid = 2;
 					break;
 				case "legs":
-					slotid = 37;
+					slotid = 1;
 					break;
 				case "feet":
-					slotid = 36;
+					slotid = 0;
 					break;
 				default:
 					syntaxError();
 					break;
 			}
-			if(mc.thePlayer.inventory.getStackInSlot(slotid) != null)	
+			if(mc.thePlayer.getInventory()[slotid] != null)	
 				error("Item already in slot \"" + args[0] + "\"");
-			if (slotid > 39 || slotid < 36) {
+			if (slotid > 3 || slotid < 0) {
 				error("Armor slot is invaild.");
-			} else
-			mc.thePlayer.sendQueue.addToSendQueue(
-					new C10PacketCreativeInventoryAction(
-						slotid, item));
+			} else {
+				mc.thePlayer.getInventory()[slotid] = item;
+			}
 			wurst.chat.message("Item placed in slot \"" + args[0] + "\"");
 		}
 		
