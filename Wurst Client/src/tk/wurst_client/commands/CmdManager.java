@@ -45,7 +45,6 @@ public class CmdManager implements ChatOutputListener
 	public final DuplicateCmd duplicateCmd = new DuplicateCmd();
 	public final EnchantCmd enchantCmd = new EnchantCmd();
 	public final FakeMsgCmd fakeMsgCmd = new FakeMsgCmd();
-	public final FastBreakCmd fastBreakCmd = new FastBreakCmd();
 	public final FeaturesCmd featuresCmd = new FeaturesCmd();
 	public final FollowCmd followCmd = new FollowCmd();
 	public final FriendsCmd friendsCmd = new FriendsCmd();
