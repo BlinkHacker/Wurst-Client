@@ -73,4 +73,8 @@ public class JetpackMod extends Mod implements UpdateListener
 	{
 		wurst.events.remove(UpdateListener.class, this);
 	}
+	public boolean getCheckbox()
+	{
+		return flightKickBypass.isChecked();
+	}
 }

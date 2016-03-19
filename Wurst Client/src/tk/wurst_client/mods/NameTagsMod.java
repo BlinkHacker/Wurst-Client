@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.RENDER,
 	description = "Changes the scale of the nametags so you can always\n"
@@ -16,5 +17,15 @@ import tk.wurst_client.mods.Mod.Info;
 	name = "NameTags")
 public class NameTagsMod extends Mod
 {	
-	
+	public final CheckboxSetting AlwaysSeeNameTags = new CheckboxSetting(
+		"Always see NameTags", false);
+	@Override
+	public void initSettings()
+	{
+		settings.add(AlwaysSeeNameTags);
+	}
+	public boolean getCheckbox()
+	{
+		return AlwaysSeeNameTags.isChecked();
+	}
 }

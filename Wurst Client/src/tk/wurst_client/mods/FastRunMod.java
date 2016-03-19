@@ -279,5 +279,9 @@ public class FastRunMod extends Mod implements UpdateListener
 	public void onDisable(){
 		wurst.events.remove(UpdateListener.class, this);
 	}
+	public boolean getCheckbox()
+	{
+		return fastrunliquid.isChecked();
+	}
 
 }

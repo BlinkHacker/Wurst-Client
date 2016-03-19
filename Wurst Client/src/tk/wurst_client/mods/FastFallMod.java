@@ -67,4 +67,8 @@ public class FastFallMod extends Mod implements UpdateListener
 	{
 		wurst.events.remove(UpdateListener.class, this);
 	}
+	public boolean getCheckbox()
+	{
+		return fastFallOnWater.isChecked();
+	}
 }
