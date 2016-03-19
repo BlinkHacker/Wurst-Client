@@ -25,7 +25,7 @@ public class CrashChestMod extends Mod
 		if(mc.thePlayer.inventory.getStackInSlot(36) != null)
 		{
 			if(mc.thePlayer.inventory.getStackInSlot(36).getDisplayName()
-				.equals("§6§lCOPY ME"))
+				.equals("§6§lLEGENDARY CHEST"))
 				wurst.chat.error("You already have a CrashChest.");
 			else
 				wurst.chat.error("Please take off your shoes.");

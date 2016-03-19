@@ -60,9 +60,6 @@ public class EnchantCmd extends Cmd
 			 					{	
 			 						
 			 					}
-			 				            mc.thePlayer.sendQueue.addToSendQueue(
-			 					 					new C10PacketCreativeInventoryAction(
-			 					 							36+player.inventory.currentItem, currentItem));
 			 				            
 			 			} else if (args.length == 2 && args[0].equals("all") && MiscUtils.isInteger(args[1])) {
 			 				int items = 0;
@@ -86,9 +83,6 @@ public class EnchantCmd extends Cmd
 			 						{	
 			 							
 			 						}
-			 					mc.thePlayer.sendQueue.addToSendQueue(
-			 						 		new C10PacketCreativeInventoryAction(
-			 						 						i, currentItem));
 			 				}
 			 				if(items == 1)
 			 					wurst.chat.message("Enchanted 1 item.");
