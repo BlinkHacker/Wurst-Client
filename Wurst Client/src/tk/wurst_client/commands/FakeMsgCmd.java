@@ -13,7 +13,7 @@ import tk.wurst_client.commands.Cmd.Info;
 
 @Info(help = "Generates a fake message into the chat screen. Use $ for colors, use $$ for $.",
 	name = "fakemsg",
-	syntax = {"Message"})
+	syntax = {"<Message>"})
 public class FakeMsgCmd extends Cmd
 {
 	@Override

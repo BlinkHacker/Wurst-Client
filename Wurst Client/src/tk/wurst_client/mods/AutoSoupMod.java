@@ -25,6 +25,7 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 @Info(category = Category.COMBAT,
@@ -35,6 +36,10 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 public class AutoSoupMod extends Mod implements UpdateListener
 {
 	public float health = 20F;
+	public final CheckboxSetting autosoupdelay = new CheckboxSetting(
+		"AutoSoup Delay", false);
+	private int timer = 0;
+	private int timer2 =0;
 	
 	@Override
 	public void initSettings()
@@ -48,6 +53,7 @@ public class AutoSoupMod extends Mod implements UpdateListener
 				health = (float)getValue();
 			}
 		});
+		settings.add(autosoupdelay);
 	}
 	
 	@Override
@@ -92,8 +98,19 @@ public class AutoSoupMod extends Mod implements UpdateListener
 			ItemStack stack = inventoryContainer.getSlot(i).getStack();
 			if(stack != null && stack.getItem() == Items.bowl)
 			{
+				if(autosoupdelay.isChecked()) {
+					timer++;
+					if(timer >= 9)
+					{
+						playerController.windowClick(0, i, 0, 0, player);
+						playerController.windowClick(0, 18, 0, 0, player);
+						timer = 0;
+					}
+				
+				}else if(!autosoupdelay.isChecked()){
 				playerController.windowClick(0, i, 0, 0, player);
 				playerController.windowClick(0, 18, 0, 0, player);
+				} 
 			}
 		}
 		
@@ -110,9 +127,22 @@ public class AutoSoupMod extends Mod implements UpdateListener
 				new BlockPos(-1, -1, -1), -1, inventoryContainer.getSlot(
 					soupInHotbar).getStack(), 0.0F, 0.0F, 0.0F));
 			sendQueue.addToSendQueue(new C09PacketHeldItemChange(oldSlot));
-		}else
+		}else{
 			// move soup in inventory to hotbar
-			playerController.windowClick(0, soupInInventory, 0, 1, player);
+			if(autosoupdelay.isChecked()) {
+				timer2++;
+				if(timer2 >= 11)
+				{
+					playerController.windowClick(0, soupInInventory, 0, 1, player);
+					timer2 = 0;
+				}
+					
+			} else if(!autosoupdelay.isChecked())
+			{ 
+				playerController.windowClick(0, soupInInventory, 0, 1, player);
+			}
+			
+		}
 	}
 	
 	@Override
