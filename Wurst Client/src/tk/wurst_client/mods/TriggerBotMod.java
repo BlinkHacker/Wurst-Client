@@ -29,7 +29,7 @@ public class TriggerBotMod extends Mod implements UpdateListener
 			wurst.mods.killauraMod, wurst.mods.killauraLegitMod,
 			wurst.mods.multiAuraMod, wurst.mods.clickAuraMod,
 			wurst.mods.criticalsMod, wurst.mods.aimbotMod,
-			wurst.mods.clickAimbotMod};
+			wurst.mods.clickAimbotMod, wurst.mods.tpAuraMod};
 	}
 	
 	@Override

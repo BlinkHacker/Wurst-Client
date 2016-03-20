@@ -85,7 +85,7 @@ public class KillauraMod extends Mod implements UpdateListener
 			wurst.mods.killauraLegitMod, wurst.mods.multiAuraMod,
 			wurst.mods.clickAuraMod, wurst.mods.triggerBotMod,
 			wurst.mods.criticalsMod, wurst.mods.aimbotMod,
-			wurst.mods.clickAimbotMod};
+			wurst.mods.clickAimbotMod,wurst.mods.tpAuraMod};
 	}
 	
 	@Override

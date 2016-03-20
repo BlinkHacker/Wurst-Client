@@ -10,11 +10,12 @@ package tk.wurst_client.mods;
 
 import net.minecraft.entity.EntityLivingBase;
 import tk.wurst_client.events.listeners.UpdateListener;
-import tk.wurst_client.mods.Mod;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.EntityUtils;
 
-@Mod.Info(category = Mod.Category.COMBAT,
+@Info(category = Category.COMBAT,
     description = "Automatically aims to the nearest entity.",
     name = "Aimbot")
 public class AimbotMod extends Mod implements UpdateListener {
@@ -25,7 +26,8 @@ public class AimbotMod extends Mod implements UpdateListener {
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.multiAuraMod,
 			wurst.mods.clickAuraMod, wurst.mods.triggerBotMod,
-			wurst.mods.killauraLegitMod,wurst.mods.clickAimbotMod};
+			wurst.mods.killauraLegitMod,wurst.mods.clickAimbotMod,
+			wurst.mods.tpAuraMod};
 	}
 	
     @Override
@@ -41,8 +43,6 @@ public class AimbotMod extends Mod implements UpdateListener {
 			wurst.mods.tpAuraMod.setEnabled(false);
     	if(wurst.mods.killauraLegitMod.isEnabled())
     		wurst.mods.killauraLegitMod.setEnabled(false);
-    	if(wurst.mods.tpAuraMod.isEnabled())
-    		wurst.mods.tpAuraMod.setEnabled(false);
     	if(wurst.mods.clickAimbotMod.isEnabled())
 			wurst.mods.clickAimbotMod.setEnabled(false);
         wurst.events.add(UpdateListener.class, this);
@@ -51,12 +51,14 @@ public class AimbotMod extends Mod implements UpdateListener {
     @Override
     public void onUpdate() {
         EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
-        if( mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange && EntityUtils.ticksCheck(en)) {
+        if(EntityUtils.ticksCheck(en))
+        if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange && en !=null) 
+        {
         	EntityUtils.faceEntityClient(en);
-            
         }
     }
      @Override
      public void onDisable() {
          wurst.events.remove(UpdateListener.class, this);
-     }}
+     }
+}

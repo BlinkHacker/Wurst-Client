@@ -26,7 +26,8 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.multiAuraMod,
 			wurst.mods.clickAuraMod, wurst.mods.triggerBotMod,
-			wurst.mods.aimbotMod,wurst.mods.clickAimbotMod};
+			wurst.mods.aimbotMod,wurst.mods.clickAimbotMod,
+			wurst.mods.tpAuraMod};
 	}
 	
 	@Override

@@ -27,7 +27,8 @@ public class ClickAimbotMod extends Mod implements UpdateListener
 		return new NavigatorItem[]{wurst.special.targetSpf,
 			wurst.mods.killauraMod, wurst.mods.killauraLegitMod,
 			wurst.mods.multiAuraMod, wurst.mods.triggerBotMod, 
-			wurst.mods.aimbotMod,wurst.mods.clickAuraMod};
+			wurst.mods.aimbotMod,wurst.mods.clickAuraMod,
+			wurst.mods.tpAuraMod};
 	}
 	
 	@Override
