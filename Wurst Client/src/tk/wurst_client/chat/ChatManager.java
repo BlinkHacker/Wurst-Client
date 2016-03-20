@@ -19,10 +19,6 @@ public class ChatManager
 	{
 		this.enabled = enabled;
 	}
-	public boolean isChatEnabled()
-	{
-		return enabled;
-	}
 	
 	public void component(IChatComponent component)
 	{

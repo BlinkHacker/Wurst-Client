@@ -13,11 +13,11 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MISC,
-	description = "Removes all Wurst related elements for recording..",
+	description = "Removes all Wurst related elements for recording.",
 	name = "RecordingMode")
 public class RecordingModeMod extends Mod implements UpdateListener
 {	
-	public boolean WmsWasOff;
+	public boolean isDisabled;
 	@Override
 	public void onEnable()
 	{
@@ -26,18 +26,20 @@ public class RecordingModeMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		if(!wurst.chat.isChatEnabled())
-			WmsWasOff=true;
+		if(isDisabled != true) 
+		{
 		wurst.commands.onSentMessage(new ChatOutputEvent(".wms off", true));
 		wurst.commands.onSentMessage(new ChatOutputEvent(".clear", true));
+		isDisabled = true;
+		}
 		
 		
 	}
 	@Override
 	public void onDisable()
 	{
-		if(!WmsWasOff)
-			wurst.commands.onSentMessage(new ChatOutputEvent(".wms on", true));
+		wurst.commands.onSentMessage(new ChatOutputEvent(".wms on", true));
+		isDisabled = false;
 		wurst.events.remove(UpdateListener.class, this);
 	}
 }

@@ -38,6 +38,8 @@ public class UIRenderer
 	{
 		if(WurstClient.INSTANCE.options.modListMode == 2)
 			return;
+		if(WurstClient.INSTANCE.mods.recordingModeMod.isActive())
+			return;
 		LinkedList<String> modList = new LinkedList<String>();
 		for(Mod mod : WurstClient.INSTANCE.mods.getAllMods())
 		{
@@ -74,6 +76,8 @@ public class UIRenderer
 	
 	public static void renderUI(float zLevel)
 	{
+		if(WurstClient.INSTANCE.mods.recordingModeMod.isActive())
+			return;
 		// GL settings
 		glEnable(GL_BLEND);
 		glDisable(GL_CULL_FACE);
