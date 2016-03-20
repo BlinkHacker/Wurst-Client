@@ -19,6 +19,10 @@ public class ChatManager
 	{
 		this.enabled = enabled;
 	}
+	public boolean isChatEnabled()
+	{
+		return enabled;
+	}
 	
 	public void component(IChatComponent component)
 	{
@@ -69,4 +73,5 @@ public class ChatManager
 			new ChatComponentText("§c[§6Wurst§c]§f §0§l<§aCMD§0§l>§f "
 				+ message));
 	}
+
 }
