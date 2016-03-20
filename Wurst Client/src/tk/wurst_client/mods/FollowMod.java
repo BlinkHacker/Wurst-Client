@@ -35,7 +35,7 @@ public class FollowMod extends Mod implements UpdateListener
 	{
 		entity = null;
 		EntityLivingBase en = EntityUtils.getClosestEntity(false, true);
-		if(en != null && mc.thePlayer.getDistanceToEntity(en) <= range)
+		if(en != null && mc.thePlayer.getDistanceToEntity(en) <= range && EntityUtils.ticksCheck(en))
 			entity = en;
 		wurst.events.add(UpdateListener.class, this);
 	}

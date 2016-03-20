@@ -55,7 +55,7 @@ public class ProtectMod extends Mod implements UpdateListener
 			setEnabled(false);
 			return;
 		}
-		if(enemy != null && (enemy.getHealth() <= 0 || enemy.isDead))
+		if(enemy != null && (enemy.getHealth() <= 0 || enemy.isDead || EntityUtils.ticksCheck(enemy) == false))
 			enemy = null;
 		double xDistF = Math.abs(mc.thePlayer.posX - friend.posX);
 		double zDistF = Math.abs(mc.thePlayer.posZ - friend.posZ);

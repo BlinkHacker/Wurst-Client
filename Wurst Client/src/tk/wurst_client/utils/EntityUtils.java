@@ -32,7 +32,6 @@ public class EntityUtils
 	public static boolean lookChanged;
 	public static float yaw;
 	public static float pitch;
-	public static float ticks=WurstClient.INSTANCE.mods.killauraMod.secondsExisted *20;
 	
 	public synchronized static void faceEntityClient(EntityLivingBase entity)
 	{
@@ -126,9 +125,9 @@ public class EntityUtils
 		}
 		return -1;
 	}
-	public static boolean ticksCheck(EntityLivingBase entity)
+	public static boolean ticksCheck(Entity entity)
 	{
-		if(entity.ticksExisted > ticks) {
+		if(entity.ticksExisted > WurstClient.INSTANCE.mods.killauraMod.secondsExisted*20) {
 		return true;
 		} else {
 			return false;

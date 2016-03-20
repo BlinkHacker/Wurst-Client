@@ -37,7 +37,7 @@ public class FightBotMod extends Mod implements UpdateListener
 		if(entity == null)
 			return;
 		if(entity.getHealth() <= 0 || entity.isDead
-			|| mc.thePlayer.getHealth() <= 0)
+			|| mc.thePlayer.getHealth() <= 0 || EntityUtils.ticksCheck(entity) == false)
 		{
 			entity = null;
 			mc.gameSettings.keyBindForward.pressed = false;
