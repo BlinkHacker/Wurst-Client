@@ -58,7 +58,7 @@ public class MultiAuraMod extends Mod implements UpdateListener
 	{
 		updateMS();
 		EntityLivingBase closestEntity =
-			EntityUtils.getClosestEntity(true, false, true);
+			EntityUtils.getClosestEntity(true, false);
 		if(closestEntity != null
 			&& mc.thePlayer.getDistanceToEntity(closestEntity) <= range)
 		{
@@ -67,7 +67,7 @@ public class MultiAuraMod extends Mod implements UpdateListener
 			wurst.mods.criticalsMod.doCritical();
 			wurst.mods.blockHitMod.doBlock();
 			ArrayList<EntityLivingBase> entities =
-				EntityUtils.getCloseEntities(true, range, true);
+				EntityUtils.getCloseEntities(true, range);
 			for(int i = 0; i < Math.min(entities.size(), 64); i++)
 			{
 				EntityLivingBase en = entities.get(i);

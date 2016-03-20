@@ -32,7 +32,6 @@ public class EntityUtils
 	public static boolean lookChanged;
 	public static float yaw;
 	public static float pitch;
-	public static float ticks = WurstClient.INSTANCE.mods.killauraMod.secondsExisted * 20;
 	
 	public synchronized static void faceEntityClient(EntityLivingBase entity)
 	{
@@ -127,7 +126,7 @@ public class EntityUtils
 		return -1;
 	}
 	
-	public static boolean isCorrectEntity(Object o, boolean ignoreFriends, boolean ticksexisted)
+	public static boolean isCorrectEntity(Object o, boolean ignoreFriends)
 	{
 		// non-entities
 		if(!(o instanceof Entity))
@@ -138,10 +137,6 @@ public class EntityUtils
 			if(WurstClient.INSTANCE.friends.contains(((EntityPlayer)o)
 				.getName()))
 				return false;
-		//Check ticks existed
-		if(ticksexisted)
-			if(Entity.ticksExisted < ticks)
-			return false;
 		
 		TargetSpf targetSpf = WurstClient.INSTANCE.special.targetSpf;
 		
@@ -208,11 +203,11 @@ public class EntityUtils
 	}
 	
 	public static EntityLivingBase getClosestEntity(boolean ignoreFriends,
-		boolean useFOV, boolean ticksexisted)
+		boolean useFOV)
 	{
 		EntityLivingBase closestEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksexisted)
+			if(isCorrectEntity(o, ignoreFriends)
 				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
@@ -232,12 +227,12 @@ public class EntityUtils
 	}
 	
 	public static ArrayList<EntityLivingBase> getCloseEntities(
-		boolean ignoreFriends, float range, boolean ticksexisted )
+		boolean ignoreFriends, float range)
 	{
 		ArrayList<EntityLivingBase> closeEntities =
 			new ArrayList<EntityLivingBase>();
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksexisted))
+			if(isCorrectEntity(o, ignoreFriends))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP)
@@ -253,11 +248,11 @@ public class EntityUtils
 		return closeEntities;
 	}
 	
-	public static EntityLivingBase getClosestEntityRaw(boolean ignoreFriends, boolean ticksexisted)
+	public static EntityLivingBase getClosestEntityRaw(boolean ignoreFriends)
 	{
 		EntityLivingBase closestEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksexisted))
+			if(isCorrectEntity(o, ignoreFriends))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead
@@ -275,7 +270,7 @@ public class EntityUtils
 	{
 		EntityLivingBase closestEnemy = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, true, true))
+			if(isCorrectEntity(o, true))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && o != friend && !en.isDead
@@ -294,7 +289,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)
@@ -308,7 +303,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead
@@ -323,7 +318,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)

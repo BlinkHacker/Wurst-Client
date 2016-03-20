@@ -28,7 +28,6 @@ public class KillauraMod extends Mod implements UpdateListener
 	public float normalRange = 5F;
 	public float yesCheatSpeed = 12F;
 	public float yesCheatRange = 4.25F;
-	public float secondsExisted = 0F; 
 	public int fov = 360;
 	public float realSpeed;
 	public float realRange;
@@ -65,15 +64,6 @@ public class KillauraMod extends Mod implements UpdateListener
 			public void update()
 			{
 				fov = (int)getValue();
-			}
-		});
-		settings.add(new SliderSetting("Minimum Seconds Existed", secondsExisted, 0, 4, 0.05,
-			ValueDisplay.DECIMAL)
-		{
-			@Override
-			public void update()
-			{
-				secondsExisted = (float)getValue();
 			}
 		});
 	}
@@ -114,7 +104,7 @@ public class KillauraMod extends Mod implements UpdateListener
 	{
 		updateSpeedAndRange();
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
 		if(hasTimePassedS(realSpeed) && en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= realRange)
 			{

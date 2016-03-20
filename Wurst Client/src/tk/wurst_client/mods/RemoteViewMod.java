@@ -49,7 +49,7 @@ public class RemoteViewMod extends Mod implements UpdateListener
 		oldPitch = mc.thePlayer.rotationPitch;
 		mc.thePlayer.noClip = true;
 		if(otherID == null)
-			otherID = EntityUtils.getClosestEntityRaw(false,true).getUniqueID();
+			otherID = EntityUtils.getClosestEntityRaw(false).getUniqueID();
 		otherView = EntityUtils.searchEntityByIdRaw(otherID);
 		wasInvisible = otherView.isInvisibleToPlayer(mc.thePlayer);
 		EntityOtherPlayerMP fakePlayer =

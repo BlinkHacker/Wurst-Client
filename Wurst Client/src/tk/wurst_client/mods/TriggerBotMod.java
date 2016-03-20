@@ -70,7 +70,7 @@ public class TriggerBotMod extends Mod implements UpdateListener
 				if((yesCheatMode
 					&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange || !yesCheatMode
 					&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange)
-					&& EntityUtils.isCorrectEntity(en, true, true))
+					&& EntityUtils.isCorrectEntity(en, true))
 				{
 					if(wurst.mods.autoSwordMod.isActive())
 						AutoSwordMod.setSlot();
