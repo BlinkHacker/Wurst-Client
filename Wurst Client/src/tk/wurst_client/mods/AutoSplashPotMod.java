@@ -24,6 +24,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 @Info(category = Category.COMBAT,
@@ -34,7 +35,9 @@ import tk.wurst_client.navigator.settings.SliderSetting;
 public class AutoSplashPotMod extends Mod implements UpdateListener
 {
 	public float health = 18F;
-	
+	public final CheckboxSetting autopotdelay = new CheckboxSetting(
+		"AutoSplashPot Delay", false);
+	private int timer;
 	@Override
 	public void initSettings()
 	{
@@ -47,6 +50,7 @@ public class AutoSplashPotMod extends Mod implements UpdateListener
 				health = (float)getValue();
 			}
 		});
+		settings.add(autopotdelay);
 	}
 	
 	@Override
@@ -103,6 +107,16 @@ public class AutoSplashPotMod extends Mod implements UpdateListener
 				updateLastMS();
 			}else
 				// move potion in inventory to hotbar
+				if(autopotdelay.isChecked())
+				{
+					timer++;
+					if(timer >= 3)
+					{
+						mc.playerController.windowClick(0, potionInInventory, 0, 1,
+							mc.thePlayer);
+						timer= 0;
+					} 
+				} else if(!autopotdelay.isChecked())
 				mc.playerController.windowClick(0, potionInInventory, 0, 1,
 					mc.thePlayer);
 		
