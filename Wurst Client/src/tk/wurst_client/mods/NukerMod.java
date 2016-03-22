@@ -34,7 +34,7 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.BLOCKS,
 	description = "Destroys blocks around you.\n"
-		+ "Use .nuker mode <mode> to change the mode.",
+		+ "Can switch modes to destory in a certain way.",
 	name = "Nuker",
 	tutorial = "Mods/Nuker")
 public class NukerMod extends Mod implements LeftClickListener, RenderListener,

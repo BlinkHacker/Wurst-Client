@@ -21,7 +21,7 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 @Info(category = Category.COMBAT,
 	description = "Automatically leaves the server when your health is lower\n"
-	    + "lower than the configured amount."
+	    + "than the configured amount.\n"
 		+ "The Chars, TP and SelfHurt modes can bypass CombatLog and similar plugins.",
 	name = "AutoLeave",
 	tags = "AutoDisconnect")

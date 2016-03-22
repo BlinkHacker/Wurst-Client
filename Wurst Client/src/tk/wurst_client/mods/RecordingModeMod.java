@@ -13,8 +13,9 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MISC,
-	description = "Removes all Wurst related elements for recording.",
-	name = "RecordingMode")
+	description = "Removes all Wurst related elements for recording, and disables WMS.",
+	name = "RecordingMode",
+	tags = "HideGUI,GhostMode")
 public class RecordingModeMod extends Mod implements UpdateListener
 {	
 	public boolean isDisabled;
