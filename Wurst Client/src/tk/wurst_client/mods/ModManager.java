@@ -110,6 +110,7 @@ public class ModManager
 	public final NameProtectMod nameProtectMod = new NameProtectMod();
 	public final NameTagsMod nameTagsMod = new NameTagsMod();
 	public final NavigatorMod navigatorMod = new NavigatorMod();
+	public final NightVisionMod nightVisionMod = new NightVisionMod();
 	public final NoClipMod noClipMod = new NoClipMod();
 	public final NoFallMod noFallMod = new NoFallMod();
 	public final NoHurtcamMod noHurtcamMod = new NoHurtcamMod();
