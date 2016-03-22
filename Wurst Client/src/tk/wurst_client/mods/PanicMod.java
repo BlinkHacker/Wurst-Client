@@ -12,7 +12,7 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MISC,
-	description = "Instantly turns off all enabled mods.\n"
+	description = "Instantly turns off all enabled mods but RecordingMode.\n"
 		+ "Be careful with this!",
 	name = "Panic")
 public class PanicMod extends Mod implements UpdateListener
