@@ -11,7 +11,7 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
-	description = "Makes entities appear to be glowing.",
+	description = "Makes players appear to be glowing.",
 	name = "Chams",
 	tags = "WallHack")
 public class ChamsMod extends Mod
