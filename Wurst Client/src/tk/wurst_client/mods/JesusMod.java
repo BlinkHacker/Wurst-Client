@@ -7,7 +7,10 @@
  */
 package tk.wurst_client.mods;
 
-@Mod.Info(category = Mod.Category.MOVEMENT,
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
+
+@Info(category = Category.MOVEMENT,
 	description = "Allows you to walk on water.\n"
 		+ "The real Jesus used this hack ~2000 years ago.\n"
 		+ "Bypasses NoCheat+ if YesCheat+ is enabled.",

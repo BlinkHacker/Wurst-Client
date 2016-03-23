@@ -7,7 +7,10 @@
  */
 package tk.wurst_client.mods;
 
-@Mod.Info(category = Mod.Category.RENDER,
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
+
+@Info(category = Category.RENDER,
 	description = "Renders the Night Vision effect, even if the potion is not active.",
 	name = "NightVision")
 public class NightVisionMod extends Mod

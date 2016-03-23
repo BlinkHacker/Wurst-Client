@@ -117,6 +117,7 @@ public class ModManager
 	public final NoPumpkinMod noPumpkinMod = new NoPumpkinMod();
 	public final NoSlowdownMod noSlowdownMod = new NoSlowdownMod();
 	public final NoSwingMod noSwingMod = new NoSwingMod();
+	public final NoWeatherMod noWeatherMod = new NoWeatherMod();
 	public final NoWebMod noWebMod = new NoWebMod();
 	public final NukerMod nukerMod = new NukerMod();
 	public final NukerLegitMod nukerLegitMod = new NukerLegitMod();

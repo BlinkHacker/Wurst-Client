@@ -7,7 +7,10 @@
  */
 package tk.wurst_client.mods;
 
-@Mod.Info(category = Mod.Category.BLOCKS,
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
+
+@Info(category = Category.BLOCKS,
 	description = "Break items and attack without swinging.",
 	name = "NoSwing",
 	noCheatCompatible=false)
