@@ -15,8 +15,8 @@ import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
 	description = "Renders the Night Vision effect. \n"
-	+ "Note that only you can see this effect, and to \n"
-	+ "others it will seem as you have no effect.",
+		+ "Note that only you can see this effect, and servers \n"
+		+ "will not know that you have this effect.",
 	name = "NightVision")
 public class NightVisionMod extends Mod implements UpdateListener
 {	
@@ -35,7 +35,7 @@ public class NightVisionMod extends Mod implements UpdateListener
 	@Override
 	public void onDisable()
 	{
-		mc.thePlayer.removePotionEffect(16);
+		mc.thePlayer.removePotionEffect(Potion.nightVision.getId());
 		wurst.events.remove(UpdateListener.class, this);
 	}
 }
