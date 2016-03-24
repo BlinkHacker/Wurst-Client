@@ -7,13 +7,34 @@
  */
 package tk.wurst_client.mods;
 
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
-	description = "Renders the Night Vision effect, even if the potion is not active.",
+	description = "Renders the Night Vision effect. \n"
+	+ "Note that only you can see this effect.",
 	name = "NightVision")
-public class NightVisionMod extends Mod
+public class NightVisionMod extends Mod implements UpdateListener
 {	
+	@Override
+	public void onEnable()
+	{
+		wurst.events.add(UpdateListener.class, this);
+	}
 	
+	@Override
+	public void onUpdate()
+	{
+		mc.thePlayer.addPotionEffect((new PotionEffect(Potion.nightVision.getId(), 100000000, 2)));
+	}
+	
+	@Override
+	public void onDisable()
+	{
+		mc.thePlayer.removePotionEffect(16);
+		wurst.events.remove(UpdateListener.class, this);
+	}
 }
