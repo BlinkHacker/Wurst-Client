@@ -51,6 +51,7 @@ public class ModManager
 	public final AutoToolMod autoToolMod = new AutoToolMod();
 	public final AutoWalkMod autoWalkMod = new AutoWalkMod();
 	public final BaseFinderMod baseFinderMod = new BaseFinderMod();
+	public final BetterFireEffectMod betterFireEffectMod = new BetterFireEffectMod();
 	public final BlinkMod blinkMod = new BlinkMod();
 	public final BlockHitMod blockHitMod = new BlockHitMod();
 	public final BowAimbotMod bowAimbotMod = new BowAimbotMod();
