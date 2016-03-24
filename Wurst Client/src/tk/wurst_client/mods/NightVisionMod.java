@@ -15,7 +15,8 @@ import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
 	description = "Renders the Night Vision effect. \n"
-	+ "Note that only you can see this effect.",
+	+ "Note that only you can see this effect, and to \n"
+	+ "others it will seem as you have no effect.",
 	name = "NightVision")
 public class NightVisionMod extends Mod implements UpdateListener
 {	
