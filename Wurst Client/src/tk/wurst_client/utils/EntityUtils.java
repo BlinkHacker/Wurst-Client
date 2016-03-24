@@ -127,7 +127,7 @@ public class EntityUtils
 	}
 	public static boolean ticksCheck(Entity entity)
 	{
-		if(entity.ticksExisted > WurstClient.INSTANCE.mods.killauraMod.secondsExisted*20) {
+		if(entity.ticksExisted >= WurstClient.INSTANCE.mods.killauraMod.secondsExisted*20) {
 		return true;
 		} else {
 			return false;
