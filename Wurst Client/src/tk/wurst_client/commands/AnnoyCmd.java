@@ -10,6 +10,9 @@ package tk.wurst_client.commands;
 import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatInputEvent;
 import tk.wurst_client.events.listeners.ChatInputListener;
+import tk.wurst_client.utils.MiscUtils;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Info(help = "Annoys a player by repeating everything he says.",
 	name = "annoy",
@@ -18,6 +21,7 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 {
 	private boolean toggled;
 	private String name;
+	private int delay;
 	
 	@Override
 	public void execute(String[] args) throws Error
@@ -32,6 +36,17 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 				if(name.equals(mc.thePlayer.getName()))
 					wurst.chat.warning("Annoying yourself is a bad idea!");
 				wurst.events.add(ChatInputListener.class, this);
+			}else if(args.length == 2 && MiscUtils.isInteger(args[1]))
+			{
+				name = args[0];
+				delay = Integer.parseInt(args[1]) * 1000;
+				if(Integer.parseInt(args[1]) != 1)
+				wurst.chat.message("Now annoying " + name + " with " + Integer.parseInt(args[1]) + " seconds delay.");
+				else
+				wurst.chat.message("Now annoying " + name + " with " + Integer.parseInt(args[1]) + " second delay.");
+				if(name.equals(mc.thePlayer.getName()))
+					wurst.chat.warning("Annoying yourself is a bad idea!");
+				wurst.events.add(ChatInputListener.class, this);	
 			}else
 			{
 				toggled = false;
@@ -57,16 +72,88 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 		if(message.startsWith("<" + name + ">") || message.contains(name + ">"))
 		{
 			String repeatMessage = message.substring(message.indexOf(">") + 1);
-			mc.thePlayer.sendChatMessage(repeatMessage);
+			if(repeatMessage.startsWith("/"))
+				return;
+			if(repeatMessage.startsWith("."))
+				repeatMessage = ".say " + repeatMessage;
+			String repeatMessage2 = repeatMessage;
+			if (delay > 0)
+			{
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run()
+					{
+					mc.thePlayer.sendChatMessage(repeatMessage2);
+					}
+					  
+					}, delay);
+			} else
+			mc.thePlayer.sendChatMessage(repeatMessage2);
 		}else if(message.contains(name + ":"))
 		{
 			String repeatMessage = message.substring(message.indexOf(":") + 1);
-			mc.thePlayer.sendChatMessage(repeatMessage);
+			if(repeatMessage.startsWith("/"))
+				return;
+			if(repeatMessage.startsWith("."))
+				repeatMessage = ".say " + repeatMessage;
+			String repeatMessage2 = repeatMessage;
+			if (delay > 0)
+			{
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run()
+					{
+					mc.thePlayer.sendChatMessage(repeatMessage2);
+					}
+					  
+					}, delay);
+			} else
+			mc.thePlayer.sendChatMessage(repeatMessage2);
 		} else if(message.contains(name + " §f"))
 		{
 			String repeatMessage = message.substring(message.indexOf(" §f"));
-			mc.thePlayer.sendChatMessage(repeatMessage); 
+			if(repeatMessage.startsWith("/"))
+				return;
+			if(repeatMessage.startsWith("."))
+				repeatMessage = ".say " + repeatMessage;
+			String repeatMessage2 = repeatMessage;
+			if (delay > 0)
+			{
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run()
+					{
+					mc.thePlayer.sendChatMessage(repeatMessage2);
+					}
+					  
+					}, delay);
+			} else
+			mc.thePlayer.sendChatMessage(repeatMessage2);
 					
+		} else if (message.contains(name + "»"))
+		{
+			String repeatMessage = message.substring(message.indexOf("»") + 1);
+			if(repeatMessage.startsWith("/"))
+				return;
+			if(repeatMessage.startsWith("."))
+				repeatMessage = ".say " + repeatMessage;
+			String repeatMessage2 = repeatMessage;
+			if (delay > 0)
+			{
+				Timer timer = new Timer();
+				timer.schedule(new TimerTask() {
+					@Override
+					public void run()
+					{
+					mc.thePlayer.sendChatMessage(repeatMessage2);
+					}
+					  
+					}, delay);
+			} else
+			mc.thePlayer.sendChatMessage(repeatMessage2);
 		}
 	}
 }
