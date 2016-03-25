@@ -117,6 +117,7 @@ public class ModManager
 	public final NightVisionMod nightVisionMod = new NightVisionMod();
 	public final NoClipMod noClipMod = new NoClipMod();
 	public final NoFallMod noFallMod = new NoFallMod();
+	public final NoFireworksMod noFireworksMod = new NoFireworksMod();
 	public final NoHurtcamMod noHurtcamMod = new NoHurtcamMod();
 	public final NoPumpkinMod noPumpkinMod = new NoPumpkinMod();
 	public final NoSlowdownMod noSlowdownMod = new NoSlowdownMod();
