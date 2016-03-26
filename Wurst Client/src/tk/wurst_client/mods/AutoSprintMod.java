@@ -10,12 +10,21 @@ package tk.wurst_client.mods;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MOVEMENT,
 	description = "Makes you sprint whenever you walk.",
 	name = "AutoSprint")
 public class AutoSprintMod extends Mod implements UpdateListener
 {
+	public final CheckboxSetting OmnidirectionalSprint = new CheckboxSetting(
+		"Sprint all directions", false);
+	@Override
+	public void initSettings()
+	{
+		settings.add(OmnidirectionalSprint);
+	}
+	
 	@Override
 	public void onEnable()
 	{
@@ -25,9 +34,16 @@ public class AutoSprintMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		if(OmnidirectionalSprint.isChecked())
+		{
+			if(!mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking())
+				if(mc.thePlayer.moveForward != 0 || mc.thePlayer.moveStrafing != 0)
+					mc.thePlayer.setSprinting(true);
+		} else {
 		if(!mc.thePlayer.isCollidedHorizontally && mc.thePlayer.moveForward > 0
 			&& !mc.thePlayer.isSneaking())
 			mc.thePlayer.setSprinting(true);
+		}
 	}
 	
 	@Override
