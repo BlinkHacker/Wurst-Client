@@ -13,7 +13,8 @@ import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.RENDER,
 	description = "Changes the scale of the nametags so you can always\n"
-		+ "read them.",
+		+ "read them, and allows you to see sneaking player's\n"
+		+ "nametags clearly.",
 	name = "NameTags")
 public class NameTagsMod extends Mod
 {	
