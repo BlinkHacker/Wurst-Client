@@ -60,6 +60,7 @@ public class ModManager
 	public final BuildRandomMod buildRandomMod = new BuildRandomMod();
 	public final BunnyHopMod bunnyHopMod = new BunnyHopMod();
 	public final CaveFinderMod caveFinderMod = new CaveFinderMod();
+	public final CivBreakMod civBreakMod = new CivBreakMod();
 	public final ChamsMod chamsMod = new ChamsMod();
 	public final ChestEspMod chestEspMod = new ChestEspMod();
 	public final ClickAimbotMod clickAimbotMod = new ClickAimbotMod();

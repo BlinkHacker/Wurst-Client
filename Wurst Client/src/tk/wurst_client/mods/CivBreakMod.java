@@ -7,36 +7,22 @@
  */
 package tk.wurst_client.mods;
 
-import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
-
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.ModeSetting;
-import tk.wurst_client.navigator.settings.SliderSetting;
 
 @Info(category = Category.BLOCKS,
-	description = "Allows you to break blocks faster.\n"
-		+ "Tip: This works with Nuker.",
-	name = "FastBreak")
-public class FastBreakMod extends Mod
+	description = "Allows you to mine the nexus faster in Annihilation.\n"
+	+ "If you get kicked, use instant fastbreak or normal civbreak.",
+	name = "CivBreak")
+public class CivBreakMod extends Mod
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Normal", "Instant"};
-	public float speed = 2;
-	
+	private String[] modes = new String[]{"Normal", "Insane"};
 	@Override
 	public void initSettings()
 	{
-		settings.add(new SliderSetting("Speed", speed, 1, 5, 0.05,
-			ValueDisplay.DECIMAL)
-		{
-			@Override
-			public void update()
-			{
-				speed = (float)getValue();
-			}
-		});
 		settings.add(new ModeSetting("Mode", modes, mode)
 		{
 			@Override
@@ -49,14 +35,13 @@ public class FastBreakMod extends Mod
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.fastPlaceMod,
-			wurst.mods.autoMineMod, wurst.mods.nukerMod};
+		return new NavigatorItem[]{wurst.mods.fastBreakMod};
 	}
 	@Override
 	public void onEnable()
-	{
-		if(wurst.mods.civBreakMod.isEnabled())
-			wurst.mods.civBreakMod.setEnabled(false);
+	{	
+		if(wurst.mods.fastBreakMod.isEnabled())
+			wurst.mods.fastBreakMod.setEnabled(false);
 	}
 	public int getMode()
 	{
