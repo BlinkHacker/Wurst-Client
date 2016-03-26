@@ -9,11 +9,18 @@ package tk.wurst_client.mods;
 
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.RENDER,
-	description = "Allows you to see underwater better.",
+	description = "Allows you to see better when under liquids.",
 	name = "LiquidVision")
 public class LiquidVisionMod extends Mod
 {	
-	
+	public final CheckboxSetting ClearLava = new CheckboxSetting(
+		"Better Lava Vision", false);
+	@Override
+	public void initSettings()
+	{
+		settings.add(ClearLava);
+	}
 }
