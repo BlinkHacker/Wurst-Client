@@ -18,6 +18,7 @@ import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
@@ -33,6 +34,34 @@ public class EntityUtils
 	public static boolean lookChanged;
 	public static float yaw;
 	public static float pitch;
+	
+	public synchronized static void faceNonlivingEntityClient(Entity entity)
+	{
+		float[] rotations = getRotationsNeeded(entity);
+		if(rotations != null)
+		{
+			Minecraft.getMinecraft().thePlayer.rotationYaw =
+				limitAngleChange(
+					Minecraft.getMinecraft().thePlayer.prevRotationYaw,
+					rotations[0], 55);// NoCheat+
+			// bypass!!!
+			Minecraft.getMinecraft().thePlayer.rotationPitch = rotations[1];
+		}
+	}
+	
+	public synchronized static void faceNonlivingEntityPacket(Entity entity)
+	{
+		float[] rotations = getRotationsNeeded(entity);
+		if(rotations != null)
+		{
+			yaw =
+				limitAngleChange(
+					Minecraft.getMinecraft().thePlayer.prevRotationYaw,
+					rotations[0], 55);// NoCheat+
+			pitch = rotations[1];
+			lookChanged = true;
+		}
+	}
 	
 	public synchronized static void faceEntityClient(EntityLivingBase entity)
 	{
@@ -335,5 +364,34 @@ public class EntityUtils
 						newEntity = en;
 			}
 		return newEntity;
+	}
+	public static Entity getClosestNonlivingEntity(boolean ignoreFriends,
+		boolean useFOV)
+	{
+		Entity closestNLEntity = null;
+		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
+			if(isCorrectNonlivingEntity(o, ignoreFriends))
+			if (getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
+			{
+				Entity en = (Entity)o;
+				if(o instanceof EntityFallingBlock)
+				if(!(o instanceof EntityPlayerSP)
+					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en))
+					if(closestNLEntity == null
+						|| Minecraft.getMinecraft().thePlayer
+							.getDistanceToEntity(en) < Minecraft.getMinecraft().thePlayer
+							.getDistanceToEntity(closestNLEntity))
+						closestNLEntity = en;
+			}
+		return closestNLEntity;
+	}
+	public static boolean isCorrectNonlivingEntity(Object o, boolean ignoreFriends)
+	{
+		Entity en = (Entity)o;
+		if(o instanceof EntityFallingBlock && Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en))
+			return true;
+		else
+			return false;
+		
 	}
 }

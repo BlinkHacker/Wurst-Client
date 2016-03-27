@@ -140,6 +140,7 @@ public class ModManager
 	public final PlayerEspMod playerEspMod = new PlayerEspMod();
 	public final PlayerFinderMod playerFinderMod = new PlayerFinderMod();
 	public final PotionSaverMod potionSaverMod = new PotionSaverMod();
+	public final ProphuntAuraMod prophuntAuraMod = new ProphuntAuraMod();
 	public final ProphuntEspMod prophuntEspMod = new ProphuntEspMod();
 	public final ProtectMod protectMod = new ProtectMod();
 	public final RegenMod regenMod = new RegenMod();
