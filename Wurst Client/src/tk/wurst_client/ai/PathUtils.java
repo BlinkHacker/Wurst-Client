@@ -75,7 +75,7 @@ public class PathUtils
 			playerCaps = Minecraft.getMinecraft().thePlayer.capabilities;
 		return WurstClient.INSTANCE.mods.flightMod.isEnabled()
 			|| playerCaps.isFlying
-			|| !WurstClient.INSTANCE.mods.noSlowdownMod.isEnabled()
+			|| !WurstClient.INSTANCE.mods.noBlockSlowdownMod.isEnabled()
 			&& getMaterial(pos) == Material.water;
 	}
 	
@@ -83,7 +83,7 @@ public class PathUtils
 	{
 		Material nextMaterial = getMaterial(next);
 		if(nextMaterial == Material.water)
-			if(WurstClient.INSTANCE.mods.noSlowdownMod.isEnabled())
+			if(WurstClient.INSTANCE.mods.noBlockSlowdownMod.isEnabled())
 				return 1;
 			else if(WurstClient.INSTANCE.mods.antiKnockbackMod.isEnabled())
 				return 2;

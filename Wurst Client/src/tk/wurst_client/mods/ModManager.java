@@ -118,12 +118,13 @@ public class ModManager
 	public final NameTagsMod nameTagsMod = new NameTagsMod();
 	public final NavigatorMod navigatorMod = new NavigatorMod();
 	public final NightVisionMod nightVisionMod = new NightVisionMod();
+	public final NoBlockSlowdownMod noBlockSlowdownMod = new NoBlockSlowdownMod();
 	public final NoClipMod noClipMod = new NoClipMod();
 	public final NoFallMod noFallMod = new NoFallMod();
 	public final NoFireworksMod noFireworksMod = new NoFireworksMod();
 	public final NoHurtcamMod noHurtcamMod = new NoHurtcamMod();
+	public final NoItemSlowdownMod noItemSlowdownMod = new NoItemSlowdownMod();
 	public final NoPumpkinMod noPumpkinMod = new NoPumpkinMod();
-	public final NoSlowdownMod noSlowdownMod = new NoSlowdownMod();
 	public final NoSwingMod noSwingMod = new NoSwingMod();
 	public final NoWeatherMod noWeatherMod = new NoWeatherMod();
 	public final NoWebMod noWebMod = new NoWebMod();

@@ -42,7 +42,6 @@ public class AntiMacMod extends Mod
 			blockedMods.remove(wurst.mods.fastBowMod);
 			blockedMods.remove(wurst.mods.glideMod);
 			blockedMods.remove(wurst.mods.multiAuraMod);
-			blockedMods.remove(wurst.mods.noSlowdownMod);
 			blockedMods.remove(wurst.mods.regenMod);
 			blockedMods.remove(wurst.mods.spiderMod);
 			blockedMods.remove(wurst.mods.tpAuraMod);

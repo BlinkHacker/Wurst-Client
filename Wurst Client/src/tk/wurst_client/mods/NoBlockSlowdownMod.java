@@ -12,11 +12,10 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MOVEMENT,
-	description = "Cancels slowness effects caused by water, soul sand and\n"
-		+ "using items.",
-	name = "NoSlowdown",
+	description = "Cancels slowness effects caused by water and soul sand.",
+	name = "NoBlockSlowdown",
 	noCheatCompatible = false)
-public class NoSlowdownMod extends Mod implements UpdateListener
+public class NoBlockSlowdownMod extends Mod implements UpdateListener
 {
 	@Override
 	public void onEnable()
