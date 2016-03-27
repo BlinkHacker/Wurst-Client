@@ -14,7 +14,8 @@ import tk.wurst_client.navigator.settings.ModeSetting;
 
 @Info(category = Category.BLOCKS,
 	description = "Allows you to mine the nexus faster in Annihilation.\n"
-	+ "If you get kicked, use instant fastbreak or normal civbreak.",
+	+ "If you get kicked, use normal civbreak.\n"
+	+ "Tip: Instant FastBreak is another form of CivBreak.",
 	name = "CivBreak")
 public class CivBreakMod extends Mod
 {
