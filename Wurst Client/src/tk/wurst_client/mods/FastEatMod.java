@@ -7,11 +7,14 @@
  */
 package tk.wurst_client.mods;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MISC,
 	description = "Allows you to eat food much faster.\n" + "OM! NOM! NOM!",
@@ -19,6 +22,8 @@ import tk.wurst_client.mods.Mod.Info;
 	noCheatCompatible = false)
 public class FastEatMod extends Mod implements UpdateListener
 {
+	public final CheckboxSetting useanythingfast  = new CheckboxSetting(
+		"Eat/Drink Faster with Any Item", false);
 	@Override
 	public void onEnable()
 	{
@@ -36,7 +41,23 @@ public class FastEatMod extends Mod implements UpdateListener
 			&& mc.gameSettings.keyBindUseItem.pressed)
 			for(int i = 0; i < 100; i++)
 				mc.thePlayer.sendQueue
-					.addToSendQueue(new C03PacketPlayer(false));
+					.addToSendQueue(new C03PacketPlayer(false)); 
+		if(useanythingfast.isChecked())
+		{
+			if(mc.thePlayer.getHealth() > 0
+				&& mc.thePlayer.onGround
+				&& mc.thePlayer.inventory.getCurrentItem() != null)
+			{
+				ItemStack stack = mc.thePlayer.inventory.getItemStack();
+				if(stack != null && stack.getItem() == Items.golden_apple ||
+					stack.getItem() == Items.potionitem)
+					if(mc.gameSettings.keyBindUseItem.isPressed())
+						for(int i = 0; i < 100; i++)
+							mc.thePlayer.sendQueue
+								.addToSendQueue(new C03PacketPlayer(false)); 
+						
+			}
+		}
 	}
 	
 	@Override
