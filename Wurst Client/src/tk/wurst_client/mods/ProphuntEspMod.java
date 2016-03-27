@@ -11,7 +11,7 @@ import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.util.MathHelper;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -20,7 +20,9 @@ import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
-	description = "Allows you to see fake blocks in Prophunt.",
+	description = "Allows you to see fake blocks in Prophunt.\n"
+		+ "Note: Enabling PropHunt blocks in the target\n"
+		+ "option will make you attack falling sand.",
 	name = "ProphuntESP")
 public class ProphuntEspMod extends Mod implements RenderListener
 {
@@ -41,7 +43,7 @@ public class ProphuntEspMod extends Mod implements RenderListener
 	public void onRender()
 	{
 		for(Object entity : mc.theWorld.loadedEntityList)
-			if(entity instanceof EntityLiving && ((Entity)entity).isInvisible())
+			if(entity instanceof EntityFallingBlock)
 			{
 				double x = ((Entity)entity).posX;
 				double y = ((Entity)entity).posY;
