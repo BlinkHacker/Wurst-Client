@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
@@ -173,7 +174,7 @@ public class EntityUtils
 		
 		// monsters
 		if(o instanceof EntityMob || o instanceof EntitySlime
-			|| o instanceof EntityFlying)
+			|| o instanceof EntityFlying || o instanceof EntityDragon)
 			return targetSpf.monsters.isChecked()
 				&& (!targetSpf.teams.isChecked()
 					|| !((Entity)o).hasCustomName() || checkName(((Entity)o)
