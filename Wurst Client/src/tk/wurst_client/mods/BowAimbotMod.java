@@ -114,6 +114,7 @@ public class BowAimbotMod extends Mod implements UpdateListener,
 			&& mc.gameSettings.keyBindUseItem.pressed)
 		{
 			target = EntityUtils.getClosestEntity(true, true);
+			if(!(target == null))
 			if (EntityUtils.ticksCheck(target))
 			aimAtTarget();
 		}
