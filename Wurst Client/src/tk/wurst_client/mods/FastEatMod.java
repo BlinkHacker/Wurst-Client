@@ -24,6 +24,13 @@ public class FastEatMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting useanythingfast  = new CheckboxSetting(
 		"Eat/Drink Faster with Any Item", false);
+	
+	@Override
+	public void initSettings()
+	{		
+		settings.add(useanythingfast);
+	}
+	
 	@Override
 	public void onEnable()
 	{

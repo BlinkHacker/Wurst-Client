@@ -71,6 +71,7 @@ public class ModManager
 	public final CrashChestMod crashChestMod = new CrashChestMod();
 	public final CrashItemMod crashItemMod = new CrashItemMod();
 	public final CriticalsMod criticalsMod = new CriticalsMod();
+	public final DisableOverlayMod disableOverlayMod = new DisableOverlayMod();
 	public final DerpMod derpMod = new DerpMod();
 	public final DolphinMod dolphinMod = new DolphinMod();
 	public final FancyChatMod fancyChatMod = new FancyChatMod();
