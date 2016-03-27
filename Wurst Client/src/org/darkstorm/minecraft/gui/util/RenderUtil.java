@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.util.Vec3;
 
 import org.lwjgl.input.Mouse;
 
@@ -317,5 +318,14 @@ public class RenderUtil
 			glVertex2d(x1, y2);
 		}
 		glEnd();
+	}
+
+	public static double[] renderPos(Vec3 vec)
+	{	
+        double x = vec.xCoord-Minecraft.getMinecraft().getRenderManager().viewerPosX;
+        double y = vec.yCoord-Minecraft.getMinecraft().getRenderManager().viewerPosY;
+        double z = vec.zCoord-Minecraft.getMinecraft().getRenderManager().viewerPosZ;
+        
+        return new double[] {x, y, z};
 	}
 }

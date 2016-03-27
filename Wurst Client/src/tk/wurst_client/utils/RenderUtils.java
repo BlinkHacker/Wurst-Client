@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.*;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -19,6 +20,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 
 import org.darkstorm.minecraft.gui.util.RenderUtil;
 import org.lwjgl.opengl.GL11;
@@ -474,5 +476,36 @@ public class RenderUtils
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		glDisable(GL_BLEND);
+	}
+	public static void line(Vec3 from, Vec3 to, int color, float width) {
+		GlStateManager.loadIdentity();
+		Minecraft.getMinecraft().entityRenderer.orientCamera(Minecraft.getMinecraft().timer.renderPartialTicks);
+		
+		float var11 = (float) (color >> 24 & 255) / 255.0F;
+		float var6 = (float) (color >> 16 & 255) / 255.0F;
+		float var7 = (float) (color >> 8 & 255) / 255.0F;
+		float var8 = (float) (color & 255) / 255.0F;
+		Tessellator var9 = Tessellator.getInstance();
+		WorldRenderer t = var9.getWorldRenderer();
+
+		GlStateManager.enableBlend();
+		GlStateManager.func_179090_x();
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		GL11.glLineWidth(width);
+
+		GlStateManager.color(var6, var7, var8, var11);
+
+		double[] pf = RenderUtil.renderPos(from);
+		double[] pt = RenderUtil.renderPos(to);
+		
+		int draw = 1;
+		t.startDrawing(draw);
+		t.addVertex(pf[0], pf[1], pf[2]);
+		t.addVertex(pt[0], pt[1], pt[2]);
+		var9.draw();
+
+		GL11.glDisable(GL11.GL_LINE_SMOOTH);
+		GlStateManager.func_179098_w();
+		GlStateManager.disableBlend();
 	}
 }
