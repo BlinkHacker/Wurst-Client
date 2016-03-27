@@ -51,14 +51,10 @@ public class AimbotMod extends Mod implements UpdateListener {
     @Override
     public void onUpdate() 
     {
-    	updateMS();
 		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
 		if(en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange && EntityUtils.ticksCheck(en))
-			{
 				EntityUtils.faceEntityClient(en);
-				updateLastMS();
-			}
     }
      @Override
      public void onDisable() {
