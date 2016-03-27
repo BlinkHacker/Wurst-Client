@@ -133,6 +133,7 @@ public class ModManager
 	public final PanicMod panicMod = new PanicMod();
 	public final ParkourMod parkourMod = new ParkourMod();
 	public final PhaseMod phaseMod = new PhaseMod();
+	public final PingSpoofMod pingSpoofMod = new PingSpoofMod();
 	public final PlayerEspMod playerEspMod = new PlayerEspMod();
 	public final PlayerFinderMod playerFinderMod = new PlayerFinderMod();
 	public final PotionSaverMod potionSaverMod = new PotionSaverMod();
