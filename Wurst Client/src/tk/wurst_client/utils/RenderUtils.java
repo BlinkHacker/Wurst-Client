@@ -477,7 +477,7 @@ public class RenderUtils
 		glDepthMask(true);
 		glDisable(GL_BLEND);
 	}
-	public static void line(Vec3 from, Vec3 to, int color, float width) {
+	public static void line(Vec3 from, Vec3 to, int color, float w) {
 		GlStateManager.loadIdentity();
 		Minecraft.getMinecraft().entityRenderer.orientCamera(Minecraft.getMinecraft().timer.renderPartialTicks);
 		
@@ -491,7 +491,7 @@ public class RenderUtils
 		GlStateManager.enableBlend();
 		GlStateManager.func_179090_x();
 		GL11.glEnable(GL11.GL_LINE_SMOOTH);
-		GL11.glLineWidth(width);
+		GL11.glLineWidth(w);
 
 		GlStateManager.color(var6, var7, var8, var11);
 

@@ -11,7 +11,6 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.item.ItemStack;
 import tk.wurst_client.commands.Cmd.Info;
-import tk.wurst_client.events.ChatOutputEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.utils.MiscUtils;
@@ -397,17 +396,5 @@ public class EnchantCmd extends Cmd
 				 					wurst.chat.message("Enchanted " + items3 + " items.");
 						}else
 			syntaxError();
-	}
-	
-	@Override
-	public String getPrimaryAction()
-	{
-		return "Enchant Current Item";
-	}
-	
-	@Override
-	public void doPrimaryAction()
-	{
-		wurst.commands.onSentMessage(new ChatOutputEvent(".enchant hand 127", true));
 	}
 }
