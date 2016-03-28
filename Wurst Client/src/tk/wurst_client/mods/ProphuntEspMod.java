@@ -27,7 +27,8 @@ public class ProphuntEspMod extends Mod implements RenderListener
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.prophuntAuraMod};
+		return new NavigatorItem[]{wurst.mods.prophuntAuraMod,
+			wurst.mods.blockChangeEspMod};
 	}
 	
 	@Override

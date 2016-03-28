@@ -22,7 +22,7 @@ import tk.wurst_client.utils.RenderUtils;
 @Info(category = Category.RENDER,
 	description = "Allows you to see blocks that have changed.\n"
 		+ "If more than 400 blocks have changed, the blocks reset.\n"
-		+ "Very good for PropHunt.",
+		+ "Very good for PropHunt and tracking far players.",
 	name = "BlockChangeESP")
 public class BlockChangeEspMod extends Mod implements RenderListener, PacketInputListener
 {
