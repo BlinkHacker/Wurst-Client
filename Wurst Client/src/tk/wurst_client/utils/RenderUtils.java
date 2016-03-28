@@ -329,12 +329,12 @@ public class RenderUtils
 		GL11.glBlendFunc(770, 771);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(1.0F);
-		GL11.glColor4d(0.25, 0.25, 1, 0.8);
+		GL11.glColor4d(0.25, 0.25, 1, 0.15F);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
-		GL11.glColor4d(0.10, 0.10, 1, 0.8);
+		GL11.glColor4d(0.10, 0.10, 1, 0.15F);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);

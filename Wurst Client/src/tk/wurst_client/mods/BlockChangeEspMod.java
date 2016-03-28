@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.util.BlockPos;
 import tk.wurst_client.events.PacketInputEvent;
@@ -17,23 +18,33 @@ import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
 	description = "Allows you to see blocks that have changed.\n"
 		+ "If more than 400 blocks have changed, the blocks reset.\n"
-		+ "Very good for PropHunt and tracking far players.",
+		+ "Very good for PropHunt and tracking far players."
+		+ "Note: This will also show where players right clicked and left clicked.",
 	name = "BlockChangeESP")
 public class BlockChangeEspMod extends Mod implements RenderListener, PacketInputListener
 {
 	private ArrayList<BlockPos> matchingBlocks = new ArrayList<BlockPos>();
 	private int maxblocks = 400;
 	public boolean notify = true;
+	public final CheckboxSetting clearafterdelay = new CheckboxSetting(
+		"Clear blocks every 15 seconds", false);
 	
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
 		return new NavigatorItem[]{wurst.mods.prophuntEspMod};
+	}
+	
+	@Override
+	public void initSettings()
+	{
+		settings.add(clearafterdelay);
 	}
 	
 	@Override
@@ -46,6 +57,7 @@ public class BlockChangeEspMod extends Mod implements RenderListener, PacketInpu
 	@Override
 	public void onReceivedPacket(PacketInputEvent event)
 	{
+		updateMS();
 		PacketInputEvent receive = (PacketInputEvent)event;
 		    if(receive.getPacket() instanceof S23PacketBlockChange) {
 		       S23PacketBlockChange blockchange = (S23PacketBlockChange)receive.getPacket();
@@ -60,6 +72,14 @@ public class BlockChangeEspMod extends Mod implements RenderListener, PacketInpu
 					}else if(matchingBlocks.size() < maxblocks)
 						notify = true;
 		     }
+		    
+		    if(clearafterdelay.isChecked())
+		    if(hasTimePassedM(15000))
+			{
+		    	matchingBlocks.clear();
+		    	updateLastMS();
+			}
+		    	
 	}
 
 	@Override
