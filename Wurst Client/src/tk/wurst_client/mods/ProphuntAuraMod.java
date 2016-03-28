@@ -16,17 +16,26 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.ModeSetting;
 import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
     description = "Aura designed for PropHunt servers, with different modes.\n"
-    	+ "Warning: You might attack (non-prophunt) falling sand.",
+    	+ "Warning: You might attack (non-prophunt) falling entities.",
     name = "ProphuntAura")
 public class ProphuntAuraMod extends Mod implements UpdateListener {
 
 	private int mode = 0;
 	private String[] modes = new String[]{"KillAura", "KALegit", "Aimbot", "Triggerbot"};
+	
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.mods.prophuntEspMod};
+	}
+	
+	
 	@Override
 	public void initSettings()
 	{

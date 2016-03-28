@@ -8,11 +8,16 @@
 package tk.wurst_client.mods;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.network.play.server.S23PacketBlockChange;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+import tk.wurst_client.events.PacketInputEvent;
+import tk.wurst_client.events.listeners.PacketInputListener;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -21,22 +26,32 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
 	description = "Allows you to see fake blocks in Prophunt.\n"
-		+ "Note: Enabling PropHunt blocks in the target\n"
-		+ "option will make you attack falling sand.",
+		+ "Highlighting changed blocks allows you to see PropHunt"
+		+ "that have solidified.",
 	name = "ProphuntESP")
-public class ProphuntEspMod extends Mod implements RenderListener
+public class ProphuntEspMod extends Mod implements RenderListener, PacketInputListener
 {
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.playerEspMod,
-			wurst.mods.mobEspMod, wurst.mods.tracersMod};
+		return new NavigatorItem[]{wurst.mods.prophuntAuraMod};
 	}
 	
 	@Override
 	public void onEnable()
 	{
+		wurst.events.add(PacketInputListener.class, this);
 		wurst.events.add(RenderListener.class, this);
+	}
+	
+	@Override
+	public void onReceivedPacket(PacketInputEvent event)
+	{
+		PacketInputEvent receive = (PacketInputEvent)event;
+        if(receive.getPacket() instanceof S23PacketBlockChange) {
+        	 S23PacketBlockChange blockchange = (S23PacketBlockChange)receive.getPacket();
+        	 RenderUtils.searchBox(blockchange.func_179827_b());
+           }
 	}
 	
 	@Override
@@ -64,6 +79,7 @@ public class ProphuntEspMod extends Mod implements RenderListener
 	@Override
 	public void onDisable()
 	{
+		wurst.events.remove(PacketInputListener.class, this);
 		wurst.events.remove(RenderListener.class, this);
 	}
 }
