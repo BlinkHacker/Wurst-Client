@@ -37,6 +37,7 @@ public class CmdManager implements ChatOutputListener
 	public final AnnoyCmd annoyCmd = new AnnoyCmd();
 	public final AuthorCmd authorCmd = new AuthorCmd();
 	public final BindsCmd bindsCmd = new BindsCmd();
+	public final BlockChangeCmd blockChangeCmd = new BlockChangeCmd();
 	public final BlinkCmd blinkCmd = new BlinkCmd();
 	public final BreadcrumbsCmd breadcrumbsCmd = new BreadcrumbsCmd();
 	public final ClearCmd clearCmd = new ClearCmd();

@@ -54,6 +54,7 @@ public class ModManager
 	public final BaseFinderMod baseFinderMod = new BaseFinderMod();
 	public final BetterFireEffectMod betterFireEffectMod = new BetterFireEffectMod();
 	public final BlinkMod blinkMod = new BlinkMod();
+	public final BlockChangeEspMod blockChangeEspMod = new BlockChangeEspMod();
 	public final BlockHitMod blockHitMod = new BlockHitMod();
 	public final BowAimbotMod bowAimbotMod = new BowAimbotMod();
 	public final BowSpamMod bowSpamMod = new BowSpamMod();
