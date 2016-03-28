@@ -7,9 +7,9 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.init.Items;
+import net.minecraft.item.ItemAppleGold;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -50,21 +50,25 @@ public class FastEatMod extends Mod implements UpdateListener
 				mc.thePlayer.sendQueue
 					.addToSendQueue(new C03PacketPlayer(false)); 
 		if(useanythingfast.isChecked())
-		{
 			if(mc.thePlayer.getHealth() > 0
+				&& !mc.thePlayer.capabilities.isCreativeMode
 				&& mc.thePlayer.onGround
-				&& mc.thePlayer.inventory.getCurrentItem() != null)
-			{
-				ItemStack stack = mc.thePlayer.inventory.getItemStack();
-				if(stack != null && stack.getItem() == Items.golden_apple ||
-					stack.getItem() == Items.potionitem)
-					if(mc.gameSettings.keyBindUseItem.isPressed())
+				&& mc.thePlayer.inventory.getCurrentItem() != null
+				&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemAppleGold
+				&& mc.gameSettings.keyBindUseItem.pressed)
 						for(int i = 0; i < 100; i++)
 							mc.thePlayer.sendQueue
 								.addToSendQueue(new C03PacketPlayer(false)); 
-						
-			}
-		}
+		if(useanythingfast.isChecked())
+			if(mc.thePlayer.getHealth() > 0
+				&& mc.thePlayer.onGround
+				&& mc.thePlayer.inventory.getCurrentItem() != null
+				&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemPotion
+				&& mc.gameSettings.keyBindUseItem.pressed)
+						for(int i = 0; i < 100; i++)
+							mc.thePlayer.sendQueue
+								.addToSendQueue(new C03PacketPlayer(false)); 
+			
 	}
 	
 	@Override
