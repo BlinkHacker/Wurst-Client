@@ -9,7 +9,6 @@ package tk.wurst_client.mods;
 
 import java.awt.Color;
 
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -32,9 +31,6 @@ public class SpawnTracerMod extends Mod implements RenderListener
 	public void onRender()
 	{
 		BlockPos spawn = mc.theWorld.getSpawnPoint();
-	    double d1 = spawn.getX() - mc.getRenderManager().renderPosX;
-	    double d2 = spawn.getY() - mc.getRenderManager().renderPosY;
-	    double d3 = spawn.getZ() - mc.getRenderManager().renderPosZ;
 	    RenderUtils.tracerLine(spawn.getX(), spawn.getY(), spawn.getZ(), new Color(0.1F, 0.1F, 0.1F, 0.5F));
 	    RenderUtils.box(spawn.getX(), spawn.getY(), spawn.getZ(), 
 	    	spawn.getX() + 1.0D, spawn.getY() + 1.0D, spawn.getZ() + 1.0D, new Color(0.1F, 0.1F, 0.1F, 0.15F));
