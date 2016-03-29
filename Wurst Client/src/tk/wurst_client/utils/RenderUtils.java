@@ -504,6 +504,7 @@ public class RenderUtils
 		glDepthMask(true);
 		glDisable(GL_BLEND);
 	}
+	
 	public static void line(Vec3 from, Vec3 to, Color color, float w) {
 		Tessellator var9 = Tessellator.getInstance();
 		WorldRenderer t = var9.getWorldRenderer();
@@ -528,4 +529,34 @@ public class RenderUtils
 		GlStateManager.func_179098_w();
 		GlStateManager.disableBlend();
 	}
+	
+	  public static void enableTextures(boolean texture)
+	  {
+	    if (texture)
+	    {
+	      GL11.glDepthMask(false);
+	      GL11.glDisable(2929);
+	    }
+	    GL11.glDisable(3008);
+	    GL11.glEnable(3042);
+	    GL11.glDisable(3553);
+	    GL11.glBlendFunc(770, 771);
+	    GL11.glEnable(2848);
+	    GL11.glHint(3154, 4354);
+	    GL11.glLineWidth(1.0F);
+	  }
+	  
+	  public static void disableTextures(boolean texture)
+	  {
+	    if (texture)
+	    {
+	      GL11.glDepthMask(true);
+	      GL11.glEnable(2929);
+	    }
+	    GL11.glEnable(3553);
+	    GL11.glDisable(3042);
+	    GL11.glEnable(3008);
+	    GL11.glDisable(2848);
+	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	  }
 }

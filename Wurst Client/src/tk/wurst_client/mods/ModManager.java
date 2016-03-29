@@ -155,6 +155,7 @@ public class ModManager
 	public final SkinBlinkerMod skinBlinkerMod = new SkinBlinkerMod();
 	public final SneakMod sneakMod = new SneakMod();
 	public final SpammerMod spammerMod = new SpammerMod();
+	public final SpawnTracerMod spawnTracerMod = new SpawnTracerMod();
 	public final SpeedHackMod speedHackMod = new SpeedHackMod();
 	public final SpeedNukerMod speedNukerMod = new SpeedNukerMod();
 	public final SpiderMod spiderMod = new SpiderMod();
