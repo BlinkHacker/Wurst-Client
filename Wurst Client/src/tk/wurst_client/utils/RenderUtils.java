@@ -504,14 +504,7 @@ public class RenderUtils
 		glDepthMask(true);
 		glDisable(GL_BLEND);
 	}
-	public static void line(Vec3 from, Vec3 to, int color, float w) {
-		GlStateManager.loadIdentity();
-		Minecraft.getMinecraft().entityRenderer.orientCamera(Minecraft.getMinecraft().timer.renderPartialTicks);
-		
-		float var11 = (float) (color >> 24 & 255) / 255.0F;
-		float var6 = (float) (color >> 16 & 255) / 255.0F;
-		float var7 = (float) (color >> 8 & 255) / 255.0F;
-		float var8 = (float) (color & 255) / 255.0F;
+	public static void line(Vec3 from, Vec3 to, Color color, float w) {
 		Tessellator var9 = Tessellator.getInstance();
 		WorldRenderer t = var9.getWorldRenderer();
 
@@ -520,7 +513,7 @@ public class RenderUtils
 		GL11.glEnable(GL11.GL_LINE_SMOOTH);
 		GL11.glLineWidth(w);
 
-		GlStateManager.color(var6, var7, var8, var11);
+		RenderUtil.setColor(color);
 
 		double[] pf = RenderUtil.renderPos(from);
 		double[] pt = RenderUtil.renderPos(to);

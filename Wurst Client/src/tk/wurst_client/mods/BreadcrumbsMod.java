@@ -7,10 +7,9 @@
  */
 package tk.wurst_client.mods;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.sun.prism.paint.Color;
 
 import net.minecraft.util.Vec3;
 import tk.wurst_client.events.listeners.RenderListener;
@@ -63,7 +62,7 @@ public class BreadcrumbsMod extends Mod implements RenderListener, UpdateListene
 			double[] t = points.get(i);
 			Vec3 from = new Vec3(f[0], f[1], f[2]);
 			Vec3 to = new Vec3(t[0], t[1], t[2]);
-			RenderUtils.line(from, to, new Color(0, 0, 255, (float)0.75).getIntArgbPre(), (float)2);
+			RenderUtils.line(from, to, new Color(0, 0, 1, 0.75F), (float)2);
 		}
 	}
 
