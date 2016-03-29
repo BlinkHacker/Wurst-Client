@@ -113,6 +113,7 @@ public class ModManager
 	public final LsdMod lsdMod = new LsdMod();
 	public final MassTpaMod massTpaMod = new MassTpaMod();
 	public final MenuWalkMod menuWalkMod = new MenuWalkMod();
+	public final MoreInventoryMod moreInventoryMod = new MoreInventoryMod();
 	public final MileyCyrusMod mileyCyrusMod = new MileyCyrusMod();
 	public final MobEspMod mobEspMod = new MobEspMod();
 	public final MultiAuraMod multiAuraMod = new MultiAuraMod();

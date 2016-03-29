@@ -7,15 +7,18 @@ public class PacketOutputEvent extends CancellableEvent
    private Packet packet;
 
 
-   public PacketOutputEvent(Packet packet) {
+   public PacketOutputEvent(Packet packet) 
+   {
       this.packet = packet;
    }
 
-   public Packet getPacket() {
+   public Packet getPacket() 
+   {
       return this.packet;
    }
 
-   public void setPacket(Packet packet) {
+   public void setPacket(Packet packet) 
+   {
       this.packet = packet;
    }
 
