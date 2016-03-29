@@ -75,6 +75,7 @@ public class ModManager
 	public final DisableOverlayMod disableOverlayMod = new DisableOverlayMod();
 	public final DerpMod derpMod = new DerpMod();
 	public final DolphinMod dolphinMod = new DolphinMod();
+	public final FakeHackersMod fakeHackersMod = new FakeHackersMod();
 	public final FancyChatMod fancyChatMod = new FancyChatMod();
 	public final FastBreakMod fastBreakMod = new FastBreakMod();
 	public final FastBowMod fastBowMod = new FastBowMod();

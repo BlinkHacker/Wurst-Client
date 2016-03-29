@@ -14,7 +14,8 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.EXPLOITS,
-	description = "Spoofs ping to 0.",
+	description = "Spoofs ping to 0. Works best when enabled"
+		+ "before you join a server and when you keep this on.",
 	name = "PingSpoof")
 public class PingSpoofMod extends Mod implements PacketOutputListener
 {
