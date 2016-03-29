@@ -92,6 +92,7 @@ public class ModManager
 	public final FullbrightMod fullbrightMod = new FullbrightMod();
 	public final GhostHandMod ghostHandMod = new GhostHandMod();
 	public final GlideMod glideMod = new GlideMod();
+	public final GhostMod ghostMod = new GhostMod();
 	public final GoToCmdMod goToCmdMod = new GoToCmdMod();
 	public final HeadlessMod headlessMod = new HeadlessMod();
 	public final HeadRollMod headRollMod = new HeadRollMod();

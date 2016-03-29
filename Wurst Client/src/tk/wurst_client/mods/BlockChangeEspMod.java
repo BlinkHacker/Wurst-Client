@@ -9,7 +9,6 @@ package tk.wurst_client.mods;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.util.BlockPos;
 import tk.wurst_client.events.PacketInputEvent;
@@ -24,7 +23,7 @@ import tk.wurst_client.utils.RenderUtils;
 @Info(category = Category.RENDER,
 	description = "Allows you to see blocks that have changed.\n"
 		+ "If more than 400 blocks have changed, the blocks reset.\n"
-		+ "Very good for PropHunt and tracking far players."
+		+ "Very good for PropHunt and tracking far players.\n"
 		+ "Note: This will also show where players right clicked and left clicked.",
 	name = "BlockChangeESP")
 public class BlockChangeEspMod extends Mod implements RenderListener, PacketInputListener
