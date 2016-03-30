@@ -36,7 +36,7 @@ public class FakeHackersMod extends Mod implements UpdateListener
 	          double d1 = mc.thePlayer.posX - localEntityPlayer.posX;
 	          double d2 = mc.thePlayer.posZ - localEntityPlayer.posZ;
 	          double d3 = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (localEntityPlayer.posY + localEntityPlayer.getEyeHeight());
-	          double d4 = MathHelper.sin((float)(d1 * d1 + d2 * d2));
+	          double d4 = MathHelper.sqrt_double((d1 * d1 + d2 * d2));
 	          float f1 = (float)(Math.atan2(d2, d1) * 180.0D / 3.141592653589793D) - 90.0F;
 	          float f2 = (float)-(Math.atan2(d3, d4) * 180.0D / 3.141592653589793D);
 	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(f1 - localEntityPlayer.rotationYawHead);
