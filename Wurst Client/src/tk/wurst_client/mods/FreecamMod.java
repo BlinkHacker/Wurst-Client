@@ -8,7 +8,6 @@
 package tk.wurst_client.mods;
 
 import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import tk.wurst_client.events.PacketInputEvent;
 import tk.wurst_client.events.listeners.PacketInputListener;
