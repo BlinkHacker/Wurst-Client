@@ -58,12 +58,9 @@ public class GhostMod extends Mod implements UpdateListener, PacketOutputListene
 	@Override
 	public void onReceivedPacket(PacketInputEvent event)
 	{
-		if(!wurst.mods.freecamMod.isActive() || !wurst.mods.freecamMod.slientfreecam.isChecked())
-		{
 		PacketInputEvent receive = (PacketInputEvent)event;
 		if(receive.getPacket() instanceof S07PacketRespawn && isdead) 
 			event.cancel();
-		}
 	}
 	
 	@Override

@@ -72,8 +72,7 @@ public class FreecamMod extends Mod implements UpdateListener, PacketInputListen
 		if(slientfreecam.isChecked())
 		{
 			PacketInputEvent receive = (PacketInputEvent)event;
-			if(receive.getPacket() instanceof S08PacketPlayerPosLook ||
-				receive.getPacket() instanceof S07PacketRespawn)
+			if(receive.getPacket() instanceof S08PacketPlayerPosLook)
 				event.cancel();
 		}
 	}
