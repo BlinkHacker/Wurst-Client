@@ -253,8 +253,8 @@ public class EntityUtils
 					&& !en.isDead
 					&& en.getHealth() > 0
 					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
-					&& !en.getName().equals(
-						Minecraft.getMinecraft().thePlayer.getName()))
+					&& (!en.getName().equals(
+						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
 					if(closestEntity == null
 						|| Minecraft.getMinecraft().thePlayer
 							.getDistanceToEntity(en) < Minecraft.getMinecraft().thePlayer
@@ -277,8 +277,8 @@ public class EntityUtils
 					&& !en.isDead
 					&& en.getHealth() > 0
 					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
-					&& !en.getName().equals(
-						Minecraft.getMinecraft().thePlayer.getName())
+					&& ((!en.getName().equals(
+						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
 					&& Minecraft.getMinecraft().thePlayer
 						.getDistanceToEntity(en) <= range)
 					closeEntities.add(en);
@@ -360,7 +360,7 @@ public class EntityUtils
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)
-					if(newEntity == null && en.getName().equals(name))
+					if(newEntity == null && (en.getName().equals(name) || !(en instanceof EntityPlayer)))
 						newEntity = en;
 			}
 		return newEntity;
