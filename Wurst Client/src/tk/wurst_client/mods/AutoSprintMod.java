@@ -37,7 +37,7 @@ public class AutoSprintMod extends Mod implements UpdateListener
 		if(OmnidirectionalSprint.isChecked())
 		{
 			if(!mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking())
-				if(mc.thePlayer.moveForward != 0 || mc.thePlayer.moveStrafing != 0)
+				if(mc.thePlayer.motionX != 0 || mc.thePlayer.motionZ != 0)
 					mc.thePlayer.setSprinting(true);
 		} else {
 		if(!mc.thePlayer.isCollidedHorizontally && mc.thePlayer.moveForward > 0
