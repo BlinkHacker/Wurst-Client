@@ -54,6 +54,7 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		updateSpeed();
 		updateMS();
 		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
 		if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
@@ -77,5 +78,11 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+	}
+	
+	private void updateSpeed()
+	{
+		if(wurst.mods.killauraMod.randomspeed.isChecked())
+			wurst.mods.killauraMod.yesCheatSpeed = wurst.mods.killauraMod.yesCheatrSpeed;
 	}
 }
