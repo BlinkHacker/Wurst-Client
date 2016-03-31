@@ -59,17 +59,11 @@ public class TriggerBotMod extends Mod implements UpdateListener
 			&& mc.objectMouseOver.entityHit instanceof EntityLivingBase)
 		{
 			updateMS();
-			boolean yesCheatMode = wurst.mods.yesCheatMod.isActive();
-			if(yesCheatMode
-				&& hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed)
-				|| !yesCheatMode
-				&& hasTimePassedS(wurst.mods.killauraMod.normalSpeed))
+			if(hasTimePassedS(wurst.mods.killauraMod.realSpeed))
 			{
 				EntityLivingBase en =
 					(EntityLivingBase)mc.objectMouseOver.entityHit;
-				if((yesCheatMode
-					&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange || !yesCheatMode
-					&& mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange)
+				if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange
 					&& EntityUtils.isCorrectEntity(en, true)
 					&& EntityUtils.ticksCheck(en))
 				{
