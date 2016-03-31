@@ -16,11 +16,14 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
-	description = "Automatically attacks everything in your range.",
+	description = "Automatically attacks everything in your range.\n"
+		+ "Tip: YesCheat+ caps hitting speed to 12 (12.5 for speed randomizer),\n"
+		+ "so randomizer with speeds above 11F will get the hitting speed capped to 12.5",
 	name = "Killaura")
 public class KillauraMod extends Mod implements UpdateListener
 {
@@ -32,6 +35,10 @@ public class KillauraMod extends Mod implements UpdateListener
 	public int fov = 360;
 	public float realSpeed;
 	public float realRange;
+	public float rSpeed;
+	public float yesCheatrSpeed;
+	public final CheckboxSetting randomspeed = new CheckboxSetting(
+		"Speed Randomizer", false);
 	
 	@Override
 	public void initSettings()
@@ -44,6 +51,9 @@ public class KillauraMod extends Mod implements UpdateListener
 			{
 				normalSpeed = (float)getValue();
 				yesCheatSpeed = Math.min(normalSpeed, 12F);
+				rSpeed = (float)(Math.round((Math.random() * ((normalSpeed + 1.5F) - 
+					(normalSpeed - 1.5F)) + (normalSpeed - 1.5F))* 10))/10;
+				yesCheatrSpeed = Math.min(rSpeed, 12.5F);
 				updateSpeedAndRange();
 			}
 		});
@@ -76,6 +86,7 @@ public class KillauraMod extends Mod implements UpdateListener
 				secondsExisted = (float)getValue();
 			}
 		});
+		settings.add(randomspeed);
 	}
 	
 	@Override
@@ -138,11 +149,19 @@ public class KillauraMod extends Mod implements UpdateListener
 	
 	private void updateSpeedAndRange()
 	{
-		if(wurst.mods.yesCheatMod.isActive())
+		if(wurst.mods.yesCheatMod.isActive() && !randomspeed.isChecked())
 		{
 			realSpeed = yesCheatSpeed;
 			realRange = yesCheatRange;
-		}else
+		}else if(wurst.mods.yesCheatMod.isActive() && randomspeed.isChecked())
+		{
+			realSpeed = yesCheatrSpeed;
+			realRange = yesCheatRange;
+		}else if(!wurst.mods.yesCheatMod.isActive() && randomspeed.isChecked())
+		{
+			realSpeed = rSpeed;
+			realRange = normalRange;
+		} else
 		{
 			realSpeed = normalSpeed;
 			realRange = normalRange;
