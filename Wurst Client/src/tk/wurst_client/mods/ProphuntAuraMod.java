@@ -79,6 +79,7 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 							}
 					case 1:
 						updateMS();
+						updateSpeed();
 						if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null 
 						&& EntityUtils.ticksCheck(en))
 							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
@@ -129,8 +130,13 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 
 				}
     }
-     @Override
-     public void onDisable() {
+    public void updateSpeed()
+    {
+    	if(wurst.mods.killauraMod.randomspeed.isChecked())
+    		wurst.mods.killauraMod.yesCheatSpeed = wurst.mods.killauraMod.yesCheatrSpeed;
+    }
+    @Override
+    public void onDisable() {
     	 
          wurst.events.remove(UpdateListener.class, this);
      }

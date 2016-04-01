@@ -102,6 +102,8 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	            mc.thePlayer.motionX *= 1.5499999523162842D;
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
 	         }
+		default:
+			return;
 		}
 	}
 	
