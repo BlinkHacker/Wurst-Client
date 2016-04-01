@@ -97,7 +97,7 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	{
 		if(mode == 2)
 		{
-		 if(block != null && mc.thePlayer.getDistanceSq(block) < 29.399999618530273D) {
+		 if(block != null && mc.thePlayer.getDistanceSq(block) < 51.399999618530273D) {
 			 BlockUtils.faceBlockPacket(block);
 	            for(int i = 0; i < civbreakspeed; i++) {
 	               mc.thePlayer.swingItem();
