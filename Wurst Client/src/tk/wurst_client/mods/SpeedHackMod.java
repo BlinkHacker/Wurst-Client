@@ -8,16 +8,31 @@
 package tk.wurst_client.mods;
 
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.navigator.settings.ModeSetting;
 
 @Mod.Info(category = Mod.Category.MOVEMENT,
-	description = "Allows you to run roughly 2.5x faster than you would by\n"
-		+ "sprinting and jumping.\n"
-		+ "Notice: This mod was patched in NoCheat+ version 3.13.2. It will\n"
-		+ "only bypass older versions of NoCheat+. Type \"/ncp version\" to\n"
-		+ "check the NoCheat+ version of a server.",
+	description = "Gotta go fast!\n"
+		+ "Note: This mod only semi bypasses NCP. It might be blocked\n"
+		+ "in newer verisons of NoCheat+ or throws checks.",
 	name = "SpeedHack")
 public class SpeedHackMod extends Mod implements UpdateListener
 {
+	private int mode = 0;
+	private String[] modes = new String[]{"Wurst", "Old", "New"};
+	private int speedupstage = 0;
+	
+	@Override
+	public void initSettings()
+	{
+		settings.add(new ModeSetting("Mode", modes, mode)
+		{
+			@Override
+			public void update()
+			{
+				mode = getSelected();
+			}
+		});
+	}
 	@Override
 	public void onEnable()
 	{
@@ -27,6 +42,9 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		switch(mode)
+		{
+		case 0:
 		// return if sneaking or not walking
 		if(mc.thePlayer.isSneaking() || mc.thePlayer.moveForward == 0
 			&& mc.thePlayer.moveStrafing == 0)
@@ -58,11 +76,53 @@ public class SpeedHackMod extends Mod implements UpdateListener
 					mc.thePlayer.motionZ / currentSpeed * maxSpeed;
 			}
 		}
+		case 1:
+			 if(speedupstage == 1) {
+                 mc.thePlayer.motionX *= 1.94D;
+                 mc.thePlayer.motionZ *= 1.94D;
+              } else if(speedupstage == 2) {
+                 mc.thePlayer.motionX /= 1.9D;
+                 mc.thePlayer.motionZ /= 1.9D;
+              } else if(speedupstage == 3) {
+                 mc.thePlayer.motionX *= 1.2000000476837158D;
+                 mc.thePlayer.motionZ *= 1.2000000476837158D;
+              } else if(speedupstage == 4) {
+                 mc.thePlayer.motionX /= 1.9D;
+                 mc.thePlayer.motionZ /= 1.9D;
+              } else if(speedupstage >= 5) {
+                 mc.thePlayer.motionX *= 1.94D;
+                 mc.thePlayer.motionZ *= 1.94D;
+                 speedupstage = 0;
+              } else
+                 mc.timer.timerSpeed = 1.0F;
+			 speedupstage++;
+		case 2:
+			if(mc.thePlayer.onGround) {
+	            mc.thePlayer.motionY = 0.06499999761581421D;
+	            mc.thePlayer.motionX *= 1.5499999523162842D;
+	            mc.thePlayer.motionZ *= 1.5499999523162842D;
+	         }
+		}
 	}
 	
 	@Override
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+	}
+	
+	public int getMode()
+	{
+		return mode;
+	}
+	
+	public void setMode(int mode)
+	{
+		((ModeSetting)settings.get(1)).setSelected(mode);
+	}
+	
+	public String[] getModes()
+	{
+		return modes;
 	}
 }
