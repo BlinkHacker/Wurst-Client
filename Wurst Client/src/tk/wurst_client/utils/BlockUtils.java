@@ -110,4 +110,17 @@ public class BlockUtils
 		return MathHelper.sqrt_float((xDiff - 0.5F) * (xDiff - 0.5F)
 			+ (zDiff - 0.5F) * (zDiff - 0.5F));
 	}
+	
+	public static float[] getBlockRotations(double x, double y, double z)
+	 {
+	    double xDiff = x - Minecraft.getMinecraft().thePlayer.posX + 0.5D;
+	    double zDiff = z - Minecraft.getMinecraft().thePlayer.posZ + 0.5D;
+	    
+	    double yDiff = y - (Minecraft.getMinecraft().thePlayer.posY + Minecraft.getMinecraft().
+	    	thePlayer.getEyeHeight() - 1.0D);
+	    double total = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
+	    float yaw = (float)(Math.atan2(zDiff, xDiff) * 180.0D / 3.141592653589793D) - 90.0F;
+	    
+	    return new float[] {yaw, (float)-(Math.atan2(yDiff, total) * 180.0D / 3.141592653589793D) };
+	  }
 }

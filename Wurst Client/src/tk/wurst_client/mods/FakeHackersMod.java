@@ -33,15 +33,15 @@ public class FakeHackersMod extends Mod implements UpdateListener
 	        EntityPlayer localEntityPlayer = (EntityPlayer)entity;
 	        if (localEntityPlayer != mc.thePlayer && mc.thePlayer.getDistanceToEntity(localEntityPlayer) <= 3.8D)
 	        {
-	          double d1 = mc.thePlayer.posX - localEntityPlayer.posX;
-	          double d2 = mc.thePlayer.posZ - localEntityPlayer.posZ;
-	          double d3 = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (localEntityPlayer.posY + localEntityPlayer.getEyeHeight());
-	          double d4 = MathHelper.sqrt_double((d1 * d1 + d2 * d2));
-	          float f1 = (float)(Math.atan2(d2, d1) * 180.0D / 3.141592653589793D) - 90.0F;
-	          float f2 = (float)-(Math.atan2(d3, d4) * 180.0D / 3.141592653589793D);
-	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(f1 - localEntityPlayer.rotationYawHead);
-	          localEntityPlayer.rotationYaw += MathHelper.wrapAngleTo180_float(f1 - localEntityPlayer.rotationYaw);
-	          localEntityPlayer.rotationPitch += MathHelper.wrapAngleTo180_float(f2 - localEntityPlayer.rotationPitch);
+	          double lookX = mc.thePlayer.posX - localEntityPlayer.posX;
+	          double lookZ = mc.thePlayer.posZ - localEntityPlayer.posZ;
+	          double lookY = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (localEntityPlayer.posY + localEntityPlayer.getEyeHeight());
+	          double total = MathHelper.sqrt_double((lookX * lookX + lookZ * lookZ));
+	          float ZX = (float)(Math.atan2(lookZ, lookX) * 180.0D / 3.141592653589793D) - 90.0F;
+	          float Y = (float)-(Math.atan2(lookY, total) * 180.0D / 3.141592653589793D);
+	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(ZX - localEntityPlayer.rotationYawHead);
+	          localEntityPlayer.rotationYaw += MathHelper.wrapAngleTo180_float(ZX - localEntityPlayer.rotationYaw);
+	          localEntityPlayer.rotationPitch += MathHelper.wrapAngleTo180_float(Y - localEntityPlayer.rotationPitch);
 	        }
 	      }
 	}

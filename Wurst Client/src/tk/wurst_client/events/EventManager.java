@@ -25,7 +25,9 @@ public final class EventManager
 		try
 		{
 			// TODO: A more efficient way to process the type
-			if(type == GUIRenderEvent.class)
+			if(type == BlockBreakingEvent.class)
+				fireBlockBreaking((BlockBreakingEvent)event);
+			else if(type == GUIRenderEvent.class)
 				fireGuiRender();
 			else if(type == RenderEvent.class)
 				fireRender();
@@ -53,6 +55,15 @@ public final class EventManager
 		}
 	}
 	
+	private void fireBlockBreaking(BlockBreakingEvent event)
+	{
+		Object[] listeners = listenerList.getListenerList();
+		for(int i = listeners.length - 2; i >= 0; i -= 2)
+		{
+			if(listeners[i] == BlockBreakingListener.class)
+				((BlockBreakingListener)listeners[i + 1]).onBlockBreaking(event);
+		}
+	}
 	private void fireChatInput(ChatInputEvent event)
 	{
 		Object[] listeners = listenerList.getListenerList();

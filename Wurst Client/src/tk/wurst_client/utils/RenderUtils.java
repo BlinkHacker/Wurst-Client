@@ -47,18 +47,18 @@ public class RenderUtils
 		x2 = x2 - Minecraft.getMinecraft().getRenderManager().renderPosX;
 		y2 = y2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
 		z2 = z2 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(2.0F);
 		RenderUtil.setColor(color);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x2, y2, z2));
 		GL11.glColor4d(0, 0, 0, 0.5F);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z, x2, y2,
 			z2), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -84,16 +84,16 @@ public class RenderUtils
 		x2 = x2 - Minecraft.getMinecraft().getRenderManager().renderPosX;
 		y2 = y2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
 		z2 = z2 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(2.0F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		RenderUtil.setColor(color);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z, x2, y2,
 			z2), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -118,18 +118,18 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(1.0F);
 		GL11.glColor4d(0, 1, 0, 0.15F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
 		GL11.glColor4d(0, 0, 0, 0.5F);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -146,16 +146,16 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(2.0F);
 		GL11.glColor4d(color.getRed() / 255, color.getGreen() / 255,
 			color.getBlue() / 255, 0.15);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -172,16 +172,16 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(2.0F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		GL11.glColor4d(0, 0, 0, 0.5F);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -195,10 +195,10 @@ public class RenderUtils
 	
 	public static void entityESPBox(Entity entity, int mode)
 	{
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(2.0F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		if(mode == 0)// Enemy
@@ -247,7 +247,7 @@ public class RenderUtils
 					- entity.posZ
 					+ (entity.posZ - Minecraft.getMinecraft()
 						.getRenderManager().renderPosZ)), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -264,11 +264,11 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(1.0F);
 		GL11.glColor4d(damage, 1 - damage, 0, 0.15F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x + 0.5 - damage / 2, y + 0.5 - damage
@@ -278,7 +278,7 @@ public class RenderUtils
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x + 0.5 - damage
 			/ 2, y + 0.5 - damage / 2, z + 0.5 - damage / 2, x + 0.5 + damage
 			/ 2, y + 0.5 + damage / 2, z + 0.5 + damage / 2), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -295,21 +295,21 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(1.0F);
 		float sinus =
 			1F - MathHelper.abs(MathHelper.sin(Minecraft.getSystemTime()
 				% 10000L / 10000.0F * (float)Math.PI * 4.0F) * 1F);
 		GL11.glColor4d(1 - sinus, sinus, 0, 0.15);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
 		GL11.glColor4d(0, 0, 0, 0.5);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -326,18 +326,18 @@ public class RenderUtils
 		double z =
 			blockPos.getZ()
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		GL11.glBlendFunc(770, 771);
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glEnable(GL_BLEND);
 		GL11.glLineWidth(1.0F);
 		GL11.glColor4d(0.25, 0.25, 1, 0.15F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL_TEXTURE_2D);
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
 		GL11.glColor4d(0.10, 0.10, 1, 0.15F);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL_TEXTURE_2D);
 		GL11.glEnable(GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
@@ -419,10 +419,10 @@ public class RenderUtils
 		double z =
 			entity.posZ
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		glBlendFunc(770, 771);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		glLineWidth(2.0F);
-		glDisable(GL11.GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 		glDepthMask(false);
 		if(mode == 0)// Enemy
@@ -445,7 +445,7 @@ public class RenderUtils
 			glVertex3d(x, y, z);
 		}
 		glEnd();
-		glEnable(GL11.GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		glDisable(GL_BLEND);
@@ -462,10 +462,10 @@ public class RenderUtils
 		double z =
 			entity.posZ
 				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		glBlendFunc(770, 771);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		glLineWidth(2.0F);
-		glDisable(GL11.GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 		glDepthMask(false);
 		RenderUtil.setColor(color);
@@ -475,7 +475,7 @@ public class RenderUtils
 			glVertex3d(x, y, z);
 		}
 		glEnd();
-		glEnable(GL11.GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		glDisable(GL_BLEND);
@@ -486,10 +486,10 @@ public class RenderUtils
 		x += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosX;
 		y += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosY;
 		z += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
-		glBlendFunc(770, 771);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		glLineWidth(2.0F);
-		glDisable(GL11.GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_DEPTH_TEST);
 		glDepthMask(false);
 		RenderUtil.setColor(color);
@@ -499,7 +499,7 @@ public class RenderUtils
 			glVertex3d(x, y, z);
 		}
 		glEnd();
-		glEnable(GL11.GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		glDisable(GL_BLEND);
@@ -511,7 +511,7 @@ public class RenderUtils
 
 		GlStateManager.enableBlend();
 		GlStateManager.func_179090_x();
-		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		GL11.glEnable(GL_LINE_SMOOTH);
 		GL11.glLineWidth(w);
 
 		RenderUtil.setColor(color);
@@ -525,7 +525,7 @@ public class RenderUtils
 		t.addVertex(pt[0], pt[1], pt[2]);
 		var9.draw();
 
-		GL11.glDisable(GL11.GL_LINE_SMOOTH);
+		GL11.glDisable(GL_LINE_SMOOTH);
 		GlStateManager.func_179098_w();
 		GlStateManager.disableBlend();
 	}
@@ -535,14 +535,14 @@ public class RenderUtils
 	    if (texture)
 	    {
 	      GL11.glDepthMask(false);
-	      GL11.glDisable(2929);
+	      GL11.glDisable(GL_DEPTH_TEST);
 	    }
-	    GL11.glDisable(3008);
-	    GL11.glEnable(3042);
-	    GL11.glDisable(3553);
-	    GL11.glBlendFunc(770, 771);
-	    GL11.glEnable(2848);
-	    GL11.glHint(3154, 4354);
+	    GL11.glDisable(GL_ALPHA_TEST);
+	    GL11.glEnable(GL_BLEND);
+	    GL11.glDisable(GL_TEXTURE_2D);
+	    GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);   
+	    GL11.glEnable(GL_LINE_SMOOTH);
+	    GL11.glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 	    GL11.glLineWidth(1.0F);
 	  }
 	  
@@ -551,12 +551,12 @@ public class RenderUtils
 	    if (texture)
 	    {
 	      GL11.glDepthMask(true);
-	      GL11.glEnable(2929);
+	      GL11.glEnable(GL_DEPTH_TEST);
 	    }
-	    GL11.glEnable(3553);
-	    GL11.glDisable(3042);
-	    GL11.glEnable(3008);
-	    GL11.glDisable(2848);
+	    GL11.glEnable(GL_TEXTURE_2D);
+	    GL11.glDisable(GL_BLEND);
+	    GL11.glEnable(GL_ALPHA_TEST);
+	    GL11.glDisable(GL_LINE_SMOOTH);
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	  }
 	  
@@ -577,17 +577,17 @@ public class RenderUtils
 				blockPos.getZ()
 					- Minecraft.getMinecraft().getRenderManager().renderPosZ;
 			RenderUtil.setColor(color);
-			GL11.glBlendFunc(770, 771);
+			GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glEnable(GL_BLEND);
 			GL11.glLineWidth(1.0F);
 			GL11.glColor4d(0.25, 0.25, 1, 0.15F);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL_TEXTURE_2D);
 			GL11.glDisable(GL_DEPTH_TEST);
 			GL11.glDepthMask(false);
 			drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
 			RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 				x + 1.0, y + 1.0, z + 1.0), -1);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glEnable(GL_TEXTURE_2D);
 			GL11.glEnable(GL_DEPTH_TEST);
 			GL11.glDepthMask(true);
 			GL11.glDisable(GL_BLEND);

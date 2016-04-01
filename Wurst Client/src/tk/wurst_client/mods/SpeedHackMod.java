@@ -33,6 +33,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 			}
 		});
 	}
+	
 	@Override
 	public void onEnable()
 	{

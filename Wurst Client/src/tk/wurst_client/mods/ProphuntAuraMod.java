@@ -47,6 +47,7 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 			}
 		});
 	}
+	
     @Override
     public void onEnable() {
     	
@@ -130,11 +131,13 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 
 				}
     }
+    
     public void updateSpeed()
     {
     	if(wurst.mods.killauraMod.randomspeed.isChecked())
     		wurst.mods.killauraMod.yesCheatSpeed = wurst.mods.killauraMod.yesCheatrSpeed;
     }
+    
     @Override
     public void onDisable() {
     	 
