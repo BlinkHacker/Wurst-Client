@@ -16,10 +16,9 @@ import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
-	description = "Draws a tracer back to the spawn."
-		+ "Note: The tracer might not be exact.",
-	name = "SpawnTracer")
-public class SpawnTracerMod extends Mod implements RenderListener
+	description = "Draws a tracer to where your compass points to.",
+	name = "CompassTracer")
+public class CompassTracerMod extends Mod implements RenderListener
 {
 	@Override
 	public void onEnable()
