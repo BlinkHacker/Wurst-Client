@@ -27,8 +27,7 @@ public class FarmHuntEspMod extends Mod implements RenderListener
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
-		return new NavigatorItem[]{wurst.mods.prophuntAuraMod,
-			wurst.mods.blockChangeEspMod};
+		return new NavigatorItem[]{wurst.mods.prophuntEspMod};
 	}
 	
 	@Override
