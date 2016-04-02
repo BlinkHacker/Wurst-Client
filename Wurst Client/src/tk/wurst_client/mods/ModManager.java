@@ -78,6 +78,7 @@ public class ModManager
 	public final DolphinMod dolphinMod = new DolphinMod();
 	public final FakeHackersMod fakeHackersMod = new FakeHackersMod();
 	public final FancyChatMod fancyChatMod = new FancyChatMod();
+	public final FarmHuntEspMod farmHuntEspMod = new FarmHuntEspMod();
 	public final FastBreakMod fastBreakMod = new FastBreakMod();
 	public final FastBowMod fastBowMod = new FastBowMod();
 	public final FastEatMod fastEatMod = new FastEatMod();

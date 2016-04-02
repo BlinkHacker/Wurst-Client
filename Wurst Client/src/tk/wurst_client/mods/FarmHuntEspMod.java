@@ -8,16 +8,11 @@
 package tk.wurst_client.mods;
 
 import java.awt.Color;
-import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityFallingBlock;
-import net.minecraft.network.play.server.S23PacketBlockChange;
-import net.minecraft.util.BlockPos;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
-import tk.wurst_client.events.PacketInputEvent;
-import tk.wurst_client.events.listeners.PacketInputListener;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -25,11 +20,10 @@ import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
-	description = "Allows you to see fake blocks in Prophunt.",
-	name = "ProphuntESP")
-public class ProphuntEspMod extends Mod implements RenderListener, PacketInputListener
+	description = "Allows you to see fake mobs in FarmHunt.",
+	name = "FarmHuntESP")
+public class FarmHuntEspMod extends Mod implements RenderListener
 {
-	private ArrayList<BlockPos> changed = new ArrayList<BlockPos>();
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
@@ -41,20 +35,17 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 	public void onEnable()
 	{
 		wurst.events.add(RenderListener.class, this);
-		wurst.events.add(PacketInputListener.class, this);
 	}
 	
 	@Override
 	public void onRender()
 	{
-		if(hasTimePassedM(2000))
-		{
-	    	changed.clear();
-	    	updateLastMS();
-		}
 		for(Object entity : mc.theWorld.loadedEntityList)
-			if(entity instanceof EntityFallingBlock)
+			if(entity != mc.thePlayer && entity instanceof EntityLivingBase)
 			{
+				EntityLivingBase mob = (EntityLivingBase)entity;
+				if (mob.rotationPitch != 0.0F)
+				{
 				double x = ((Entity)entity).posX;
 				double y = ((Entity)entity).posY;
 				double z = ((Entity)entity).posZ;
@@ -68,39 +59,13 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 					color = new Color(0, 0, 0, 0);
 				RenderUtils.box(x - 0.5, y - 0.1, z - 0.5, x + 0.5, y + 0.9,
 					z + 0.5, color);
+				}
 			}
-		for(Object blocks : changed)
-		{
-				double xb = ((Entity)blocks).posX;
-				double yb = ((Entity)blocks).posY;
-				double zb = ((Entity)blocks).posZ;
-				Color colorb;
-				if(mc.thePlayer.getDistanceToEntity((Entity)blocks) >= 0.5)
-					colorb =
-						new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
-							.sin(Minecraft.getSystemTime() % 1000L / 1000.0F
-								* (float)Math.PI * 1.0F) * 0.3F));
-				else
-					colorb = new Color(0, 0, 0, 0);
-				RenderUtils.box(xb - 0.5, yb - 0.1, zb - 0.5, xb + 0.5, yb + 0.9,
-					zb + 0.5, colorb);
-		}
-	}
-	
-	@Override
-	public void onReceivedPacket(PacketInputEvent event)
-	{
-		PacketInputEvent receive = (PacketInputEvent)event;
-	    if(receive.getPacket() instanceof S23PacketBlockChange) {
-	       S23PacketBlockChange blockchange = (S23PacketBlockChange)receive.getPacket();
-	       changed.add(blockchange.func_179827_b());
-	    }
 	}
 	
 	@Override
 	public void onDisable()
 	{
 		wurst.events.remove(RenderListener.class, this);
-		wurst.events.remove(PacketInputListener.class, this);
 	}
 }
