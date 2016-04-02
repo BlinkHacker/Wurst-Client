@@ -16,8 +16,11 @@ import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -36,8 +39,6 @@ public class HudMod extends Mod implements RenderListener
 		"ArmorHUD", true);
 	public final CheckboxSetting potionhud = new CheckboxSetting(
 		"PotionHUD", true);
-	public final CheckboxSetting directionhud = new CheckboxSetting(
-		"DirectionHUD", true);
 	private int yOffset = 2;
 	private int xOffset = 2;
 	private Map<PotionEffect, Integer> potionMaxDurationMap = new HashMap<PotionEffect,Integer>();
@@ -48,7 +49,6 @@ public class HudMod extends Mod implements RenderListener
 	{
 		settings.add(armorhud);
 		settings.add(potionhud);
-		settings.add(directionhud);
 	}
 	
 	@Override
@@ -127,14 +127,38 @@ public class HudMod extends Mod implements RenderListener
 		        potionMaxDurationMap.remove(pe);
 		    }
 		}
+		if(armorhud.isChecked())
+		{
+			if(mc.playerController.isNotCreative()) {
+		         int x = 15;
+		         GL11.glPushMatrix();
+
+		         for(int index = 3; index >= 0; --index) {
+		            ItemStack stack = mc.thePlayer.inventory.armorInventory[index];
+		            if(stack != null) {
+		               mc.getRenderItem().func_180450_b(stack, screenRes.getScaledWidth() / 2 + x - 1, screenRes.getScaledHeight() - (mc.thePlayer.isInsideOfMaterial(Material.water)?65:55) - 2);
+		               mc.getRenderItem().func_175030_a(mc.fontRendererObj, stack, screenRes.getScaledWidth() / 2 + x - 1, screenRes.getScaledHeight() - (mc.thePlayer.isInsideOfMaterial(Material.water)?65:55) - 2);
+		               x += 18;
+		            }
+		         }
+
+		         GlStateManager.disableCull();
+		         GlStateManager.enableAlpha();
+		         GlStateManager.disableBlend();
+		         GlStateManager.disableLighting();
+		         GlStateManager.disableCull();
+		         GlStateManager.clear(256);
+		         GL11.glPopMatrix();
+		      }
+		}
 	}
 	
-	public int getX(int width)
+	private int getX(int width)
 	{
 		return screenRes.getScaledWidth() - width - xOffset;
 	}
 	
-	public int getY(int rowCount, int height)
+	private int getY(int rowCount, int height)
 	{
 		return screenRes.getScaledHeight() - rowCount * height - yOffset;
 	}
