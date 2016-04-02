@@ -592,4 +592,17 @@ public class RenderUtils
 			GL11.glDepthMask(true);
 			GL11.glDisable(GL_BLEND);
 		}
+	  public static void drawTexturedModalRect(int x, int y, int u, int v, int width, int height, float zLevel)
+	  {
+	    float var7 = 0.00390625F;
+	    float var8 = 0.00390625F;
+	    Tessellator tessellator = Tessellator.getInstance();
+	    WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+	    worldRenderer.startDrawingQuads();
+	    worldRenderer.addVertexWithUV(x + 0, y + height, zLevel, (u + 0) * var7, (v + height) * var8);
+	    worldRenderer.addVertexWithUV(x + width, y + height, zLevel, (u + width) * var7, (v + height) * var8);
+	    worldRenderer.addVertexWithUV(x + width, y + 0, zLevel, (u + width) * var7, (v + 0) * var8);
+	    worldRenderer.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * var7, (v + 0) * var8);
+	    tessellator.draw();
+	  }
 }
