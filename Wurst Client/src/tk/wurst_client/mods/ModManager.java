@@ -150,6 +150,7 @@ public class ModManager
 	public final RegenMod regenMod = new RegenMod();
 	public final RemoteViewMod remoteViewMod = new RemoteViewMod();
 	public final RecordingModeMod recordingModeMod = new RecordingModeMod();
+	public final ScaffoldWalkMod scaffoldWalkMod = new ScaffoldWalkMod();
 	public final SafeWalkMod safeWalkMod = new SafeWalkMod();
 	public final SearchMod searchMod = new SearchMod();
 	public final SkinBlinkerMod skinBlinkerMod = new SkinBlinkerMod();
