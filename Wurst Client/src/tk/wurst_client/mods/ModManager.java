@@ -99,6 +99,7 @@ public class ModManager
 	public final HeadRollMod headRollMod = new HeadRollMod();
 	public final HealthTagsMod healthTagsMod = new HealthTagsMod();
 	public final HighJumpMod highJumpMod = new HighJumpMod();
+	public final HorseJumpMod horseJumpMod = new HorseJumpMod();
 	public final HungerGlitcherMod hungerGlitcherMod = new HungerGlitcherMod();
 	public final HomeMod homeMod = new HomeMod();
 	public final InstantBunkerMod instantBunkerMod = new InstantBunkerMod();
