@@ -32,7 +32,7 @@ import tk.wurst_client.utils.BlockUtils;
 public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Normal", "Insane", "Bypass"};
+	private String[] modes = new String[]{"Normal", "Bypass", "Latest"};
 	private BlockPos block;
 	private EnumFacing side;
 	public int civbreakspeed = 1;
@@ -76,7 +76,7 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	@Override
 	public void onBlockBreaking(BlockBreakingEvent event)
 	{
-		if(mode == 2)
+		if(mode == 1)
 		{
 	    BlockBreakingEvent blk = (BlockBreakingEvent)event;
         if (blk.getState() != BlockBreakingEvent.EnumBlock.CLICK)
@@ -89,13 +89,17 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
           return;
         mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(block, -1, mc.thePlayer.getCurrentEquippedItem(), 0.0F, 0.0F, 0.0F));
 		}
+		if(mode == 2)
+		{
+			
+		}
 		
 	}
 	
 	@Override
 	public void onUpdate()
 	{
-		if(mode == 2)
+		if(mode == 1)
 		{
 		 if(block != null && mc.thePlayer.getDistanceSq(block) < 51.399999618530273D) {
 			 BlockUtils.faceBlockPacket(block);
