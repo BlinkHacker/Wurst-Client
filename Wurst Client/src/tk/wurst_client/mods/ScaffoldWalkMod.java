@@ -22,7 +22,8 @@ import tk.wurst_client.utils.BlockUtils;
 
 @Info(category = Category.BLOCKS,
 	description = "Allows you to automatically place blocks under you"
-		+ "while you are walking. Good for fast bridge building.",
+		+ "while you are walking. Good for fast bridge building."
+		+ "Note: This may impair walking while not bridge building.",
 	name = "ScaffoldWalk")
 public class ScaffoldWalkMod extends Mod implements UpdateListener
 {
