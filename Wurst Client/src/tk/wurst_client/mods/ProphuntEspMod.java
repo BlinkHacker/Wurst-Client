@@ -78,7 +78,7 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 				Color colorb;
 				if(mc.thePlayer.getDistance(xb, yb, zb) >= 0.5)
 					colorb =
-						new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
+						new Color(1F, 0F, 0F, 0.3F - MathHelper.abs(MathHelper
 							.sin(Minecraft.getSystemTime() % 1000L / 1000.0F
 								* (float)Math.PI * 1.0F) * 0.3F));
 				else
