@@ -12,6 +12,7 @@ import java.awt.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -40,10 +41,10 @@ public class FarmHuntEspMod extends Mod implements RenderListener
 	public void onRender()
 	{
 		for(Object entity : mc.theWorld.loadedEntityList)
-			if(entity != mc.thePlayer && entity instanceof EntityLivingBase)
+			if(!(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase)
 			{
 				EntityLivingBase mob = (EntityLivingBase)entity;
-				if (mob.rotationPitch != 0.0F)
+				if (mob.rotationYaw != 0.0F)
 				{
 				double x = ((Entity)entity).posX;
 				double y = ((Entity)entity).posY;
