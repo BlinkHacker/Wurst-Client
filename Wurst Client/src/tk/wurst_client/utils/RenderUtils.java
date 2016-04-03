@@ -342,6 +342,34 @@ public class RenderUtils
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL_BLEND);
 	}
+	
+	public static void genericBox(BlockPos blockPos, Color color)
+	{
+		double x =
+			blockPos.getX()
+				- Minecraft.getMinecraft().getRenderManager().renderPosX;
+		double y =
+			blockPos.getY()
+				- Minecraft.getMinecraft().getRenderManager().renderPosY;
+		double z =
+			blockPos.getZ()
+				- Minecraft.getMinecraft().getRenderManager().renderPosZ;
+		GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL_BLEND);
+		GL11.glLineWidth(1.0F);
+		RenderUtil.setColor(color);
+		GL11.glDisable(GL_TEXTURE_2D);
+		GL11.glDisable(GL_DEPTH_TEST);
+		GL11.glDepthMask(false);
+		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
+		RenderUtil.setColor(color);
+		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
+			x + 1.0, y + 1.0, z + 1.0), -1);
+		GL11.glEnable(GL_TEXTURE_2D);
+		GL11.glEnable(GL_DEPTH_TEST);
+		GL11.glDepthMask(true);
+		GL11.glDisable(GL_BLEND);
+	}
 	public static void drawColorBox(AxisAlignedBB axisalignedbb)
 	{
 		Tessellator ts = Tessellator.getInstance();

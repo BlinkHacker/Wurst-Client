@@ -47,6 +47,7 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 	@Override
 	public void onRender()
 	{
+		updateMS();
 		if(hasTimePassedM(2000))
 		{
 	    	changed.clear();
@@ -69,21 +70,20 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 				RenderUtils.box(x - 0.5, y - 0.1, z - 0.5, x + 0.5, y + 0.9,
 					z + 0.5, color);
 			}
-		for(Object blocks : changed)
+		for(BlockPos blocks : changed)
 		{
-				double xb = ((Entity)blocks).posX;
-				double yb = ((Entity)blocks).posY;
-				double zb = ((Entity)blocks).posZ;
+				double xb = blocks.getX();
+				double yb = blocks.getY();
+				double zb = blocks.getZ();
 				Color colorb;
-				if(mc.thePlayer.getDistanceToEntity((Entity)blocks) >= 0.5)
+				if(mc.thePlayer.getDistance(xb, yb, zb) >= 0.5)
 					colorb =
 						new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
 							.sin(Minecraft.getSystemTime() % 1000L / 1000.0F
 								* (float)Math.PI * 1.0F) * 0.3F));
 				else
 					colorb = new Color(0, 0, 0, 0);
-				RenderUtils.box(xb - 0.5, yb - 0.1, zb - 0.5, xb + 0.5, yb + 0.9,
-					zb + 0.5, colorb);
+				RenderUtils.genericBox(blocks, colorb);
 		}
 	}
 	
