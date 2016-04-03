@@ -35,6 +35,7 @@ public class ModManager
 	public final AntiRotationSetMod antiRotationSetMod = new AntiRotationSetMod();
 	public final AntiSpamMod antiSpamMod = new AntiSpamMod();
 	public final ArenaBrawlMod arenaBrawlMod = new ArenaBrawlMod();
+	public final ArrowTrajectoriesMod arrowTrajectoriesMod = new ArrowTrajectoriesMod();
 	public final AutoArmorMod autoArmorMod = new AutoArmorMod();
 	public final AutoBuildMod autoBuildMod = new AutoBuildMod();
 	public final AutoLeaveMod autoLeaveMod = new AutoLeaveMod();
