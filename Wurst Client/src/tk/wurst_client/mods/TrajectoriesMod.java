@@ -124,10 +124,10 @@ public class TrajectoriesMod extends Mod implements RenderListener
 		// GL settings
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_LINE_SMOOTH);
-		GL11.glBlendFunc(770, 771);
-		GL11.glEnable(3042);
-		GL11.glDisable(3553);
-		GL11.glDisable(2929);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL13.GL_MULTISAMPLE);
 		GL11.glDepthMask(false);
 		GL11.glLineWidth(1.8F);
@@ -175,9 +175,9 @@ public class TrajectoriesMod extends Mod implements RenderListener
 		RenderGlobal.drawOutlinedBoundingBox(bb, -1);
 		
 		// GL resets
-		GL11.glDisable(3042);
-		GL11.glEnable(3553);
-		GL11.glEnable(2929);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL13.GL_MULTISAMPLE);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL11.GL_LINE_SMOOTH);
