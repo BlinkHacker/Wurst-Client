@@ -14,7 +14,7 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.FUN,
-	description = "Makes other players look like hackers.",
+	description = "Makes other players look like aimbot hackers.",
 	name = "FakeHackers")
 public class FakeHackersMod extends Mod implements UpdateListener
 {

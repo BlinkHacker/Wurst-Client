@@ -44,7 +44,7 @@ public class FarmHuntEspMod extends Mod implements RenderListener
 			if(!(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase)
 			{
 				EntityLivingBase mob = (EntityLivingBase)entity;
-				if (mob.rotationYaw != 0.0F)
+				if (mob.rotationPitch != 0.0F)
 				{
 				double x = ((Entity)entity).posX;
 				double y = ((Entity)entity).posY;
