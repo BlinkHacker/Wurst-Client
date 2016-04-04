@@ -22,8 +22,8 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
 	description = "Allows you to see fake mobs in FarmHunt.",
-	name = "FarmHuntESP")
-public class FarmHuntEspMod extends Mod implements RenderListener
+	name = "FarmhuntESP")
+public class FarmhuntEspMod extends Mod implements RenderListener
 {
 	@Override
 	public NavigatorItem[] getSeeAlso()
