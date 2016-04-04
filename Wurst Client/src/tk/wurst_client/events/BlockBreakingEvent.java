@@ -65,6 +65,6 @@ public class BlockBreakingEvent extends Event
   @Override
   public String getAction()
   {
-	return "Breaking block";
+	return "breaking block";
   }
 }

@@ -25,7 +25,9 @@ public final class EventManager
 		try
 		{
 			// TODO: A more efficient way to process the type
-			if(type == BlockBreakingEvent.class)
+			if(type == AttackEntityEvent.class)
+				fireAttackEntity((AttackEntityEvent)event);
+			else if(type == BlockBreakingEvent.class)
 				fireBlockBreaking((BlockBreakingEvent)event);
 			else if(type == GUIRenderEvent.class)
 				fireGuiRender();
@@ -52,6 +54,18 @@ public final class EventManager
 		{
 			handleException(e, this, "processing events", "Event type: "
 				+ event.getClass().getSimpleName());
+		}
+	}
+	
+	private void fireAttackEntity(AttackEntityEvent event)
+	{
+		Object[] listeners = listenerList.getListenerList();
+		for(int i = listeners.length - 2; i >= 0; i -= 2)
+		{
+			if(listeners[i] == AttackEntityListener.class)
+				((AttackEntityListener)listeners[i + 1]).onEntityAttacked(event);
+			if(event.isCancelled())
+				break;
 		}
 	}
 	
