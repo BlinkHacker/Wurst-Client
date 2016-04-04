@@ -7,6 +7,7 @@
  */
 package tk.wurst_client.mods;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,33 +17,34 @@ import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import tk.wurst_client.events.listeners.RenderListener;
+import tk.wurst_client.events.listeners.GUIRenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
+import tk.wurst_client.utils.HUDElementUtils;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
-	description = "Shows armor status, potion effects, and direction on screen.",
+	description = "Shows armor status and potion effects on screen.",
 	name = "HUD")
-public class HudMod extends Mod implements RenderListener
+public class HudMod extends Mod implements GUIRenderListener
 {
 	public final CheckboxSetting armorhud = new CheckboxSetting(
 		"ArmorHUD", true);
 	public final CheckboxSetting potionhud = new CheckboxSetting(
 		"PotionHUD", true);
-	private int yOffset = 2;
-	private int xOffset = 2;
+	private int yOffsetP = 20;
+	private int xOffsetP = 2;
+	private int yOffsetA = 270;
+	private int xOffsetA = 100;
 	private Map<PotionEffect, Integer> potionMaxDurationMap = new HashMap<PotionEffect,Integer>();
-	ScaledResolution screenRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+	private List<HUDElementUtils> elements = new ArrayList<HUDElementUtils>();
 	
 	@Override
 	public void initSettings()
@@ -54,19 +56,20 @@ public class HudMod extends Mod implements RenderListener
 	@Override
 	public void onEnable()
 	{
-		wurst.events.add(RenderListener.class, this);
+		wurst.events.add(GUIRenderListener.class, this);
 	}
 	
 	@Override
-	public void onRender()
+	public void onRenderGUI()
 	{
+		ScaledResolution scaledRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 		if(potionhud.isChecked())
 		{
 			Collection<?> activeEffects = mc.thePlayer.getActivePotionEffects();
 		    if (!activeEffects.isEmpty())
 		    {
 		      int yOffset = 20;
-		      int yBase = getY(activeEffects.size(), yOffset);
+		      int yBase = getYP(activeEffects.size(), yOffset, scaledRes);
 		      for (Iterator<?> iteratorPotionEffect = activeEffects.iterator(); iteratorPotionEffect.hasNext(); yBase += yOffset)
 		      {
 		        PotionEffect potionEffect = (PotionEffect)iteratorPotionEffect.next();
@@ -76,7 +79,7 @@ public class HudMod extends Mod implements RenderListener
 		        Potion potion = Potion.potionTypes[potionEffect.getPotionID()];
 		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		        mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/inventory.png"));
-		        int xBase = getX(22 + mc.fontRendererObj.getStringWidth("0:00"));
+		        int xBase = getXP(22 + mc.fontRendererObj.getStringWidth("0:00"), scaledRes);
 		        String potionName = "";
 		          potionName = I18n.format(potion.getName());
 		          if (potionEffect.getAmplifier() == 1) {
@@ -100,9 +103,9 @@ public class HudMod extends Mod implements RenderListener
 		          } else if (potionEffect.getAmplifier() > 9) {
 		            potionName = potionName + " " + (potionEffect.getAmplifier() + 1);
 		          }
-		          xBase = getX(22 + mc.fontRendererObj.getStringWidth(potionName));
+		          xBase = getXP(22 + mc.fontRendererObj.getStringWidth(potionName), scaledRes);
 		        String effectDuration = Potion.getDurationString(potionEffect);
-		        xBase = getX(0);
+		        xBase = getXP(0, scaledRes);
 		        if ((potion).hasStatusIcon())
 		        {
 		            int potionStatusIcon = potion.getStatusIconIndex();
@@ -112,11 +115,11 @@ public class HudMod extends Mod implements RenderListener
 		        }
 		          int stringWidth = mc.fontRendererObj.getStringWidth(potionName);
 		          GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		          mc.fontRendererObj.drawString("§f" + potionName + "§r", xBase - 22 -
+		          mc.fontRendererObj.drawString(potionName + "§r", xBase - 22 -
 		        	  stringWidth, yBase, 16777215);
 		          int stringWidth2 = mc.fontRendererObj.getStringWidth(effectDuration);
 		          if (shouldRender(potionEffect, potionEffect.getDuration(), 10))
-		              mc.fontRendererObj.drawString("§f" + effectDuration + "§r", xBase
+		              mc.fontRendererObj.drawString(effectDuration + "§r", xBase
 		            	  - 22 - stringWidth2, yBase + 10, 16777215);
 		      }
 		      List<PotionEffect> toRemove = new LinkedList<PotionEffect>();
@@ -129,38 +132,39 @@ public class HudMod extends Mod implements RenderListener
 		}
 		if(armorhud.isChecked())
 		{
-			if(mc.playerController.isNotCreative()) {
-		         int x = 15;
-		         GL11.glPushMatrix();
-
-		         for(int index = 3; index >= 0; --index) {
-		            ItemStack stack = mc.thePlayer.inventory.armorInventory[index];
-		            if(stack != null) {
-		               mc.getRenderItem().func_180450_b(stack, screenRes.getScaledWidth() / 2 + x - 1, screenRes.getScaledHeight() - (mc.thePlayer.isInsideOfMaterial(Material.water)?65:55) - 2);
-		               mc.getRenderItem().func_175030_a(mc.fontRendererObj, stack, screenRes.getScaledWidth() / 2 + x - 1, screenRes.getScaledHeight() - (mc.thePlayer.isInsideOfMaterial(Material.water)?65:55) - 2);
-		               x += 18;
-		            }
-		         }
-
-		         GlStateManager.disableCull();
-		         GlStateManager.enableAlpha();
-		         GlStateManager.disableBlend();
-		         GlStateManager.disableLighting();
-		         GlStateManager.disableCull();
-		         GlStateManager.clear(256);
-		         GL11.glPopMatrix();
-		      }
+			getHUDElements();
+		    int yBase;
+		    if (elements.size() > 0)
+		    {
+		      int yOffset = 18;
+		        yBase = getYA(elements.size(), yOffset, scaledRes);
+		        for (HUDElementUtils e : elements)
+		        {
+		          e.renderToHud(getXA(0, scaledRes), yBase);
+		          yBase += yOffset;
+		        }
+		    }
 		}
 	}
 	
-	private int getX(int width)
+	private int getXP(int width, ScaledResolution scaledres)
 	{
-		return screenRes.getScaledWidth() - width - xOffset;
+		return scaledres.getScaledWidth() - width - xOffsetP;
 	}
 	
-	private int getY(int rowCount, int height)
+	private int getYP(int rowCount, int height, ScaledResolution scaledres)
 	{
-		return screenRes.getScaledHeight() - rowCount * height - yOffset;
+		return scaledres.getScaledHeight() - rowCount * height - yOffsetP;
+	}
+	
+	private int getXA(int width, ScaledResolution scaledres)
+	{
+		return scaledres.getScaledWidth() - width - xOffsetA;
+	}
+	
+	private int getYA(int rowCount, int height, ScaledResolution scaledres)
+	{
+		return scaledres.getScaledHeight() - rowCount * height - yOffsetA;
 	}
 	
 	 private boolean shouldRender(PotionEffect pe, int ticksLeft, int thresholdSeconds)
@@ -172,9 +176,26 @@ public class HudMod extends Mod implements RenderListener
 	    return true;
 	 }
 	 
+	 private void getHUDElements()
+	  {
+	    elements.clear();
+	    for (int i = 3; i >= -1; i--)
+	    {
+	      ItemStack itemStack = null;
+	      if ((i == -1)) {
+	        itemStack = mc.thePlayer.getCurrentEquippedItem();
+	      } else if (i != -1) {
+	        itemStack = mc.thePlayer.inventory.armorInventory[i];
+	      }
+	      if (itemStack != null) {
+	        elements.add(new HUDElementUtils(itemStack, 16, 16, 2, i > -1));
+	      }
+	    }
+	  }
+	 
 	@Override
 	public void onDisable()
 	{
-		wurst.events.remove(RenderListener.class, this);
+		wurst.events.remove(GUIRenderListener.class, this);
 	}
 }

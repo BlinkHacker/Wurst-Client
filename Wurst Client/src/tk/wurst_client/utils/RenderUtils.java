@@ -633,4 +633,15 @@ public class RenderUtils
 	    worldRenderer.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * var7, (v + 0) * var8);
 	    tessellator.draw();
 	  }
+	  public static void renderQuad(Tessellator tessellator, int x, int y, int width, int height, int color)
+	  {
+	    WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+	    worldRenderer.startDrawingQuads();;
+	    worldRenderer.setColorOpaque_I(color);
+	    worldRenderer.addVertex(x + 0, y + 0, 0.0D);
+	    worldRenderer.addVertex(x + 0, y + height, 0.0D);
+	    worldRenderer.addVertex(x + width, y + height, 0.0D);
+	    worldRenderer.addVertex(x + width, y + 0, 0.0D);
+	    tessellator.draw();
+	  }
 }

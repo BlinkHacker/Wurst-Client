@@ -22,8 +22,9 @@ import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
 	description = "Automatically attacks everything in your range.\n"
-		+ "Tip: YesCheat+ caps hitting speed to 12 (12.5 for speed randomizer),\n"
-		+ "so randomizer with speeds above 11F will get the hitting speed capped to 12.5",
+		+ "Tip: YesCheat+ caps hitting speed to 12,\n"
+		+ "(12.5 for speed randomizer) so randomizer with speeds\n"
+		+ "above 11F will get the hitting speed capped to 12.5.",
 	name = "Killaura")
 public class KillauraMod extends Mod implements UpdateListener
 {
