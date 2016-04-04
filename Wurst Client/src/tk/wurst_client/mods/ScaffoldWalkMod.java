@@ -46,7 +46,8 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 	      blockData = null;
-	      if ((mc.thePlayer.getHeldItem() != null) && (!mc.thePlayer.isSneaking()) && ((mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)))
+	      if ((mc.thePlayer.getHeldItem() != null) && (!mc.thePlayer.isSneaking()) && 
+	    	  ((mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)))
 	      {
 	        BlockPos blockBelow = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
 	        if (mc.theWorld.getBlockState(blockBelow).getBlock() == Blocks.air)
@@ -62,13 +63,17 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	      if (blockData != null)
 	      {
 	      updateMS();
-	      if(hasTimePassedS(slower.isChecked() ? 250 : 75))
+	      if(hasTimePassedS(slower.isChecked() ? 500 : 75))
 	      {
-	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, C0BPacketEntityAction.Action.START_SNEAKING));
-	          if (mc.playerController.func_178890_a(mc.thePlayer, mc.theWorld, mc.thePlayer.getHeldItem(), this.blockData.position, this.blockData.face, new Vec3(this.blockData.position.getX(), this.blockData.position.getY(), this.blockData.position.getZ()))) {
+	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
+	    		  C0BPacketEntityAction.Action.START_SNEAKING));
+	          if (mc.playerController.func_178890_a(mc.thePlayer, mc.theWorld, mc.thePlayer.getHeldItem(), 
+	        	  this.blockData.position, this.blockData.face, new Vec3(this.blockData.position.getX(), 
+	        		  this.blockData.position.getY(), this.blockData.position.getZ()))) {
 	            mc.thePlayer.swingItem();
 	          }
-	          mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, C0BPacketEntityAction.Action.STOP_SNEAKING));
+	          mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
+	        	  C0BPacketEntityAction.Action.STOP_SNEAKING));
 	          updateLastMS();
 	      }
 	      }
@@ -76,7 +81,15 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	
 	public BlockDataUtils getBlockData(BlockPos blockpos)
 	{
-	    return mc.theWorld.getBlockState(blockpos.add(0, 0, 1)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(0, 0, 1), EnumFacing.NORTH) : mc.theWorld.getBlockState(blockpos.add(0, 0, -1)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(0, 0, -1), EnumFacing.SOUTH) : mc.theWorld.getBlockState(blockpos.add(1, 0, 0)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(1, 0, 0), EnumFacing.WEST) : mc.theWorld.getBlockState(blockpos.add(-1, 0, 0)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(-1, 0, 0), EnumFacing.EAST) : mc.theWorld.getBlockState(blockpos.add(0, -1, 0)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(0, -1, 0), EnumFacing.UP) : null;
+	    return mc.theWorld.getBlockState(blockpos.add(0, 0, 1)).getBlock() != Blocks.air ? 
+	    	new BlockDataUtils(blockpos.add(0, 0, 1), EnumFacing.NORTH) : mc.theWorld.getBlockState(
+	    		blockpos.add(0, 0, -1)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add
+	    			(0, 0, -1), EnumFacing.SOUTH) : mc.theWorld.getBlockState(blockpos.add(1, 0, 0)).
+	    			getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(1, 0, 0), EnumFacing.WEST) 
+	    				: mc.theWorld.getBlockState(blockpos.add(-1, 0, 0)).getBlock() != Blocks.air ? 
+	    					new BlockDataUtils(blockpos.add(-1, 0, 0), EnumFacing.EAST) : 
+	    						mc.theWorld.getBlockState(blockpos.add(0, -1, 0)).getBlock() != Blocks.air 
+	    						? new BlockDataUtils(blockpos.add(0, -1, 0), EnumFacing.UP) : null;
 	}
 	
 	@Override
