@@ -39,10 +39,6 @@ public class HudMod extends Mod implements GUIRenderListener
 		"ArmorHUD", true);
 	public final CheckboxSetting potionhud = new CheckboxSetting(
 		"PotionHUD", true);
-	private int yOffsetP = 20;
-	private int xOffsetP = 2;
-	private int yOffsetA = 270;
-	private int xOffsetA = 100;
 	private Map<PotionEffect, Integer> potionMaxDurationMap = new HashMap<PotionEffect,Integer>();
 	private List<HUDElementUtils> elements = new ArrayList<HUDElementUtils>();
 	
@@ -149,22 +145,22 @@ public class HudMod extends Mod implements GUIRenderListener
 	
 	private int getXP(int width, ScaledResolution scaledres)
 	{
-		return scaledres.getScaledWidth() - width - xOffsetP;
+		return scaledres.getScaledWidth() - width - 2;
 	}
 	
 	private int getYP(int rowCount, int height, ScaledResolution scaledres)
 	{
-		return scaledres.getScaledHeight() - rowCount * height - yOffsetP;
+		return scaledres.getScaledHeight() - rowCount * height - 20;
 	}
 	
 	private int getXA(int width, ScaledResolution scaledres)
 	{
-		return scaledres.getScaledWidth() - width - xOffsetA;
+		return scaledres.getScaledWidth() - width - 2;
 	}
 	
 	private int getYA(int rowCount, int height, ScaledResolution scaledres)
 	{
-		return scaledres.getScaledHeight() - rowCount * height - yOffsetA;
+		return scaledres.getScaledHeight() - rowCount * height - 270;
 	}
 	
 	 private boolean shouldRender(PotionEffect pe, int ticksLeft, int thresholdSeconds)
