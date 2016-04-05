@@ -64,8 +64,7 @@ public class TriggerBotMod extends Mod implements UpdateListener
 				EntityLivingBase en =
 					(EntityLivingBase)mc.objectMouseOver.entityHit;
 				if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange
-					&& EntityUtils.isCorrectEntity(en, true)
-					&& EntityUtils.ticksCheck(en))
+					&& EntityUtils.isCorrectEntity(en, true, true))
 				{
 					if(wurst.mods.autoSwordMod.isActive())
 						AutoSwordMod.setSlot();

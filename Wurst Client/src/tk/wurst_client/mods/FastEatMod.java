@@ -8,6 +8,7 @@
 package tk.wurst_client.mods;
 
 import net.minecraft.item.ItemAppleGold;
+import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.network.play.client.C03PacketPlayer;
@@ -64,6 +65,15 @@ public class FastEatMod extends Mod implements UpdateListener
 				&& mc.thePlayer.onGround
 				&& mc.thePlayer.inventory.getCurrentItem() != null
 				&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemPotion
+				&& mc.gameSettings.keyBindUseItem.pressed)
+						for(int i = 0; i < 100; i++)
+							mc.thePlayer.sendQueue
+								.addToSendQueue(new C03PacketPlayer(false)); 
+		if(useanythingfast.isChecked())
+			if(mc.thePlayer.getHealth() > 0
+				&& mc.thePlayer.onGround
+				&& mc.thePlayer.inventory.getCurrentItem() != null
+				&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBucketMilk
 				&& mc.gameSettings.keyBindUseItem.pressed)
 						for(int i = 0; i < 100; i++)
 							mc.thePlayer.sendQueue

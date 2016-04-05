@@ -56,10 +56,10 @@ public class ClickAimbotMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
 		if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null
 			&& mc.gameSettings.keyBindAttack.pressed)
-			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange && EntityUtils.ticksCheck(en))
+			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange)
 			{
 				if(wurst.mods.autoSwordMod.isActive())
 					AutoSwordMod.setSlot();

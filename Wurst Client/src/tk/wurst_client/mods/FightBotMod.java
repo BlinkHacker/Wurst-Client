@@ -33,11 +33,11 @@ public class FightBotMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		entity = EntityUtils.getClosestEntity(true, false);
+		entity = EntityUtils.getClosestEntity(true, false, true);
 		if(entity == null)
 			return;
 		if(entity.getHealth() <= 0 || entity.isDead
-			|| mc.thePlayer.getHealth() <= 0 || EntityUtils.ticksCheck(entity) == false)
+			|| mc.thePlayer.getHealth() <= 0)
 		{
 			entity = null;
 			mc.gameSettings.keyBindForward.pressed = false;

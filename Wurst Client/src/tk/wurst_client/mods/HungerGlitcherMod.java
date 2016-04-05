@@ -29,9 +29,9 @@ public class HungerGlitcherMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
 		if(mc.thePlayer.onGround && en != null
-			&& en.getDistanceToEntity(mc.thePlayer) < 1 && EntityUtils.ticksCheck(en))
+			&& en.getDistanceToEntity(mc.thePlayer) < 1)
 			for(int i = 0; i < 1000; i++)
 				mc.thePlayer.sendQueue
 					.addToSendQueue(new C03PacketPlayer(true));

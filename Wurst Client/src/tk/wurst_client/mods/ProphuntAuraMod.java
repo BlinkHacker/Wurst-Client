@@ -57,15 +57,14 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
     @Override
     public void onUpdate() 
     {
-		Entity en = EntityUtils.getClosestNonlivingEntity(false, true);
+		Entity en = EntityUtils.getClosestNonlivingEntity(false, true, true);
 		if(en != null)
 			if (en instanceof EntityFallingBlock)
 				switch(mode)
 				{
 					case 0:
 						updateMS();
-						if(hasTimePassedS(wurst.mods.killauraMod.realSpeed)
-						&& EntityUtils.ticksCheck(en))
+						if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null)
 							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange)
 							{
 						if(wurst.mods.autoSwordMod.isActive())
@@ -81,8 +80,7 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 					case 1:
 						updateMS();
 						updateSpeed();
-						if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null 
-						&& EntityUtils.ticksCheck(en))
+						if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
 							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
 							{
 								if(wurst.mods.criticalsMod.isActive() && mc.thePlayer.onGround)
@@ -98,8 +96,8 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 								updateLastMS();
 							}
 					case 2:
-						if(en != null)
-							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.normalRange && EntityUtils.ticksCheck(en))
+							if(en != null && mc.thePlayer.getDistanceToEntity(en) <= 
+							wurst.mods.killauraMod.normalRange)
 								EntityUtils.faceNonlivingEntityClient(en);
 					case 3:
 						if(mc.objectMouseOver != null
@@ -111,9 +109,9 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 						{
 							Entity entrigger =
 								(Entity)mc.objectMouseOver.entityHit;
-							if( mc.thePlayer.getDistanceToEntity(entrigger) <= wurst.mods.killauraMod.realRange
-								&& EntityUtils.isCorrectNonlivingEntity(entrigger, true)
-								&& EntityUtils.ticksCheck(entrigger))
+							if(en != null && mc.thePlayer.getDistanceToEntity(entrigger) <= 
+								wurst.mods.killauraMod.realRange
+								&& EntityUtils.isCorrectNonlivingEntity(entrigger, true, true))
 							{
 								if(wurst.mods.autoSwordMod.isActive())
 									AutoSwordMod.setSlot();

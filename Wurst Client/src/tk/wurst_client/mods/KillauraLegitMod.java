@@ -56,9 +56,9 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 	{
 		updateSpeed();
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
 		if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
-			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange && EntityUtils.ticksCheck(en))
+			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
 			{
 				if(wurst.mods.criticalsMod.isActive() && mc.thePlayer.onGround)
 					mc.thePlayer.jump();
