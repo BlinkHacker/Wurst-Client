@@ -37,6 +37,8 @@ public class AutoSwordMod extends Mod implements LeftClickListener,
 	@Override
 	public void onEnable()
 	{
+		if(wurst.mods.armorBreakerMod.isActive())
+			wurst.mods.armorBreakerMod.setEnabled(false);
 		oldSlot = -1;
 		wurst.events.add(LeftClickListener.class, this);
 	}

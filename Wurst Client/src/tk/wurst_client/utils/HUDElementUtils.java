@@ -67,7 +67,7 @@ public class HUDElementUtils
       {
         maxDamage = itemStack.getMaxDamage() + 1;
         damage = maxDamage - this.itemStack.getItemDamage();
-        percentdamage = (damage / maxDamage) * 100;
+        percentdamage = damage * 100 / maxDamage;
         itemDamage = ("§" + getColorCode(percentdamage) + damage + "/" + maxDamage);
       }
       itemDamageW = Minecraft.getMinecraft().fontRendererObj.getStringWidth
@@ -177,18 +177,19 @@ public class HUDElementUtils
   
   public String getColorCode(int value)
   {
-   if(value >= 80)
-	   return "f";
-   else if(value >= 60)
-	   return "7";
-   else if(value >= 40)
-	   return "e";
-   else if(value >= 25)
-	   return "6";
-   else if(value >= 10)
-	   return "c";
-   else if(value >= 0)
+   if(value >= 0 && value < 10)
 	   return "4";
+   else if(value >= 10 && value < 25)
+	   return "c";
+   else if(value >= 25 && value < 40)
+	   return "6";
+   else if(value >= 40 && value < 60)
+	   return "e";
+   else if(value >= 60 && value < 80)
+	   return "7";
+   else if(value >= 80)
+	   return "f";
+   else
     return "f";
   }
 }

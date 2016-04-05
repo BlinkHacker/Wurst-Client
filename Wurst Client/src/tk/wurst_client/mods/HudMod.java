@@ -111,11 +111,11 @@ public class HudMod extends Mod implements GUIRenderListener
 		        }
 		          int stringWidth = mc.fontRendererObj.getStringWidth(potionName);
 		          GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		          mc.fontRendererObj.drawString(potionName + "§r", xBase - 22 -
+		          mc.fontRendererObj.drawStringWithShadow(potionName + "§r", xBase - 22 -
 		        	  stringWidth, yBase, 16777215);
 		          int stringWidth2 = mc.fontRendererObj.getStringWidth(effectDuration);
 		          if (shouldRender(potionEffect, potionEffect.getDuration(), 10))
-		              mc.fontRendererObj.drawString(effectDuration + "§r", xBase
+		              mc.fontRendererObj.drawStringWithShadow(effectDuration + "§r", xBase
 		            	  - 22 - stringWidth2, yBase + 10, 16777215);
 		      }
 		      List<PotionEffect> toRemove = new LinkedList<PotionEffect>();
