@@ -7,8 +7,14 @@
  */
 package tk.wurst_client.utils;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 
@@ -123,4 +129,53 @@ public class BlockUtils
 	    
 	    return new float[] {yaw, (float)-(Math.atan2(yDiff, total) * 180.0D / 3.141592653589793D) };
 	  }
+	
+	public static boolean isInsideBlock(Entity entity) 
+	{
+        for (int x = MathHelper.floor_double(entity.getEntityBoundingBox().minX); x <
+        	MathHelper.floor_double(entity.getEntityBoundingBox().maxX) + 1; x++) {
+            for (int y = MathHelper.floor_double(entity.getEntityBoundingBox().minY); y < 
+            	MathHelper.floor_double(entity.getEntityBoundingBox().maxY) + 1; y++) {
+                for (int z = MathHelper.floor_double(entity.getEntityBoundingBox().minZ); z < 
+                	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) {
+                    Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+                    if (block != null) {
+                        AxisAlignedBB boundingBox = block.getCollisionBoundingBox(
+                        	Minecraft.getMinecraft().theWorld, new BlockPos(x, y, z), 
+                        	Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)));
+                        if (block instanceof BlockHopper) {
+                            boundingBox = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1);
+                        }
+
+                        if (boundingBox != null && entity.getEntityBoundingBox().intersectsWith(boundingBox)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+	 public static boolean isInLiquid(Entity entity) {
+	        if (entity == null)
+	            return false;
+	        boolean inLiquid = false;
+	        final int y = (int) entity.getEntityBoundingBox().minY;
+	        for (int x = MathHelper.floor_double(entity.getEntityBoundingBox().minX); x < 
+	        	MathHelper.floor_double(Minecraft.getMinecraft().thePlayer.
+	        		getEntityBoundingBox().maxX) + 1; x++) {
+	            for (int z = MathHelper.floor_double(entity.getEntityBoundingBox().minZ); z < 
+	            	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) {
+	                final Block block = Minecraft.getMinecraft().theWorld.getBlockState(
+	                	new BlockPos(x, y, z)).getBlock();
+	                if (block != null && !(block instanceof BlockAir)) {
+	                    if (!(block instanceof BlockLiquid))
+	                        return false;
+	                    inLiquid = true;
+	                }
+	            }
+	        }
+	        return inLiquid || Minecraft.getMinecraft().thePlayer.isInWater();
+	    }
 }
