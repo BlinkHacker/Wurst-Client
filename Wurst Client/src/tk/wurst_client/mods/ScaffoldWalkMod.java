@@ -13,6 +13,7 @@ import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
+import tk.wurst_client.events.listeners.PostUpdateListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -21,11 +22,11 @@ import tk.wurst_client.utils.BlockDataUtils;
 import tk.wurst_client.utils.BlockUtils;
 
 @Info(category = Category.BLOCKS,
-	description = "Allows you to automatically place blocks under you"
-		+ "while you are walking. Good for fast bridge building."
+	description = "Allows you to automatically place blocks under you\n"
+		+ "while you are walking. Good for fast bridge building.\n"
 		+ "Note: This may impair walking while not bridge building.",
 	name = "ScaffoldWalk")
-public class ScaffoldWalkMod extends Mod implements UpdateListener
+public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	private BlockDataUtils blockData = null;
 	public final CheckboxSetting slower = new CheckboxSetting(
@@ -40,6 +41,7 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	public void onEnable()
 	{
 		wurst.events.add(UpdateListener.class, this);
+		wurst.events.add(PostUpdateListener.class, this);
 	}
 	
 	@Override
@@ -47,7 +49,7 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	{
 	      blockData = null;
 	      if ((mc.thePlayer.getHeldItem() != null) && (!mc.thePlayer.isSneaking()) && 
-	    	  ((mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)))
+	    	  (mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock))
 	      {
 	        BlockPos blockBelow = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
 	        if (mc.theWorld.getBlockState(blockBelow).getBlock() == Blocks.air)
@@ -60,10 +62,15 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	          }
 	        }
 	      }
-	      if (blockData != null)
+	}
+	
+	@Override
+	public void onPostUpdate()
+	{
+		updateMS();
+		if (blockData != null)
 	      {
-	      updateMS();
-	      if(hasTimePassedS(slower.isChecked() ? 500 : 75))
+	      if(hasTimePassedS(slower.isChecked() ? 1000 : 75))
 	      {
 	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
 	    		  C0BPacketEntityAction.Action.START_SNEAKING));
@@ -96,5 +103,6 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+		wurst.events.remove(PostUpdateListener.class, this);
 	}
 }

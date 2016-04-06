@@ -80,6 +80,7 @@ public class ModManager
 	public final DisableOverlayMod disableOverlayMod = new DisableOverlayMod();
 	public final DolphinMod dolphinMod = new DolphinMod();
 	public final FakeHackersMod fakeHackersMod = new FakeHackersMod();
+	public final FakeLagMod fakeLagMod = new FakeLagMod();
 	public final FancyChatMod fancyChatMod = new FancyChatMod();
 	public final FarmhuntEspMod farmhuntEspMod = new FarmhuntEspMod();
 	public final FastBowMod fastBowMod = new FastBowMod();
