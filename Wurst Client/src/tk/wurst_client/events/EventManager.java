@@ -39,6 +39,8 @@ public final class EventManager
 				firePacketOutput((PacketOutputEvent)event);
 			else if(type == UpdateEvent.class)
 				fireUpdate();
+			else if(type == PostUpdateEvent.class)
+				firePostUpdate();
 			else if(type == ChatInputEvent.class)
 				fireChatInput((ChatInputEvent)event);
 			else if(type == ChatOutputEvent.class)
@@ -158,6 +160,14 @@ public final class EventManager
 				((UpdateListener)listeners[i + 1]).onUpdate();
 	}
 	
+	private void firePostUpdate()
+	{
+		Object[] listeners = listenerList.getListenerList();
+		for(int i = listeners.length - 2; i >= 0; i -= 2)
+			if(listeners[i] == PostUpdateListener.class)
+				((PostUpdateListener)listeners[i + 1]).onPostUpdate();
+	}
+	
 	public void handleException(final Exception e, final Object cause,
 		final String action, final String comment)
 	{
@@ -173,6 +183,17 @@ public final class EventManager
 				Minecraft.getMinecraft().displayGuiScreen(
 					new GuiError(e, cause, action, comment));
 				remove(UpdateListener.class, this);
+			}
+		});
+		add(PostUpdateListener.class, new PostUpdateListener()	
+		{
+			@Override
+			public void onPostUpdate()
+			{
+				Minecraft.getMinecraft().displayGuiScreen(
+					new GuiError(e, cause, action, comment));
+				remove(PostUpdateListener.class, this);
+				
 			}
 		});
 	}

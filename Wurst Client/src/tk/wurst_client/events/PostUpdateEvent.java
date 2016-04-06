@@ -7,25 +7,11 @@
  */
 package tk.wurst_client.events;
 
-import net.minecraft.entity.Entity;
-
-public class AttackEntityEvent extends CancellableEvent 
+public class PostUpdateEvent extends Event
 {
-    private final Entity entity;
-
-    public AttackEntityEvent(final Entity entity) {
-    	
-        this.entity = entity;
-    }
-
-    public Entity getEntity() {
-    	
-        return entity;
-    }
-
 	@Override
 	public String getAction()
 	{
-		return "attacking entity";
+		return "post-updating";
 	}
 }
