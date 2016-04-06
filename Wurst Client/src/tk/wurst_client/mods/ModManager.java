@@ -136,6 +136,7 @@ public class ModManager
 	public final NoFireworksMod noFireworksMod = new NoFireworksMod();
 	public final NoHurtcamMod noHurtcamMod = new NoHurtcamMod();
 	public final NoItemSlowdownMod noItemSlowdownMod = new NoItemSlowdownMod();
+	public final NoLightningMod noLightningMod = new NoLightningMod();
 	public final NoPumpkinMod noPumpkinMod = new NoPumpkinMod();
 	public final NoSwingMod noSwingMod = new NoSwingMod();
 	public final NoWeatherMod noWeatherMod = new NoWeatherMod();

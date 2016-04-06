@@ -25,6 +25,7 @@ public class PingSpoofMod extends Mod implements PacketOutputListener
 {
 	private int mode = 0;
 	private String[] modes = new String[]{"Key", "Packet"};
+	private float packet = 1;
 	private long packetdelay;
 	
 	@Override
