@@ -76,15 +76,12 @@ public class UIRenderer
 	
 	public static void renderUI(float zLevel)
 	{
-		if(WurstClient.INSTANCE.mods.recordingModeMod.isActive())
-			return;
 		// GL settings
 		glEnable(GL_BLEND);
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		RenderUtil.setColor(new Color(255, 255, 255, 128));
-		
 		// get version string
 		String version =
 			"v"
@@ -93,6 +90,8 @@ public class UIRenderer
 					: "");
 		
 		// draw version background
+		if(!WurstClient.INSTANCE.mods.recordingModeMod.isActive())
+		{
 		glBegin(GL_QUADS);
 		{
 			glVertex2d(0, 6);
@@ -101,12 +100,14 @@ public class UIRenderer
 			glVertex2d(0, 18);
 		}
 		glEnd();
+		}
 		
 		// draw version string
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
+		if(!WurstClient.INSTANCE.mods.recordingModeMod.isActive())
 		Fonts.segoe22.drawString(version, 74, 4, 0xFF000000);
 		
 		// mod list & pinned frames
@@ -127,6 +128,8 @@ public class UIRenderer
 		double fh = 256;
 		double u1 = 0;
 		double v1 = 0;
+		if(!WurstClient.INSTANCE.mods.recordingModeMod.isActive())
+		{
 		wr.startDrawingQuads();
 		wr.addVertexWithUV(x + 0, y + h, zLevel, (float)(u1 + 0) / 256D,
 			(float)(v1 + fh) / 256D);
@@ -137,6 +140,7 @@ public class UIRenderer
 		wr.addVertexWithUV(x + 0, y + 0, zLevel, (float)(u1 + 0) / 256D,
 			(float)(v1 + 0) / 256D);
 		ts.draw();
+		}
 		
 		// GUI render event
 		WurstClient.INSTANCE.events.fireEvent(GUIRenderEvent.class,

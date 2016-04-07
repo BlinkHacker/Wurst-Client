@@ -22,6 +22,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import tk.wurst_client.events.listeners.GUIRenderListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -31,7 +32,7 @@ import tk.wurst_client.utils.HUDElementUtils;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
-	description = "Shows armor status and potion effects on screen.",
+	description = "Shows armor status, potion effects, time, and coords on screen.",
 	name = "HUD")
 public class HudMod extends Mod implements GUIRenderListener
 {
@@ -39,6 +40,8 @@ public class HudMod extends Mod implements GUIRenderListener
 		"ArmorHUD", true);
 	public final CheckboxSetting potionhud = new CheckboxSetting(
 		"PotionHUD", true);
+	public final CheckboxSetting coordtime = new CheckboxSetting(
+		"Show Coords and Time", true);
 	private Map<PotionEffect, Integer> potionMaxDurationMap = new HashMap<PotionEffect,Integer>();
 	private List<HUDElementUtils> elements = new ArrayList<HUDElementUtils>();
 	
@@ -47,6 +50,7 @@ public class HudMod extends Mod implements GUIRenderListener
 	{
 		settings.add(armorhud);
 		settings.add(potionhud);
+		settings.add(coordtime);
 	}
 	
 	@Override
@@ -141,6 +145,60 @@ public class HudMod extends Mod implements GUIRenderListener
 		        }
 		    }
 		}
+		if(coordtime.isChecked())
+		{
+			int posX = MathHelper.floor_double(mc.thePlayer.posX);
+			int posY = MathHelper.floor_double(mc.thePlayer.posY);
+			int posZ = MathHelper.floor_double(mc.thePlayer.posZ);
+			int yaw = MathHelper.floor_double(mc.thePlayer.rotationYaw);
+	        yaw += 22;
+	        yaw %= 360;
+
+	        if (yaw < 0)
+	            yaw += 360;
+
+	        int facing = yaw / 45;
+	        String facingdir = "";
+
+	        if (facing == 0)
+	            facingdir = "S";
+	        else if (facing == 1)
+	            facingdir = "SW";
+	        else if (facing == 2)
+	            facingdir = "W";
+	        else if (facing == 3)
+	            facingdir = "NW";
+	        else if (facing == 4)
+	            facingdir = "N";
+	        else if (facing == 5)
+	            facingdir = "NE";
+	        else if (facing == 6)
+	            facingdir = "E";
+	        else if(facing == 7)
+	            facingdir = "SE";
+	        else
+	        	facingdir = "Null";
+	        long time = (mc.theWorld.getWorldTime()) % 24000;
+			long hours = (time + 6000) / 1000;
+			long seconds = (long)(((time + 6000) % 1000) * (60.0/1000.0));
+			String colorhour = "";
+			if (time >= 0 && time < 1000)
+			colorhour = "§5" + hours;
+			else if (time >= 1000 && time < 12000)
+			colorhour = "§e" + hours;
+			else if (time >= 12000 && time < 14000)
+			colorhour = "§5" + hours;
+			else 
+			colorhour = "§9" + hours;
+			String worldtime = "";
+			if (seconds < 10)
+			worldtime = colorhour + ":0" + seconds;
+			else 
+			worldtime = colorhour + ":" + seconds;
+	        String coorddirtime = "§lCoords:§r" + posX + ", " + posY + ", " + posZ + " " + "[" + facingdir + "]";
+	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, 115F, scaledRes.getScaledHeight() - 365, 16777215);
+	        mc.fontRendererObj.drawStringWithShadow(worldtime, 260F, scaledRes.getScaledHeight() - 365, 16777215);
+		}
 	}
 	
 	private int getXP(int width, ScaledResolution scaledres)
@@ -163,14 +221,14 @@ public class HudMod extends Mod implements GUIRenderListener
 		return scaledres.getScaledHeight() - rowCount * height - 270;
 	}
 	
-	 private boolean shouldRender(PotionEffect pe, int ticksLeft, int thresholdSeconds)
-	 {
+	private boolean shouldRender(PotionEffect pe, int ticksLeft, int thresholdSeconds)
+	{
 	    if ((((Integer)potionMaxDurationMap.get(pe)).intValue() > 400) && 
 	      (ticksLeft / 20 <= thresholdSeconds)) {
 	      return ticksLeft % 20 < 10;
 	    }
 	    return true;
-	 }
+	}
 	 
 	 private void getHUDElements()
 	  {
