@@ -111,6 +111,7 @@ public class ModManager
 	public final InstantBunkerMod instantBunkerMod = new InstantBunkerMod();
 	public final InvisibilityMod invisibilityMod = new InvisibilityMod();
 	public final ItemEspMod itemEspMod = new ItemEspMod();
+	public final ItemLabelsMod itemLabelsMod = new ItemLabelsMod();
 	public final JesusMod jesusMod = new JesusMod();
 	public final JetpackMod jetpackMod = new JetpackMod();
 	public final KaboomMod kaboomMod = new KaboomMod();

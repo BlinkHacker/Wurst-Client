@@ -413,4 +413,11 @@ public class EntityUtils
 		return true;
 
 	}
+	
+	public static double[] EntityPos(Entity entity)
+	{
+	    double d = Minecraft.getMinecraft().timer.renderPartialTicks;
+	    double[] arrayOfDouble = {entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * d, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * d, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * d };
+	    return arrayOfDouble;
+	}
 }

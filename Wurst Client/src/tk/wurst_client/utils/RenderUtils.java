@@ -12,10 +12,12 @@ import static org.lwjgl.opengl.GL11.*;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -558,8 +560,8 @@ public class RenderUtils
 		GlStateManager.disableBlend();
 	}
 	
-	  public static void enableTextures(boolean texture)
-	  {
+	public static void enableTextures(boolean texture)
+	{
 	    if (texture)
 	    {
 	      GL11.glDepthMask(false);
@@ -572,11 +574,11 @@ public class RenderUtils
 	    GL11.glEnable(GL_LINE_SMOOTH);
 	    GL11.glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 	    GL11.glLineWidth(1.0F);
-	  }
+	}
 	  
-	  public static void disableTextures(boolean texture)
-	  {
-	    if (texture)
+	public static void disableTextures(boolean texture)
+	{
+		if (texture)
 	    {
 	      GL11.glDepthMask(true);
 	      GL11.glEnable(GL_DEPTH_TEST);
@@ -586,15 +588,15 @@ public class RenderUtils
 	    GL11.glEnable(GL_ALPHA_TEST);
 	    GL11.glDisable(GL_LINE_SMOOTH);
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	  }
+	}
 	  
-	  public static void prophuntBox(BlockPos blockPos)
-	  {
-		  Color color;
-		  color =
-				new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
-					.sin(Minecraft.getSystemTime() % 1000L / 1000.0F
-						* (float)Math.PI * 1.0F) * 0.3F));
+	public static void prophuntBox(BlockPos blockPos)
+	{
+		Color color;
+		color =
+		new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
+			.sin(Minecraft.getSystemTime() % 1000L / 1000.0F
+				* (float)Math.PI * 1.0F) * 0.3F));
 			double x =
 				blockPos.getX()
 					- Minecraft.getMinecraft().getRenderManager().renderPosX;
@@ -619,9 +621,10 @@ public class RenderUtils
 			GL11.glEnable(GL_DEPTH_TEST);
 			GL11.glDepthMask(true);
 			GL11.glDisable(GL_BLEND);
-		}
-	  public static void drawTexturedModalRect(int x, int y, int u, int v, int width, int height, float zLevel)
-	  {
+	}
+	
+	public static void drawTexturedModalRect(int x, int y, int u, int v, int width, int height, float zLevel)
+	{
 	    float var7 = 0.00390625F;
 	    float var8 = 0.00390625F;
 	    Tessellator tessellator = Tessellator.getInstance();
@@ -630,11 +633,12 @@ public class RenderUtils
 	    worldRenderer.addVertexWithUV(x + 0, y + height, zLevel, (u + 0) * var7, (v + height) * var8);
 	    worldRenderer.addVertexWithUV(x + width, y + height, zLevel, (u + width) * var7, (v + height) * var8);
 	    worldRenderer.addVertexWithUV(x + width, y + 0, zLevel, (u + width) * var7, (v + 0) * var8);
-	    worldRenderer.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * var7, (v + 0) * var8);
-	    tessellator.draw();
-	  }
-	  public static void renderQuad(Tessellator tessellator, int x, int y, int width, int height, int color)
-	  {
+		worldRenderer.addVertexWithUV(x + 0, y + 0, zLevel, (u + 0) * var7, (v + 0) * var8);
+		tessellator.draw();
+	}
+	
+	public static void renderQuad(Tessellator tessellator, int x, int y, int width, int height, int color)
+	{
 	    WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 	    worldRenderer.startDrawingQuads();;
 	    worldRenderer.setColorOpaque_I(color);
@@ -642,6 +646,58 @@ public class RenderUtils
 	    worldRenderer.addVertex(x + 0, y + height, 0.0D);
 	    worldRenderer.addVertex(x + width, y + height, 0.0D);
 	    worldRenderer.addVertex(x + width, y + 0, 0.0D);
-	    tessellator.draw();
-	  }
+		tessellator.draw();
+	}
+	
+	public static void itemLabels(String string, Entity entity, double sizetag, int color)
+	{
+	    RenderManager RenderManager = Minecraft.getMinecraft().getRenderManager();
+	    FontRenderer FontRenderer = Minecraft.getMinecraft().fontRendererObj;
+	    int width = FontRenderer.getStringWidth(string);
+	    double dist = Minecraft.getMinecraft().thePlayer.getDistanceToEntity(entity);
+	    GL11.glPushMatrix();
+	    enableTextures(true);
+	    double[] arrayOfDouble = EntityUtils.EntityPos(entity);
+	    double renderX = arrayOfDouble[0] - Minecraft.getMinecraft().getRenderManager().renderPosX;
+	    double renderY = arrayOfDouble[1] - Minecraft.getMinecraft().getRenderManager().renderPosY + entity.height + 0.5D;
+	    double renderZ = arrayOfDouble[2] - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+	    GL11.glTranslated(renderX, renderY, renderZ);
+	    GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+	    GL11.glScaled(-0.027D, -0.027D, 0.027D);
+	    double size = 10.0D - sizetag;
+	    if (dist > size) {
+	      GL11.glScaled(dist / size, dist / size, dist / size);
+	    }
+	    double posX = entity.posX;
+	    double posY = entity.posY;
+	    double posZ = entity.posZ;
+		double distX = posX - Minecraft.getMinecraft().thePlayer.posX;
+	  	double distY = posY - Minecraft.getMinecraft().thePlayer.posY;
+	  	double distZ = posZ - Minecraft.getMinecraft().thePlayer.posZ;
+	 	float ZX = (float)(Math.atan2(distZ, distX) * 180.0D / 3.141592653589793D) - 90.0F;
+	 	float Y = (float)-(Math.atan2(distY, dist) * 180.0D / 3.141592653589793D);
+	  	float yaw = Math.abs(MathHelper.wrapAngleTo180_float(ZX - Minecraft.getMinecraft().thePlayer.rotationYaw));
+	  	float pitch = Math.abs(MathHelper.wrapAngleTo180_float(Y - Minecraft.getMinecraft().thePlayer.rotationPitch));
+	  	float sqrt = (float)((75.0D - Math.sqrt(yaw * yaw + pitch * pitch)) / 50.0D);
+	  	if (sqrt > 1.0F)
+	    	sqrt = 1.0F;
+	      if (sqrt < 0.0F)
+	        sqrt = 0.0F;
+	    GL11.glScaled(sqrt, sqrt, sqrt);
+	    GL11.glRotatef(RenderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+	    GL11.glRotatef(-RenderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+	    GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.3F);
+	    GL11.glBegin(GL_QUADS);
+	    GL11.glVertex3d(-width / 2 - 2, -2.0D, 0.0D);
+	    GL11.glVertex3d(-width / 2 - 2, 9.0D, 0.0D);
+	    GL11.glVertex3d(width / 2 + 2, 9.0D, 0.0D);
+	    GL11.glVertex3d(width / 2 + 2, -2.0D, 0.0D);
+	    GL11.glEnd();
+	    GL11.glColor3f(1.0F, 1.0F, 1.0F);
+	    GL11.glEnable(GL_TEXTURE_2D);
+	    FontRenderer.drawString(string, -width / 2, 0, color);
+	    GL11.glDisable(GL_TEXTURE_2D);
+	    disableTextures(true);
+		GL11.glPopMatrix();
+	}
 }
