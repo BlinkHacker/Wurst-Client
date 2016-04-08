@@ -126,6 +126,7 @@ public class ModManager
 	public final MenuWalkMod menuWalkMod = new MenuWalkMod();
 	public final MileyCyrusMod mileyCyrusMod = new MileyCyrusMod();
 	public final MobEspMod mobEspMod = new MobEspMod();
+	public final MobHealthTagsMod mobHealthTagsMod = new MobHealthTagsMod();
 	public final MoreInventoryMod moreInventoryMod = new MoreInventoryMod();
 	public final MultiAuraMod multiAuraMod = new MultiAuraMod();
 	public final NameProtectMod nameProtectMod = new NameProtectMod();

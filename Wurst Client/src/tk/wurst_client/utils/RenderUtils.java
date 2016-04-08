@@ -649,17 +649,17 @@ public class RenderUtils
 		tessellator.draw();
 	}
 	
-	public static void itemLabels(String string, Entity entity, double sizetag, int color)
+	public static void renderTag(String string, Entity entity, double sizetag, int color, double height, boolean disabledepth)
 	{
 	    RenderManager RenderManager = Minecraft.getMinecraft().getRenderManager();
 	    FontRenderer FontRenderer = Minecraft.getMinecraft().fontRendererObj;
 	    int width = FontRenderer.getStringWidth(string);
 	    double dist = Minecraft.getMinecraft().thePlayer.getDistanceToEntity(entity);
 	    GL11.glPushMatrix();
-	    enableTextures(true);
+	    enableTextures(disabledepth);
 	    double[] arrayOfDouble = EntityUtils.EntityPos(entity);
 	    double renderX = arrayOfDouble[0] - Minecraft.getMinecraft().getRenderManager().renderPosX;
-	    double renderY = arrayOfDouble[1] - Minecraft.getMinecraft().getRenderManager().renderPosY + entity.height + 0.5D;
+	    double renderY = arrayOfDouble[1] - Minecraft.getMinecraft().getRenderManager().renderPosY + entity.height + height;
 	    double renderZ = arrayOfDouble[2] - Minecraft.getMinecraft().getRenderManager().renderPosZ;
 	    GL11.glTranslated(renderX, renderY, renderZ);
 	    GL11.glNormal3f(0.0F, 1.0F, 0.0F);
@@ -697,7 +697,7 @@ public class RenderUtils
 	    GL11.glEnable(GL_TEXTURE_2D);
 	    FontRenderer.drawString(string, -width / 2, 0, color);
 	    GL11.glDisable(GL_TEXTURE_2D);
-	    disableTextures(true);
+	    disableTextures(disabledepth);
 		GL11.glPopMatrix();
 	}
 }

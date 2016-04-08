@@ -24,6 +24,7 @@ import tk.wurst_client.mods.Mod.Info;
 public class GhostMod extends Mod implements UpdateListener, PacketOutputListener, PacketInputListener
 {
 	boolean isdead;
+	
 	@Override
 	public void onEnable()
 	{
