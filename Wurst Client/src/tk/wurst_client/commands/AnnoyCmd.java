@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 @Info(help = "Annoys a player by repeating everything he says.",
 	name = "annoy",
-	syntax = {"[<player>]"})
+	syntax = {"<player> [delay]"})
 public class AnnoyCmd extends Cmd implements ChatInputListener
 {
 	private boolean toggled;
