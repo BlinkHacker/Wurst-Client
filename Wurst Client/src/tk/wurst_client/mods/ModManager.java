@@ -38,6 +38,7 @@ public class ModManager
 	public final ArenaBrawlMod arenaBrawlMod = new ArenaBrawlMod();
 	public final ArmorBreakerMod armorBreakerMod = new ArmorBreakerMod();
 	public final ArrowTrajectoriesMod arrowTrajectoriesMod = new ArrowTrajectoriesMod();
+	public final AutoAcceptMod autoAcceptMod = new AutoAcceptMod();
 	public final AutoArmorMod autoArmorMod = new AutoArmorMod();
 	public final AutoBuildMod autoBuildMod = new AutoBuildMod();
 	public final AutoEatMod autoEatMod = new AutoEatMod();
