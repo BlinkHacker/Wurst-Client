@@ -7,7 +7,10 @@
  */
 package tk.wurst_client.mods;
 
-@Mod.Info(category = Mod.Category.MOVEMENT,
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
+
+@Info(category = Category.MOVEMENT,
 	description = "Protects you from falling down as if you were sneaking.",
 	name = "SafeWalk")
 public class SafeWalkMod extends Mod

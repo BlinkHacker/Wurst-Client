@@ -12,10 +12,12 @@ import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.EntityUtils;
 
-@Mod.Info(category = Mod.Category.COMBAT,
+@Info(category = Category.COMBAT,
 	description = "Automatically attacks the closest valid entity while teleporting around it.",
 	name = "TP-Aura",
 	noCheatCompatible = false,

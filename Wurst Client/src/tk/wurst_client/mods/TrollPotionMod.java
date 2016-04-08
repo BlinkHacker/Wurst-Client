@@ -12,8 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 
-@Mod.Info(category = Mod.Category.FUN,
+@Info(category = Category.FUN,
 	description = "Generates an incredibly annoying potion.\n"
 		+ "Tip: AntiBlind makes you partially immune to it.",
 	name = "TrollPotion")

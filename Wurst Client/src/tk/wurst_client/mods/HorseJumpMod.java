@@ -7,7 +7,10 @@
  */
 package tk.wurst_client.mods;
 
-@Mod.Info(category = Mod.Category.MOVEMENT,
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
+
+@Info(category = Category.MOVEMENT,
 	description = "Always make the highest jump possible on a horse.",
 	name = "HorseJump")
 public class HorseJumpMod extends Mod

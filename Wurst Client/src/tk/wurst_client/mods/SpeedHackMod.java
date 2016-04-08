@@ -8,9 +8,11 @@
 package tk.wurst_client.mods;
 
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.ModeSetting;
 
-@Mod.Info(category = Mod.Category.MOVEMENT,
+@Info(category = Category.MOVEMENT,
 	description = "Gotta go fast!\n"
 		+ "Note: This mod only semi bypasses NCP. It might be blocked\n"
 		+ "in newer verisons of NoCheat+ or throws checks.",

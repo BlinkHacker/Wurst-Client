@@ -11,8 +11,10 @@ import java.util.Set;
 
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 
-@Mod.Info(category = Mod.Category.FUN,
+@Info(category = Category.FUN,
 	description = "Makes your skin blink.\n"
 		+ "Requires a skin with a jacket, a hat or something similar.",
 	name = "SkinBlinker")

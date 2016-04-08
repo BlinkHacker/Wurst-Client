@@ -12,8 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 
-@Mod.Info(category = Mod.Category.EXPLOITS,
+@Info(category = Category.EXPLOITS,
 	description = "Generates a potion that can kill players in Creative mode.\n"
 		+ "Requires Creative mode.",
 	name = "KillerPotion")

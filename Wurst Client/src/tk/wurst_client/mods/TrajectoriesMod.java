@@ -7,7 +7,9 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.client.Minecraft;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -21,18 +23,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-
 import tk.wurst_client.events.listeners.RenderListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.RenderUtils;
 
-@Mod.Info(name = "Trajectories",
+@Info(name = "Trajectories",
 	description = "Predicts the flight path of arrows and throwable items.",
 	tags = "Projectiles",
-	category = Mod.Category.RENDER)
+	category = Category.RENDER)
 public class TrajectoriesMod extends Mod implements RenderListener
 {
 	@Override
@@ -76,11 +76,11 @@ public class TrajectoriesMod extends Mod implements RenderListener
 				* 0.16F;
 		double arrowPosY =
 			player.lastTickPosY + (player.posY - player.lastTickPosY)
-				* Minecraft.getMinecraft().timer.renderPartialTicks
+				* mc.timer.renderPartialTicks
 				+ player.getEyeHeight() - 0.1;
 		double arrowPosZ =
 			player.lastTickPosZ + (player.posZ - player.lastTickPosZ)
-				* Minecraft.getMinecraft().timer.renderPartialTicks
+				* mc.timer.renderPartialTicks
 				- MathHelper.sin((float)Math.toRadians(player.rotationYaw))
 				* 0.16F;
 		

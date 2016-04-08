@@ -16,11 +16,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.BlockUtils;
 import tk.wurst_client.utils.RenderUtils;
 
-@Mod.Info(category = Mod.Category.BLOCKS,
+@Info(category = Category.BLOCKS,
 	description = "Digs a 3x3 tunnel around you.",
 	name = "Tunneller")
 public class TunnellerMod extends Mod implements RenderListener, UpdateListener

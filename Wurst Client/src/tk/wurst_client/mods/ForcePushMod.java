@@ -10,9 +10,11 @@ package tk.wurst_client.mods;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import tk.wurst_client.events.listeners.UpdateListener;
+import tk.wurst_client.mods.Mod.Category;
+import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.utils.EntityUtils;
 
-@Mod.Info(category = Mod.Category.FUN,
+@Info(category = Category.FUN,
 	description = "Pushes mobs like crazy.\n" + "They'll literally fly away!\n"
 		+ "Can sometimes get you kicked for \"Flying is not enabled\".",
 	name = "ForcePush")
