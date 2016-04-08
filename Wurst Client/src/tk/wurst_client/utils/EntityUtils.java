@@ -169,6 +169,7 @@ public class EntityUtils
 				return false;
 		
 		//ticks Existed check
+		if(ticksExisted)
 		if(!(o instanceof Entity))
 		{
 			return false;
@@ -399,6 +400,7 @@ public class EntityUtils
 				return false;
 				
 		//ticks Existed check
+		if(ticksExisted)
 		if(!(o instanceof Entity))
 		{
 			return false;
