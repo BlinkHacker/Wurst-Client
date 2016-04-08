@@ -182,14 +182,14 @@ public class HudMod extends Mod implements GUIRenderListener
 			long hours = (time + 6000) / 1000;
 			long seconds = (long)(((time + 6000) % 1000) * (60.0/1000.0));
 			String colorhour = "";
-			if (time >= 0 && time < 1000)
-			colorhour = "§5" + hours;
-			else if (time >= 1000 && time < 12000)
+			if (time >= 0 && time < 12000)
 			colorhour = "§e" + hours;
-			else if (time >= 12000 && time < 14000)
+			else if (time >= 12000 && time < 13500)
 			colorhour = "§5" + hours;
-			else 
+			else if(time >= 13500 && time < 22500)
 			colorhour = "§9" + hours;
+			else 
+			colorhour = "§5" + hours;
 			String worldtime = "";
 			if (seconds < 10)
 			worldtime = colorhour + ":0" + seconds;

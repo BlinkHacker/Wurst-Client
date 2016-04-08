@@ -62,6 +62,7 @@ public class CmdManager implements ChatOutputListener
 	public final LeaveCmd leaveCmd = new LeaveCmd();
 	public final MassMessageCmd massMessageCmd = new MassMessageCmd();
 	public final ModifyCmd modifyCmd = new ModifyCmd();
+	public final NameHistoryCmd nameHistoryCmd = new NameHistoryCmd();
 	public final NothingCmd nothingCmd = new NothingCmd();
 	public final NukerCmd nukerCmd = new NukerCmd();
 	public final PathCmd pathCmd = new PathCmd();
