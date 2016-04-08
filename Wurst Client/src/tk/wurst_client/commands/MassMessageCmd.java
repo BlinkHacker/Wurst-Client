@@ -25,26 +25,43 @@ import net.minecraft.util.StringUtils;
 	syntax = {"[<message>]"})
 public class MassMessageCmd extends Cmd implements UpdateListener
 {
-	private long speed = 1000;
+	private float speed = 1F;
 	private int i;
 	private ArrayList<String> players;
 	private Random random = new Random();
 	private String message;
+	private boolean toggled;
 	
 	@Override
 	public void execute(String[] args) throws Error
 	{
-		if(args.length == 1)
+		toggled = !toggled;
+		if(toggled)
 		{
-		i = 0;
-		message = args[0];
-		Iterator itr = mc.getNetHandler().getPlayerInfo().iterator();
-		players = new ArrayList<String>();
-		while(itr.hasNext())
-			players.add(StringUtils.stripControlCodes(((NetworkPlayerInfo)itr
+			if(args.length == 1)
+			{
+				i = 0;
+				message = args[0];
+				Iterator itr = mc.getNetHandler().getPlayerInfo().iterator();
+				players = new ArrayList<String>();
+				while(itr.hasNext())
+				players.add(StringUtils.stripControlCodes(((NetworkPlayerInfo)itr
 				.next()).getPlayerNameForReal()));
-		Collections.shuffle(players, random);
-		wurst.events.add(UpdateListener.class, this);
+				Collections.shuffle(players, random);
+				wurst.events.add(UpdateListener.class, this);
+			} else
+			{
+				syntaxError();
+				toggled = false;
+			}
+		} else
+		{
+			wurst.events.remove(UpdateListener.class, this);
+			if(message != null)
+			{
+				wurst.chat.message("Disabling MassMessage.");
+				message = null;
+			}
 		}
 	}
 
@@ -53,20 +70,20 @@ public class MassMessageCmd extends Cmd implements UpdateListener
 	{
 		if(message != null)
 		{
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run()
+			updateMS();
+		if(hasTimePassedS(speed))
+		{
+			String name = players.get(i);
+			if(!name.equals(mc.thePlayer.getName()))
+				mc.thePlayer.sendChatMessage("/msg " + name + " " + message);
+			updateLastMS();
+			i++;
+			if(i == players.size())
 			{
-				String name = players.get(i);
-				if(!name.equals(mc.thePlayer.getName()))
-					mc.thePlayer.sendChatMessage("/msg " + name + " " + message);
-				i++;
+				wurst.events.remove(UpdateListener.class, this);
+				wurst.chat.message("MassMessage finished.");
 			}
-			  
-			}, speed);
-		if(i == players.size())
-			wurst.events.remove(UpdateListener.class, this);
+		}
 		}
 	}
 	

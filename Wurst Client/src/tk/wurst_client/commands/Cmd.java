@@ -31,6 +31,8 @@ public abstract class Cmd implements NavigatorItem
 	
 	protected static final WurstClient wurst = WurstClient.INSTANCE;
 	protected static final Minecraft mc = Minecraft.getMinecraft();
+	private long currentMS = 0L;
+	protected long lastMS = -1L;
 	
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Info
@@ -232,6 +234,25 @@ public abstract class Cmd implements NavigatorItem
 	protected final void error(String message) throws Error
 	{
 		throw new Error(message);
+	}
+	public final void updateMS()
+	{
+		currentMS = System.currentTimeMillis();
+	}
+	
+	public final void updateLastMS()
+	{
+		lastMS = System.currentTimeMillis();
+	}
+	
+	public final boolean hasTimePassedM(long MS)
+	{
+		return currentMS >= lastMS + MS;
+	}
+	
+	public final boolean hasTimePassedS(float speed)
+	{
+		return currentMS >= lastMS + (long)(1000 / speed);
 	}
 	
 	public abstract void execute(String[] args) throws Cmd.Error;

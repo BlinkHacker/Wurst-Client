@@ -82,6 +82,7 @@ public class UIRenderer
 		glDisable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		RenderUtil.setColor(new Color(255, 255, 255, 128));
+		
 		// get version string
 		String version =
 			"v"
