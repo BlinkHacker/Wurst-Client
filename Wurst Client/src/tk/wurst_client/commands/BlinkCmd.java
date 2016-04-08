@@ -7,7 +7,9 @@
  */
 package tk.wurst_client.commands;
 
-@Cmd.Info(help = "Enables, disables or cancels Blink.",
+import tk.wurst_client.commands.Cmd.Info;
+
+@Info(help = "Enables, disables or cancels Blink.",
 	name = "blink",
 	syntax = {"[(on|off|cancel)]"})
 public class BlinkCmd extends Cmd

@@ -17,7 +17,8 @@ import tk.wurst_client.utils.MiscUtils;
 
 @Info(help = "Enchants items with everything, or removes enchantments.",
 	name = "enchant",
-	syntax = {"clear", "(hand|allitems) <enchantment_name|enchantment_id|all> <level>","(hand|allitems) all maxpossible"})
+	syntax = {"clear", "(hand|allitems) <enchantment_name|enchantment_id|all> <level>"
+		,"(hand|allitems) all maxpossible"})
 public class EnchantCmd extends Cmd
 {
 	@Override

@@ -8,9 +8,10 @@
 package tk.wurst_client.commands;
 
 import net.minecraft.block.Block;
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.utils.MiscUtils;
 
-@Cmd.Info(help = "Changes the settings of GhostHand or toggles it.",
+@Info(help = "Changes the settings of GhostHand or toggles it.",
 	name = "ghosthand",
 	syntax = {"id <block_id>", "name <block_name>"})
 public class GhostHandCmd extends Cmd

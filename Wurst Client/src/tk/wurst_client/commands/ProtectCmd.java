@@ -8,9 +8,10 @@
 package tk.wurst_client.commands;
 
 import net.minecraft.entity.EntityLivingBase;
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.utils.EntityUtils;
 
-@Cmd.Info(help = "Toggles Protect or makes it protect a specific entity.",
+@Info(help = "Toggles Protect or makes it protect a specific entity.",
 	name = "protect",
 	syntax = {"[<entity>]"})
 public class ProtectCmd extends Cmd

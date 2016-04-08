@@ -9,11 +9,12 @@ package tk.wurst_client.commands;
 
 import java.util.Iterator;
 
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.NavigatorSetting;
 
-@Cmd.Info(help = "Changes a checkbox setting of a feature. Allows you\n"
+@Info(help = "Changes a checkbox setting of a feature. Allows you\n"
 	+ "to toggle checkboxes through keybinds.",
 	name = "setcheckbox",
 	syntax = {"<feature> <checkbox_setting> (on|off|toggle)"})

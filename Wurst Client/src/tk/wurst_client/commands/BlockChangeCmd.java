@@ -7,9 +7,10 @@
  */
 package tk.wurst_client.commands;
 
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatOutputEvent;
 
-@Cmd.Info(help = "Removes all boxes from BlockChangeESP.",
+@Info(help = "Removes all boxes from BlockChangeESP.",
 	name = "blockchange",
 	syntax = {})
 public class BlockChangeCmd extends Cmd

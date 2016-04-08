@@ -13,11 +13,13 @@ import java.util.stream.Collectors;
 
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.network.play.server.S3APacketTabComplete;
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.events.ChatOutputEvent;
 import tk.wurst_client.events.PacketInputEvent;
 import tk.wurst_client.events.listeners.PacketInputListener;
 
-@Cmd.Info(help = "Allows you to get the plugins of the server.",
+@Info(help = "Allows you to get the plugins of the server.\n"
+	+ "Note: This will not find plugins that have no commands.",
 	name = "plugins",
 	syntax = {})
 public class PluginsCmd extends Cmd implements PacketInputListener
@@ -39,7 +41,7 @@ public class PluginsCmd extends Cmd implements PacketInputListener
 	public void onReceivedPacket(PacketInputEvent event)
 	{
 		if (event.getPacket() instanceof S3APacketTabComplete) {
-            S3APacketTabComplete packet = (S3APacketTabComplete) event.getPacket();
+            S3APacketTabComplete packet = (S3APacketTabComplete)event.getPacket();
             event.cancel();
             List<String> plugins = new ArrayList<>();
             for (String cmd : packet.func_149630_c()) {
