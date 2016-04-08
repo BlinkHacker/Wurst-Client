@@ -9,12 +9,13 @@ package tk.wurst_client.commands;
 
 import java.util.Iterator;
 
+import tk.wurst_client.commands.Cmd.Info;
 import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.navigator.settings.NavigatorSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 import tk.wurst_client.utils.MiscUtils;
 
-@Cmd.Info(help = "Changes a slider setting of a feature. Allows you to\n"
+@Info(help = "Changes a slider setting of a feature. Allows you to\n"
 	+ "move sliders through keybinds.",
 	name = "setslider",
 	syntax = {"<feature> <slider_setting> (<value>|more|less)"})
