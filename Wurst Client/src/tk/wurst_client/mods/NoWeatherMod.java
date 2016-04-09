@@ -11,14 +11,9 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
-	description = "Prevents rain and snow client-side. This will block PlayerFinder.",
+	description = "Prevents rain and snow client-side.",
 	name = "NoWeather")
 public class NoWeatherMod extends Mod
 {	
-	@Override
-	public void onEnable()
-	{
-		if(wurst.mods.playerFinderMod.isEnabled())
-			wurst.mods.playerFinderMod.setEnabled(false);
-	}
+
 }

@@ -41,8 +41,6 @@ public class PlayerFinderMod extends Mod implements PacketInputListener,
 	@Override
 	public void onEnable()
 	{
-		if(wurst.mods.noWeatherMod.isEnabled())
-			wurst.mods.noWeatherMod.setEnabled(false);
 		blockPos = null;
 		wurst.events.add(PacketInputListener.class, this);
 		wurst.events.add(RenderListener.class, this);

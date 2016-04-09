@@ -30,11 +30,8 @@ public class MoreInventoryMod extends Mod implements PacketOutputListener
 	@Override
 	public void onSentPacket(PacketOutputEvent event)
 	{
-		PacketOutputEvent receive = (PacketOutputEvent)event;
-		 if(receive.getPacket() instanceof C0DPacketCloseWindow) 
-		 {
+		 if(event.getPacket() instanceof C0DPacketCloseWindow) 
 			 event.cancel();
-		 }
 	}	
 	
 	@Override

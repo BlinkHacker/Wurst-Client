@@ -30,10 +30,9 @@ public class AntiRotationSetMod extends Mod implements PacketInputListener
 	@Override
 	public void onReceivedPacket(PacketInputEvent event)
 	{
-		         PacketInputEvent receive = (PacketInputEvent)event;
-	         if(receive.getPacket() instanceof S08PacketPlayerPosLook) 
+	         if(event.getPacket() instanceof S08PacketPlayerPosLook) 
 	         {
-	            S08PacketPlayerPosLook poslook = (S08PacketPlayerPosLook)receive.getPacket();
+	            S08PacketPlayerPosLook poslook = (S08PacketPlayerPosLook)event.getPacket();
 	            if(mc.thePlayer != null && mc.thePlayer.rotationYaw != -180.0F && mc.thePlayer.rotationPitch != 0.0F) 
 	            {
 	               poslook.field_148936_d = mc.thePlayer.rotationYaw;

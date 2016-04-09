@@ -57,9 +57,8 @@ public class BlockChangeEspMod extends Mod implements RenderListener, PacketInpu
 	public void onReceivedPacket(PacketInputEvent event)
 	{
 		updateMS();
-		PacketInputEvent receive = (PacketInputEvent)event;
-		    if(receive.getPacket() instanceof S23PacketBlockChange) {
-		       S23PacketBlockChange blockchange = (S23PacketBlockChange)receive.getPacket();
+		    if(event.getPacket() instanceof S23PacketBlockChange) {
+		       S23PacketBlockChange blockchange = (S23PacketBlockChange)event.getPacket();
 		       matchingBlocks.add(blockchange.func_179827_b());
 					if(matchingBlocks.size() >= maxblocks && notify)
 					{
