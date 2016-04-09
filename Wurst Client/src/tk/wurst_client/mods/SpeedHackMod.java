@@ -79,6 +79,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 					mc.thePlayer.motionZ / currentSpeed * maxSpeed;
 			}
 		}
+			break;
 		case 1:
 			 if(speedupstage == 1) {
                  mc.thePlayer.motionX *= 1.94D;
@@ -99,12 +100,14 @@ public class SpeedHackMod extends Mod implements UpdateListener
               } else
                  mc.timer.timerSpeed = 1.0F;
 			 speedupstage++;
+			 break;
 		case 2:
 			if(mc.thePlayer.onGround) {
 	            mc.thePlayer.motionY = 0.06499999761581421D;
 	            mc.thePlayer.motionX *= 1.5499999523162842D;
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
 	         }
+			break;
 		default:
 			return;
 		}
