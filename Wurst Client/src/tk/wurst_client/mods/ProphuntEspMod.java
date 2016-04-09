@@ -83,7 +83,7 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 								* (float)Math.PI * 1.0F) * 0.3F));
 				else
 					colorb = new Color(0, 0, 0, 0);
-				RenderUtils.genericBox(blocks, colorb);
+				RenderUtils.genericBox(blocks, colorb, new Color(0, 0, 0, 0.5F));
 		}
 	}
 	

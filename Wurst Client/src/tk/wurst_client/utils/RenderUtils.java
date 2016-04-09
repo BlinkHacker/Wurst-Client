@@ -345,7 +345,7 @@ public class RenderUtils
 		GL11.glDisable(GL_BLEND);
 	}
 	
-	public static void genericBox(BlockPos blockPos, Color color)
+	public static void genericBox(BlockPos blockPos, Color color, Color outline)
 	{
 		double x =
 			blockPos.getX()
@@ -364,7 +364,7 @@ public class RenderUtils
 		GL11.glDisable(GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		drawColorBox(new AxisAlignedBB(x, y, z, x + 1.0, y + 1.0, z + 1.0));
-		RenderUtil.setColor(color);
+		RenderUtil.setColor(outline);
 		RenderGlobal.drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z,
 			x + 1.0, y + 1.0, z + 1.0), -1);
 		GL11.glEnable(GL_TEXTURE_2D);
