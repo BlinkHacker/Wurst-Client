@@ -674,11 +674,11 @@ public class RenderUtils
 		double distX = posX - Minecraft.getMinecraft().thePlayer.posX;
 	  	double distY = posY - Minecraft.getMinecraft().thePlayer.posY;
 	  	double distZ = posZ - Minecraft.getMinecraft().thePlayer.posZ;
-	 	float ZX = (float)(Math.atan2(distZ, distX) * 180.0D / 3.141592653589793D) - 90.0F;
-	 	float Y = (float)-(Math.atan2(distY, dist) * 180.0D / 3.141592653589793D);
-	  	float yaw = Math.abs(MathHelper.wrapAngleTo180_float(ZX - Minecraft.getMinecraft().thePlayer.rotationYaw));
-	  	float pitch = Math.abs(MathHelper.wrapAngleTo180_float(Y - Minecraft.getMinecraft().thePlayer.rotationPitch));
-	  	float sqrt = (float)((75.0D - Math.sqrt(yaw * yaw + pitch * pitch)) / 50.0D);
+	 	float yaw = (float)(Math.atan2(distZ, distX) * 180.0D / Math.PI) - 90.0F;
+	 	float pitch = (float)-(Math.atan2(distY, dist) * 180.0D / Math.PI);
+	  	float wrapyaw = Math.abs(MathHelper.wrapAngleTo180_float(yaw - Minecraft.getMinecraft().thePlayer.rotationYaw));
+	  	float wrappitch = Math.abs(MathHelper.wrapAngleTo180_float(pitch - Minecraft.getMinecraft().thePlayer.rotationPitch));
+	  	float sqrt = (float)((75.0D - Math.sqrt(wrapyaw * wrapyaw + wrappitch * wrappitch)) / 50.0D);
 	  	if (sqrt > 1.0F)
 	    	sqrt = 1.0F;
 	      if (sqrt < 0.0F)

@@ -37,11 +37,11 @@ public class FakeHackersMod extends Mod implements UpdateListener
 	          double lookZ = mc.thePlayer.posZ - localEntityPlayer.posZ;
 	          double lookY = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (localEntityPlayer.posY + localEntityPlayer.getEyeHeight());
 	          double total = MathHelper.sqrt_double((lookX * lookX + lookZ * lookZ));
-	          float ZX = (float)(Math.atan2(lookZ, lookX) * 180.0D / 3.141592653589793D) - 90.0F;
-	          float Y = (float)-(Math.atan2(lookY, total) * 180.0D / 3.141592653589793D);
-	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(ZX - localEntityPlayer.rotationYawHead);
-	          localEntityPlayer.rotationYaw += MathHelper.wrapAngleTo180_float(ZX - localEntityPlayer.rotationYaw);
-	          localEntityPlayer.rotationPitch += MathHelper.wrapAngleTo180_float(Y - localEntityPlayer.rotationPitch);
+	          float yaw = (float)(Math.atan2(lookZ, lookX) * 180.0D / Math.PI) - 90.0F;
+	          float pitch = (float)-(Math.atan2(lookY, total) * 180.0D / Math.PI);
+	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(yaw - localEntityPlayer.rotationYawHead);
+	          localEntityPlayer.rotationYaw += MathHelper.wrapAngleTo180_float(yaw - localEntityPlayer.rotationYaw);
+	          localEntityPlayer.rotationPitch += MathHelper.wrapAngleTo180_float(pitch - localEntityPlayer.rotationPitch);
 	        }
 	      }
 	}

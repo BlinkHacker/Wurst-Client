@@ -14,9 +14,7 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MISC,
-	description = "Prevents items from dropping in crafting slots.\n"
-		+ "Note: You must click the items in the slots to make them\n"
-		+ "appear again after closing your inventory.",
+	description = "Prevents items from dropping in crafting slots.",
 	name = "MoreInventory")
 public class MoreInventoryMod extends Mod implements PacketOutputListener
 {
