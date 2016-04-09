@@ -1,5 +1,5 @@
 /*
- * Copyright ï¿½ 2014 - 2016 | Wurst-Imperium | All rights reserved.
+ * Copyright © 2014 - 2016 | Wurst-Imperium | All rights reserved.
  * 
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -45,13 +45,13 @@ public class MobHealthTagsMod extends Mod implements RenderListener
 				String healthtag = "";
 				float percenthealth = health * 100 / maxhealth;
 				if(percenthealth <= 25)
-					healthtag += "ï¿½4";
+					healthtag += "§4";
 				else if(percenthealth <= 50)
-					healthtag += "ï¿½6";
+					healthtag += "§6";
 				else if(percenthealth <= 75)
-					healthtag += "ï¿½e";
+					healthtag += "§e";
 				else if(percenthealth <= 100)
-					healthtag += "ï¿½a";
+					healthtag += "§a";
 				healthtag += health + "/" + maxhealth;
 				if(!en.hasCustomName())
 					RenderUtils.renderTag(healthtag, en, 1, 16777215, 0.5D, false);
