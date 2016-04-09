@@ -16,8 +16,7 @@ import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.EXPLOITS,
 	description = "Makes the players near 1 block of you glitch.\n"
-	    + "Causes rapid hunger loss in vanilla servers\n"
-	    + "to either you or the player near you.\n"
+		+ "You can cause high knockback if you punch them."
 	    + "Extermely buggy.",
 	name = "HungerGlitcher")
 public class HungerGlitcherMod extends Mod implements UpdateListener

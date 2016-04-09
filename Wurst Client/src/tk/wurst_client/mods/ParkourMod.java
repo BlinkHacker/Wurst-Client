@@ -13,12 +13,18 @@ import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MOVEMENT,
-	description = "Allows you to make the perfect jump for parkour",
+	description = "Allows you to make the perfect jump for parkour.",
 	name = "Parkour")
 public class ParkourMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting Boost = new CheckboxSetting(
 		"Jump Further (NCP Incompatible)", false);   
+	@Override
+	public void initSettings()
+	{
+		settings.add(Boost);
+	}
+	
 	@Override
 	public void onEnable()
 	{
