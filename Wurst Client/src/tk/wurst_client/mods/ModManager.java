@@ -108,7 +108,6 @@ public class ModManager
 	public final HomeMod homeMod = new HomeMod();
 	public final HorseJumpMod horseJumpMod = new HorseJumpMod();
 	public final HudMod hudMod = new HudMod();
-	public final HungerGlitcherMod hungerGlitcherMod = new HungerGlitcherMod();
 	public final InstantBunkerMod instantBunkerMod = new InstantBunkerMod();
 	public final InvisibilityMod invisibilityMod = new InvisibilityMod();
 	public final ItemEspMod itemEspMod = new ItemEspMod();
@@ -139,6 +138,7 @@ public class ModManager
 	public final NoFireworksMod noFireworksMod = new NoFireworksMod();
 	public final NoHurtcamMod noHurtcamMod = new NoHurtcamMod();
 	public final NoItemSlowdownMod noItemSlowdownMod = new NoItemSlowdownMod();
+	public final NoItemsMod noItemsMod = new NoItemsMod();
 	public final NoLightningMod noLightningMod = new NoLightningMod();
 	public final NoPumpkinMod noPumpkinMod = new NoPumpkinMod();
 	public final NoSwingMod noSwingMod = new NoSwingMod();
@@ -151,6 +151,7 @@ public class ModManager
 	public final OpSignMod opSignMod = new OpSignMod();
 	public final OverlayMod overlayMod = new OverlayMod();
 	public final PanicMod panicMod = new PanicMod();
+	public final ParalyzeMod paralyzeMod = new ParalyzeMod();
 	public final ParkourMod parkourMod = new ParkourMod();
 	public final PhaseMod phaseMod = new PhaseMod();
 	public final PingSpoofMod pingSpoofMod = new PingSpoofMod();

@@ -18,7 +18,6 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
-import tk.wurst_client.utils.BlockDataUtils;
 import tk.wurst_client.utils.BlockUtils;
 
 @Info(category = Category.BLOCKS,
@@ -104,5 +103,17 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	{
 		wurst.events.remove(UpdateListener.class, this);
 		wurst.events.remove(PostUpdateListener.class, this);
+	}
+	
+	public class BlockDataUtils
+	{
+	  public BlockPos position;
+	  public EnumFacing face;
+	  
+	  public BlockDataUtils(BlockPos position, EnumFacing face)
+	  {
+	    this.position = position;
+	    this.face = face;
+	  }
 	}
 }
