@@ -72,6 +72,7 @@ public class ModManager
 	public final ClickAimbotMod clickAimbotMod = new ClickAimbotMod();
 	public final ClickAuraMod clickAuraMod = new ClickAuraMod();
 	public final ClickGuiMod clickGuiMod = new ClickGuiMod();
+	public final ClickTeleportMod clickTeleportMod = new ClickTeleportMod();
 	public final CmdBlockMod cmdBlockMod = new CmdBlockMod();
 	public final CompassTracerMod compassTracerMod = new CompassTracerMod();
 	public final CrashChestMod crashChestMod = new CrashChestMod();

@@ -25,6 +25,8 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.minecraft.util.MathHelper;
 import tk.wurst_client.WurstClient;
 import tk.wurst_client.special.TargetSpf;
@@ -422,4 +424,102 @@ public class EntityUtils
 	    double[] arrayOfDouble = {entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * d, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * d, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * d };
 	    return arrayOfDouble;
 	}
+	
+	public static double[] teleportToPosition(double[] startPosition, double[] endPosition, double setOffset, double slack, boolean extendOffset, boolean onGround) {
+        boolean wasSneaking = false;
+
+        if (Minecraft.getMinecraft().thePlayer.isSneaking())
+            wasSneaking = true;
+
+        double startX = startPosition[0];
+        double startY = startPosition[1];
+        double startZ = startPosition[2];
+
+        double endX = endPosition[0];
+        double endY = endPosition[1];
+        double endZ = endPosition[2];
+
+        double distance = Math.abs(startX - startY) + Math.abs(startY - endY) + Math.abs(startZ - endZ);
+
+        int count = 0;
+        while (distance > slack) {
+            distance = Math.abs(startX - endX) + Math.abs(startY - endY) + Math.abs(startZ - endZ);
+
+            if (count > 120) {
+                break;
+            }
+
+            double offset = extendOffset && (count & 0x1) == 0 ? setOffset + 0.15D : setOffset;
+
+            double diffX = startX - endX;
+            double diffY = startY - endY;
+            double diffZ = startZ - endZ;
+
+            if (diffX < 0.0D) {
+                if (Math.abs(diffX) > offset) {
+                    startX += offset;
+                } else {
+                    startX += Math.abs(diffX);
+                }
+            }
+            if (diffX > 0.0D) {
+                if (Math.abs(diffX) > offset) {
+                    startX -= offset;
+                } else {
+                    startX -= Math.abs(diffX);
+                }
+            }
+            if (diffY < 0.0D) {
+                if (Math.abs(diffY) > offset) {
+                    startY += offset;
+                } else {
+                    startY += Math.abs(diffY);
+                }
+            }
+            if (diffY > 0.0D) {
+                if (Math.abs(diffY) > offset) {
+                    startY -= offset;
+                } else {
+                    startY -= Math.abs(diffY);
+                }
+            }
+            if (diffZ < 0.0D) {
+                if (Math.abs(diffZ) > offset) {
+                    startZ += offset;
+                } else {
+                    startZ += Math.abs(diffZ);
+                }
+            }
+            if (diffZ > 0.0D) {
+                if (Math.abs(diffZ) > offset) {
+                    startZ -= offset;
+                } else {
+                    startZ -= Math.abs(diffZ);
+                }
+            }
+
+            if (wasSneaking) {
+                Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C0BPacketEntityAction
+                	(Minecraft.getMinecraft().thePlayer, C0BPacketEntityAction.Action.STOP_SNEAKING));
+            }
+
+            Minecraft.getMinecraft().getNetHandler().getNetworkManager().sendPacket(
+            	new C03PacketPlayer.C04PacketPlayerPosition(startX, startY, startZ, onGround));
+            count++;
+        }
+
+        if (wasSneaking) {
+            Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C0BPacketEntityAction
+            	(Minecraft.getMinecraft().thePlayer, C0BPacketEntityAction.Action.START_SNEAKING));
+        }
+
+        return new double[]{startX, startY, startZ};
+    }
+	
+    private static EntityPlayer reference;
+
+    public static EntityPlayer getReference() 
+    {
+        return reference == null ? reference = Minecraft.getMinecraft().thePlayer : reference;
+    }
 }

@@ -179,7 +179,7 @@ public class HudMod extends Mod implements GUIRenderListener
 	        else
 	        	facingdir = "Null";
 	        long time = (mc.theWorld.getWorldTime()) % 24000;
-			long hours = (time + 6000) / 1000;
+			long hours = ((time + 6000) / 1000) % 24;
 			long seconds = (long)(((time + 6000) % 1000) * (60.0/1000.0));
 			String colorhour = "";
 			if (time >= 0 && time < 12000)

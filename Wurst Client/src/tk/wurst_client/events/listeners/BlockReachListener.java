@@ -7,9 +7,9 @@
  */
 package tk.wurst_client.events.listeners;
 
-import tk.wurst_client.events.AttackEntityEvent;
+import tk.wurst_client.events.BlockReachEvent;
 
-public interface AttackEntityListener extends Listener
+public interface BlockReachListener extends Listener
 {
-	public void onEntityAttacked(AttackEntityEvent event);
+	public void onBlockReach(BlockReachEvent event);
 }

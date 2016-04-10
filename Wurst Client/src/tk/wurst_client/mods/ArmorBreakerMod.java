@@ -16,8 +16,7 @@ import tk.wurst_client.mods.Mod.Info;
 @Info(category = Category.COMBAT,
 	description = "Breaks your enemies armor faster in PVP.\n"
 		+ "Note: you must have a second weapon available in your hotbar.\n"
-		+ "Note 2: This will make you use a weak weapon if you\n"
-		+ "have one in your hotbar.", 
+		+ "This might also break your tool faster.", 
 	name = "ArmorBreaker")
 public class ArmorBreakerMod extends Mod implements AttackEntityListener
 {

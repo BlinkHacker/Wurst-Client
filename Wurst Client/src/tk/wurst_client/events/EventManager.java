@@ -29,6 +29,8 @@ public final class EventManager
 				fireAttackEntity((AttackEntityEvent)event);
 			else if(type == BlockBreakingEvent.class)
 				fireBlockBreaking((BlockBreakingEvent)event);
+			else if(type == BlockReachEvent.class)
+				fireBlockReach((BlockReachEvent)event);
 			else if(type == GUIRenderEvent.class)
 				fireGuiRender();
 			else if(type == RenderEvent.class)
@@ -80,6 +82,17 @@ public final class EventManager
 				((BlockBreakingListener)listeners[i + 1]).onBlockBreaking(event);
 		}
 	}
+	
+	private void fireBlockReach(BlockReachEvent event)
+	{
+		Object[] listeners = listenerList.getListenerList();
+		for(int i = listeners.length - 2; i >= 0; i -= 2)
+		{
+			if(listeners[i] == BlockReachListener.class)
+				((BlockReachListener)listeners[i + 1]).onBlockReach(event);
+		}
+	}
+	
 	private void fireChatInput(ChatInputEvent event)
 	{
 		Object[] listeners = listenerList.getListenerList();
