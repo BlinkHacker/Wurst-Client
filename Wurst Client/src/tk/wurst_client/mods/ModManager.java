@@ -144,6 +144,7 @@ public class ModManager
 	public final NoSwingMod noSwingMod = new NoSwingMod();
 	public final NoWeatherMod noWeatherMod = new NoWeatherMod();
 	public final NoWebMod noWebMod = new NoWebMod();
+	public final NoWitherMod noWitherMod = new NoWitherMod();
 	public final NoWorldMod noWorldMod = new NoWorldMod();
 	public final NukerLegitMod nukerLegitMod = new NukerLegitMod();
 	public final NukerMod nukerMod = new NukerMod();
