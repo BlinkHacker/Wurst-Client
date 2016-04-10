@@ -57,10 +57,7 @@ public class FastBowMod extends Mod implements UpdateListener
 			for(int i = 0; i < 20; i++)
 				mc.thePlayer.sendQueue
 					.addToSendQueue(new C03PacketPlayer(false));
-			Minecraft
-				.getMinecraft()
-				.getNetHandler()
-				.addToSendQueue(
+			mc.getNetHandler().addToSendQueue(
 					new C07PacketPlayerDigging(Action.RELEASE_USE_ITEM,
 						new BlockPos(0, 0, 0), EnumFacing.DOWN));
 			mc.thePlayer.inventory

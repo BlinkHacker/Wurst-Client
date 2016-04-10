@@ -137,7 +137,7 @@ public class HudMod extends Mod implements GUIRenderListener
 		    if (elements.size() > 0)
 		    {
 		      int yOffset = 18;
-		        yBase = getYA(elements.size(), yOffset, scaledRes);
+		        yBase = 3;
 		        for (HUDElementUtils e : elements)
 		        {
 		          e.renderToHud(getXA(0, scaledRes), yBase);
@@ -196,8 +196,10 @@ public class HudMod extends Mod implements GUIRenderListener
 			else 
 			worldtime = colorhour + ":" + seconds;
 	        String coorddirtime = "§lCoords:§r "+ posX + ", " + posY + ", " + posZ + " " + "[" + facingdir + "]";
-	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, 115F, scaledRes.getScaledHeight() - 365, 16777215);
-	        mc.fontRendererObj.drawStringWithShadow(worldtime, 264F, scaledRes.getScaledHeight() - 365, 16777215);
+	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, mc.fontRendererObj.getStringWidth("12:34") * 5
+	        	-15, 3, 16777215);
+	        mc.fontRendererObj.drawStringWithShadow(worldtime, mc.fontRendererObj.getStringWidth("12:34") * 7 + 
+	        	78, 3, 16777215);
 		}
 	}
 	
@@ -214,11 +216,6 @@ public class HudMod extends Mod implements GUIRenderListener
 	private int getXA(int width, ScaledResolution scaledres)
 	{
 		return scaledres.getScaledWidth() - width - 2;
-	}
-	
-	private int getYA(int rowCount, int height, ScaledResolution scaledres)
-	{
-		return scaledres.getScaledHeight() - rowCount * height - 270;
 	}
 	
 	private boolean shouldRender(PotionEffect pe, int ticksLeft, int thresholdSeconds)

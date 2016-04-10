@@ -124,10 +124,10 @@ public class BlockUtils
 	    
 	    double yDiff = y - (Minecraft.getMinecraft().thePlayer.posY + Minecraft.getMinecraft().
 	    	thePlayer.getEyeHeight() - 1.0D);
-	    double total = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
+	    double dist = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
 	    float yaw = (float)(Math.atan2(zDiff, xDiff) * 180.0D / Math.PI) - 90.0F;
 	    
-	    return new float[] {yaw, (float)-(Math.atan2(yDiff, total) * 180.0D / Math.PI)};
+	    return new float[] {yaw, (float)-(Math.atan2(yDiff, dist) * 180.0D / Math.PI)};
 	  }
 	
 	public static boolean isInsideBlock(Entity entity) 

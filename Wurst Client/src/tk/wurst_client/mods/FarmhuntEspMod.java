@@ -22,7 +22,7 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
 	description = "Allows you to see fake mobs in FarmHunt.",
-	name = "FarmhuntESP")
+	name = "FarmHuntESP")
 public class FarmhuntEspMod extends Mod implements RenderListener
 {
 	@Override

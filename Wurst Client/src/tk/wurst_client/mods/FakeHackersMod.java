@@ -30,18 +30,18 @@ public class FakeHackersMod extends Mod implements UpdateListener
 		for(Object entity : mc.theWorld.loadedEntityList)
 		 if(entity instanceof EntityPlayer)
 		 {
-	        EntityPlayer localEntityPlayer = (EntityPlayer)entity;
-	        if (localEntityPlayer != mc.thePlayer && mc.thePlayer.getDistanceToEntity(localEntityPlayer) <= 3.8D)
+	        EntityPlayer otherplayer = (EntityPlayer)entity;
+	        if (otherplayer != mc.thePlayer && mc.thePlayer.getDistanceToEntity(otherplayer) <= 3.8D)
 	        {
-	          double lookX = mc.thePlayer.posX - localEntityPlayer.posX;
-	          double lookZ = mc.thePlayer.posZ - localEntityPlayer.posZ;
-	          double lookY = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (localEntityPlayer.posY + localEntityPlayer.getEyeHeight());
-	          double total = MathHelper.sqrt_double((lookX * lookX + lookZ * lookZ));
+	          double lookX = mc.thePlayer.posX - otherplayer.posX;
+	          double lookZ = mc.thePlayer.posZ - otherplayer.posZ;
+	          double lookY = mc.thePlayer.posY + mc.thePlayer.getEyeHeight() - (otherplayer.posY + otherplayer.getEyeHeight());
+	          double dist = MathHelper.sqrt_double((lookX * lookX + lookZ * lookZ));
 	          float yaw = (float)(Math.atan2(lookZ, lookX) * 180.0D / Math.PI) - 90.0F;
-	          float pitch = (float)-(Math.atan2(lookY, total) * 180.0D / Math.PI);
-	          localEntityPlayer.rotationYawHead += MathHelper.wrapAngleTo180_float(yaw - localEntityPlayer.rotationYawHead);
-	          localEntityPlayer.rotationYaw += MathHelper.wrapAngleTo180_float(yaw - localEntityPlayer.rotationYaw);
-	          localEntityPlayer.rotationPitch += MathHelper.wrapAngleTo180_float(pitch - localEntityPlayer.rotationPitch);
+	          float pitch = (float)-(Math.atan2(lookY, dist) * 180.0D / Math.PI);
+	          otherplayer.rotationYawHead += MathHelper.wrapAngleTo180_float(yaw - otherplayer.rotationYawHead);
+	          otherplayer.rotationYaw += MathHelper.wrapAngleTo180_float(yaw - otherplayer.rotationYaw);
+	          otherplayer.rotationPitch += MathHelper.wrapAngleTo180_float(pitch - otherplayer.rotationPitch);
 	        }
 	      }
 	}
