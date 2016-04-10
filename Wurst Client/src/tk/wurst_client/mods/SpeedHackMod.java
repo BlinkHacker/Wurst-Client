@@ -11,6 +11,7 @@ import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.ModeSetting;
+import tk.wurst_client.utils.BlockUtils;
 
 @Info(category = Category.MOVEMENT,
 	description = "Gotta go fast!\n"
@@ -20,8 +21,9 @@ import tk.wurst_client.navigator.settings.ModeSetting;
 public class SpeedHackMod extends Mod implements UpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Wurst", "Old", "New"};
+	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Gomme"};
 	private int speedupstage = 0;
+	private int gommestage = 0;
 	
 	@Override
 	public void initSettings()
@@ -45,6 +47,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		if(canSpeed())
 		switch(mode)
 		{
 		case 0:
@@ -108,11 +111,32 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
 	         }
 			break;
+		case 3:
+			if(gommestage == 1) {
+				mc.thePlayer.motionY = 0.07999999821186066D;
+	            mc.thePlayer.motionX *= 2.299999952316284D;
+	            mc.thePlayer.motionZ *= 2.299999952316284D;
+			} else if(gommestage >= 2) {
+	            mc.thePlayer.motionX /= 1.4500000476837158D;
+	            mc.thePlayer.motionZ /= 1.4500000476837158D;
+	            gommestage = 0;
+	        }
+
+	            gommestage++;
+			break;
 		default:
 			return;
 		}
 	}
 	
+	public boolean canSpeed()
+	{
+	      boolean moving = mc.thePlayer.movementInput.moveForward != 0.0F || mc.thePlayer.movementInput.moveStrafe != 0.0F;
+	      return !mc.thePlayer.isInWater() && !BlockUtils.isInLiquid(mc.thePlayer) &&
+	    	  !BlockUtils.isOnLiquid(mc.thePlayer) && !mc.thePlayer.isCollidedHorizontally && 
+	    	  !BlockUtils.isOnLadder(mc.thePlayer) && 
+	    	  !mc.thePlayer.isSneaking() && mc.thePlayer.onGround && moving;
+	}
 	@Override
 	public void onDisable()
 	{
