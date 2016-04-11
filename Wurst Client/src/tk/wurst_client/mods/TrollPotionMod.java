@@ -21,15 +21,11 @@ import tk.wurst_client.mods.Mod.Info;
 	name = "TrollPotion")
 public class TrollPotionMod extends Mod
 {
+	private boolean hotbarclear = false;
 	@Override
 	public void onEnable()
 	{
-		if(mc.thePlayer.inventory.getStackInSlot(0) != null)
-		{
-			wurst.chat.error("Please clear the first slot in your hotbar.");
-			setEnabled(false);
-			return;
-		}else if(!mc.thePlayer.capabilities.isCreativeMode)
+		if(!mc.thePlayer.capabilities.isCreativeMode)
 		{
 			wurst.chat.error("Creative mode only.");
 			setEnabled(false);
@@ -48,9 +44,19 @@ public class TrollPotionMod extends Mod
 		}
 		stack.setTagInfo("CustomPotionEffects", effects);
 		stack.setStackDisplayName("§c§lTroll§6§lPotion");
-		mc.thePlayer.sendQueue
-			.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
-		wurst.chat.message("Potion created. Trololo!");
+		for(int i = 0; i < 9; i++)
+			if(mc.thePlayer.inventory.getStackInSlot(i) == null && !hotbarclear)
+			{
+				mc.thePlayer.sendQueue
+					.addToSendQueue(new C10PacketCreativeInventoryAction(
+						36 + i, stack));
+				hotbarclear = true;
+			}
+		if(hotbarclear)
+			wurst.chat.message("Potion created. Trololo!");
+		else
+			wurst.chat.error("Please clear a slot in your hotbar.");
+		hotbarclear = false;
 		setEnabled(false);
 	}
 }
