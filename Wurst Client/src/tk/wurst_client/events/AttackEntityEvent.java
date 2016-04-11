@@ -13,8 +13,8 @@ public class AttackEntityEvent extends CancellableEvent
 {
     private final Entity entity;
 
-    public AttackEntityEvent(final Entity entity) {
-    	
+    public AttackEntityEvent(final Entity entity) 
+    {
         this.entity = entity;
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemEgg;
 import net.minecraft.item.ItemEnderPearl;
+import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemSnowball;
 import net.minecraft.item.ItemStack;
@@ -62,7 +63,7 @@ public class TrajectoriesMod extends Mod implements RenderListener
 		Item item = stack.getItem();
 		if(!(item instanceof ItemBow || item instanceof ItemSnowball
 			|| item instanceof ItemEgg || item instanceof ItemEnderPearl || (item instanceof ItemPotion && ItemPotion
-			.isSplash(stack.getItemDamage()))))
+			.isSplash(stack.getItemDamage()) || item instanceof ItemFishingRod)))
 			return;
 		
 		boolean usingBow =
@@ -136,7 +137,7 @@ public class TrajectoriesMod extends Mod implements RenderListener
 		
 		// draw trajectory line
 		double gravity =
-			usingBow ? 0.05D : item instanceof ItemPotion ? 0.4D : 0.03D;
+			usingBow ? 0.05D : item instanceof ItemPotion ? 0.4D : item instanceof ItemFishingRod ? 0.15D : 0.03D;
 		Vec3 playerVector =
 			new Vec3(player.posX, player.posY + player.getEyeHeight(),
 				player.posZ);
@@ -148,13 +149,13 @@ public class TrajectoriesMod extends Mod implements RenderListener
 				- renderManager.renderPosY, arrowPosZ
 				- renderManager.renderPosZ);
 			
-			arrowPosX += arrowMotionX;
-			arrowPosY += arrowMotionY;
-			arrowPosZ += arrowMotionZ;
-			arrowMotionX *= 0.99D;
-			arrowMotionY *= 0.99D;
-			arrowMotionZ *= 0.99D;
-			arrowMotionY -= gravity;
+			arrowPosX += arrowMotionX * 0.1;
+			arrowPosY += arrowMotionY * 0.1;
+			arrowPosZ += arrowMotionZ * 0.1;
+			arrowMotionX *= 0.999D;
+			arrowMotionY *= 0.999D;
+			arrowMotionZ *= 0.999D;
+			arrowMotionY -= gravity * 0.1;
 			
 			if(mc.theWorld.rayTraceBlocks(playerVector, new Vec3(arrowPosX,
 				arrowPosY, arrowPosZ)) != null)
