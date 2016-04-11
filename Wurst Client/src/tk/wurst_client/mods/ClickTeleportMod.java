@@ -35,8 +35,9 @@ import tk.wurst_client.utils.EntityUtils;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.MOVEMENT,
-	description = "Teleports you every time you click a block.\n"
-		+ "Teleporting too far will get you held back in NoCheat+ servers.",
+	description = "Teleports you every time you right click a block.\n"
+		+ "Teleporting too far will get you held back in NoCheat+ servers\n"
+		+ "Note: There must be no blocks in the way, or you get held back.",
 	name = "ClickTeleport")
 public class ClickTeleportMod extends Mod implements BlockReachListener, PacketOutputListener, RenderListener,
 UpdateListener
@@ -65,6 +66,7 @@ UpdateListener
 		wurst.events.add(BlockReachListener.class, this);
 		wurst.events.add(PacketOutputListener.class, this);
 		wurst.events.add(RenderListener.class, this);
+		wurst.events.add(UpdateListener.class, this);
 	}
 
 	@Override
@@ -107,10 +109,8 @@ UpdateListener
                      GlStateManager.popMatrix();
 
                      if (mc.inGameHasFocus) 
-                     {
                          teleportPosition = blockBelowPos;
-                         break;
-                     } else
+                     else
                          teleportPosition = null;
                  }
              }
@@ -149,10 +149,9 @@ UpdateListener
                      RenderHelper.disableStandardItemLighting();
                      GlStateManager.popMatrix();
 
-                     if (mc.inGameHasFocus) {
+                     if (mc.inGameHasFocus)
                          teleportPosition = blockBelowPos;
-                         break;
-                     } else
+                     else
                          teleportPosition = null;
                  }
              }
@@ -190,7 +189,6 @@ UpdateListener
             double[] blockPosition = new double[]{teleportPosition.getX() + 0.5F, teleportPosition.getY() 
             	+ getOffset(mc.theWorld.getBlockState(teleportPosition).getBlock(), 
             		teleportPosition) + 1.0F, teleportPosition.getZ() + 0.5F};
-            wurst.chat.message("Teleporting!");
 
             if (wurst.mods.freecamMod.isActive())
                 wurst.mods.freecamMod.setEnabled(false);
@@ -363,5 +361,6 @@ UpdateListener
 		wurst.events.remove(BlockReachListener.class, this);
 		wurst.events.remove(PacketOutputListener.class, this);
 		wurst.events.remove(RenderListener.class, this);
+		wurst.events.remove(UpdateListener.class, this);
 	}
 }

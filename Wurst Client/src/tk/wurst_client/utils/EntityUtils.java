@@ -442,12 +442,12 @@ public class EntityUtils
         double distance = Math.abs(startX - startY) + Math.abs(startY - endY) + Math.abs(startZ - endZ);
 
         int count = 0;
-        while (distance > slack) {
+        while (distance > slack) 
+        {
             distance = Math.abs(startX - endX) + Math.abs(startY - endY) + Math.abs(startZ - endZ);
 
-            if (count > 120) {
+            if (count > 120)
                 break;
-            }
 
             double offset = extendOffset && (count & 0x1) == 0 ? setOffset + 0.15D : setOffset;
 
@@ -455,63 +455,49 @@ public class EntityUtils
             double diffY = startY - endY;
             double diffZ = startZ - endZ;
 
-            if (diffX < 0.0D) {
-                if (Math.abs(diffX) > offset) {
+            if (diffX < 0.0D) 
+                if (Math.abs(diffX) > offset)
                     startX += offset;
-                } else {
+                else
                     startX += Math.abs(diffX);
-                }
-            }
-            if (diffX > 0.0D) {
-                if (Math.abs(diffX) > offset) {
+            if (diffX > 0.0D)
+                if (Math.abs(diffX) > offset)
                     startX -= offset;
-                } else {
+                else
                     startX -= Math.abs(diffX);
-                }
-            }
-            if (diffY < 0.0D) {
-                if (Math.abs(diffY) > offset) {
+            if (diffY < 0.0D)
+                if (Math.abs(diffY) > offset)
                     startY += offset;
-                } else {
+                else
                     startY += Math.abs(diffY);
-                }
-            }
-            if (diffY > 0.0D) {
-                if (Math.abs(diffY) > offset) {
+            if (diffY > 0.0D)
+                if (Math.abs(diffY) > offset)
                     startY -= offset;
-                } else {
+                else
                     startY -= Math.abs(diffY);
-                }
-            }
-            if (diffZ < 0.0D) {
-                if (Math.abs(diffZ) > offset) {
+            if (diffZ < 0.0D)
+                if (Math.abs(diffZ) > offset)
                     startZ += offset;
-                } else {
+                else
                     startZ += Math.abs(diffZ);
-                }
-            }
-            if (diffZ > 0.0D) {
-                if (Math.abs(diffZ) > offset) {
+            if (diffZ > 0.0D)
+                if (Math.abs(diffZ) > offset)
                     startZ -= offset;
-                } else {
+                else
                     startZ -= Math.abs(diffZ);
-                }
-            }
 
-            if (wasSneaking) {
+            if (wasSneaking)
                 Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C0BPacketEntityAction
                 	(Minecraft.getMinecraft().thePlayer, C0BPacketEntityAction.Action.STOP_SNEAKING));
-            }
 
             Minecraft.getMinecraft().getNetHandler().getNetworkManager().sendPacket(
             	new C03PacketPlayer.C04PacketPlayerPosition(startX, startY, startZ, onGround));
             count++;
         }
 
-        if (wasSneaking) {
+        if (wasSneaking)
             Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C0BPacketEntityAction
             	(Minecraft.getMinecraft().thePlayer, C0BPacketEntityAction.Action.START_SNEAKING));
-        }
 
         return new double[]{startX, startY, startZ};
     }
