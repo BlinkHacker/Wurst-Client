@@ -67,6 +67,7 @@ public class GhostMod extends Mod implements UpdateListener, PacketOutputListene
 	@Override
 	public void onDisable()
 	{
+		if(isdead)
 		mc.thePlayer.respawnPlayer();
 		isdead = false;
 		wurst.events.remove(UpdateListener.class, this);
