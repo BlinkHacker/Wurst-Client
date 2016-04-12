@@ -39,10 +39,9 @@ public class VPhaseMod extends Mod implements PostUpdateListener, PacketInputLis
 	@Override
 	public void onPostUpdate()
 	{
+		if(!isInsideBlock())
 		mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-			mc.thePlayer.posX, mc.thePlayer.posY - 0.05D, mc.thePlayer.posZ, true));
-        if(!mc.thePlayer.isCollidedVertically && isInsideBlock())
-           setEnabled(false);
+			mc.thePlayer.posX, mc.thePlayer.posY - 0.02D, mc.thePlayer.posZ, true));
 	}
 	
 	@Override
@@ -60,6 +59,7 @@ public class VPhaseMod extends Mod implements PostUpdateListener, PacketInputLis
 		if((double)event.getY() > mc.thePlayer.boundingBox.minY - 0.3D && (double)event.getY() 
 			< mc.thePlayer.boundingBox.maxY && !isInsideBlock() && mc.thePlayer.isCollidedHorizontally)
             event.setBoundingBox((AxisAlignedBB)null);
+            
 	}
 	
 	private boolean isInsideBlock() 

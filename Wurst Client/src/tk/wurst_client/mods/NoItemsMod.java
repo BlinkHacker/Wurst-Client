@@ -7,35 +7,14 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.entity.item.EntityItem;
-import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.RENDER,
 	description = "Prevents rendering of items. Good if there are\n"
-		+ "too much items on the ground. You will have to relog\n"
-		+ "to see the items again.",
+		+ "too much items on the ground.",
 	name = "NoItems")
-public class NoItemsMod extends Mod implements UpdateListener
+public class NoItemsMod extends Mod
 {
-	@Override
-	public void onEnable()
-	{
-		wurst.events.add(UpdateListener.class, this);
-	}
 	
-	@Override
-	public void onUpdate()
-	{
-		for (Object entity: mc.theWorld.loadedEntityList)
-			if(entity instanceof EntityItem)
-				mc.theWorld.removeEntity((EntityItem)entity);
-	}
-	
-	@Override
-	public void onDisable()
-	{
-		wurst.events.remove(UpdateListener.class, this);
-	}
 }
