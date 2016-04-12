@@ -185,6 +185,7 @@ public class ModManager
 	public final TrollPotionMod trollPotionMod = new TrollPotionMod();
 	public final TrueSightMod trueSightMod = new TrueSightMod();
 	public final TunnellerMod tunnellerMod = new TunnellerMod();
+	public final VPhaseMod vPhaseMod = new VPhaseMod();
 	public final XRayMod xRayMod = new XRayMod();
 	public final YesCheatMod yesCheatMod = new YesCheatMod();
 	
