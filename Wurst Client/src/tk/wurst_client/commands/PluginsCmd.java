@@ -40,7 +40,8 @@ public class PluginsCmd extends Cmd implements PacketInputListener
 	@Override
 	public void onReceivedPacket(PacketInputEvent event)
 	{
-		if (event.getPacket() instanceof S3APacketTabComplete) {
+		if (event.getPacket() instanceof S3APacketTabComplete) 
+		{
             S3APacketTabComplete packet = (S3APacketTabComplete)event.getPacket();
             event.cancel();
             List<String> plugins = new ArrayList<>();
@@ -60,6 +61,12 @@ public class PluginsCmd extends Cmd implements PacketInputListener
             else
                 wurst.chat.message("Cannot find any plugins!");
             wurst.events.remove(PacketInputListener.class, this);
+		}
+		if(hasTimePassedM(20000))
+		{
+			wurst.chat.message("Server did not respond to TabComplete request.");
+			wurst.events.remove(PacketInputListener.class, this);
+			
 		}
 	}
 	
