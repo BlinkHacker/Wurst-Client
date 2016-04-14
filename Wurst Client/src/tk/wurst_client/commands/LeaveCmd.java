@@ -17,7 +17,7 @@ import tk.wurst_client.mods.AutoLeaveMod;
 
 @Info(help = "Leaves the current server or changes the mode of AutoLeave.",
 	name = "leave",
-	syntax = {"[chars|tp|selfhurt|quit]", "mode chars|tp|selfhurt|quit|taco"})
+	syntax = {"[chars|tp|selfhurt|quit|taco]", "mode chars|tp|selfhurt|quit"})
 public class LeaveCmd extends Cmd
 {
 	@Override
@@ -27,7 +27,7 @@ public class LeaveCmd extends Cmd
 		if(args.length > 2)
 			syntaxError();
 		if(mc.isIntegratedServerRunning()
-			&& mc.thePlayer.sendQueue.getPlayerInfo().size() == 1)
+			&& mc.thePlayer.sendQueue.getPlayerInfo().size() == 1 && args.length != 2)
 			error("Cannot leave server when in singleplayer.");
 		switch(args.length)
 		{
