@@ -186,7 +186,7 @@ public class NukerMod extends Mod implements LeftClickListener, RenderListener,
 			currentBlock.getPlayerRelativeBlockHardness(mc.thePlayer,
 				mc.theWorld, pos)
 				* (wurst.mods.fastBreakMod.isActive()
-					&& wurst.options.fastbreakMode == 0
+					&& wurst.mods.fastBreakMod.getMode() == 0
 					? wurst.mods.fastBreakMod.speed : 1);
 		mc.theWorld.sendBlockBreakProgress(mc.thePlayer.getEntityId(), pos,
 			(int)(currentDamage * 10.0F) - 1);
@@ -198,7 +198,7 @@ public class NukerMod extends Mod implements LeftClickListener, RenderListener,
 			blockHitDelay = (byte)4;
 			currentDamage = 0;
 		}else if(wurst.mods.fastBreakMod.isActive()
-			&& wurst.options.fastbreakMode == 1)
+			&& wurst.mods.fastBreakMod.getMode() == 1)
 			mc.thePlayer.sendQueue.addToSendQueue(new C07PacketPlayerDigging(
 				Action.STOP_DESTROY_BLOCK, pos, side));
 	}

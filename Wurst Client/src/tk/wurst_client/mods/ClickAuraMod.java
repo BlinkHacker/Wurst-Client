@@ -47,6 +47,8 @@ public class ClickAuraMod extends Mod implements UpdateListener
 			wurst.mods.multiAuraMod.setEnabled(false);
 		if(wurst.mods.triggerBotMod.isEnabled())
 			wurst.mods.triggerBotMod.setEnabled(false);
+		if(wurst.mods.tpAuraMod.isEnabled())
+			wurst.mods.tpAuraMod.setEnabled(false);
 		if(wurst.mods.aimbotMod.isEnabled())
 			wurst.mods.aimbotMod.setEnabled(false);
 		if(wurst.mods.clickAimbotMod.isEnabled())
