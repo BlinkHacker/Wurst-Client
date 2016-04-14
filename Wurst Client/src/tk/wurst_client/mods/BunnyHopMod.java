@@ -7,7 +7,6 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.client.Minecraft;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -28,7 +27,7 @@ public class BunnyHopMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		if((mc.thePlayer.moveForward != 0 || Minecraft.getMinecraft().thePlayer.moveStrafing != 0)
+		if((mc.thePlayer.moveForward != 0 || mc.thePlayer.moveStrafing != 0)
 			&& !mc.thePlayer.isSneaking() && mc.thePlayer.onGround)
 			mc.thePlayer.jump();
 	}

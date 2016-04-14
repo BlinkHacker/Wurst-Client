@@ -54,15 +54,14 @@ public class SneakMod extends Mod implements UpdateListener
 			sendQueue.addToSendQueue(new C0BPacketEntityAction(Minecraft
 				.getMinecraft().thePlayer, Action.STOP_SNEAKING));
 		}else 
-			if(hassneaked == false) {
+			if(hassneaked == false) 
+			{
 			mc.thePlayer.sendQueue.addToSendQueue(new C0BPacketEntityAction(
-				Minecraft.getMinecraft().thePlayer, Action.START_SNEAKING));
+				mc.thePlayer, Action.START_SNEAKING));
 			hassneaked=true;
 			}
 		} else if (mode == 1) 
-		{
 			mc.gameSettings.keyBindSneak.pressed = true;
-		}
 	}
 	
 	@Override
@@ -81,7 +80,7 @@ public class SneakMod extends Mod implements UpdateListener
 	
 	public void setMode(int mode)
 	{
-		((ModeSetting)settings.get(1)).setSelected(mode);
+		((ModeSetting)settings.get(0)).setSelected(mode);
 	}
 	
 	public String[] getModes()

@@ -9,7 +9,6 @@ package tk.wurst_client.mods;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.network.Packet;
 import tk.wurst_client.events.listeners.RenderListener;
@@ -75,8 +74,8 @@ public class BlinkMod extends Mod implements RenderListener
 	public static void addToBlinkQueue(Packet packet)
 	{
 		if(mc.thePlayer.posX != mc.thePlayer.prevPosX
-			|| mc.thePlayer.posZ != Minecraft.getMinecraft().thePlayer.prevPosZ
-			|| mc.thePlayer.posY != Minecraft.getMinecraft().thePlayer.prevPosY)
+			|| mc.thePlayer.posZ != mc.thePlayer.prevPosZ
+			|| mc.thePlayer.posY != mc.thePlayer.prevPosY)
 		{
 			blinkTime += System.currentTimeMillis() - lastTime;
 			packets.add(packet);

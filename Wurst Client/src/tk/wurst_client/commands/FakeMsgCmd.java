@@ -7,7 +7,6 @@
  */
 package tk.wurst_client.commands;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import tk.wurst_client.commands.Cmd.Info;
 
@@ -25,7 +24,7 @@ public class FakeMsgCmd extends Cmd
 		for(int i = 1; i < args.length; i++)
 			message += " " + args[i];
 		message = message.replace("$", "§").replace("§§", "$");
-		Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(
+		mc.ingameGUI.getChatGUI().printChatMessage(
 				new ChatComponentText(message));
 	}
 }

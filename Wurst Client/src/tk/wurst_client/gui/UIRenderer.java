@@ -160,6 +160,8 @@ public class UIRenderer
 	
 	public static void renderPinnedFrames()
 	{
+		if(WurstClient.INSTANCE.mods.recordingModeMod.isActive())
+			return;
 		for(Frame moduleFrame : WurstClient.INSTANCE.gui.getFrames())
 			if(moduleFrame.isPinned()
 				&& !(Minecraft.getMinecraft().currentScreen instanceof GuiManagerDisplayScreen))

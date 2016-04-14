@@ -8,7 +8,6 @@
 package tk.wurst_client.mods;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C07PacketPlayerDigging.Action;
 import net.minecraft.network.play.client.C0APacketAnimation;
@@ -115,7 +114,7 @@ public class KaboomMod extends Mod implements UpdateListener
 											Action.STOP_DESTROY_BLOCK, pos,
 											side));
 								block.onBlockDestroyedByPlayer(
-									Minecraft.getMinecraft().theWorld, pos,
+									mc.theWorld, pos,
 									mc.theWorld.getBlockState(pos));
 							}
 						}

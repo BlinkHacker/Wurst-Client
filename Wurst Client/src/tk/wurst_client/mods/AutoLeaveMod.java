@@ -7,7 +7,6 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C02PacketUseEntity.Action;
@@ -71,7 +70,7 @@ public class AutoLeaveMod extends Mod implements UpdateListener
 	{
 		if(mc.thePlayer.getHealth() <= health
 			&& !mc.thePlayer.capabilities.isCreativeMode
-			&& (!mc.isIntegratedServerRunning() || Minecraft.getMinecraft().thePlayer.sendQueue
+			&& (!mc.isIntegratedServerRunning() || mc.thePlayer.sendQueue
 				.getPlayerInfo().size() > 1))
 		{
 			switch(mode)

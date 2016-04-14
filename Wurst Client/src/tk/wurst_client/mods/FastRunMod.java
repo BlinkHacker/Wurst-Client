@@ -16,7 +16,6 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import tk.wurst_client.events.listeners.UpdateListener;
@@ -61,17 +60,21 @@ public class FastRunMod extends Mod implements UpdateListener
 	}
 	
 	@Override
-	public void onEnable(){
+	public void onEnable()
+	{
 		wurst.events.add(UpdateListener.class, this);
 	}
 	
 	@Override
-	public void onUpdate(){
-		if(!isFlatArea()) return;
+	public void onUpdate()
+	{
+		if(!isFlatArea())
+			return;
 		int direction = MathHelper.floor_double((double)((mc.thePlayer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		if(mc.thePlayer.posX != mc.thePlayer.prevPosX
-			|| mc.thePlayer.posZ != Minecraft.getMinecraft().thePlayer.prevPosZ
-			|| mc.thePlayer.posY != Minecraft.getMinecraft().thePlayer.prevPosY){
+			|| mc.thePlayer.posZ != mc.thePlayer.prevPosZ
+			|| mc.thePlayer.posY != mc.thePlayer.prevPosY)
+		{
 			currentX = mc.thePlayer.posX;
 			currentY = mc.thePlayer.posY;
 			currentZ = mc.thePlayer.posZ;
@@ -79,9 +82,11 @@ public class FastRunMod extends Mod implements UpdateListener
 		    boolean isTravelPossible1 = false;
 		    boolean isTravelPossible2 = false;
 		    boolean isTravelPossible3 = false;
-		    for(int i = 0; i < speed; i++){
+		    for(int i = 0; i < speed; i++)
+		    {
 				double i2 = i;
-				if(direction == 0){
+				if(direction == 0)
+				{
 					//TODO: Better way to do this
 					if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.air || 
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.plants ||
@@ -90,20 +95,20 @@ public class FastRunMod extends Mod implements UpdateListener
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.carpet ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.portal ||
 					getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.web)
-					{
 						isTravelPossible0=true;
-					} else if(isTravelPossible0=false) {
-					if(fastrunliquid.isChecked()) {
+					else if(isTravelPossible0=false) 
+					if(fastrunliquid.isChecked()) 
+					{
 
 						if(getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ+i2).getMaterial() == Material.lava)
 						isTravelPossible0=true;
 						
 					}
-					}
 					if(isTravelPossible0)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ+i2/10);
-				}else if(direction == 1){
+				}else if(direction == 1)
+				{
 					if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.air || 
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.plants ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.vine ||
@@ -111,22 +116,20 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.carpet ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.web)
-					{
 						isTravelPossible1=true;
-					} else if(isTravelPossible1=false) {
-						if(fastrunliquid.isChecked()) {
+					else if(isTravelPossible1=false)
+						if(fastrunliquid.isChecked()) 
+						{
 							
 							if(getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX-i2, currentY, currentZ).getMaterial() == Material.lava)
-							
 								isTravelPossible1=true;
 							
 						}
-					
-					}
 				    if(isTravelPossible1)
 					mc.thePlayer.setPosition(currentX-i2/10, currentY, currentZ);
-				}else if(direction == 2){
+				}else if(direction == 2)
+				{
 					if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.air || 
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.plants ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.vine ||
@@ -134,22 +137,21 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.carpet ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.portal ||
 						getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.web)
-					{
 						isTravelPossible2=true;
-					} else if(isTravelPossible2=false) {
-						if(fastrunliquid.isChecked()) {
+					else if(isTravelPossible2=false)
+						if(fastrunliquid.isChecked()) 
+						{
 						
 							if(getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.water ||
 							getBlock(currentX, currentY, currentZ-i2).getMaterial() == Material.lava)
-							
 								isTravelPossible2=true;
 							
 						}
-					}
 
 				    if(isTravelPossible2)
 					mc.thePlayer.setPosition(currentX, currentY, currentZ-i2/10);
-				}else if(direction == 3){
+				}else if(direction == 3)
+				{
 					if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.air || 
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.plants ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.vine ||
@@ -157,39 +159,37 @@ public class FastRunMod extends Mod implements UpdateListener
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.carpet ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.portal ||
 						getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.web)
-					{
 						isTravelPossible3=true;
-					} else if(isTravelPossible3=false) {
-						if(fastrunliquid.isChecked()) {
+					else if(isTravelPossible3=false)
+						if(fastrunliquid.isChecked()) 
+						{
 							
 							if(getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.water ||
 								getBlock(currentX+i2, currentY, currentZ).getMaterial() == Material.lava)
-								
 								    isTravelPossible3=true;
 								
 						}
-					}
 					if(isTravelPossible3)	
 					mc.thePlayer.setPosition(currentX+i2/10, currentY, currentZ);
-				}else{
+				}else
 					return;
-				}
 			}
 		}
 	}
 	
 	//Check if the 3x3 cube 'around' the player is flat. If it is, return true.
-	private boolean isFlatArea(){
+	private boolean isFlatArea()
+	{
 		double pX = mc.thePlayer.posX;
 		double pY = mc.thePlayer.posY;
 		double pZ = mc.thePlayer.posZ;
 		boolean[] isPassable = new boolean[9];
-		for(int i2 = 0; i2 < 9; i2++){
+		for(int i2 = 0; i2 < 9; i2++)
 			isPassable[i2] = false;
-		}
 		isPassable[8] = false;
 		int onThis = 0;
-		for(int i = 0; i < 9; i++){
+		for(int i = 0; i < 9; i++)
+		{
 			if(onThis == 0){
 				if(getBlock(pX+1, pY, pZ).getMaterial() == Material.air) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.plants) isPassable[0] = true;
@@ -199,7 +199,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.portal) isPassable[0] = true;
 					if(getBlock(pX+1, pY, pZ).getMaterial() == Material.web) isPassable[0] = true;
 				
-			}else if(onThis == 1){
+			}else if(onThis == 1)
+			{
 				if(getBlock(pX-1, pY, pZ).getMaterial() == Material.air) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.plants) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.vine) isPassable[1] = true;
@@ -208,7 +209,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.portal) isPassable[1] = true;
 					if(getBlock(pX-1, pY, pZ).getMaterial() == Material.web) isPassable[1] = true;
 				
-			}else if(onThis == 2){
+			}else if(onThis == 2)
+			{
 				if(getBlock(pX, pY, pZ+1).getMaterial() == Material.air) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.plants) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.vine) isPassable[2] = true;
@@ -216,7 +218,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.carpet) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.portal) isPassable[2] = true;
 					if(getBlock(pX, pY, pZ+1).getMaterial() == Material.web) isPassable[2] = true;
-			}else if(onThis == 3){
+			}else if(onThis == 3)
+			{
 				if(getBlock(pX, pY, pZ-1).getMaterial() == Material.air) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.plants) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.vine) isPassable[3] = true;
@@ -224,7 +227,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.carpet) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.portal) isPassable[3] = true;
 					if(getBlock(pX, pY, pZ-1).getMaterial() == Material.web) isPassable[3] = true;
-			}else if(onThis == 4){
+			}else if(onThis == 4)
+			{
 				if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.air) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.plants) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.vine) isPassable[4] = true;
@@ -232,7 +236,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.carpet) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.portal) isPassable[4] = true;
 					if(getBlock(pX+1, pY, pZ+1).getMaterial() == Material.web) isPassable[4] = true;
-			}else if(onThis == 5){
+			}else if(onThis == 5)
+			{
 				if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.air) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.plants) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.vine) isPassable[5] = true;
@@ -240,7 +245,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.carpet) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.portal) isPassable[5] = true;
 					if(getBlock(pX-1, pY, pZ-1).getMaterial() == Material.web) isPassable[5] = true;
-			}else if(onThis == 6){
+			}else if(onThis == 6)
+			{
 				if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.air) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.plants) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.vine) isPassable[6] = true;
@@ -248,7 +254,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.carpet) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.portal) isPassable[6] = true;
 					if(getBlock(pX+1, pY, pZ-1).getMaterial() == Material.web) isPassable[6] = true;
-			}else if(onThis == 7){
+			}else if(onThis == 7)
+			{
 				if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.air) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.plants) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.vine) isPassable[7] = true;
@@ -256,7 +263,8 @@ public class FastRunMod extends Mod implements UpdateListener
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.carpet) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.portal) isPassable[7] = true;
 					if(getBlock(pX-1, pY, pZ+1).getMaterial() == Material.web) isPassable[7] = true;
-			}else if(onThis == 8){
+			}else if(onThis == 8)
+			{
 				if(getBlock(pX, pY, pZ).getMaterial() == Material.air) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.plants) isPassable[8] = true;
 					if(getBlock(pX, pY, pZ).getMaterial() == Material.vine) isPassable[8] = true;
@@ -271,14 +279,17 @@ public class FastRunMod extends Mod implements UpdateListener
 		return false;
 	}
 	
-	private Block getBlock(double x, double y, double z){
+	private Block getBlock(double x, double y, double z)
+	{
 		return mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
 	}
 	
 	@Override
-	public void onDisable(){
+	public void onDisable()
+	{
 		wurst.events.remove(UpdateListener.class, this);
 	}
+	
 	public boolean getCheckbox()
 	{
 		return fastrunliquid.isChecked();

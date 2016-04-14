@@ -172,7 +172,7 @@ public class Mod implements NavigatorItem
 			onToggle();
 		}catch(Exception e)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(
+			mc.displayGuiScreen(
 				new GuiError(e, this, "toggling", "Mod was toggled "
 					+ (enabled ? "on" : "off") + "."));
 		}
@@ -182,7 +182,7 @@ public class Mod implements NavigatorItem
 				onEnable();
 			}catch(Exception e)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(
+				mc.displayGuiScreen(
 					new GuiError(e, this, "enabling", ""));
 			}
 		else
@@ -191,11 +191,11 @@ public class Mod implements NavigatorItem
 				onDisable();
 			}catch(Exception e)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(
+				mc.displayGuiScreen(
 					new GuiError(e, this, "disabling", ""));
 			}
-		if(!WurstClient.INSTANCE.files.isModBlacklisted(this))
-			WurstClient.INSTANCE.files.saveMods();
+		if(!wurst.files.isModBlacklisted(this))
+			wurst.files.saveMods();
 	}
 	
 	public final void enableOnStartup()
@@ -207,7 +207,7 @@ public class Mod implements NavigatorItem
 			onToggle();
 		}catch(Exception e)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(
+			mc.displayGuiScreen(
 				new GuiError(e, this, "toggling", "Mod was toggled "
 					+ (enabled ? "on" : "off") + "."));
 		}
@@ -216,7 +216,7 @@ public class Mod implements NavigatorItem
 			onEnable();
 		}catch(Exception e)
 		{
-			Minecraft.getMinecraft().displayGuiScreen(
+			mc.displayGuiScreen(
 				new GuiError(e, this, "enabling", ""));
 		}
 	}
@@ -243,7 +243,7 @@ public class Mod implements NavigatorItem
 				onToggle();
 			}catch(Exception e)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(
+				mc.displayGuiScreen(
 					new GuiError(e, this, "toggling", "Mod was toggled "
 						+ (blocked ? "off" : "on") + "."));
 			}
@@ -255,7 +255,7 @@ public class Mod implements NavigatorItem
 					onEnable();
 			}catch(Exception e)
 			{
-				Minecraft.getMinecraft().displayGuiScreen(
+				mc.displayGuiScreen(
 					new GuiError(e, this, blocked ? "disabling" : "enabling",
 						""));
 			}
@@ -264,7 +264,7 @@ public class Mod implements NavigatorItem
 	
 	public final void noCheatMessage()
 	{
-		WurstClient.INSTANCE.chat.warning(name + " cannot bypass NoCheat+.");
+		wurst.chat.warning(name + " cannot bypass NoCheat+.");
 	}
 	
 	public final void updateMS()

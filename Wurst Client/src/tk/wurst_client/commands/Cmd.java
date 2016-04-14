@@ -169,7 +169,7 @@ public abstract class Cmd implements NavigatorItem
 	public final void printHelp()
 	{
 		for(String line : help.split("\n"))
-			WurstClient.INSTANCE.chat.message(line);
+			wurst.chat.message(line);
 	}
 	
 	public final void printSyntax()
@@ -182,7 +182,7 @@ public abstract class Cmd implements NavigatorItem
 				output += "\n    " + syntax[i];
 		}
 		for(String line : output.split("\n"))
-			WurstClient.INSTANCE.chat.message(line);
+			wurst.chat.message(line);
 	}
 	
 	protected final int[] argsToPos(String... args) throws Cmd.Error
@@ -191,9 +191,9 @@ public abstract class Cmd implements NavigatorItem
 		if(args.length == 3)
 		{
 			int[] playerPos =
-				new int[]{(int)Minecraft.getMinecraft().thePlayer.posX,
-					(int)Minecraft.getMinecraft().thePlayer.posY,
-					(int)Minecraft.getMinecraft().thePlayer.posZ};
+				new int[]{(int)mc.thePlayer.posX,
+					(int)mc.thePlayer.posY,
+					(int)mc.thePlayer.posZ};
 			for(int i = 0; i < args.length; i++)
 				if(MiscUtils.isInteger(args[i]))
 					pos[i] = Integer.parseInt(args[i]);

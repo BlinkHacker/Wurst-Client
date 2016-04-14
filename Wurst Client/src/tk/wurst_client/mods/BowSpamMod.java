@@ -19,7 +19,8 @@ import tk.wurst_client.navigator.settings.SliderSetting;
         description = "Spams low power arrows.\n" + "Tip: This works with BowAimbot.",
         name = "BowSpam",
         noCheatCompatible = false)
-public class BowSpamMod extends Mod implements UpdateListener {
+public class BowSpamMod extends Mod implements UpdateListener 
+{
     public long delay = 20;
 
     @Override
@@ -36,49 +37,51 @@ public class BowSpamMod extends Mod implements UpdateListener {
         });
     }
     @Override
-    public void onEnable() {
-        WurstClient.INSTANCE.events.add(UpdateListener.class, this);
+    public void onEnable()
+    {
+        wurst.events.add(UpdateListener.class, this);
     }
 
     @Override
-    public void onUpdate() {
-        if (Minecraft.getMinecraft().thePlayer.getHealth() > 0 && (Minecraft.getMinecraft().thePlayer.onGround ||
-                Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode) &&
-                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null &&
-                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBow &&
-                Minecraft.getMinecraft().gameSettings.keyBindUseItem.pressed) {
-            new Thread(() -> {
-                Minecraft.getMinecraft().playerController
-                        .sendUseItem(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().theWorld,
-                                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem());
-                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()
-                        .onItemRightClick(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem(),
-                                Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer);
+    public void onUpdate() 
+    {
+        if (mc.thePlayer.getHealth() > 0 && (mc.thePlayer.onGround ||
+                mc.thePlayer.capabilities.isCreativeMode) &&
+                mc.thePlayer.inventory.getCurrentItem() != null &&
+                mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBow &&
+                mc.gameSettings.keyBindUseItem.pressed) 
+        {
+            new Thread(() -> 
+            {
+                mc.playerController
+                        .sendUseItem(mc.thePlayer, mc.theWorld,
+                                mc.thePlayer.inventory.getCurrentItem());
+                mc.thePlayer.inventory.getCurrentItem().getItem()
+                        .onItemRightClick(mc.thePlayer.inventory.getCurrentItem(),
+                                mc.theWorld, mc.thePlayer);
 
 
-                for (int i = 0; i < delay; i++) {
+                for (int i = 0; i < delay; i++)
                    try {
-
-
                         Thread.sleep(delay,10);
                    } catch (InterruptedException ignored) {}
-                    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
-                }
+                    mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(false));
 
 
-                Minecraft.getMinecraft().getNetHandler().addToSendQueue(
+                mc.getNetHandler().addToSendQueue(
                         new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM,
                                 new BlockPos(0, 0, 0), EnumFacing.DOWN));
-                Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem()
-                        .onPlayerStoppedUsing(Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem(),
-                                Minecraft.getMinecraft().theWorld, Minecraft.getMinecraft().thePlayer, 10);
+                mc.thePlayer.inventory.getCurrentItem().getItem()
+                        .onPlayerStoppedUsing(mc.thePlayer.inventory.getCurrentItem(),
+                                mc.theWorld, mc.thePlayer, 10);
 
             }).start();
         }
     }
 
     @Override
-    public void onDisable() {
-        WurstClient.INSTANCE.events.remove(UpdateListener.class, this);
+    public void onDisable() 
+    {
+        wurst.events.remove(UpdateListener.class, this);
     }
 }

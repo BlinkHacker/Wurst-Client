@@ -7,7 +7,6 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemBow;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
@@ -42,7 +41,7 @@ public class FastBowMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		if(mc.thePlayer.getHealth() > 0
-			&& (mc.thePlayer.onGround || Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode)
+			&& (mc.thePlayer.onGround || mc.thePlayer.capabilities.isCreativeMode)
 			&& mc.thePlayer.inventory.getCurrentItem() != null
 			&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBow
 			&& mc.gameSettings.keyBindUseItem.pressed)
