@@ -38,15 +38,15 @@ public class LeaveCmd extends Cmd
 				if(args[0].equalsIgnoreCase("taco"))
 					for(int i = 0; i < 128; i++)
 						mc.thePlayer.sendAutomaticChatMessage("Taco!");
-				else if(args[0].equalsIgnoreCase("quit")) {
+				else if(args[0].equalsIgnoreCase("quit"))
 					disconnectWithMode(0);
-				} else if(args[0].equalsIgnoreCase("chars")) {
+				else if(args[0].equalsIgnoreCase("chars"))
 					disconnectWithMode(1);
-				} else if(args[0].equalsIgnoreCase("tp")) {
+				else if(args[0].equalsIgnoreCase("tp"))
 					disconnectWithMode(2);
-				} else if(args[0].equalsIgnoreCase("selfhurt")) {
+				else if(args[0].equalsIgnoreCase("selfhurt"))
 					disconnectWithMode(3);
-				} else 
+				else 
 					syntaxError();
 				break;
 			case 2:
@@ -63,9 +63,7 @@ public class LeaveCmd extends Cmd
 					syntaxError("Invalid mode");
 				
 				if(newMode != leave.getMode())
-				{
 					leave.setMode(newMode);
-				}
 				
 				wurst.chat.message("Leave mode set to \"" + args[1] + "\".");
 				break;
