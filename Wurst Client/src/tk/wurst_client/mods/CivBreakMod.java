@@ -12,7 +12,6 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
-import net.minecraft.network.play.client.C0APacketAnimation;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import tk.wurst_client.events.BlockBreakingEvent;
@@ -34,7 +33,7 @@ import tk.wurst_client.utils.BlockUtils;
 public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateListener, PostUpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Normal", "Bypass", "Test"};
+	private String[] modes = new String[]{"Normal", "Bypass"};
 	private BlockPos block;
 	private EnumFacing side;
 	public int civbreakspeed = 1;
@@ -91,32 +90,6 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
         mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(block, -1, mc.thePlayer.getCurrentEquippedItem(), 0.0F, 0.0F, 0.0F));
 		}
 		}
-		if(mode == 2)
-		{
-		BlockBreakingEvent event2 = (BlockBreakingEvent)event;
-		if (event2.getState() == BlockBreakingEvent.EnumBlock.CLICK)
-		{
-			block = event2.getPos();
-		    side = event2.getSide();
-		}
-		if ((event2.getState() == BlockBreakingEvent.EnumBlock.DAMAGE) && (
-		   block != null) && (mc.thePlayer.getDistanceSq(block) < 41.39999961853027D)) {
-		 for (int i = 0; i < civbreakspeed; i++)
-		 {
-			 mc.thePlayer.swingItem();
-		     if (mc.playerController.blockHitDelay > 0) 
-		     {
-		    	 mc.playerController.blockHitDelay = 0;
-		      }
-		          mc.getNetHandler().addToSendQueue(new C0APacketAnimation());
-		          mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, block, side));
-		          mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, block, side));
-		          if ((mc.thePlayer.getHeldItem() != null) && (!(mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock))) {
-		            mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(block, -1, mc.thePlayer.getCurrentEquippedItem(), 0.0F, 0.0F, 0.0F));
-		          }
-		        }
-		      }
-		}
 	}
 	
 	@Override
@@ -125,9 +98,6 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 		if(mode == 1)
 			if(block != null && mc.thePlayer.getDistanceSq(block) < 41.399999618530273D) 
 			 BlockUtils.faceBlockPacket(block);
-		if(mode == 2)
-			if(block != null && mc.thePlayer.getDistanceSq(block) < 41.399999618530273D) 
-				 BlockUtils.faceBlockPacket(block);
 	}
 	
 	@Override
@@ -145,25 +115,6 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
             mc.playerController.onPlayerDamageBlock(block, side);
          }
 		}
-		 if ((block != null) && (mc.thePlayer.getDistanceSq(block) < 41.39999961853027D)) 
-		 {
-			 int civbreakmode2 = Math.min(2, civbreakspeed);
-		      for (int i = 0; i < civbreakmode2; i++)
-		      {
-		        mc.thePlayer.swingItem();
-		        mc.playerController.onPlayerDamageBlock(block, side);
-		        if (mc.playerController.blockHitDelay > 0) {
-		          mc.playerController.blockHitDelay = 0;
-		        }
-		        mc.getNetHandler().addToSendQueue(new C0APacketAnimation());
-		        mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, block, side));
-		        mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, block, side));
-		        if ((mc.thePlayer.getHeldItem() != null) && (!(mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock))) {
-		          mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(block, -1, mc.thePlayer.getCurrentEquippedItem(), 0.0F, 0.0F, 0.0F));
-		        }
-		      }
-		    }
-		
 	}
 	
 	@Override
@@ -180,7 +131,7 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	
 	public void setMode(int mode)
 	{
-		((ModeSetting)settings.get(1)).setSelected(mode);
+		((ModeSetting)settings.get(0)).setSelected(mode);
 	}
 	
 	public String[] getModes()
