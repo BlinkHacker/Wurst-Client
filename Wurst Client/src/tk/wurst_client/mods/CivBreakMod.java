@@ -69,8 +69,6 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	@Override
 	public void onEnable()
 	{	
-		if(wurst.mods.fastBreakMod.isEnabled())
-			wurst.mods.fastBreakMod.setEnabled(false);
 		wurst.events.add(BlockBreakingListener.class, this);
 		wurst.events.add(UpdateListener.class, this);
 		wurst.events.add(PostUpdateListener.class, this);

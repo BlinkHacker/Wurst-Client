@@ -50,14 +50,10 @@ public class FastBreakMod extends Mod
 	public NavigatorItem[] getSeeAlso()
 	{
 		return new NavigatorItem[]{wurst.mods.fastPlaceMod,
-			wurst.mods.autoMineMod, wurst.mods.nukerMod};
+			wurst.mods.autoMineMod, wurst.mods.nukerMod,
+			wurst.mods.civBreakMod};
 	}
-	@Override
-	public void onEnable()
-	{
-		if(wurst.mods.civBreakMod.isEnabled())
-			wurst.mods.civBreakMod.setEnabled(false);
-	}
+	
 	public int getMode()
 	{
 		return mode;
