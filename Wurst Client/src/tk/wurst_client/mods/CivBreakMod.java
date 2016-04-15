@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
+import net.minecraft.block.BlockAir;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
@@ -96,14 +97,16 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	public void onUpdate()
 	{
 		if(mode == 1)
-			if(block != null && mc.thePlayer.getDistanceSq(block) < 41.399999618530273D) 
+			if(block != null && mc.thePlayer.getDistanceSq(block) < 41.399999618530273D &&
+			!(mc.theWorld.getBlockState(block) instanceof BlockAir)) 
 			 BlockUtils.faceBlockPacket(block);
 	}
 	
 	@Override
 	public void onPostUpdate()
 	{
-		if(mode == 1 && block != null && mc.thePlayer.getDistanceSq(block) < 41.399999618530273D)
+		if(mode == 1 && block != null && !(mc.theWorld.getBlockState(block) instanceof BlockAir) &&
+			mc.thePlayer.getDistanceSq(block) < 41.399999618530273D)
 		{
 		for(int i = 0; i < civbreakspeed; i++) {
             mc.thePlayer.swingItem();
@@ -120,6 +123,8 @@ public class CivBreakMod extends Mod implements BlockBreakingListener, UpdateLis
 	@Override
 	public void onDisable()
 	{	
+		block = null;
+		side = null;
 		wurst.events.remove(BlockBreakingListener.class, this);
 		wurst.events.remove(UpdateListener.class, this);
 		wurst.events.remove(PostUpdateListener.class, this);
