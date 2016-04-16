@@ -90,7 +90,7 @@ public class RainbowArmorMod extends Mod implements UpdateListener
 				  Item.getIdFromItem(block.getItem()) != 60 &&
 				  Item.getIdFromItem(block.getItem()) != 97 &&
 				  Item.getIdFromItem(block.getItem()) != 62 &&
-				  Item.getIdFromItem(block.getItem()) != 31 &&!restricted)
+				  Item.getIdFromItem(block.getItem()) != 31 && !restricted)
 		        {
 		          mc.thePlayer.inventoryContainer.putStackInSlot(5, block);
 		          mc.getNetHandler().addToSendQueue(new C10PacketCreativeInventoryAction(5, block));
