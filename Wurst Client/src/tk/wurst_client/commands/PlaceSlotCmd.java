@@ -7,25 +7,16 @@
  */
 package tk.wurst_client.commands;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.google.common.collect.Lists;
-
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
 import tk.wurst_client.commands.Cmd.Info;
-import tk.wurst_client.events.listeners.UpdateListener;
 
 @Info(help = "Duplicates items in your hand in a specified armor slot.\n"
 	+ "Requires creative mode.",
 	name = "placeslot",
-	syntax = {"(head|chest|legs|feet)", "headderp (on|off)"})
-public class PlaceSlotCmd extends Cmd implements UpdateListener
+	syntax = {"(head|chest|legs|feet)"})
+public class PlaceSlotCmd extends Cmd
 {
-	private boolean headderp;
 	@Override
 	public void execute(String[] args) throws Error
 	{
@@ -73,44 +64,7 @@ public class PlaceSlotCmd extends Cmd implements UpdateListener
 				mc.getNetHandler().addToSendQueue(new C10PacketCreativeInventoryAction(slotid, item));
 			}
 			wurst.chat.message("Item placed in slot \"" + args[0] + "\"");
-		} else if(args.length == 2 && args[0].equalsIgnoreCase("headderp") && 
-			args[1].equalsIgnoreCase("on"))
-		{
-			headderp = true;
-			wurst.events.add(UpdateListener.class, this);
-		} else if(args.length == 2 && args[0].equalsIgnoreCase("headderp") && 
-			args[1].equalsIgnoreCase("off"))
-		{
-			headderp = false;
-			wurst.events.remove(UpdateListener.class, this);
 		} else
 			syntaxError();
-	}
-	
-	@Override
-	public void onUpdate()
-	{
-		if(headderp)
-		{
-			if (!mc.playerController.isInCreativeMode() || mc.theWorld == null)
-				return;
-			ItemStack block = getRandomBlock();
-		      if (Item.getIdFromItem(block.getItem()) != 0 &&
-		    	  Item.getIdFromItem(block.getItem()) != 86)
-		        {
-		          mc.thePlayer.inventoryContainer.putStackInSlot(5, block);
-		          mc.getNetHandler().addToSendQueue(new C10PacketCreativeInventoryAction(5, block));
-		        }
-		}
-	} 	
-	
-	private ItemStack getRandomBlock()
-	{
-		Random random = new Random();
-	    ArrayList blockreg = Lists.newArrayList(Block.blockRegistry.iterator());
-	    int i = 0;
-	    int size = blockreg.size() - 1;
-	    int randblock = random.nextInt(size - i) + i;
-	    return new ItemStack((Block)blockreg.get(randblock));
 	}
 }

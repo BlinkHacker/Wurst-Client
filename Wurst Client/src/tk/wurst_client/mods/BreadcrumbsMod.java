@@ -27,7 +27,7 @@ public class BreadcrumbsMod extends Mod implements RenderListener, UpdateListene
 {	
 	private List<double[]> points = new CopyOnWriteArrayList<double[]>();
 	public CheckboxSetting opacity = new CheckboxSetting(
-		"See Lines Through Walls", true);
+		"See Lines Through Walls", false);
 	
 	@Override
 	public void initSettings()
