@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -85,28 +84,28 @@ UpdateListener
 
                  if (canRenderBox(mouseOverPos)) 
                  {
-                	 GlStateManager.pushMatrix();
+                	 GL11.glPushMatrix();
                      RenderHelper.enableStandardItemLighting();
-                     GlStateManager.disableLighting();
-                     GlStateManager.enableBlend();
-                     GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                     GlStateManager.disableDepth();
-                     GlStateManager.depthMask(false);
-                     GlStateManager.func_179090_x();
+                     GL11.glDisable(GL11.GL_LIGHTING);
+                     GL11.glEnable(GL11.GL_BLEND);
+                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                     GL11.glDisable(GL11.GL_DEPTH);
+                     GL11.glDepthMask(false);
+                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                      GL11.glEnable(GL11.GL_LINE_SMOOTH);
                      GL11.glLineWidth(1.0F);
                      drawBox(blockBelow, new BlockPos(mouseOverPos[0], mouseOverPos[1], mouseOverPos[2]));
                      drawNametags(blockBelow, new BlockPos(mouseOverPos[0], mouseOverPos[1], mouseOverPos[2]));
                      GL11.glLineWidth(2.0F);
                      GL11.glDisable(GL11.GL_LINE_SMOOTH);
-                     GlStateManager.func_179098_w();
-                     GlStateManager.depthMask(true);
-                     GlStateManager.enableDepth();
-                     GlStateManager.disableBlend();
-                     GlStateManager.enableLighting();
-                     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                     GL11.glEnable(GL11.GL_TEXTURE_2D);
+                     GL11.glDepthMask(true);
+                     GL11.glEnable(GL11.GL_DEPTH);
+                     GL11.glDisable(GL11.GL_BLEND);
+                     GL11.glEnable(GL11.GL_LIGHTING);
+                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                      RenderHelper.disableStandardItemLighting();
-                     GlStateManager.popMatrix();
+                     GL11.glPopMatrix();
 
                      if (mc.inGameHasFocus) 
                          teleportPosition = blockBelowPos;
@@ -126,28 +125,28 @@ UpdateListener
 
                  if (canRenderBox(mouseOverPos)) 
                  {
-                	 GlStateManager.pushMatrix();
+                	 GL11.glPushMatrix();
                      RenderHelper.enableStandardItemLighting();
-                     GlStateManager.disableLighting();
-                     GlStateManager.enableBlend();
-                     GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                     GlStateManager.disableDepth();
-                     GlStateManager.depthMask(false);
-                     GlStateManager.func_179090_x();
+                     GL11.glDisable(GL11.GL_LIGHTING);
+                     GL11.glEnable(GL11.GL_BLEND);
+                     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                     GL11.glDisable(GL11.GL_DEPTH);
+                     GL11.glDepthMask(false);
+                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                      GL11.glEnable(GL11.GL_LINE_SMOOTH);
                      GL11.glLineWidth(1.0F);
                      drawBox(blockBelow, new BlockPos(mouseOverPos[0], mouseOverPos[1], mouseOverPos[2]));
                      drawNametags(blockBelow, new BlockPos(mouseOverPos[0], mouseOverPos[1], mouseOverPos[2]));
                      GL11.glLineWidth(2.0F);
                      GL11.glDisable(GL11.GL_LINE_SMOOTH);
-                     GlStateManager.func_179098_w();
-                     GlStateManager.depthMask(true);
-                     GlStateManager.enableDepth();
-                     GlStateManager.disableBlend();
-                     GlStateManager.enableLighting();
-                     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                     GL11.glEnable(GL11.GL_TEXTURE_2D);
+                     GL11.glDepthMask(true);
+                     GL11.glEnable(GL11.GL_DEPTH);
+                     GL11.glDisable(GL11.GL_BLEND);
+                     GL11.glEnable(GL11.GL_LIGHTING);
+                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                      RenderHelper.disableStandardItemLighting();
-                     GlStateManager.popMatrix();
+                     GL11.glPopMatrix();
 
                      if (mc.inGameHasFocus)
                          teleportPosition = blockBelowPos;
@@ -302,22 +301,22 @@ UpdateListener
 
         float var13 = 2.5F + ((float) dist / 5 <= 2 ? 2.0F : (float) dist / 5);
         float var14 = 0.016666668F * var13;
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y + 1.5F, z);
+        GL11.glPushMatrix();
+        GL11.glTranslated(x, y + 1.5F, z);
         GL11.glNormal3f(0.0F, 1.0F, 0.0F);
         if (mc.gameSettings.thirdPersonView == 2) 
         {
-            GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(mc.getRenderManager().playerViewX, -1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(mc.getRenderManager().playerViewX, -1.0F, 0.0F, 0.0F);
         } else 
         {
-            GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
         }
-        GlStateManager.scale(-var14, -var14, var14);
+        GL11.glScalef(-var14, -var14, var14);
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-        GlStateManager.func_179090_x();
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
         worldRenderer.startDrawingQuads();
         int var18 = mc.fontRendererObj.getStringWidth(text) / 2;
         worldRenderer.setColorRGBA_F(0.0F, 0.0F, 0.0F, 0.25F);
@@ -326,9 +325,9 @@ UpdateListener
         worldRenderer.addVertex(var18 + 2, 9, 0.0D);
         worldRenderer.addVertex(var18 + 2, -2, 0.0D);
         tessellator.draw();
-        GlStateManager.func_179098_w();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
         mc.fontRendererObj.drawStringWithShadow(text, -var18, 0, 0xFFFFFFFF);
-        GlStateManager.popMatrix();
+        GL11.glPopMatrix();
     }
 	
 	private void drawBox(Block block, BlockPos pos) 
@@ -343,9 +342,9 @@ UpdateListener
 	    double offset = getOffset(blockBelow, blockPosBelow);
 
 	    AxisAlignedBB box = AxisAlignedBB.fromBounds(x, y + offset, z, x + 1, y + offset + 0.06F, z + 1);
-	    GlStateManager.color(0.49F, 0.8F, 1F, 0.11F);
+	    GL11.glColor4f(0.49F, 0.8F, 1F, 0.11F);
 	    RenderUtils.drawColorBox(box);
-	    GlStateManager.color(0.49F, 0.8F, 1F, 0.60F);
+	    GL11.glColor4f(0.49F, 0.8F, 1F, 0.60F);
 	    RenderUtils.drawLines(box);
 	    RenderGlobal.drawOutlinedBoundingBox(box, -1);
 	}
