@@ -370,6 +370,7 @@ public class RenderUtils
 		glDepthMask(true);
 		glDisable(GL_BLEND);
 	}
+	
 	public static void drawColorBox(AxisAlignedBB axisalignedbb)
 	{
 		Tessellator ts = Tessellator.getInstance();
@@ -618,7 +619,7 @@ public class RenderUtils
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
 			glLineWidth(1.0F);
-			glColor4d(0.25, 0.25, 1, 0.15F);
+			glColor4d(1, 0, 0, 0.15F);
 			glDisable(GL_TEXTURE_2D);
 			glDisable(GL_DEPTH_TEST);
 			glDepthMask(false);
