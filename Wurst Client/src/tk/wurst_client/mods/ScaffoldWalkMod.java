@@ -74,10 +74,9 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
 	    		  C0BPacketEntityAction.Action.START_SNEAKING));
 	          if (mc.playerController.func_178890_a(mc.thePlayer, mc.theWorld, mc.thePlayer.getHeldItem(), 
-	        	  this.blockData.position, this.blockData.face, new Vec3(this.blockData.position.getX(), 
-	        		  this.blockData.position.getY(), this.blockData.position.getZ()))) {
+	        	  blockData.position, blockData.face, new Vec3(blockData.position.getX(), 
+	        		  blockData.position.getY(), blockData.position.getZ())))
 	            mc.thePlayer.swingItem();
-	          }
 	          mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
 	        	  C0BPacketEntityAction.Action.STOP_SNEAKING));
 	          updateLastMS();
