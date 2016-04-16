@@ -196,10 +196,10 @@ public class HudMod extends Mod implements GUIRenderListener
 			else 
 			worldtime = colorhour + ":" + seconds;
 	        String coorddirtime = "§lCoords:§r "+ posX + ", " + posY + ", " + posZ + " " + "[" + facingdir + "]";
-	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, mc.fontRendererObj.getStringWidth("12:34") * 4
-	        	+ mc.fontRendererObj.getStringWidth("1"), 8, 16777215);
-	        mc.fontRendererObj.drawStringWithShadow(worldtime, mc.fontRendererObj.getStringWidth("12:34") * 10
-	        	+ mc.fontRendererObj.getStringWidth("1"), 8, 16777215);
+	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, mc.fontRendererObj.getStringWidth("12:34") * 5
+	        	+ mc.fontRendererObj.getStringWidth("1") * 2, 8, 16777215);
+	        mc.fontRendererObj.drawStringWithShadow(worldtime, mc.fontRendererObj.getStringWidth("12:34") * 4
+	        	+ mc.fontRendererObj.getStringWidth("1") * 2 , 8, 16777215);
 		}
 	}
 	
