@@ -16,6 +16,7 @@ import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
@@ -25,6 +26,15 @@ import tk.wurst_client.utils.RenderUtils;
 public class BreadcrumbsMod extends Mod implements RenderListener, UpdateListener
 {	
 	private List<double[]> points = new CopyOnWriteArrayList<double[]>();
+	public CheckboxSetting opacity = new CheckboxSetting(
+		"See Lines Through Walls", true);
+	
+	@Override
+	public void initSettings()
+	{
+		settings.add(opacity);
+	}
+	
 	@Override
 	public void onEnable()
 	{
@@ -62,7 +72,7 @@ public class BreadcrumbsMod extends Mod implements RenderListener, UpdateListene
 			double[] t = points.get(i);
 			Vec3 from = new Vec3(f[0], f[1], f[2]);
 			Vec3 to = new Vec3(t[0], t[1], t[2]);
-			RenderUtils.line(from, to, new Color(0, 0, 1, 0.75F), (float)2);
+			RenderUtils.line(from, to, new Color(0, 0, 1, 0.75F), (float)2, opacity.isChecked());
 		}
 	}
 
