@@ -77,6 +77,7 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 							en, C02PacketUseEntity.Action.ATTACK));
 						updateLastMS();
 							}
+						break;
 					case 1:
 						updateMS();
 						updateSpeed();
@@ -95,10 +96,12 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 								}
 								updateLastMS();
 							}
+						break;
 					case 2:
 							if(en != null && mc.thePlayer.getDistanceToEntity(en) <= 
 							wurst.mods.killauraMod.normalRange)
 								EntityUtils.faceNonlivingEntityClient(en);
+							break;
 					case 3:
 						if(mc.objectMouseOver != null
 						&& mc.objectMouseOver.typeOfHit == MovingObjectType.ENTITY
@@ -124,6 +127,7 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 							}
 						}
 					}
+						break;
 					default:
 						return;
 
