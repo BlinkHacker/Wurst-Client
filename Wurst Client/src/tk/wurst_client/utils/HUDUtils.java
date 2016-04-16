@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-public class HUDElementUtils
+public class HUDUtils
 {
   public ItemStack itemStack;
   public int iconW;
@@ -34,7 +34,7 @@ public class HUDElementUtils
   private int itemDamageW;
   private boolean isArmor;
   
-  public HUDElementUtils(ItemStack itemStack, int iconW, int iconH, int padW, boolean isArmor)
+  public HUDUtils(ItemStack itemStack, int iconW, int iconH, int padW, boolean isArmor)
   {
     this.itemStack = itemStack;
     this.iconW = iconW;

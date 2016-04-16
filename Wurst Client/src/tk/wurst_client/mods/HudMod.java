@@ -28,7 +28,7 @@ import tk.wurst_client.events.listeners.GUIRenderListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
-import tk.wurst_client.utils.HUDElementUtils;
+import tk.wurst_client.utils.HUDUtils;
 import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.RENDER,
@@ -43,7 +43,7 @@ public class HudMod extends Mod implements GUIRenderListener
 	public final CheckboxSetting coordtime = new CheckboxSetting(
 		"Show Coords and Time", true);
 	private Map<PotionEffect, Integer> potionMaxDurationMap = new HashMap<PotionEffect,Integer>();
-	private List<HUDElementUtils> elements = new ArrayList<HUDElementUtils>();
+	private List<HUDUtils> elements = new ArrayList<HUDUtils>();
 	
 	@Override
 	public void initSettings()
@@ -138,7 +138,7 @@ public class HudMod extends Mod implements GUIRenderListener
 		    {
 		      int yOffset = 18;
 		        yBase = 3;
-		        for (HUDElementUtils e : elements)
+		        for (HUDUtils e : elements)
 		        {
 		          e.renderToHud(getXA(0, scaledRes), yBase);
 		          yBase += yOffset;
@@ -239,7 +239,7 @@ public class HudMod extends Mod implements GUIRenderListener
 	        itemStack = mc.thePlayer.inventory.armorInventory[i];
 	      }
 	      if (itemStack != null) {
-	        elements.add(new HUDElementUtils(itemStack, 16, 16, 2, i > -1));
+	        elements.add(new HUDUtils(itemStack, 16, 16, 2, i > -1));
 	      }
 	    }
 	  }
