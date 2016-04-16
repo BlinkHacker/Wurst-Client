@@ -11,41 +11,38 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import tk.wurst_client.events.PacketInputEvent;
 import tk.wurst_client.events.PacketOutputEvent;
+import tk.wurst_client.events.listeners.DeathListener;
 import tk.wurst_client.events.listeners.PacketInputListener;
 import tk.wurst_client.events.listeners.PacketOutputListener;
-import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.MOVEMENT,
-	description = "Allows you walk around after dying.\n"
-		+ "Enable with freecam to bypass anti-cheat detections.",
+	description = "Allows you walk around after dying.",
 	name = "Ghost")
-public class GhostMod extends Mod implements UpdateListener, PacketOutputListener, PacketInputListener
+public class GhostMod extends Mod implements DeathListener, PacketOutputListener, PacketInputListener
 {
 	boolean isdead;
 	
 	@Override
 	public void onEnable()
 	{
-		wurst.events.add(UpdateListener.class, this);
+		wurst.events.add(DeathListener.class, this);
 		wurst.events.add(PacketOutputListener.class, this);
 		wurst.events.add(PacketInputListener.class, this);
 	}
 	
 	@Override
-	public void onUpdate()
+	public void onDeath()
 	{
 		if (mc.theWorld == null)
 			return;
-		if (mc.thePlayer.getHealth() == 0.0F)
-		{
 			mc.thePlayer.setHealth(20.0F);
 			mc.thePlayer.isDead = false;
 			isdead = true;
 			mc.displayGuiScreen(null);
 			mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ);
-		}
+			wurst.chat.message("You are now dead and in Ghost mode.");
 	}
 	
 	@Override
@@ -68,9 +65,12 @@ public class GhostMod extends Mod implements UpdateListener, PacketOutputListene
 	public void onDisable()
 	{
 		if(isdead)
+		{
 		mc.thePlayer.respawnPlayer();
+		wurst.chat.message("You are no longer dead and have exited Ghost mode.");
+		}
 		isdead = false;
-		wurst.events.remove(UpdateListener.class, this);
+		wurst.events.remove(DeathListener.class, this);
 		wurst.events.remove(PacketOutputListener.class, this);
 		wurst.events.remove(PacketInputListener.class, this);
 	}
