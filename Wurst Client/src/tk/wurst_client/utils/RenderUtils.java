@@ -658,7 +658,8 @@ public class RenderUtils
 		tessellator.draw();
 	}
 	
-	public static void renderTag(String string, Entity entity, double sizetag, int color, double height, boolean disabledepth)
+	public static void renderTag(String string, Entity entity, double sizetag, int color, 
+		double height, boolean disabledepth)
 	{
 	    RenderManager RenderManager = Minecraft.getMinecraft().getRenderManager();
 	    FontRenderer FontRenderer = Minecraft.getMinecraft().fontRendererObj;
@@ -710,7 +711,8 @@ public class RenderUtils
 		glPopMatrix();
 	}
 	
-	 public static void drawLines(AxisAlignedBB axisalignedbb) {
+	 public static void drawLines(AxisAlignedBB axisalignedbb) 
+	 {
 	        Tessellator tessellator = Tessellator.getInstance();
 	        WorldRenderer worldRenderer = tessellator.getWorldRenderer();
 	        worldRenderer.startDrawing(2);

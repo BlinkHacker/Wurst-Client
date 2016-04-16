@@ -364,11 +364,12 @@ public class EntityUtils
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)
-					if(newEntity == null && (en.getName().equals(name) || !(en instanceof EntityPlayer)))
+					if(newEntity == null && (en.getName().equals(name)))
 						newEntity = en;
 			}
 		return newEntity;
 	}
+	
 	public static Entity getClosestNonlivingEntity(boolean ignoreFriends,
 		boolean useFOV, boolean ticksExisted)
 	{
@@ -389,17 +390,12 @@ public class EntityUtils
 			}
 		return closestNLEntity;
 	}
+	
 	public static boolean isCorrectNonlivingEntity(Object o, boolean ignoreFriends, boolean ticksExisted)
 	{
 		// non-entities
 		if(!(o instanceof Entity))
 					return false;
-				
-		// friends
-		if(ignoreFriends && o instanceof EntityPlayer)
-			if(WurstClient.INSTANCE.friends.contains(((EntityPlayer)o)
-				.getName()))
-				return false;
 				
 		//ticks Existed check
 		if(ticksExisted)
