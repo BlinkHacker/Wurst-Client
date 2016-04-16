@@ -71,19 +71,23 @@ public class PathUtils
 	
 	public static boolean isFlyable(BlockPos pos)
 	{
+		boolean noBlockSlow = WurstClient.INSTANCE.mods.noSlowdownMod.isEnabled() &&
+			WurstClient.INSTANCE.mods.noSlowdownMod.blocks.isChecked();
 		if(playerCaps == null)
 			playerCaps = Minecraft.getMinecraft().thePlayer.capabilities;
 		return WurstClient.INSTANCE.mods.flightMod.isEnabled()
 			|| playerCaps.isFlying
-			|| !WurstClient.INSTANCE.mods.noBlockSlowdownMod.isEnabled()
+			|| !noBlockSlow
 			&& getMaterial(pos) == Material.water;
 	}
 	
 	public static int getCost(BlockPos current, BlockPos next)
 	{
+		boolean noBlockSlow = WurstClient.INSTANCE.mods.noSlowdownMod.isEnabled() &&
+			WurstClient.INSTANCE.mods.noSlowdownMod.blocks.isChecked();
 		Material nextMaterial = getMaterial(next);
 		if(nextMaterial == Material.water)
-			if(WurstClient.INSTANCE.mods.noBlockSlowdownMod.isEnabled())
+			if(noBlockSlow)
 				return 1;
 			else if(WurstClient.INSTANCE.mods.antiKnockbackMod.isEnabled())
 				return 2;

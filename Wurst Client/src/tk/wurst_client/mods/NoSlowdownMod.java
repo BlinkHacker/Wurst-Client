@@ -10,18 +10,24 @@ package tk.wurst_client.mods;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
-import tk.wurst_client.navigator.NavigatorItem;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MOVEMENT,
-	description = "Cancels slowness effects caused by water and soul sand.",
-	name = "NoBlockSlowdown",
-	noCheatCompatible = false)
-public class NoBlockSlowdownMod extends Mod implements UpdateListener
+	description = "Cancels slowness effects caused by water, soul sand and\n"
+		+ "using items. Water and soul sand slowdown cannot bypass NCP.",
+	name = "NoSlowdown")
+public class NoSlowdownMod extends Mod implements UpdateListener
 {
+	public CheckboxSetting items = new CheckboxSetting(
+		"No Item Slowdown", true);
+	public CheckboxSetting blocks = new CheckboxSetting(
+		"No Block Slowdown", true);
+	
 	@Override
-	public NavigatorItem[] getSeeAlso()
+	public void initSettings()
 	{
-		return new NavigatorItem[]{wurst.mods.noItemSlowdownMod};
+		settings.add(blocks);
+		settings.add(items);
 	}
 	
 	@Override
@@ -34,7 +40,7 @@ public class NoBlockSlowdownMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		if(mc.thePlayer.onGround && mc.thePlayer.isInWater()
-			&& mc.gameSettings.keyBindJump.pressed)
+			&& mc.gameSettings.keyBindJump.pressed && blocks.isChecked())
 			mc.thePlayer.jump();
 	}
 	
