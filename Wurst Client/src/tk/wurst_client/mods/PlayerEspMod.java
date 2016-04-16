@@ -24,8 +24,7 @@ public class PlayerEspMod extends Mod implements RenderListener
 	public NavigatorItem[] getSeeAlso()
 	{
 		return new NavigatorItem[]{wurst.mods.tracersMod,
-			wurst.mods.playerFinderMod, wurst.mods.mobEspMod,
-			wurst.mods.prophuntEspMod};
+			wurst.mods.playerFinderMod, wurst.mods.mobEspMod};
 	}
 	
 	@Override
