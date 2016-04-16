@@ -82,27 +82,27 @@ public class HudMod extends Mod implements GUIRenderListener
 		        int xBase = getXP(22 + mc.fontRendererObj.getStringWidth("0:00"), scaledRes);
 		        String potionName = "";
 		          potionName = I18n.format(potion.getName());
-		          if (potionEffect.getAmplifier() == 1) {
+		          if (potionEffect.getAmplifier() == 1)
 		            potionName = potionName + " II";
-		          } else if (potionEffect.getAmplifier() == 2) {
+		          else if (potionEffect.getAmplifier() == 2)
 		            potionName = potionName + " III";
-		          } else if (potionEffect.getAmplifier() == 3) {
+		          else if (potionEffect.getAmplifier() == 3)
 		            potionName = potionName + " IV";
-		          } else if (potionEffect.getAmplifier() == 4) {
+		          else if (potionEffect.getAmplifier() == 4)
 		            potionName = potionName + " V";
-		          } else if (potionEffect.getAmplifier() == 5) {
+		          else if (potionEffect.getAmplifier() == 5)
 		            potionName = potionName + " VI";
-		          } else if (potionEffect.getAmplifier() == 6) {
+		          else if (potionEffect.getAmplifier() == 6)
 		            potionName = potionName + " VII";
-		          } else if (potionEffect.getAmplifier() == 7) {
+		          else if (potionEffect.getAmplifier() == 7)
 		            potionName = potionName + " VIII";
-		          } else if (potionEffect.getAmplifier() == 8) {
+		          else if (potionEffect.getAmplifier() == 8)
 		            potionName = potionName + " IX";
-		          } else if (potionEffect.getAmplifier() == 9) {
+		          else if (potionEffect.getAmplifier() == 9)
 		            potionName = potionName + " X";
-		          } else if (potionEffect.getAmplifier() > 9) {
+		          else if (potionEffect.getAmplifier() > 9)
 		            potionName = potionName + " " + (potionEffect.getAmplifier() + 1);
-		          }
+		          
 		          xBase = getXP(22 + mc.fontRendererObj.getStringWidth(potionName), scaledRes);
 		        String effectDuration = Potion.getDurationString(potionEffect);
 		        xBase = getXP(0, scaledRes);
@@ -197,7 +197,7 @@ public class HudMod extends Mod implements GUIRenderListener
 			worldtime = colorhour + ":" + seconds;
 	        String coorddirtime = "§lCoords:§r "+ posX + ", " + posY + ", " + posZ + " " + "[" + facingdir + "]";
 	        mc.fontRendererObj.drawStringWithShadow(coorddirtime, mc.fontRendererObj.getStringWidth("12:34") * 5
-	        	+ mc.fontRendererObj.getStringWidth("1") * 2, 8, 16777215);
+	        	+ mc.fontRendererObj.getStringWidth("1") * 3, 8, 16777215);
 	        mc.fontRendererObj.drawStringWithShadow(worldtime, mc.fontRendererObj.getStringWidth("12:34") * 4
 	        	+ mc.fontRendererObj.getStringWidth("1") * 2 , 8, 16777215);
 		}

@@ -33,7 +33,7 @@ public class AntiHungerMod extends Mod implements PacketOutputListener
             double yDifference = mc.thePlayer.posY - mc.thePlayer.lastTickPosY;
             boolean groundCheck = yDifference == 0.0D;
             if (groundCheck && !mc.playerController.isHittingBlock)
-                player.setOnGround(false);
+                player.field_149474_g = false;
         }
 		
 	}

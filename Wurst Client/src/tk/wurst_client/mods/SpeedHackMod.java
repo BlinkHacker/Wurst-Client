@@ -7,11 +7,15 @@
  */
 package tk.wurst_client.mods;
 
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.MovementInput;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.ModeSetting;
 import tk.wurst_client.utils.BlockUtils;
+import tk.wurst_client.utils.MathUtils;
 
 @Info(category = Category.MOVEMENT,
 	description = "Gotta go fast!\n"
@@ -21,9 +25,12 @@ import tk.wurst_client.utils.BlockUtils;
 public class SpeedHackMod extends Mod implements UpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Gomme"};
+	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Rapid"};
 	private int speedupstage = 0;
-	private int gommestage = 0;
+	private int lateststage = -1;
+	private double moveSpeed;
+	private double lastDist;
+	private boolean changedtimer = false;
 	
 	@Override
 	public void initSettings()
@@ -119,23 +126,101 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	            mc.thePlayer.motionY = 0.06499999761581421D;
 	            mc.thePlayer.motionX *= 1.5499999523162842D;
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
-	         }
+	        }
 			break;
 		case 3:
-			if(gommestage == 1) 
+			if ((!mc.gameSettings.keyBindForward.pressed) && (!mc.gameSettings.keyBindLeft.pressed) && 
+				(!mc.gameSettings.keyBindRight.pressed) && (!mc.gameSettings.keyBindBack.pressed) && (
+				(mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, 
+					mc.thePlayer.boundingBox.offset(0.0D, mc.thePlayer.motionY, 0.0D)).
+					size() > 0) || (mc.thePlayer.isCollidedVertically)))
+				lateststage = 1;
+			if (MathUtils.round(mc.thePlayer.posY - (int)mc.thePlayer.posY, 3) == 
+				MathUtils.round(0.138D, 3)) 
 			{
-				mc.thePlayer.motionY = 0.07999999821186066D;
-	            mc.thePlayer.motionX *= 2.299999952316284D;
-	            mc.thePlayer.motionZ *= 2.299999952316284D;
-			} else if(gommestage >= 2) 
+				EntityPlayerSP thePlayer = mc.thePlayer;
+				thePlayer.motionY -= 0.08D;
+				mc.thePlayer.motionY -= 0.09316090325960147D;
+				EntityPlayerSP thePlayer2 = mc.thePlayer;
+				thePlayer2.posY -= 0.09316090325960147D;
+			}
+			if (lateststage == 1 && mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F) 
 			{
-	            mc.thePlayer.motionX /= 1.4500000476837158D;
-	            mc.thePlayer.motionZ /= 1.4500000476837158D;
-	            gommestage = 0;
-	        }
-
-	            gommestage++;
-			break;
+				lateststage = 2;
+				mc.timer.timerSpeed = 1.0F;
+				moveSpeed = (2.3D * getBaseMoveSpeed() - 0.01D);
+				} else if (lateststage == 2) 
+				{
+					lateststage = 3;
+					if (mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, 
+						mc.thePlayer.boundingBox.offset(0.0D, mc.thePlayer.motionY, 0.0D)).size() < 1)
+						return;
+					mc.thePlayer.motionY = 0.4D;
+					if (mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, mc.thePlayer.boundingBox.offset(
+						mc.thePlayer.motionX, mc.thePlayer.motionY, mc.thePlayer.motionZ)).size() > 0)
+						return;
+					mc.timer.timerSpeed = 1.0F;
+					mc.thePlayer.motionY = 0.0D;
+					moveSpeed *= 2.149D;
+				} else if (lateststage == 3) 
+				{
+					mc.timer.timerSpeed = 1.0F;
+					lateststage = 4;
+					double difference = 0.66D * (lastDist - getBaseMoveSpeed());
+					moveSpeed = (lastDist - difference);
+				} else 
+				{
+					mc.timer.timerSpeed = 1.0F;
+					if (mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F)
+						mc.timer.timerSpeed = 1.6F;
+					if ((mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, mc.thePlayer.boundingBox.offset(
+						0.0D, mc.thePlayer.motionY, 0.0D)).size() > 0) || (mc.thePlayer.isCollidedVertically)) {
+						lateststage = 1;
+						}
+					moveSpeed = (lastDist - lastDist / 159.0D);
+					}
+			moveSpeed = Math.max(moveSpeed, getBaseMoveSpeed());
+			MovementInput movementInput = mc.thePlayer.movementInput;
+			float forward = movementInput.moveForward;
+			float strafe = movementInput.moveStrafe;
+			float yaw = mc.thePlayer.rotationYaw;
+			if (forward == 0.0F && strafe == 0.0F) 
+			{
+				mc.thePlayer.motionX = 0.0D;
+				mc.thePlayer.motionZ = 0.0D;
+			}else if (forward != 0.0F) 
+			{
+				if (strafe >= 1.0F) 
+				{
+					yaw += (forward > 0.0F ? -45 : 45);
+					strafe = 0.0F;
+				}else if (strafe <= -1.0F)
+				{
+					yaw += (forward > 0.0F ? 45 : -45);
+					strafe = 0.0F;
+				}
+				if (forward > 0.0F)
+					forward = 1.0F;
+				else if (forward < 0.0F)
+				         forward = -1.0F;
+				}
+				     double mx = Math.cos(Math.toRadians(yaw + 90.0F));
+				     double mz = Math.sin(Math.toRadians(yaw + 90.0F));
+				     double motionX = forward * moveSpeed * mx + strafe * moveSpeed * mz;
+				     double motionZ = forward * moveSpeed * mz - strafe * moveSpeed * mx;  
+				     mc.thePlayer.motionX = motionX;
+				     mc.thePlayer.motionZ = motionZ;
+				     double xDist = mc.thePlayer.posX - mc.thePlayer.prevPosX;
+				     double zDist = mc.thePlayer.posZ - mc.thePlayer.prevPosZ;
+				     lastDist = Math.sqrt(xDist * xDist + zDist * zDist);
+				     if (changedtimer) 
+				     {
+				    	 mc.timer.timerSpeed = 1.0F;
+				    	 changedtimer = false;
+				    	 }
+				     if (mc.timer.timerSpeed != 1.0F) 
+				    	 changedtimer = true;
+				     break;
 		default:
 			return;
 		}
@@ -148,6 +233,17 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	    	  !BlockUtils.isOnLiquid(mc.thePlayer) && !mc.thePlayer.isCollidedHorizontally && 
 	    	  !BlockUtils.isOnLadder(mc.thePlayer) && 
 	    	  !mc.thePlayer.isSneaking() && mc.thePlayer.onGround && moving;
+	}
+	
+	public double getBaseMoveSpeed() 
+	{
+		double baseSpeed = 0.2873D;
+		 if (mc.thePlayer.isPotionActive(Potion.moveSpeed)) 
+		 {
+			 int amplifier = mc.thePlayer.getActivePotionEffect(Potion.moveSpeed).getAmplifier();
+			 baseSpeed *= (1.0D + 0.2D * (amplifier + 1));
+		 }
+		 return baseSpeed;
 	}
 	@Override
 	public void onDisable()
