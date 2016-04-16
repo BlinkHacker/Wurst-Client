@@ -10,9 +10,6 @@ package tk.wurst_client.mods;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.client.C02PacketUseEntity;
-import net.minecraft.network.play.client.C07PacketPlayerDigging;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
@@ -44,8 +41,8 @@ public class KillauraMod extends Mod implements UpdateListener
 	public float yesCheatrSpeed;
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
-	public final CheckboxSetting alwaysblock = new CheckboxSetting(
-		"Always Block", false);
+	public final CheckboxSetting blockhit = new CheckboxSetting(
+		"BlockHit", false);
 	
 	@Override
 	public void initSettings()
@@ -94,7 +91,7 @@ public class KillauraMod extends Mod implements UpdateListener
 			}
 		});
 		settings.add(randomspeed);
-		settings.add(alwaysblock);
+		settings.add(blockhit);
 	}
 	
 	@Override
@@ -134,29 +131,22 @@ public class KillauraMod extends Mod implements UpdateListener
 		updateSpeedAndRange();
 		updateMS();
 		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
-		if(en != null && alwaysblock.isChecked() && mc.thePlayer.getCurrentEquippedItem() != null &&
-			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword
-			&& mc.thePlayer.getDistanceToEntity(en) <= 6)
-			mc.gameSettings.keyBindUseItem.pressed = true;
 		if(hasTimePassedS(realSpeed) && en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= realRange)
 			{
 				if(wurst.mods.autoSwordMod.isActive())
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
-				if(!alwaysblock.isChecked())
-				wurst.mods.blockHitMod.doBlock();
-				else
-					mc.getNetHandler().addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.
-						Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN));
 				EntityUtils.faceEntityPacket(en);
 				mc.thePlayer.swingItem();
+				if(blockhit.isChecked() && mc.thePlayer.getHeldItem() != null &&
+					mc.thePlayer.getHeldItem().getItem() instanceof ItemSword)
+				mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 					en, C02PacketUseEntity.Action.ATTACK));
-				if(alwaysblock.isChecked() && en != null && mc.thePlayer.getDistanceToEntity(en) <= 6)
-					mc.gameSettings.keyBindUseItem.pressed = true;
-				else
-					mc.gameSettings.keyBindUseItem.pressed = false;
+				if(blockhit.isChecked() && mc.thePlayer.getHeldItem() != null &&
+					mc.thePlayer.getHeldItem().getItem() instanceof ItemSword)
+				mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
 				updateLastMS();
 			}
 	}
