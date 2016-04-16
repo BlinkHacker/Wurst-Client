@@ -649,7 +649,7 @@ public class RenderUtils
 	public static void renderQuad(Tessellator tessellator, int x, int y, int width, int height, int color)
 	{
 	    WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-	    worldRenderer.startDrawingQuads();;
+	    worldRenderer.startDrawingQuads();
 	    worldRenderer.setColorOpaque_I(color);
 	    worldRenderer.addVertex(x + 0, y + 0, 0.0D);
 	    worldRenderer.addVertex(x + 0, y + height, 0.0D);

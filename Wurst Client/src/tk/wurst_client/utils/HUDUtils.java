@@ -120,10 +120,10 @@ public class HUDUtils
         int var11 = (int)Math.round(13.0D - itemStack.getItemDamage() * 13.0D / itemStack.getMaxDamage());
         int var7 = (int)Math.round(255.0D - itemStack.getItemDamage() * 255.0D / itemStack.getMaxDamage());
         GlStateManager.disableLighting();
-        GlStateManager.disableDepth();;
+        GlStateManager.disableDepth();
         GlStateManager.func_179090_x();
-        GlStateManager.disableAlpha();;
-        GlStateManager.disableBlend();;
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
         Tessellator var8 = Tessellator.getInstance();
         int var9 = 255 - var7 << 16 | var7 << 8;
         int var10 = (255 - var7) / 4 << 16 | 0x3F00;

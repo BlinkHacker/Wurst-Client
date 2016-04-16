@@ -344,7 +344,7 @@ UpdateListener
 
 	    AxisAlignedBB box = AxisAlignedBB.fromBounds(x, y + offset, z, x + 1, y + offset + 0.06F, z + 1);
 	    GlStateManager.color(0.49F, 0.8F, 1F, 0.11F);
-	    RenderUtils.drawColorBox(box);;
+	    RenderUtils.drawColorBox(box);
 	    GlStateManager.color(0.49F, 0.8F, 1F, 0.60F);
 	    RenderUtils.drawLines(box);
 	    RenderGlobal.drawOutlinedBoundingBox(box, -1);
