@@ -84,19 +84,28 @@ public class SpeedHackMod extends Mod implements UpdateListener
 		}
 			break;
 		case 1:
-			 if(speedupstage == 1) {
+			 if(speedupstage == 1) 
+			 {
+				 mc.timer.timerSpeed = 1F;
                  mc.thePlayer.motionX *= 1.94D;
                  mc.thePlayer.motionZ *= 1.94D;
-              } else if(speedupstage == 2) {
+              } else if(speedupstage == 2) 
+              {
+            	 mc.timer.timerSpeed = 1.1F;
                  mc.thePlayer.motionX /= 1.9D;
                  mc.thePlayer.motionZ /= 1.9D;
-              } else if(speedupstage == 3) {
+              } else if(speedupstage == 3) 
+              {
                  mc.thePlayer.motionX *= 1.2000000476837158D;
                  mc.thePlayer.motionZ *= 1.2000000476837158D;
-              } else if(speedupstage == 4) {
+              } else if(speedupstage == 4) 
+              {
+            	 mc.timer.timerSpeed = 1F;
                  mc.thePlayer.motionX /= 1.9D;
                  mc.thePlayer.motionZ /= 1.9D;
-              } else if(speedupstage >= 5) {
+              } else if(speedupstage >= 5) 
+              {
+            	 mc.timer.timerSpeed = 1.15F;
                  mc.thePlayer.motionX *= 1.94D;
                  mc.thePlayer.motionZ *= 1.94D;
                  speedupstage = 0;
@@ -105,18 +114,21 @@ public class SpeedHackMod extends Mod implements UpdateListener
 			 speedupstage++;
 			 break;
 		case 2:
-			if(mc.thePlayer.onGround) {
+			if(mc.thePlayer.onGround) 
+			{
 	            mc.thePlayer.motionY = 0.06499999761581421D;
 	            mc.thePlayer.motionX *= 1.5499999523162842D;
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
 	         }
 			break;
 		case 3:
-			if(gommestage == 1) {
+			if(gommestage == 1) 
+			{
 				mc.thePlayer.motionY = 0.07999999821186066D;
 	            mc.thePlayer.motionX *= 2.299999952316284D;
 	            mc.thePlayer.motionZ *= 2.299999952316284D;
-			} else if(gommestage >= 2) {
+			} else if(gommestage >= 2) 
+			{
 	            mc.thePlayer.motionX /= 1.4500000476837158D;
 	            mc.thePlayer.motionZ /= 1.4500000476837158D;
 	            gommestage = 0;
@@ -150,7 +162,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	
 	public void setMode(int mode)
 	{
-		((ModeSetting)settings.get(1)).setSelected(mode);
+		((ModeSetting)settings.get(0)).setSelected(mode);
 	}
 	
 	public String[] getModes()

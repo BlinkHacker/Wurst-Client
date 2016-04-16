@@ -64,7 +64,6 @@ public class LeaveCmd extends Cmd
 				
 				if(newMode != leave.getMode())
 					leave.setMode(newMode);
-				
 				wurst.chat.message("Leave mode set to \"" + args[1] + "\".");
 				break;
 			default:
