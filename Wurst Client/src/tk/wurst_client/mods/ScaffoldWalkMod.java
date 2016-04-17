@@ -69,7 +69,7 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 		updateMS();
 		if (blockData != null)
 	      {
-	      if(hasTimePassedS(slower.isChecked() ? 1000 : 75))
+	      if(hasTimePassedS(slower.isChecked() ? 350 : 75))
 	      {
 	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
 	    		  C0BPacketEntityAction.Action.START_SNEAKING));
