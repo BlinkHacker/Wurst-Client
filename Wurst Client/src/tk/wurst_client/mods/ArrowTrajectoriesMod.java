@@ -57,9 +57,8 @@ public class ArrowTrajectoriesMod extends Mod implements RenderListener
 	            useduration = (useduration * useduration + useduration * 2.0F) / 3.0F;
 	            if (useduration >= 0.1D)
 	            {
-	              if (useduration > 1.0F) {
+	              if (useduration > 1.0F)
 	            	  useduration = 1.0F;
-	              }
 	              float dur3 = useduration * 3.0F;
 	              arrowx = ((EntityPlayer)mpplayer).posX - MathHelper.cos(((EntityPlayer)mpplayer).
 	            	  rotationYaw / 180.0F * 3.1415927F) * 0.16F;
@@ -96,9 +95,8 @@ public class ArrowTrajectoriesMod extends Mod implements RenderListener
 	                Vec3 arrowvec = new Vec3(arrowx, arrowy, arrowz);
 	                Vec3 arrowyaw = new Vec3(arrowx + yaw1, arrowy + pitch, arrowz+ yaw2);
 	                movingobject = mc.theWorld.rayTraceBlocks(arrowvec, arrowyaw, false, true, false);
-	                if (movingobject != null) {
+	                if (movingobject != null)
 	                  j = 1;
-	                }
 	                arrowx += yaw1;
 	                arrowy += pitch;
 	                arrowz+= yaw2;
