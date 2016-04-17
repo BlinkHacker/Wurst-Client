@@ -62,7 +62,8 @@ public class PingSpoofMod extends Mod implements PacketOutputListener
 	{
 		if(mode == 0)
 		{
-         if(event.getPacket() instanceof C00PacketKeepAlive) {
+         if(event.getPacket() instanceof C00PacketKeepAlive) 
+         {
             C00PacketKeepAlive packet = (C00PacketKeepAlive)event.getPacket();
             packet.key = Integer.MAX_VALUE;
          }
@@ -85,5 +86,19 @@ public class PingSpoofMod extends Mod implements PacketOutputListener
 	{
 		wurst.events.remove(PacketOutputListener.class, this);
 	}
-
+	
+	public int getMode()
+	{
+		return mode;
+	}
+	
+	public void setMode(int mode)
+	{
+		((ModeSetting)settings.get(1)).setSelected(mode);
+	}
+	
+	public String[] getModes()
+	{
+		return modes;
+	}
 }
