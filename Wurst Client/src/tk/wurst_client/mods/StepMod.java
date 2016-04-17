@@ -15,7 +15,8 @@ import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.SliderSetting;
 
 @Info(category = Category.MOVEMENT,
-	description = "Allows you to step up full blocks.",
+	description = "Allows you to step up full blocks.\n"
+		+ "Bypasses NoCheat if YesCheat+ is enabled.",
 	name = "Step")
 public class StepMod extends Mod implements UpdateListener
 {
@@ -44,13 +45,10 @@ public class StepMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		if(wurst.mods.yesCheatMod.isActive())
-		{
-			mc.thePlayer.stepHeight = 0.5F;
-			if(mc.thePlayer.isCollidedHorizontally && mc.thePlayer.onGround)
-				mc.thePlayer.jump();
-		}else
+		if(!wurst.mods.yesCheatMod.isActive())
 			mc.thePlayer.stepHeight = isEnabled() ? height : 0.5F;
+		else if(wurst.mods.yesCheatMod.isActive())
+			mc.thePlayer.stepHeight = 1;
 	}
 	
 	@Override
