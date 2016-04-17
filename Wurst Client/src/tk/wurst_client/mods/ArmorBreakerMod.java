@@ -32,7 +32,7 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 	public void onEntityAttacked(AttackEntityEvent event)
 	{
 		 ItemStack current = mc.thePlayer.getCurrentEquippedItem();
-		 for(int i = 0; i < 36; i++)
+		 for(int i = 0; i < 45; i++)
 		 {
 	        ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
 	        if (current != null && toSwitch != null)
