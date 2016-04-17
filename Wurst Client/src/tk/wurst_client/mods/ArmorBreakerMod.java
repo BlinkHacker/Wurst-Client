@@ -32,14 +32,17 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 	public void onEntityAttacked(AttackEntityEvent event)
 	{
 		 ItemStack current = mc.thePlayer.getCurrentEquippedItem();
-	        ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(27).getStack();
+		 for(int i = 0; i < 36; i++)
+		 {
+	        ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
 	        if (current != null && toSwitch != null)
 	            if (current.getItem() instanceof ItemSword || current.getItem() instanceof ItemAxe ||
 	            	current.getItem() instanceof ItemPickaxe || current.getItem() instanceof ItemSpade)
 	                if (toSwitch.getItem() instanceof ItemSword || toSwitch.getItem() instanceof ItemAxe || 
 	                	toSwitch.getItem() instanceof ItemPickaxe || toSwitch.getItem() instanceof ItemSpade)
-	                    mc.playerController.windowClick(0, 27, mc.thePlayer.inventory.currentItem, 
+	                    mc.playerController.windowClick(0, i, mc.thePlayer.inventory.currentItem, 
 	                    	2, mc.thePlayer);
+		 }
 	}
 	
 	@Override
