@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.NavigatorItem;
 
 @Info(category = Category.RENDER,
 	description = "Adds the health of players and mobs with names\n"
@@ -16,5 +17,9 @@ import tk.wurst_client.mods.Mod.Info;
 	name = "HealthTags")
 public class HealthTagsMod extends Mod
 {	
-	
+	@Override
+	public NavigatorItem[] getSeeAlso()
+	{
+		return new NavigatorItem[]{wurst.mods.mobHealthTagsMod};
+	}
 }
