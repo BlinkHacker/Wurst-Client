@@ -62,6 +62,6 @@ public class BlockBBEvent extends Event
    @Override
    public String getAction()
    {
-	   return "Setting BoundingBox";
+	   return "setting boundingBox";
    }
 }

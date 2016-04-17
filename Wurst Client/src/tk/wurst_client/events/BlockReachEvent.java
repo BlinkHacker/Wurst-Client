@@ -29,6 +29,6 @@ public class BlockReachEvent extends Event
 	@Override
 	public String getAction()
 	{
-		return "Reaching Block";
+		return "reaching block";
 	}
 }
