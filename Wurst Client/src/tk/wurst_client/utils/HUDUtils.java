@@ -9,6 +9,7 @@ package tk.wurst_client.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -18,8 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
 
 public class HUDUtils
 {
@@ -86,10 +85,10 @@ public class HUDUtils
   {
     RenderItem itemRenderer = Minecraft.getMinecraft().getRenderItem();
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-    GL11.glEnable(GL11.GL_BLEND);
-    GL14.glBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, 
-        	GL11.GL_NONE);
+    GlStateManager.enableRescaleNormal();
+    GlStateManager.enableBlend();
+    GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, 
+    	GL11.GL_NONE);
     RenderHelper.enableGUIStandardItemLighting();
     itemRenderer.zLevel = 200.0F;
       itemRenderer.func_180450_b(itemStack, x - (iconW + padW), y);
@@ -97,8 +96,8 @@ public class HUDUtils
     	  (iconW + padW), y, true, true);
       
       RenderHelper.disableStandardItemLighting();
-      GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-      GL11.glDisable(GL11.GL_BLEND);
+      GlStateManager.disableRescaleNormal();
+      GlStateManager.disableBlend();
       
       Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(itemName + "§r", x - (padW + 
     	  iconW + padW) - itemNameW, y, 16777215);
@@ -120,21 +119,21 @@ public class HUDUtils
       {
         int var11 = (int)Math.round(13.0D - itemStack.getItemDamage() * 13.0D / itemStack.getMaxDamage());
         int var7 = (int)Math.round(255.0D - itemStack.getItemDamage() * 255.0D / itemStack.getMaxDamage());
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_DEPTH);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_ALPHA);
-        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        GlStateManager.func_179090_x();
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
         Tessellator var8 = Tessellator.getInstance();
         int var9 = 255 - var7 << 16 | var7 << 8;
         int var10 = (255 - var7) / 4 << 16 | 0x3F00;
         RenderUtils.renderQuad(var8, x + 2, y + 13, 13, 2, 0);
         RenderUtils.renderQuad(var8, x + 2, y + 13, 12, 1, var10);
         RenderUtils.renderQuad(var8, x + 2, y + 13, var11, 1, var9);
-        GL11.glEnable(GL11.GL_ALPHA);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_DEPTH);
+        GlStateManager.enableAlpha();
+        GlStateManager.func_179098_w();
+        GlStateManager.enableLighting();
+        GlStateManager.enableDepth();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
       }
       if (showCount)
@@ -149,12 +148,12 @@ public class HUDUtils
         if (count > 1)
         {
           String var6 = "" + count;
-          GL11.glDisable(GL11.GL_LIGHTING);
-          GL11.glDisable(GL11.GL_DEPTH);
-          GL11.glDisable(GL11.GL_BLEND);
+          GlStateManager.disableLighting();
+          GlStateManager.disableDepth();
+          GlStateManager.disableBlend();
           fontRenderer.drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.getStringWidth(var6), y + 6 + 3, 16777215);
-          GL11.glEnable(GL11.GL_LIGHTING);
-          GL11.glEnable(GL11.GL_DEPTH);
+          GlStateManager.enableLighting();
+          GlStateManager.enableDepth();
         }
       }
     }
