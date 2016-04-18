@@ -538,6 +538,7 @@ public class RenderUtils
 	{
 		Tessellator ts = Tessellator.getInstance();
 		WorldRenderer t = ts.getWorldRenderer();
+		
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		glLineWidth(w);
@@ -553,11 +554,12 @@ public class RenderUtils
 
 		double[] pf = RenderUtil.renderPos(from);
 		double[] pt = RenderUtil.renderPos(to);
-		int draw = 1;
-		t.startDrawing(draw);
+		
+		t.startDrawing(1);
 		t.addVertex(pf[0], pf[1], pf[2]);
 		t.addVertex(pt[0], pt[1], pt[2]);
 		ts.draw();
+		
 		glEnable(GL_TEXTURE_2D);
 		if(opacity)
 		{
