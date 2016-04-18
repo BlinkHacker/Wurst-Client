@@ -67,12 +67,13 @@ public class BreadcrumbsMod extends Mod implements RenderListener, UpdateListene
 	@Override
 	public void onRender()
 	{
-		for(int i = 1; i < points.size(); i++) {
+		for(int i = 1; i < points.size(); i++) 
+		{
 			double[] f = points.get(i-1);
 			double[] t = points.get(i);
 			Vec3 from = new Vec3(f[0], f[1], f[2]);
 			Vec3 to = new Vec3(t[0], t[1], t[2]);
-			RenderUtils.line(from, to, new Color(0, 0, 1, 0.75F), (float)2, opacity.isChecked());
+			RenderUtils.line(from, to, new Color(0, 0, 1, 0.75F), 2.0F, opacity.isChecked());
 		}
 	}
 

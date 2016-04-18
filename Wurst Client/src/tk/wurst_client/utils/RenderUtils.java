@@ -534,11 +534,13 @@ public class RenderUtils
 		glDisable(GL_BLEND);
 	}
 	
-	public static void line(Vec3 from, Vec3 to, Color color, float w, boolean opacity) {
-		Tessellator var9 = Tessellator.getInstance();
-		WorldRenderer t = var9.getWorldRenderer();
-
+	public static void line(Vec3 from, Vec3 to, Color color, float w, boolean opacity) 
+	{
+		Tessellator ts = Tessellator.getInstance();
+		WorldRenderer t = ts.getWorldRenderer();
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
+		glLineWidth(w);
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_LINE_SMOOTH);
 		if(opacity)
@@ -546,27 +548,24 @@ public class RenderUtils
 		glDisable(GL_DEPTH_TEST);
 		glDepthMask(false);
 		}
-		glLineWidth(w);
 
 		RenderUtil.setColor(color);
 
 		double[] pf = RenderUtil.renderPos(from);
 		double[] pt = RenderUtil.renderPos(to);
-		
 		int draw = 1;
 		t.startDrawing(draw);
 		t.addVertex(pf[0], pf[1], pf[2]);
 		t.addVertex(pt[0], pt[1], pt[2]);
-		var9.draw();
-
-		glDisable(GL_LINE_SMOOTH);
+		ts.draw();
+		glEnable(GL_TEXTURE_2D);
 		if(opacity)
 		{
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(true);
 		}
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
+		glDisable(GL_LINE_SMOOTH);
+		glDisable(GL_BLEND);
 	}
 	
 	public static void enableTextures(boolean texture)

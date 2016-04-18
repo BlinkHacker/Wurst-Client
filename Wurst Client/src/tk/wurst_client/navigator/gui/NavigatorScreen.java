@@ -122,6 +122,7 @@ public abstract class NavigatorScreen extends GuiScreen
 		glDisable(GL_CULL_FACE);
 		glDisable(GL_TEXTURE_2D);
 		glShadeModel(GL_SMOOTH);
+		glLineWidth(1.0F);
 		
 		// background
 		int bgx1 = middleX - 154;
