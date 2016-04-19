@@ -69,7 +69,6 @@ public class TriggerBotMod extends Mod implements UpdateListener
 					if(wurst.mods.autoSwordMod.isActive())
 						AutoSwordMod.setSlot();
 					wurst.mods.criticalsMod.doCritical();
-					wurst.mods.blockHitMod.doBlock();
 					mc.thePlayer.swingItem();
 					mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 						en, C02PacketUseEntity.Action.ATTACK));

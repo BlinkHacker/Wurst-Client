@@ -65,7 +65,6 @@ public class MultiAuraMod extends Mod implements UpdateListener
 			if(wurst.mods.autoSwordMod.isActive())
 				AutoSwordMod.setSlot();
 			wurst.mods.criticalsMod.doCritical();
-			wurst.mods.blockHitMod.doBlock();
 			ArrayList<EntityLivingBase> entities =
 				EntityUtils.getCloseEntities(true, range, true);
 			for(int i = 0; i < Math.min(entities.size(), 64); i++)

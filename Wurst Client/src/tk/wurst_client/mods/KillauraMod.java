@@ -8,9 +8,7 @@
 package tk.wurst_client.mods;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.client.C02PacketUseEntity;
-import net.minecraft.network.play.client.C0APacketAnimation;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
@@ -42,8 +40,6 @@ public class KillauraMod extends Mod implements UpdateListener
 	public float yesCheatrSpeed;
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
-	public final CheckboxSetting blockhit = new CheckboxSetting(
-		"BlockHit", false);
 	
 	@Override
 	public void initSettings()
@@ -92,7 +88,6 @@ public class KillauraMod extends Mod implements UpdateListener
 			}
 		});
 		settings.add(randomspeed);
-		settings.add(blockhit);
 	}
 	
 	@Override
@@ -139,18 +134,9 @@ public class KillauraMod extends Mod implements UpdateListener
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
 				EntityUtils.faceEntityPacket(en);
-				if(blockhit.isChecked() && mc.thePlayer.getHeldItem() != null &&
-					mc.thePlayer.getHeldItem().getItem() instanceof ItemSword)
-				{
-					mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
-					 mc.getNetHandler().addToSendQueue(new C0APacketAnimation());
-				} else
 					mc.thePlayer.swingItem();
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 					en, C02PacketUseEntity.Action.ATTACK));
-				if(blockhit.isChecked() && mc.thePlayer.getHeldItem() != null &&
-					mc.thePlayer.getHeldItem().getItem() instanceof ItemSword)
-				mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
 				updateLastMS();
 			}
 	}

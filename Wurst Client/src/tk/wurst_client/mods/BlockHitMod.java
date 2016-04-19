@@ -7,70 +7,57 @@
  */
 package tk.wurst_client.mods;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.ItemStack;
+import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
+
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSword;
-import tk.wurst_client.events.listeners.LeftClickListener;
+import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.SliderSetting;
+import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
-	description = "Automatically blocks whenever you hit something with a\n"
-		+ "sword. Some say that you will receive less damage in PVP when doing\n"
-		+ "this.",
+	description = "Automatically blocks whenever an entity is near.",
 	name = "BlockHit",
 	tags = "autoblock")
-public class BlockHitMod extends Mod implements LeftClickListener
+public class BlockHitMod extends Mod implements UpdateListener
 {
+	public float Range = 4F;
+	@Override
+	public void initSettings()
+	{
+		settings.add(new SliderSetting("Range", Range, 2, 9, 0.1,
+		ValueDisplay.DECIMAL)
+		{
+			@Override
+			public void update()
+			{
+				Range = (float)getValue();
+			}
+		});
+	}
+	
 	@Override
 	public void onEnable()
 	{
-		wurst.events.add(LeftClickListener.class, this);
+		wurst.events.add(UpdateListener.class, this);
+	}
+	
+	@Override
+	public void onUpdate()
+	{
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		if(mc.thePlayer.getCurrentEquippedItem() != null && 
+			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword && en != null &&
+			mc.thePlayer.getDistanceToEntity(en) <= Range)
+			mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
+		
 	}
 	
 	@Override
 	public void onDisable()
 	{
-		wurst.events.remove(LeftClickListener.class, this);
-	}
-	
-	@Override
-	public void onLeftClick()
-	{
-		ItemStack stack = mc.thePlayer.getCurrentEquippedItem();
-		
-		if(stack != null && stack.getItem() instanceof ItemSword)
-			doBlock();
-	}
-	
-	public void doBlock()
-	{
-		if(!isActive())
-			return;
-		new Thread("BlockHit")
-		{
-			@Override
-			public void run()
-			{
-				KeyBinding keybindUseItem = mc.gameSettings.keyBindUseItem;
-				keybindUseItem.pressed = false;
-				try
-				{
-					Thread.sleep(50);
-				}catch(InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				keybindUseItem.pressed = true;
-				try
-				{
-					Thread.sleep(100);
-				}catch(InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				keybindUseItem.pressed = false;
-			}
-		}.start();
+		wurst.events.remove(UpdateListener.class, this);
 	}
 }

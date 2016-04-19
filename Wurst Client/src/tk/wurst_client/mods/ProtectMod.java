@@ -90,7 +90,6 @@ public class ProtectMod extends Mod implements UpdateListener
 				if(wurst.mods.autoSwordMod.isActive())
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
-				wurst.mods.blockHitMod.doBlock();
 				EntityUtils.faceEntityClient(enemy);
 				mc.thePlayer.swingItem();
 				mc.playerController.attackEntity(mc.thePlayer, enemy);

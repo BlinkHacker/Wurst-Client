@@ -68,7 +68,6 @@ public class ClickAuraMod extends Mod implements UpdateListener
 				if(wurst.mods.autoSwordMod.isActive())
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
-				wurst.mods.blockHitMod.doBlock();
 				EntityUtils.faceEntityPacket(en);
 				mc.thePlayer.swingItem();
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
