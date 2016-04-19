@@ -10,6 +10,7 @@ package tk.wurst_client.mods;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MovementInput;
+import tk.wurst_client.events.listeners.PostUpdateListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -22,10 +23,10 @@ import tk.wurst_client.utils.MathUtils;
 		+ "Note: This mod only semi bypasses NCP. It might be blocked\n"
 		+ "in newer verisons of NoCheat+ or throws checks.",
 	name = "SpeedHack")
-public class SpeedHackMod extends Mod implements UpdateListener
+public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Rapid"};
+	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Rapid", "YPort"};
 	private int speedupstage = 0;
 	private int lateststage = -1;
 	private double moveSpeed;
@@ -48,6 +49,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	@Override
 	public void onEnable()
 	{
+		wurst.events.add(PostUpdateListener.class, this);
 		wurst.events.add(UpdateListener.class, this);
 	}
 	
@@ -221,9 +223,27 @@ public class SpeedHackMod extends Mod implements UpdateListener
 				     if (mc.timer.timerSpeed != 1.0F) 
 				    	 changedtimer = true;
 				     break;
+		case 4:
+			if(mc.thePlayer.onGround)
+			{
+				mc.thePlayer.motionY = 0.3994F;
+				mc.thePlayer.motionX *= 1.55F;
+				mc.thePlayer.motionZ *= 1.55F; 
+			}
+			break;
 		default:
 			return;
 		}
+	}
+	
+	@Override
+	public void onPostUpdate()
+	{
+		if(mode == 4 && mc.thePlayer.fallDistance <= 3.994)
+		{
+		mc.thePlayer.jumpMovementFactor *= 1.3f;
+		mc.thePlayer.motionY = -100f;
+		}	
 	}
 	
 	public boolean canSpeed()
@@ -248,6 +268,7 @@ public class SpeedHackMod extends Mod implements UpdateListener
 	@Override
 	public void onDisable()
 	{
+		wurst.events.remove(PostUpdateListener.class, this);
 		wurst.events.remove(UpdateListener.class, this);
 	}
 	
