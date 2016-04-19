@@ -11,19 +11,24 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSword;
+import tk.wurst_client.events.listeners.LeftClickListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
+import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
-	description = "Automatically blocks whenever an entity is near.",
+	description = "Automatically blocks whenever an entity is near.\n"
+		+ "Tip: You can use this with NoSlowdown to bypass NCP in blocking.",
 	name = "BlockHit",
 	tags = "autoblock")
-public class BlockHitMod extends Mod implements UpdateListener
+public class BlockHitMod extends Mod implements UpdateListener, LeftClickListener
 {
 	public float Range = 4F;
+	public final CheckboxSetting alwaysblock = new CheckboxSetting(
+		"Always Block", false);
 	@Override
 	public void initSettings()
 	{
@@ -36,6 +41,7 @@ public class BlockHitMod extends Mod implements UpdateListener
 				Range = (float)getValue();
 			}
 		});
+		settings.add(alwaysblock);
 	}
 	
 	@Override
@@ -52,7 +58,17 @@ public class BlockHitMod extends Mod implements UpdateListener
 			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword && en != null &&
 			mc.thePlayer.getDistanceToEntity(en) <= Range)
 			mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
+		if(alwaysblock.isChecked() && mc.thePlayer.getCurrentEquippedItem() != null && 
+			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword)
+			mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
+		if(mc.gameSettings.keyBindAttack.pressed && mc.objectMouseOver != null)
+			mc.clickMouse();
 		
+	}
+	
+	@Override
+	public void onLeftClick()
+	{
 	}
 	
 	@Override

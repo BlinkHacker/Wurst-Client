@@ -40,6 +40,8 @@ public class KillauraMod extends Mod implements UpdateListener
 	public float yesCheatrSpeed;
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
+	public final CheckboxSetting mobinfront = new CheckboxSetting(
+		"MobInFront Bypass", false);
 	
 	@Override
 	public void initSettings()
@@ -88,6 +90,7 @@ public class KillauraMod extends Mod implements UpdateListener
 			}
 		});
 		settings.add(randomspeed);
+		settings.add(mobinfront);
 	}
 	
 	@Override
@@ -134,9 +137,13 @@ public class KillauraMod extends Mod implements UpdateListener
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
 				EntityUtils.faceEntityPacket(en);
+				if(!mobinfront.isChecked())
+				{
 					mc.thePlayer.swingItem();
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 					en, C02PacketUseEntity.Action.ATTACK));
+				} else
+					mc.clickMouse();
 				updateLastMS();
 			}
 	}
