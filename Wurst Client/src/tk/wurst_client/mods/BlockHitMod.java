@@ -11,7 +11,6 @@ import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemSword;
-import tk.wurst_client.events.listeners.LeftClickListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -24,7 +23,7 @@ import tk.wurst_client.utils.EntityUtils;
 		+ "Tip: You can use this with NoSlowdown to bypass NCP in blocking.",
 	name = "BlockHit",
 	tags = "autoblock")
-public class BlockHitMod extends Mod implements UpdateListener, LeftClickListener
+public class BlockHitMod extends Mod implements UpdateListener
 {
 	public float Range = 4F;
 	public final CheckboxSetting alwaysblock = new CheckboxSetting(
@@ -64,11 +63,6 @@ public class BlockHitMod extends Mod implements UpdateListener, LeftClickListene
 		if(mc.gameSettings.keyBindAttack.pressed && mc.objectMouseOver != null)
 			mc.clickMouse();
 		
-	}
-	
-	@Override
-	public void onLeftClick()
-	{
 	}
 	
 	@Override
