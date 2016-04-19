@@ -137,13 +137,9 @@ public class KillauraMod extends Mod implements UpdateListener
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
 				EntityUtils.faceEntityPacket(en);
-				if(!mobinfront.isChecked())
-				{
 					mc.thePlayer.swingItem();
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 					en, C02PacketUseEntity.Action.ATTACK));
-				} else
-					mc.clickMouse();
 				updateLastMS();
 			}
 	}
