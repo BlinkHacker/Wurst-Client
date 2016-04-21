@@ -52,6 +52,7 @@ public class BlockHitMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		updateMS();
 		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
 		if(mc.thePlayer.getCurrentEquippedItem() != null && 
 			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword && en != null &&
@@ -60,8 +61,12 @@ public class BlockHitMod extends Mod implements UpdateListener
 		if(alwaysblock.isChecked() && mc.thePlayer.getCurrentEquippedItem() != null && 
 			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword)
 			mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
-		if(mc.gameSettings.keyBindAttack.pressed && mc.objectMouseOver != null)
+		if(mc.gameSettings.keyBindAttack.pressed && mc.objectMouseOver != null && 
+			hasTimePassedS(wurst.mods.killauraMod.realSpeed))
+		{
 			mc.clickMouse();
+			updateLastMS();
+		}
 		
 	}
 	
