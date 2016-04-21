@@ -67,6 +67,7 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 				else
 				{
 					EntityUtils.faceEntityClient(en);
+					wurst.mods.armorBreakerMod.SwapItem();
 					if(!wurst.mods.killauraMod.mobinfront.isChecked())
 					{
 					mc.thePlayer.swingItem();

@@ -16,7 +16,7 @@ import tk.wurst_client.mods.Mod.Info;
 @Info(category = Category.COMBAT,
 	description = "Breaks your enemies armor faster in PVP.\n"
 		+ "Note: you must have a second weapon available in your hotbar.\n"
-		+ "This might also break your tool faster.", 
+		+ "This might also throw NCP checks.", 
 	name = "ArmorBreaker")
 public class ArmorBreakerMod extends Mod implements AttackEntityListener
 {
@@ -31,7 +31,15 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 	@Override
 	public void onEntityAttacked(AttackEntityEvent event)
 	{
-		 ItemStack current = mc.thePlayer.getCurrentEquippedItem();
+		SwapItem();
+	}
+	
+	public void SwapItem()
+	{
+		updateMS();
+		if(wurst.mods.armorBreakerMod.isActive() && hasTimePassedM(200))
+		{
+		ItemStack current = mc.thePlayer.getCurrentEquippedItem();
 		 for(int i = 0; i < 45; i++)
 		 {
 	        ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
@@ -40,9 +48,10 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 	            	current.getItem() instanceof ItemPickaxe || current.getItem() instanceof ItemSpade)
 	                if (toSwitch.getItem() instanceof ItemSword || toSwitch.getItem() instanceof ItemAxe || 
 	                	toSwitch.getItem() instanceof ItemPickaxe || toSwitch.getItem() instanceof ItemSpade)
-	                    mc.playerController.windowClick(0, i, mc.thePlayer.inventory.currentItem, 
-	                    	2, mc.thePlayer);
+	                    mc.playerController.windowClick(0, i, 0, 2, mc.thePlayer);
 		 }
+		 updateLastMS();
+		}
 	}
 	
 	@Override
@@ -50,5 +59,4 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 	{
 		wurst.events.remove(AttackEntityListener.class, this);
 	}
-	
 }

@@ -98,7 +98,8 @@ public class AutoSoupMod extends Mod implements UpdateListener
 			ItemStack stack = inventoryContainer.getSlot(i).getStack();
 			if(stack != null && stack.getItem() == Items.bowl)
 			{
-				if(autosoupdelay.isChecked()) {
+				if(autosoupdelay.isChecked()) 
+				{
 					timer++;
 					if(timer >= 9)
 					{
@@ -127,9 +128,10 @@ public class AutoSoupMod extends Mod implements UpdateListener
 				new BlockPos(-1, -1, -1), -1, inventoryContainer.getSlot(
 					soupInHotbar).getStack(), 0.0F, 0.0F, 0.0F));
 			sendQueue.addToSendQueue(new C09PacketHeldItemChange(oldSlot));
-		}else{
+		}else {
 			// move soup in inventory to hotbar
-			if(autosoupdelay.isChecked()) {
+			if(autosoupdelay.isChecked()) 
+			{
 				timer2++;
 				if(timer2 >= 11)
 				{

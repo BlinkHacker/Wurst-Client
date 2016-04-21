@@ -73,6 +73,7 @@ public class TpAuraMod extends Mod implements UpdateListener
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
 				EntityUtils.faceEntityPacket(en);
+				wurst.mods.armorBreakerMod.SwapItem();
 				mc.thePlayer.swingItem();
 				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 					en, C02PacketUseEntity.Action.ATTACK));

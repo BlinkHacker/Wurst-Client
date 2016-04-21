@@ -65,6 +65,7 @@ public class ClickAimbotMod extends Mod implements UpdateListener
 					AutoSwordMod.setSlot();
 				wurst.mods.criticalsMod.doCritical();
 				EntityUtils.faceEntityClient(en);
+				wurst.mods.armorBreakerMod.SwapItem();
 				if(!wurst.mods.killauraMod.mobinfront.isChecked())
 				{
 				mc.thePlayer.swingItem();
