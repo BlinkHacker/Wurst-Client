@@ -10,6 +10,9 @@ package tk.wurst_client.mods;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 import tk.wurst_client.events.listeners.PostUpdateListener;
@@ -38,7 +41,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	public float realRange;
 	public float rSpeed;
 	public float yesCheatrSpeed;
-	private EntityLivingBase target = null;
+	private EntityLivingBase target;
+	private List<EntityLivingBase> targets = new ArrayList<EntityLivingBase>();
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
 	public final CheckboxSetting mobinfront = new CheckboxSetting(
@@ -135,21 +139,39 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	@Override
 	public void onUpdate()
 	{
-		updateMS();
-		if(hasTimePassedS(realSpeed / 2))
+		targets.clear();
+		target = null;
+		List<EntityLivingBase> close = EntityUtils.getCloseEntities(!friends.isChecked(), 
+			realRange, true, checkarmor.isChecked());
+		double averageX = 0.0D;
+		double averageY = 0.0D;
+		double averageZ = 0.0D;
+		
+		for (EntityLivingBase entity : close) 
+			target = entity;
+		
+		while(close.iterator().hasNext() && targets.size() <= 6)
+			targets.add(close.iterator().next());
+		
+		for (EntityLivingBase entity : targets)
 		{
-		target = EntityUtils.getClosestEntity(!friends.isChecked(), true, true, 
-			wurst.mods.killauraMod.checkarmor.isChecked());
-			{
-				float[] rotations = EntityUtils.getRotationsNeeded(target);
-				if(rotations != null)
-				{
-				EntityUtils.setYaw(rotations[0]);
-				EntityUtils.setPitch(rotations[1]);
-				}
-				updateLastMS();
-			}
+			averageX += entity.posX;
+			averageY += entity.posY + entity.getEyeHeight();
+			averageZ += entity.posZ;
 		}
+		 	averageX /= targets.size();
+		 	averageY /= targets.size();
+		 	averageZ /= targets.size();        
+		 	float[] rotations = EntityUtils.facePosition(mc.thePlayer, averageX, averageY, averageZ);
+		 	if(rotations != null)
+		 	{
+		 	EntityUtils.setYaw(rotations[0]);
+		 	EntityUtils.setPitch(rotations[1]);
+		 	}
+		 	if(wurst.mods.autoSwordMod.isActive())
+		 		AutoSwordMod.setSlot();
+		 	wurst.mods.criticalsMod.doCritical();
+		 	wurst.mods.armorBreakerMod.SwapItem();
 		
 	}
 	
@@ -157,16 +179,25 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	public void onPostUpdate()
 	{
 		updateMS();
-		if(target != null)
+		if(target != null && !targets.isEmpty() && hasTimePassedS(realSpeed))
 		{
-			attack(target);
-			target = null;
+			for (int i = 0; i < targets.size(); i++) 
+			{
+			updateMS();
+			if(hasTimePassedM(10))
+			{
+				attack(targets.get(i));
+				updateLastMS();
+			}
+			}
 			updateLastMS();
 		}
 	}
 	
 	public void attack(EntityLivingBase en)
 	{
+		if(en == null || mc.thePlayer.getDistanceToEntity(en) > realRange)
+			return;
 		mc.thePlayer.swingItem();
 	mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 		en, C02PacketUseEntity.Action.ATTACK));
