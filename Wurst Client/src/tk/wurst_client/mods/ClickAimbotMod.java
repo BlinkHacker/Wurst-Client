@@ -19,8 +19,7 @@ import tk.wurst_client.mods.Mod.Info;
 	description = "Automatically attacks the closest valid entity whenever you\n"
 		+ "click and faces it for you. This is usually easier to detect\n"
 		+ "then Killaura or Triggerbot.",
-	name = "ClickAimbot",
-	tags = "ClickAimbot,Click Aimbot")
+	name = "ClickAimbot")
 public class ClickAimbotMod extends Mod implements UpdateListener
 {
 	@Override
@@ -56,7 +55,8 @@ public class ClickAimbotMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true,
+		EntityLivingBase en = EntityUtils.getClosestEntity(!wurst.mods.killauraMod.friends.isChecked(), 
+			true, true,
 			wurst.mods.killauraMod.checkarmor.isChecked());
 		if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null
 			&& mc.gameSettings.keyBindAttack.pressed)

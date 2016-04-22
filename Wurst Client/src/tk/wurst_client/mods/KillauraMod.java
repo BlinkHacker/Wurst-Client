@@ -45,6 +45,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		"MobInFront Bypass (For other auras)", false);
 	public final CheckboxSetting checkarmor = new CheckboxSetting(
 		"Ignore ArmorLess Players", false);
+	public final CheckboxSetting friends = new CheckboxSetting(
+		"Attack Friends", false);
 	
 	@Override
 	public void initSettings()
@@ -95,6 +97,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		});
 		settings.add(mobinfront);
 		settings.add(checkarmor);
+		settings.add(friends);
 	}
 	
 	@Override
@@ -135,12 +138,15 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		updateMS();
 		if(hasTimePassedS(realSpeed / 2))
 		{
-		target = EntityUtils.getClosestEntity(true, true, true, 
+		target = EntityUtils.getClosestEntity(!friends.isChecked(), true, true, 
 			wurst.mods.killauraMod.checkarmor.isChecked());
 			{
 				float[] rotations = EntityUtils.getRotationsNeeded(target);
+				if(rotations != null)
+				{
 				EntityUtils.setYaw(rotations[0]);
 				EntityUtils.setPitch(rotations[1]);
+				}
 				updateLastMS();
 			}
 		}
