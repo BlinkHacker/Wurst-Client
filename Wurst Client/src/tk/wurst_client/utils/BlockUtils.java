@@ -218,7 +218,7 @@ public class BlockUtils
 	        	 MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) {
 	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
 	            if(block != null && !(block instanceof BlockAir)) {
-	               if(!(block instanceof BlockLadder) && !(block instanceof BlockLadder)) {
+	               if(!(block instanceof BlockLadder)) {
 	                  return false;
 	               }
 

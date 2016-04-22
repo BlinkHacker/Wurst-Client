@@ -31,6 +31,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	private int lateststage = -1;
 	private double moveSpeed;
 	private double lastDist;
+	private int ystage = 0;
 	private boolean changedtimer = false;
 	
 	@Override
@@ -212,9 +213,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				     double motionZ = forward * moveSpeed * mz - strafe * moveSpeed * mx;  
 				     mc.thePlayer.motionX = motionX;
 				     mc.thePlayer.motionZ = motionZ;
-				     double xDist = mc.thePlayer.posX - mc.thePlayer.prevPosX;
-				     double zDist = mc.thePlayer.posZ - mc.thePlayer.prevPosZ;
-				     lastDist = Math.sqrt(xDist * xDist + zDist * zDist);
+				     lastDist = getMotion();
 				     if (changedtimer) 
 				     {
 				    	 mc.timer.timerSpeed = 1.0F;
@@ -224,12 +223,26 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				    	 changedtimer = true;
 				     break;
 		case 4:
-			if(mc.thePlayer.onGround)
-			{
-				mc.thePlayer.motionY = 0.3994F;
-				mc.thePlayer.motionX *= 1.55F;
-				mc.thePlayer.motionZ *= 1.55F; 
-			}
+				if(ystage == 1)
+				{
+					mc.thePlayer.motionY = 0.3994F;
+					mc.thePlayer.motionX *= 1.38F - 0.01F;
+					mc.thePlayer.motionZ *= 1.38F - 0.01F; 
+				} else if(ystage == 2) 
+				{
+					mc.thePlayer.motionY = 0.3994F;
+					mc.timer.timerSpeed = 1.1115F;
+					mc.thePlayer.motionX *= 1.649F;
+					mc.thePlayer.motionZ *= 1.649F;
+				} else if(ystage >= 3) 
+				{
+					ystage = 0;
+					mc.thePlayer.motionY = 0.3994F;
+					mc.thePlayer.motionX *= 1.55F;
+					mc.thePlayer.motionZ *= 1.55F;
+				} else
+	                 mc.timer.timerSpeed = 1.0F;
+				 ystage++;
 			break;
 		default:
 			return;
@@ -265,6 +278,14 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 		 }
 		 return baseSpeed;
 	}
+	
+	private double getMotion()
+	{
+		 double xDist = mc.thePlayer.posX - mc.thePlayer.prevPosX;
+	     double zDist = mc.thePlayer.posZ - mc.thePlayer.prevPosZ;
+	     return Math.sqrt(xDist * xDist + zDist * zDist);
+	}
+	
 	@Override
 	public void onDisable()
 	{
