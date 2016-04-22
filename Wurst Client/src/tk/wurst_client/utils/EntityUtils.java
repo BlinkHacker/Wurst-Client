@@ -25,6 +25,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAmbientCreature;
 import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.minecraft.util.MathHelper;
@@ -158,7 +159,8 @@ public class EntityUtils
 		return -1;
 	}
 
-	public static boolean isCorrectEntity(Object o, boolean ignoreFriends, boolean ticksExisted)
+	public static boolean isCorrectEntity(Object o, boolean ignoreFriends, boolean ticksExisted, boolean 
+		armorCheck)
 	{
 		// non-entities
 		if(!(o instanceof Entity))
@@ -180,6 +182,17 @@ public class EntityUtils
 			if(((Entity)o).ticksExisted < WurstClient.INSTANCE.mods.killauraMod.secondsExisted * 20)
 				return false;
 		}
+		
+		if(armorCheck && o instanceof EntityPlayer)
+		{
+			ItemStack boots = ((EntityPlayer)o).inventory.armorInventory[0];
+			ItemStack pants = ((EntityPlayer)o).inventory.armorInventory[1];
+			ItemStack chest = ((EntityPlayer)o).inventory.armorInventory[2];
+			ItemStack head = ((EntityPlayer)o).inventory.armorInventory[3];
+			if (boots == null && pants == null && chest == null && head == null)
+			    return false;
+		}
+		
 		TargetSpf targetSpf = WurstClient.INSTANCE.special.targetSpf;
 		
 		// invisible entities
@@ -245,11 +258,11 @@ public class EntityUtils
 	}
 	
 	public static EntityLivingBase getClosestEntity(boolean ignoreFriends,
-		boolean useFOV, boolean ticksExisted)
+		boolean useFOV, boolean ticksExisted, boolean armorCheck)
 	{
 		EntityLivingBase closestEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksExisted)
+			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck)
 				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
@@ -269,12 +282,12 @@ public class EntityUtils
 	}
 	
 	public static ArrayList<EntityLivingBase> getCloseEntities(
-		boolean ignoreFriends, float range, boolean ticksExisted)
+		boolean ignoreFriends, float range, boolean ticksExisted, boolean armorCheck)
 	{
 		ArrayList<EntityLivingBase> closeEntities =
 			new ArrayList<EntityLivingBase>();
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksExisted))
+			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP)
@@ -290,11 +303,12 @@ public class EntityUtils
 		return closeEntities;
 	}
 	
-	public static EntityLivingBase getClosestEntityRaw(boolean ignoreFriends, boolean ticksExisted)
+	public static EntityLivingBase getClosestEntityRaw(boolean ignoreFriends, boolean ticksExisted,
+		boolean armorCheck)
 	{
 		EntityLivingBase closestEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, ignoreFriends, ticksExisted))
+			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead
@@ -308,11 +322,12 @@ public class EntityUtils
 		return closestEntity;
 	}
 	
-	public static EntityLivingBase getClosestEnemy(EntityLivingBase friend, boolean ticksExisted)
+	public static EntityLivingBase getClosestEnemy(EntityLivingBase friend, boolean ticksExisted, 
+		boolean armorCheck)
 	{
 		EntityLivingBase closestEnemy = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, true, ticksExisted))
+			if(isCorrectEntity(o, true, ticksExisted, armorCheck))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && o != friend && !en.isDead
@@ -331,7 +346,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false, false, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)
@@ -345,7 +360,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false, false, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead
@@ -360,7 +375,7 @@ public class EntityUtils
 	{
 		EntityLivingBase newEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
-			if(isCorrectEntity(o, false, false))
+			if(isCorrectEntity(o, false, false, false))
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead)
@@ -504,4 +519,62 @@ public class EntityUtils
     {
         return reference == null ? reference = Minecraft.getMinecraft().thePlayer : reference;
     }
+    
+    public static float[] getRotationNew(Entity entity)
+	{
+		if(entity == null)
+			return null;
+		  double diffX = (entity.posX) - Minecraft.getMinecraft().thePlayer.posX;
+		  double diffZ = (entity.posZ) - Minecraft.getMinecraft().thePlayer.posZ;
+		  double diffY = (entity.posY + entity.getEyeHeight() / 2.0F) -
+			  Minecraft.getMinecraft().thePlayer.posY - 0.6D;
+		double dist = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
+		float yaw =
+			(float)(Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
+		float pitch = (float)-(Math.atan2(diffY, dist) * 180.0D / Math.PI);
+		return new float[]{
+			Minecraft.getMinecraft().thePlayer.rotationYaw
+				+ MathHelper.wrapAngleTo180_float(yaw
+					- Minecraft.getMinecraft().thePlayer.rotationYaw),
+			Minecraft.getMinecraft().thePlayer.rotationPitch
+				+ MathHelper.wrapAngleTo180_float(pitch
+					- Minecraft.getMinecraft().thePlayer.rotationPitch)};	
+	}
+    
+	public static ArrayList<EntityLivingBase> getCloseEntitiesWithFOV(
+		boolean ignoreFriends, float range, boolean ticksExisted, boolean armorCheck)
+	{
+		ArrayList<EntityLivingBase> closeEntities =
+			new ArrayList<EntityLivingBase>();
+		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
+			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck)
+				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
+			{
+				EntityLivingBase en = (EntityLivingBase)o;
+				if(!(o instanceof EntityPlayerSP)
+					&& !en.isDead
+					&& en.getHealth() > 0
+					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
+					&& ((!en.getName().equals(
+						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
+					&& Minecraft.getMinecraft().thePlayer
+						.getDistanceToEntity(en) <= range)
+					closeEntities.add(en);
+			}
+		return closeEntities;
+	}
+	
+	public synchronized static void faceEntityPacketNoAngle(EntityLivingBase entity)
+	{
+		float[] rotations = getRotationNew(entity);
+		if(rotations != null)
+		{
+			yaw =
+				limitAngleChange(
+					Minecraft.getMinecraft().thePlayer.prevRotationYaw,
+					rotations[0], Integer.MAX_VALUE);// NoCheat+
+			pitch = rotations[1];
+			lookChanged = true;
+		}
+	}
 }

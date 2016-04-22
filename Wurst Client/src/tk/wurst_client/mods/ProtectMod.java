@@ -38,7 +38,7 @@ public class ProtectMod extends Mod implements UpdateListener
 	public void onEnable()
 	{
 		friend = null;
-		EntityLivingBase en = EntityUtils.getClosestEntity(false, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(false, true, true, true);
 		if(en != null && mc.thePlayer.getDistanceToEntity(en) <= range)
 			friend = en;
 		wurst.events.add(UpdateListener.class, this);
@@ -82,9 +82,9 @@ public class ProtectMod extends Mod implements UpdateListener
 		else
 			speed = wurst.mods.killauraMod.normalSpeed;
 		updateMS();
-		if(hasTimePassedS(speed) && EntityUtils.getClosestEnemy(friend, true) != null)
+		if(hasTimePassedS(speed) && EntityUtils.getClosestEnemy(friend, true, true) != null)
 		{
-			enemy = EntityUtils.getClosestEnemy(friend, true);
+			enemy = EntityUtils.getClosestEnemy(friend, true, true);
 			if(mc.thePlayer.getDistanceToEntity(enemy) <= range)
 			{
 				if(wurst.mods.autoSwordMod.isActive())

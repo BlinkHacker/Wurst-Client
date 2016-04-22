@@ -30,7 +30,8 @@ public class ParalyzeMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked());
 		if(mc.thePlayer.onGround && en != null
 			&& en.getDistanceToEntity(mc.thePlayer) < 1)
 			for(int i = 0; i < 1000; i++)

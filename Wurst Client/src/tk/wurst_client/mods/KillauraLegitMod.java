@@ -15,8 +15,7 @@ import tk.wurst_client.navigator.NavigatorItem;
 import tk.wurst_client.utils.EntityUtils;
 
 @Info(category = Category.COMBAT,
-	description = "Slower Killaura that bypasses any cheat prevention\n"
-		+ "PlugIn. Not required on most NoCheat+ servers!",
+	description = "Experimental killaura to bypass AAC.",
 	name = "KillauraLegit")
 public class KillauraLegitMod extends Mod implements UpdateListener
 {
@@ -56,7 +55,8 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 	{
 		updateSpeed();
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked());
 		if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
 			{
@@ -68,11 +68,6 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 				{
 					EntityUtils.faceEntityClient(en);
 					wurst.mods.armorBreakerMod.SwapItem();
-					if(!wurst.mods.killauraMod.mobinfront.isChecked())
-					{
-					mc.thePlayer.swingItem();
-					mc.playerController.attackEntity(mc.thePlayer, en);
-					} else
 					mc.clickMouse();
 				}
 				updateLastMS();

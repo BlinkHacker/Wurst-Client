@@ -53,7 +53,8 @@ public class BlockHitMod extends Mod implements UpdateListener
 	public void onUpdate()
 	{
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked());
 		if(mc.thePlayer.getCurrentEquippedItem() != null && 
 			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword && en != null &&
 			mc.thePlayer.getDistanceToEntity(en) <= Range)

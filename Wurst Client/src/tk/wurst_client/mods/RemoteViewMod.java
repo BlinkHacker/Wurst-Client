@@ -36,7 +36,7 @@ public class RemoteViewMod extends Mod implements UpdateListener
 	@Override
 	public void onEnable()
 	{
-		if(EntityUtils.getClosestEntityRaw(false, false) == null)
+		if(EntityUtils.getClosestEntityRaw(false, false, false) == null)
 		{
 			wurst.chat.message("There is no nearby entity.");
 			setEnabled(false);
@@ -49,7 +49,7 @@ public class RemoteViewMod extends Mod implements UpdateListener
 		oldPitch = mc.thePlayer.rotationPitch;
 		mc.thePlayer.noClip = true;
 		if(otherID == null)
-			otherID = EntityUtils.getClosestEntityRaw(false, false).getUniqueID();
+			otherID = EntityUtils.getClosestEntityRaw(false, false, false).getUniqueID();
 		otherView = EntityUtils.searchEntityByIdRaw(otherID);
 		wasInvisible = otherView.isInvisibleToPlayer(mc.thePlayer);
 		EntityOtherPlayerMP fakePlayer =

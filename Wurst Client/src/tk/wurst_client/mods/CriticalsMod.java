@@ -99,4 +99,19 @@ public class CriticalsMod extends Mod implements LeftClickListener
 			
 		}
 	}
+	
+	public int getMode()
+	{
+		return mode;
+	}
+	
+	public void setMode(int mode)
+	{
+		((ModeSetting)settings.get(0)).setSelected(mode);
+	}
+	
+	public String[] getModes()
+	{
+		return modes;
+	}
 }

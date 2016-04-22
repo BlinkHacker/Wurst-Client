@@ -10,8 +10,11 @@ package tk.wurst_client.mods;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 
+import java.util.List;
+
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
+import tk.wurst_client.events.listeners.PostUpdateListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -20,13 +23,12 @@ import tk.wurst_client.navigator.settings.CheckboxSetting;
 import tk.wurst_client.navigator.settings.SliderSetting;
 import tk.wurst_client.utils.EntityUtils;
 
+
 @Info(category = Category.COMBAT,
-	description = "Automatically attacks everything in your range.\n"
-		+ "Tip: YesCheat+ caps hitting speed to 12,\n"
-		+ "(12.5 for speed randomizer) so randomizer with speeds\n"
-		+ "above 11F will get the hitting speed capped to 12.5.",
-	name = "Killaura")
-public class KillauraMod extends Mod implements UpdateListener
+	description = "Automatically attacks everything in your range.",
+	name = "Killaura",
+	tags = "SwitchAura")
+public class KillauraMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	public float normalSpeed = 20F;
 	public float normalRange = 5F;
@@ -38,10 +40,13 @@ public class KillauraMod extends Mod implements UpdateListener
 	public float realRange;
 	public float rSpeed;
 	public float yesCheatrSpeed;
+	private List<EntityLivingBase> en;
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
 	public final CheckboxSetting mobinfront = new CheckboxSetting(
-		"MobInFront Bypass", false);
+		"MobInFront Bypass (For other auras)", false);
+	public final CheckboxSetting checkarmor = new CheckboxSetting(
+		"Ignore ArmorLess Players", false);
 	
 	@Override
 	public void initSettings()
@@ -91,6 +96,7 @@ public class KillauraMod extends Mod implements UpdateListener
 		});
 		settings.add(randomspeed);
 		settings.add(mobinfront);
+		settings.add(checkarmor);
 	}
 	
 	@Override
@@ -122,6 +128,7 @@ public class KillauraMod extends Mod implements UpdateListener
 		if(wurst.mods.clickAimbotMod.isEnabled())
 			wurst.mods.clickAimbotMod.setEnabled(false);
 		wurst.events.add(UpdateListener.class, this);
+		wurst.events.add(PostUpdateListener.class, this);
 	}
 	
 	@Override
@@ -129,7 +136,7 @@ public class KillauraMod extends Mod implements UpdateListener
 	{
 		updateSpeedAndRange();
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true);
+		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true, checkarmor.isChecked());
 		if(hasTimePassedS(realSpeed) && en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= realRange)
 			{
@@ -146,9 +153,23 @@ public class KillauraMod extends Mod implements UpdateListener
 	}
 	
 	@Override
+	public void onPostUpdate()
+	{
+
+	}
+	
+	public void attack(EntityLivingBase en)
+	{
+		mc.thePlayer.swingItem();
+	mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
+		en, C02PacketUseEntity.Action.ATTACK));
+	}
+	 
+	@Override
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+		wurst.events.remove(PostUpdateListener.class, this);
 	}
 	
 	private void updateSpeedAndRange()

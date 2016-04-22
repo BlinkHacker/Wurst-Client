@@ -113,7 +113,8 @@ public class BowAimbotMod extends Mod implements UpdateListener,
 			&& mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBow
 			&& mc.gameSettings.keyBindUseItem.pressed)
 		{
-			target = EntityUtils.getClosestEntity(true, true, true);
+			target = EntityUtils.getClosestEntity(true, true, true, 
+				wurst.mods.killauraMod.checkarmor.isChecked());
 			if(!(target == null))
 			aimAtTarget();
 		}
