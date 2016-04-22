@@ -10,8 +10,10 @@ package tk.wurst_client.utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockIce;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockPackedIce;
 import net.minecraft.block.BlockSoulSand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -252,6 +254,31 @@ public class BlockUtils
 	            if(block != null && !(block instanceof BlockAir)) 
 	            {
 	               if(!(block instanceof BlockSoulSand))
+	                  return false;
+
+	               onLiquid = true;
+	            }
+	         }
+
+	      return onLiquid;
+	}
+	
+	public static boolean isOnIce(Entity entity)
+	{
+		if(entity == null)
+			return false;
+		boolean onLiquid = false;
+	      int y = (int)(entity.boundingBox.minY - 0.01D);
+
+	      for(int x = MathHelper.floor_double(entity.boundingBox.minX); x 
+	    	  < MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x)
+	         for(int z = MathHelper.floor_double(entity.boundingBox.minZ); z 
+	        	 < MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) 
+	         {
+	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+	            if(block != null && !(block instanceof BlockAir)) 
+	            {
+	               if(!(block instanceof BlockIce) && !(block instanceof BlockPackedIce))
 	                  return false;
 
 	               onLiquid = true;

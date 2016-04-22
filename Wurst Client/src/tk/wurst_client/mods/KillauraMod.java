@@ -133,16 +133,17 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	public void onUpdate()
 	{
 		updateMS();
-		if(hasTimePassedS(realSpeed))
-		for(EntityLivingBase en : EntityUtils.getCloseEntitiesWithFOV(true, realRange, true, 
-			wurst.mods.killauraMod.checkarmor.isChecked()))
+		if(hasTimePassedS(realSpeed / 2))
+		{
+		target = EntityUtils.getClosestEntity(true, true, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked());
 			{
-				float[] rotations = EntityUtils.getRotationsNeeded(en);
+				float[] rotations = EntityUtils.getRotationsNeeded(target);
 				EntityUtils.setYaw(rotations[0]);
 				EntityUtils.setPitch(rotations[1]);
-				target = en;
 				updateLastMS();
 			}
+		}
 		
 	}
 	

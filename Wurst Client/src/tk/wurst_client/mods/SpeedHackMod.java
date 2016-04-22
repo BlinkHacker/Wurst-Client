@@ -223,7 +223,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				    	 changedtimer = true;
 				     break;
 		case 4:
-			if(!BlockUtils.isOnSoulSand(mc.thePlayer))
+			if(!BlockUtils.isOnSoulSand(mc.thePlayer) && !BlockUtils.isOnIce(mc.thePlayer))
 			{
 				if(ystage == 1)
 				{
