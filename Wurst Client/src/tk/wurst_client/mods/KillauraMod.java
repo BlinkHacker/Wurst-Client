@@ -10,8 +10,6 @@ package tk.wurst_client.mods;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 
-import java.util.List;
-
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
 import tk.wurst_client.events.listeners.PostUpdateListener;
@@ -40,7 +38,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	public float realRange;
 	public float rSpeed;
 	public float yesCheatrSpeed;
-	private List<EntityLivingBase> en;
+	private EntityLivingBase target = null;
 	public final CheckboxSetting randomspeed = new CheckboxSetting(
 		"Speed Randomizer", false);
 	public final CheckboxSetting mobinfront = new CheckboxSetting(
@@ -134,28 +132,30 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	@Override
 	public void onUpdate()
 	{
-		updateSpeedAndRange();
 		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(true, true, true, checkarmor.isChecked());
-		if(hasTimePassedS(realSpeed) && en != null)
-			if(mc.thePlayer.getDistanceToEntity(en) <= realRange)
+		if(hasTimePassedS(realSpeed))
+		for(EntityLivingBase en : EntityUtils.getCloseEntitiesWithFOV(true, realRange, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked()))
 			{
-				if(wurst.mods.autoSwordMod.isActive())
-					AutoSwordMod.setSlot();
-				wurst.mods.criticalsMod.doCritical();
-				EntityUtils.faceEntityPacket(en);
-				wurst.mods.armorBreakerMod.SwapItem();
-					mc.thePlayer.swingItem();
-				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
-					en, C02PacketUseEntity.Action.ATTACK));
+				float[] rotations = EntityUtils.getRotationsNeeded(en);
+				EntityUtils.setYaw(rotations[0]);
+				EntityUtils.setPitch(rotations[1]);
+				target = en;
 				updateLastMS();
 			}
+		
 	}
 	
 	@Override
 	public void onPostUpdate()
 	{
-
+		updateMS();
+		if(target != null)
+		{
+			attack(target);
+			target = null;
+			updateLastMS();
+		}
 	}
 	
 	public void attack(EntityLivingBase en)

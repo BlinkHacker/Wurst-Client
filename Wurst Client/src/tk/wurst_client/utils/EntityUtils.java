@@ -519,4 +519,51 @@ public class EntityUtils
     {
         return reference == null ? reference = Minecraft.getMinecraft().thePlayer : reference;
     }
+    
+    public static ArrayList<EntityLivingBase> getCloseEntitiesWithFOV(
+		boolean ignoreFriends, float range, boolean ticksExisted, boolean armorCheck)
+	{
+		ArrayList<EntityLivingBase> closeEntities =
+			new ArrayList<EntityLivingBase>();
+		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
+			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck)
+				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
+			{
+				EntityLivingBase en = (EntityLivingBase)o;
+				if(!(o instanceof EntityPlayerSP)
+					&& !en.isDead
+					&& en.getHealth() > 0
+					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
+					&& ((!en.getName().equals(
+						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
+					&& Minecraft.getMinecraft().thePlayer
+						.getDistanceToEntity(en) <= range)
+					closeEntities.add(en);
+			}
+		return closeEntities;
+	}
+
+	public static float[] faceEntityXYZ(Entity entity, double x, double y, double z) 
+	{
+		double xdiff = x - entity.posX;
+		double zdiff = z - entity.posZ;
+		double ydiff = y - (entity.posY + entity.getEyeHeight());
+		double dist = MathHelper.sqrt_double(xdiff * xdiff + zdiff * zdiff);
+		float yaw = (float)(Math.atan2(zdiff, xdiff) * 180.0D / 3.141592653589793D) - 90.0F;
+		float pitch = (float)-(Math.atan2(ydiff, dist) * 180.0D / 3.141592653589793D);
+		return new float[] { entity.rotationYaw + MathHelper.wrapAngleTo180_float(yaw - entity.rotationYaw), 
+			entity.rotationPitch + MathHelper.wrapAngleTo180_float(pitch - entity.rotationPitch)};
+	}
+	
+	public synchronized static void setYaw(float yawset)
+	{
+		yaw = yawset;
+		lookChanged = true;
+	}
+	
+	public synchronized static void setPitch(float pitchset)
+	{
+		pitch = pitchset;
+		lookChanged = true;
+	}
 }
