@@ -29,9 +29,9 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Rapid", "YPort"};
 	private int speedupstage = 0;
 	private int lateststage = -1;
+	private int ystage = 0;
 	private double moveSpeed;
 	private double lastDist;
-	private int ystage = 0;
 	private boolean changedtimer = false;
 	
 	@Override
@@ -223,6 +223,8 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				    	 changedtimer = true;
 				     break;
 		case 4:
+			if(!BlockUtils.isOnSoulSand(mc.thePlayer))
+			{
 				if(ystage == 1)
 				{
 					mc.thePlayer.motionY = 0.3994F;
@@ -243,6 +245,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				} else
 	                 mc.timer.timerSpeed = 1.0F;
 				 ystage++;
+			}
 			break;
 		default:
 			return;

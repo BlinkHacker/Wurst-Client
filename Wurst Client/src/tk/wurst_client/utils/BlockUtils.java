@@ -12,6 +12,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockSoulSand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -159,24 +160,26 @@ public class BlockUtils
         return false;
     }
 
-	 public static boolean isInLiquid(Entity entity) {
+	 public static boolean isInLiquid(Entity entity) 
+	 {
 	        if (entity == null)
 	            return false;
 	        boolean inLiquid = false;
 	        final int y = (int) entity.getEntityBoundingBox().minY;
 	        for (int x = MathHelper.floor_double(entity.getEntityBoundingBox().minX); x < 
-	        	MathHelper.floor_double(entity.getEntityBoundingBox().maxX) + 1; x++) {
+	        	MathHelper.floor_double(entity.getEntityBoundingBox().maxX) + 1; x++) 
 	            for (int z = MathHelper.floor_double(entity.getEntityBoundingBox().minZ); z < 
-	            	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) {
+	            	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) 
+	            {
 	                final Block block = Minecraft.getMinecraft().theWorld.getBlockState(
 	                	new BlockPos(x, y, z)).getBlock();
-	                if (block != null && !(block instanceof BlockAir)) {
+	                if (block != null && !(block instanceof BlockAir)) 
+	                {
 	                    if (!(block instanceof BlockLiquid))
 	                        return false;
 	                    inLiquid = true;
 	                }
 	            }
-	        }
 	        return inLiquid || Minecraft.getMinecraft().thePlayer.isInWater();
 	    }
 
@@ -188,19 +191,19 @@ public class BlockUtils
 	      int y = (int)(entity.boundingBox.minY - 0.01D);
 
 	      for(int x = MathHelper.floor_double(entity.boundingBox.minX); x 
-	    	  < MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x) {
+	    	  < MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x)
 	         for(int z = MathHelper.floor_double(entity.boundingBox.minZ); z 
-	        	 < MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) {
+	        	 < MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) 
+	         {
 	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
-	            if(block != null && !(block instanceof BlockAir)) {
-	               if(!(block instanceof BlockLiquid)) {
+	            if(block != null && !(block instanceof BlockAir)) 
+	            {
+	               if(!(block instanceof BlockLiquid))
 	                  return false;
-	               }
 
 	               onLiquid = true;
 	            }
 	         }
-	      }
 
 	      return onLiquid;
 	}
@@ -213,23 +216,48 @@ public class BlockUtils
 	      int y = (int)(entity.boundingBox.minY - 1.0D);
 
 	      for(int x = MathHelper.floor_double(entity.boundingBox.minX); x < 
-	    	  MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x) {
+	    	  MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x) 
 	         for(int z = MathHelper.floor_double(entity.boundingBox.minZ); z < 
-	        	 MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) {
+	        	 MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) 
+	         {
 	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
-	            if(block != null && !(block instanceof BlockAir)) {
-	               if(!(block instanceof BlockLadder)) {
+	            if(block != null && !(block instanceof BlockAir)) 
+	            {
+	               if(!(block instanceof BlockLadder))
 	                  return false;
-	               }
 
 	               onLadder = true;
 	            }
 	         }
-	      }
 
 	      if(!onLadder && !entity.isOnLadder()) 
 	         return false;
 	      else
 	         return true;
-	   }
+	}
+	
+	public static boolean isOnSoulSand(Entity entity)
+	{
+		if(entity == null)
+			return false;
+		boolean onLiquid = false;
+	      int y = (int)(entity.boundingBox.minY - 0.01D);
+
+	      for(int x = MathHelper.floor_double(entity.boundingBox.minX); x 
+	    	  < MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x)
+	         for(int z = MathHelper.floor_double(entity.boundingBox.minZ); z 
+	        	 < MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) 
+	         {
+	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+	            if(block != null && !(block instanceof BlockAir)) 
+	            {
+	               if(!(block instanceof BlockSoulSand))
+	                  return false;
+
+	               onLiquid = true;
+	            }
+	         }
+
+	      return onLiquid;
+	}
 }
