@@ -33,7 +33,8 @@ public class FightBotMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		entity = EntityUtils.getClosestEntity(true, false, true, true);
+		entity = EntityUtils.getClosestEntity(true, false, true, 
+			wurst.mods.killauraMod.checkarmor.isChecked());
 		if(entity == null)
 			return;
 		if(entity.getHealth() <= 0 || entity.isDead

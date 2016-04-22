@@ -65,6 +65,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 				updateSpeedAndRange();
 			}
 		});
+		settings.add(randomspeed);
 		settings.add(new SliderSetting("Range", normalRange, 1, 6, 0.05,
 			ValueDisplay.DECIMAL)
 		{
@@ -94,7 +95,6 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 				secondsExisted = (float)getValue();
 			}
 		});
-		settings.add(randomspeed);
 		settings.add(mobinfront);
 		settings.add(checkarmor);
 	}
