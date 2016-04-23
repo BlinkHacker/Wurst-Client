@@ -29,9 +29,9 @@ public class PacketOutputEvent extends CancellableEvent
       this.packet = packet;
    }
 
-@Override
-public String getAction()
-{
-	return "Sending Packet";
-}
+   @Override
+   public String getAction()
+   {
+	   return "Sending Packet";
+   }
 }

@@ -176,6 +176,7 @@ public class ModManager
 	public final SpeedNukerMod speedNukerMod = new SpeedNukerMod();
 	public final SpiderMod spiderMod = new SpiderMod();
 	public final StepMod stepMod = new StepMod();
+	public final TerrainSpeedMod terrainSpeedMod = new TerrainSpeedMod();
 	public final ThrowMod throwMod = new ThrowMod();
 	public final TimerMod timerMod = new TimerMod();
 	public final TiredMod tiredMod = new TiredMod();

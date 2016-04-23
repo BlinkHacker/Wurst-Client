@@ -29,9 +29,9 @@ public class SetModeCmd extends Cmd
 		// find feature
 		NavigatorItem feature = null;
 		String featureName = args[0];
-		for(Iterator itr = wurst.navigator.iterator(); itr.hasNext();)
+		for(Iterator<NavigatorItem> itr = wurst.navigator.iterator(); itr.hasNext();)
 		{
-			NavigatorItem item = (NavigatorItem)itr.next();
+			NavigatorItem item = itr.next();
 			if(featureName.equalsIgnoreCase(item.getName()))
 			{
 				feature = item;
