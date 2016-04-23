@@ -61,8 +61,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 			{
 				normalSpeed = (float)getValue();
 				yesCheatSpeed = Math.min(normalSpeed, 12F);
-				rSpeed = (float)(Math.round((Math.random() * ((normalSpeed + 1.5F) - 
-					(normalSpeed - 1.5F)) + (normalSpeed - 1.5F))* 10))/10;
+				rSpeed = (float)(Math.round((Math.random() * ((normalSpeed + 2F) - 
+					(normalSpeed - 2F)) + (normalSpeed - 2F))* 10))/10;
 				yesCheatrSpeed = Math.min(rSpeed, 12.5F);
 				updateSpeedAndRange();
 			}

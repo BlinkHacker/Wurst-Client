@@ -19,6 +19,7 @@ import tk.wurst_client.utils.EntityUtils;
 	name = "KillauraLegit")
 public class KillauraLegitMod extends Mod implements UpdateListener
 {
+	float yescheatspeed;
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
@@ -57,7 +58,7 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 		updateMS();
 		EntityLivingBase en = EntityUtils.getClosestEntity(!wurst.mods.killauraMod.friends.isChecked()
 			, true, true, wurst.mods.killauraMod.checkarmor.isChecked());
-		if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
+		if(hasTimePassedS(yescheatspeed) && en != null)
 			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
 			{
 				if(wurst.mods.criticalsMod.isActive() && mc.thePlayer.onGround)
@@ -83,6 +84,6 @@ public class KillauraLegitMod extends Mod implements UpdateListener
 	private void updateSpeed()
 	{
 		if(wurst.mods.killauraMod.randomspeed.isChecked())
-			wurst.mods.killauraMod.yesCheatSpeed = wurst.mods.killauraMod.yesCheatrSpeed;
+			yescheatspeed = wurst.mods.killauraMod.yesCheatrSpeed;
 	}
 }
