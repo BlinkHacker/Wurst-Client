@@ -569,14 +569,14 @@ public class EntityUtils
 
 	public static float[] facePosition(Entity entity, double x, double y, double z) 
 	{
-		double var4 = x - entity.posX;
-		double var8 = z - entity.posZ;
-		double var6 = y - (entity.posY + entity.getEyeHeight());
-		double var14 = MathHelper.sqrt_double(var4 * var4 + var8 * var8);
-		float var12 = (float)(Math.atan2(var8, var4) * 180.0D / 3.141592653589793D) - 90.0F;
-		float var13 = (float)-(Math.atan2(var6, var14) * 180.0D / 3.141592653589793D);
+		double diffX = x - entity.posX;
+		double diffZ = z - entity.posZ;
+		double diffY = y - (entity.posY + entity.getEyeHeight());
+		double var14 = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
+		float var12 = (float)(Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
+		float var13 = (float)-(Math.atan2(diffY, var14) * 180.0D / Math.PI);
 		return new float[] { entity.rotationYaw + MathHelper.wrapAngleTo180_float(
 			var12 - entity.rotationYaw), entity.rotationPitch + MathHelper.wrapAngleTo180_float(
-				var13 - entity.rotationPitch) };
+				var13 - entity.rotationPitch)};
 	}
 }
