@@ -572,11 +572,11 @@ public class EntityUtils
 		double diffX = x - entity.posX;
 		double diffZ = z - entity.posZ;
 		double diffY = y - (entity.posY + entity.getEyeHeight());
-		double var14 = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
-		float var12 = (float)(Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
-		float var13 = (float)-(Math.atan2(diffY, var14) * 180.0D / Math.PI);
+		double dist = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
+		float yaw = (float)(Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
+		float pitch = (float)-(Math.atan2(diffY, dist) * 180.0D / Math.PI);
 		return new float[] { entity.rotationYaw + MathHelper.wrapAngleTo180_float(
-			var12 - entity.rotationYaw), entity.rotationPitch + MathHelper.wrapAngleTo180_float(
-				var13 - entity.rotationPitch)};
+			yaw - entity.rotationYaw), entity.rotationPitch + MathHelper.wrapAngleTo180_float(
+				pitch - entity.rotationPitch)};
 	}
 }
