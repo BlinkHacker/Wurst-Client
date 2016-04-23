@@ -8,19 +8,24 @@
 package tk.wurst_client.mods;
 
 import net.minecraft.item.ItemAppleGold;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.network.play.client.C07PacketPlayerDigging;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MISC,
-	description = "Allows you to eat food much faster.\n" + "OM! NOM! NOM!",
-	name = "FastEat",
-	noCheatCompatible = false)
+	description = "Allows you to eat food much faster.\n"
+		+ "Bypasses NoCheat if YesCheat+ is enabled.\n"
+		+ "OM! NOM! NOM!",
+	name = "FastEat")
 public class FastEatMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting useanythingfast  = new CheckboxSetting(
@@ -41,6 +46,8 @@ public class FastEatMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
+		if(!wurst.mods.yesCheatMod.isActive())
+		{
 		if(mc.thePlayer.getHealth() > 0
 			&& mc.thePlayer.onGround
 			&& mc.thePlayer.inventory.getCurrentItem() != null
@@ -78,6 +85,28 @@ public class FastEatMod extends Mod implements UpdateListener
 						for(int i = 0; i < 100; i++)
 							mc.thePlayer.sendQueue
 								.addToSendQueue(new C03PacketPlayer(false)); 
+		} else
+		{
+			  if (mc.thePlayer.getHealth() > 0
+					&& mc.thePlayer.onGround 
+					&& mc.thePlayer.getItemInUseDuration() == 16 && 
+				  mc.thePlayer.inventory.getCurrentItem() != null &&
+				  !(mc.thePlayer.getItemInUse().getItem() instanceof ItemBow))
+		      {
+				  boolean isIncorrectItem = mc.thePlayer.inventory.getCurrentItem().getItem() 
+					  instanceof ItemBucketMilk ||
+					  mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemAppleGold ||
+					  mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemPotion;
+				  if(!isIncorrectItem || useanythingfast.isChecked())
+				  {
+					  for (int i = 0; i < 17; i++)
+						  mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
+					  mc.thePlayer.sendQueue.addToSendQueue(
+						  new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, 
+							  BlockPos.ORIGIN, EnumFacing.DOWN));
+				  }
+		      }
+		}
 			
 	}
 	
