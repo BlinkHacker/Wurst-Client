@@ -23,7 +23,7 @@ import tk.wurst_client.navigator.settings.CheckboxSetting;
 
 @Info(category = Category.MISC,
 	description = "Allows you to eat food much faster.\n"
-		+ "Bypasses NoCheat if YesCheat+ is enabled.\n"
+		+ "Bypasses NoCheat+ if YesCheat+ is enabled.\n"
 		+ "OM! NOM! NOM!",
 	name = "FastEat")
 public class FastEatMod extends Mod implements UpdateListener

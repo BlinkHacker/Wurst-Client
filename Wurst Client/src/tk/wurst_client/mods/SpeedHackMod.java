@@ -26,8 +26,7 @@ import tk.wurst_client.utils.MathUtils;
 public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Wurst", "Old", "Bhop", "Rapid", "YPort"};
-	private int speedupstage = 0;
+	private String[] modes = new String[]{"Wurst", "Bhop", "Rapid", "YPort"};
 	private int lateststage = -1;
 	private int ystage = 0;
 	private double moveSpeed;
@@ -94,36 +93,6 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 		}
 			break;
 		case 1:
-			 if(speedupstage == 1) 
-			 {
-				 mc.timer.timerSpeed = 1F;
-                 mc.thePlayer.motionX *= 1.94D;
-                 mc.thePlayer.motionZ *= 1.94D;
-              } else if(speedupstage == 2) 
-              {
-            	 mc.timer.timerSpeed = 1.1F;
-                 mc.thePlayer.motionX /= 1.9D;
-                 mc.thePlayer.motionZ /= 1.9D;
-              } else if(speedupstage == 3) 
-              {
-                 mc.thePlayer.motionX *= 1.2000000476837158D;
-                 mc.thePlayer.motionZ *= 1.2000000476837158D;
-              } else if(speedupstage == 4) 
-              {
-            	 mc.timer.timerSpeed = 1F;
-                 mc.thePlayer.motionX /= 1.9D;
-                 mc.thePlayer.motionZ /= 1.9D;
-              } else if(speedupstage >= 5) 
-              {
-            	 mc.timer.timerSpeed = 1.15F;
-                 mc.thePlayer.motionX *= 1.94D;
-                 mc.thePlayer.motionZ *= 1.94D;
-                 speedupstage = 0;
-              } else
-                 mc.timer.timerSpeed = 1.0F;
-			 speedupstage++;
-			 break;
-		case 2:
 			if(mc.thePlayer.onGround) 
 			{
 	            mc.thePlayer.motionY = 0.06499999761581421D;
@@ -131,7 +100,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	            mc.thePlayer.motionZ *= 1.5499999523162842D;
 	        }
 			break;
-		case 3:
+		case 2:
 			if ((!mc.gameSettings.keyBindForward.pressed) && (!mc.gameSettings.keyBindLeft.pressed) && 
 				(!mc.gameSettings.keyBindRight.pressed) && (!mc.gameSettings.keyBindBack.pressed) && (
 				(mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, 
@@ -222,7 +191,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				     if (mc.timer.timerSpeed != 1.0F) 
 				    	 changedtimer = true;
 				     break;
-		case 4:
+		case 3:
 			if(!BlockUtils.isOnSoulSand(mc.thePlayer) && !BlockUtils.isOnIce(mc.thePlayer))
 			{
 				if(ystage == 1)
@@ -255,10 +224,10 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	@Override
 	public void onPostUpdate()
 	{
-		if(mode == 4 && mc.thePlayer.fallDistance <= 3.994)
+		if(mode == 3 && mc.thePlayer.fallDistance <= 3.994)
 		{
-		mc.thePlayer.jumpMovementFactor *= 1.3f;
-		mc.thePlayer.motionY = -100f;
+		mc.thePlayer.jumpMovementFactor *= 1.3F;
+		mc.thePlayer.motionY = -100F;
 		}	
 	}
 	
