@@ -19,10 +19,13 @@ public class AutoSprintMod extends Mod implements UpdateListener
 {
 	public final CheckboxSetting OmnidirectionalSprint = new CheckboxSetting(
 		"Sprint all directions", false);
+	public final CheckboxSetting keepsprint = new CheckboxSetting(
+		"Keep Sprinting When Attacking", false);
 	@Override
 	public void initSettings()
 	{
 		settings.add(OmnidirectionalSprint);
+		settings.add(keepsprint);
 	}
 	
 	@Override
@@ -39,7 +42,8 @@ public class AutoSprintMod extends Mod implements UpdateListener
 			if(!mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isSneaking())
 				if(mc.thePlayer.motionX != 0 || mc.thePlayer.motionZ != 0)
 					mc.thePlayer.setSprinting(true);
-		} else {
+		} else 
+		{
 		if(!mc.thePlayer.isCollidedHorizontally && mc.thePlayer.moveForward > 0
 			&& !mc.thePlayer.isSneaking())
 			mc.thePlayer.setSprinting(true);
