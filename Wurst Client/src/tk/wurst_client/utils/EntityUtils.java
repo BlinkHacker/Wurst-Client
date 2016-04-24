@@ -60,7 +60,7 @@ public class EntityUtils
 			yaw =
 				limitAngleChange(
 					Minecraft.getMinecraft().thePlayer.prevRotationYaw,
-					rotations[0], 55);// NoCheat+
+					rotations[0], 1337);// NoCheat+
 			pitch = rotations[1];
 			lookChanged = true;
 		}
