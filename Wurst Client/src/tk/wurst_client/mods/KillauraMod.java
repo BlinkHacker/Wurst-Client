@@ -144,7 +144,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		updateMS();
 		target = EntityUtils.getClosestEntity(!friends.isChecked(), 
 			true, true, checkarmor.isChecked());
-	          if (target != null)
+	          if (target != null && mc.thePlayer.getDistanceToEntity(target) <= 
+	        	  (reach.isChecked() ? 10 : realRange))
 	          {
 	            float[] rotations = EntityUtils.getRotationsNeeded(target);
 	            EntityUtils.setYaw(rotations[0]);
