@@ -13,7 +13,7 @@ import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
 
 @Info(category = Category.EXPLOITS,
-	description = "Phase through blocks.\n"
+	description = "Phase to the side of a block.\n"
 		+ "Tip: You can climb blocks with this.",
 	name = "VPhase",
 	tags = "CheckerClimb")
@@ -28,7 +28,8 @@ public class VPhaseMod extends Mod implements BlockBBListener
 	@Override
 	public void onBlockBB(BlockBBEvent event)
 	{
-		 mc.thePlayer.boundingBox.offsetAndUpdate(0, 0, 0);
+		 if(mc.thePlayer == null)
+			return;
 		 if (event.getBoundingBox() != null && event.getBoundingBox().maxY > 
 		 mc.thePlayer.boundingBox.minY)
 		      event.setBoundingBox(null);

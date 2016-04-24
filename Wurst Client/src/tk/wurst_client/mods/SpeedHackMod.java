@@ -192,7 +192,8 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				    	 changedtimer = true;
 				     break;
 		case 3:
-			if(!BlockUtils.isOnSoulSand(mc.thePlayer) && !BlockUtils.isOnIce(mc.thePlayer))
+			if(!BlockUtils.isOnSoulSand(mc.thePlayer) && !BlockUtils.isOnIce(mc.thePlayer) &&
+				!BlockUtils.isOnSlimeBlock(mc.thePlayer))
 			{
 				if(ystage == 1)
 				{
@@ -226,8 +227,8 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	{
 		if(mode == 3 && mc.thePlayer.fallDistance <= 3.994)
 		{
-		mc.thePlayer.jumpMovementFactor *= 1.3F;
-		mc.thePlayer.motionY = -100F;
+			mc.thePlayer.jumpMovementFactor *= 1.3F;
+			mc.thePlayer.motionY = -100F;
 		}	
 	}
 	

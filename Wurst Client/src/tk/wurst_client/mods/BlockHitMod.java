@@ -63,7 +63,8 @@ public class BlockHitMod extends Mod implements UpdateListener
 		if(alwaysblock.isChecked() && mc.thePlayer.getCurrentEquippedItem() != null && 
 			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword)
 			mc.thePlayer.getCurrentEquippedItem().useItemRightClick(mc.theWorld, mc.thePlayer);
-		if(mc.gameSettings.keyBindAttack.pressed && mc.objectMouseOver != null && 
+		if(mc.gameSettings.keyBindAttack.pressed && mc.thePlayer.getCurrentEquippedItem() != null && 
+			mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword &&
 			hasTimePassedS(wurst.mods.killauraMod.realSpeed))
 		{
 			mc.clickMouse();

@@ -8,13 +8,7 @@
 package tk.wurst_client.utils;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockIce;
-import net.minecraft.block.BlockLadder;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockPackedIce;
-import net.minecraft.block.BlockSoulSand;
+import net.minecraft.block.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -123,7 +117,7 @@ public class BlockUtils
 	}
 	
 	public static float[] getBlockRotations(double x, double y, double z)
-	 {
+	{
 	    double xDiff = x - Minecraft.getMinecraft().thePlayer.posX + 0.5D;
 	    double zDiff = z - Minecraft.getMinecraft().thePlayer.posZ + 0.5D;
 	    
@@ -133,32 +127,33 @@ public class BlockUtils
 	    float yaw = (float)(Math.atan2(zDiff, xDiff) * 180.0D / Math.PI) - 90.0F;
 	    
 	    return new float[] {yaw, (float)-(Math.atan2(yDiff, dist) * 180.0D / Math.PI)};
-	  }
+	}
 	
 	public static boolean isInsideBlock(Entity entity) 
 	{
+		if (entity == null)
+			return false;
+		else
         for (int x = MathHelper.floor_double(entity.getEntityBoundingBox().minX); x <
-        	MathHelper.floor_double(entity.getEntityBoundingBox().maxX) + 1; x++) {
+        	MathHelper.floor_double(entity.getEntityBoundingBox().maxX) + 1; x++)
             for (int y = MathHelper.floor_double(entity.getEntityBoundingBox().minY); y < 
-            	MathHelper.floor_double(entity.getEntityBoundingBox().maxY) + 1; y++) {
+            	MathHelper.floor_double(entity.getEntityBoundingBox().maxY) + 1; y++)
                 for (int z = MathHelper.floor_double(entity.getEntityBoundingBox().minZ); z < 
-                	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) {
+                	MathHelper.floor_double(entity.getEntityBoundingBox().maxZ) + 1; z++) 
+                {
                     Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
-                    if (block != null) {
+                    if (block != null) 
+                    {
                         AxisAlignedBB boundingBox = block.getCollisionBoundingBox(
                         	Minecraft.getMinecraft().theWorld, new BlockPos(x, y, z), 
                         	Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)));
-                        if (block instanceof BlockHopper) {
+                        if (block instanceof BlockHopper)
                             boundingBox = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1);
-                        }
 
-                        if (boundingBox != null && entity.getEntityBoundingBox().intersectsWith(boundingBox)) {
+                        if (boundingBox != null && entity.getEntityBoundingBox().intersectsWith(boundingBox))
                             return true;
-                        }
                     }
                 }
-            }
-        }
         return false;
     }
 
@@ -166,6 +161,8 @@ public class BlockUtils
 	 {
 	        if (entity == null)
 	            return false;
+	        else
+	        {
 	        boolean inLiquid = false;
 	        final int y = (int) entity.getEntityBoundingBox().minY;
 	        for (int x = MathHelper.floor_double(entity.getEntityBoundingBox().minX); x < 
@@ -182,13 +179,16 @@ public class BlockUtils
 	                    inLiquid = true;
 	                }
 	            }
-	        return inLiquid || Minecraft.getMinecraft().thePlayer.isInWater();
+	        return inLiquid || entity.isInWater();
+	        }
 	    }
 
 	public static boolean isOnLiquid(Entity entity)
 	{
 		if(entity == null)
 			return false;
+		else
+		{
 		boolean onLiquid = false;
 	      int y = (int)(entity.boundingBox.minY - 0.01D);
 
@@ -208,12 +208,15 @@ public class BlockUtils
 	         }
 
 	      return onLiquid;
+		}
 	}
 	
 	public static boolean isOnLadder(EntityLivingBase entity) 
 	{
 		if(entity == null)
 			return false;
+		else
+		{
 	      boolean onLadder = false;
 	      int y = (int)(entity.boundingBox.minY - 1.0D);
 
@@ -236,12 +239,15 @@ public class BlockUtils
 	         return false;
 	      else
 	         return true;
+		}
 	}
 	
 	public static boolean isOnSoulSand(Entity entity)
 	{
 		if(entity == null)
 			return false;
+		else
+		{
 		boolean onLiquid = false;
 	      int y = (int)(entity.boundingBox.minY - 0.01D);
 
@@ -261,12 +267,15 @@ public class BlockUtils
 	         }
 
 	      return onLiquid;
+		}
 	}
 	
 	public static boolean isOnIce(Entity entity)
 	{
 		if(entity == null)
 			return false;
+		else
+		{
 		boolean onLiquid = false;
 	      int y = (int)(entity.boundingBox.minY - 0.01D);
 
@@ -286,5 +295,34 @@ public class BlockUtils
 	         }
 
 	      return onLiquid;
+		}
+	}
+	
+	public static boolean isOnSlimeBlock(Entity entity)
+	{
+		if(entity == null)
+			return false;
+		else
+		{
+		boolean onLiquid = false;
+	      int y = (int)(entity.boundingBox.minY - 0.01D);
+
+	      for(int x = MathHelper.floor_double(entity.boundingBox.minX); x 
+	    	  < MathHelper.floor_double(entity.boundingBox.maxX) + 1; ++x)
+	         for(int z = MathHelper.floor_double(entity.boundingBox.minZ); z 
+	        	 < MathHelper.floor_double(entity.boundingBox.maxZ) + 1; ++z) 
+	         {
+	            Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+	            if(block != null && !(block instanceof BlockAir)) 
+	            {
+	               if(!(block instanceof BlockSlime))
+	                  return false;
+
+	               onLiquid = true;
+	            }
+	         }
+
+	      return onLiquid;
+		}
 	}
 }
