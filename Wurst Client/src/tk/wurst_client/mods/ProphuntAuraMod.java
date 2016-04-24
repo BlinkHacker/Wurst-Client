@@ -49,14 +49,15 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 	}
 	
     @Override
-    public void onEnable() {
-    	
+    public void onEnable() 
+    {
         wurst.events.add(UpdateListener.class, this);
     }
     
     @Override
     public void onUpdate() 
     {
+    	KillauraMod killaura = wurst.mods.killauraMod;
 		Entity en = EntityUtils.getClosestNonlivingEntity(false, true, true);
 		if(en != null)
 			if (en instanceof EntityFallingBlock)
@@ -64,25 +65,25 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 				{
 					case 0:
 						updateMS();
-						if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null)
-							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange)
+						if(hasTimePassedS(killaura.realSpeed) && en != null)
+							if(mc.thePlayer.getDistanceToEntity(en) <= killaura.realRange)
 							{
-						if(wurst.mods.autoSwordMod.isActive())
-							AutoSwordMod.setSlot();
-						wurst.mods.criticalsMod.doCritical();
-						wurst.mods.armorBreakerMod.SwapItem();
-						EntityUtils.faceNonlivingEntityPacket(en);
-						mc.thePlayer.swingItem();
-						mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
-							en, C02PacketUseEntity.Action.ATTACK));
-						updateLastMS();
+								if(wurst.mods.autoSwordMod.isActive())
+									AutoSwordMod.setSlot();
+								wurst.mods.criticalsMod.doCritical();
+								wurst.mods.armorBreakerMod.SwapItem();
+								EntityUtils.faceNonlivingEntityPacket(en);
+								mc.thePlayer.swingItem();
+								mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
+									en, C02PacketUseEntity.Action.ATTACK));
+								updateLastMS();
 							}
 						break;
 					case 1:
 						updateMS();
-						updateSpeed();
-						if(hasTimePassedS(wurst.mods.killauraMod.yesCheatSpeed) && en != null)
-							if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.yesCheatRange)
+						if(hasTimePassedS(killaura.randomspeed.isChecked() ? killaura.yesCheatrSpeed 
+							: killaura.yesCheatSpeed) && en != null)
+							if(mc.thePlayer.getDistanceToEntity(en) <= killaura.yesCheatRange)
 							{
 								if(wurst.mods.criticalsMod.isActive() && mc.thePlayer.onGround)
 									mc.thePlayer.jump();
@@ -99,22 +100,22 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 							}
 						break;
 					case 2:
-							if(en != null && mc.thePlayer.getDistanceToEntity(en) <= 
-							wurst.mods.killauraMod.normalRange)
-								EntityUtils.faceNonlivingEntityClient(en);
-							break;
+						if(en != null && mc.thePlayer.getDistanceToEntity(en) <= 
+						killaura.normalRange)
+							EntityUtils.faceNonlivingEntityClient(en);
+						break;
 					case 3:
 						if(mc.objectMouseOver != null
 						&& mc.objectMouseOver.typeOfHit == MovingObjectType.ENTITY
 						&& mc.objectMouseOver.entityHit instanceof Entity)
 					{
 						updateMS();
-						if(hasTimePassedS(wurst.mods.killauraMod.realSpeed))
+						if(hasTimePassedS(killaura.realSpeed))
 						{
 							Entity entrigger =
 								(Entity)mc.objectMouseOver.entityHit;
 							if(en != null && mc.thePlayer.getDistanceToEntity(entrigger) <= 
-								wurst.mods.killauraMod.realRange
+								killaura.realRange
 								&& EntityUtils.isCorrectNonlivingEntity(entrigger, true, true))
 							{
 								if(wurst.mods.autoSwordMod.isActive())
@@ -135,17 +136,11 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 				}
     }
     
-    public void updateSpeed()
-    {
-    	if(wurst.mods.killauraMod.randomspeed.isChecked())
-    		wurst.mods.killauraMod.yesCheatSpeed = wurst.mods.killauraMod.yesCheatrSpeed;
-    }
-    
     @Override
-    public void onDisable() {
-    	 
+    public void onDisable() 
+    {	 
          wurst.events.remove(UpdateListener.class, this);
-     }
+    }
      
  	public int getMode()
  	{
