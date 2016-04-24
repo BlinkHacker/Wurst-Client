@@ -93,8 +93,12 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 								{
 									EntityUtils.faceNonlivingEntityClient(en);
 									wurst.mods.armorBreakerMod.SwapItem();
-									mc.thePlayer.swingItem();
-									mc.playerController.attackEntity(mc.thePlayer, en);
+									if(!killaura.mobinfront.isChecked())
+									{
+										mc.thePlayer.swingItem();
+										mc.playerController.attackEntity(mc.thePlayer, en);
+									} else
+										mc.clickMouse();
 								}
 								updateLastMS();
 							}
@@ -122,9 +126,13 @@ public class ProphuntAuraMod extends Mod implements UpdateListener {
 									AutoSwordMod.setSlot();
 								wurst.mods.criticalsMod.doCritical();
 								wurst.mods.armorBreakerMod.SwapItem();
-								mc.thePlayer.swingItem();
-								mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
+								if(!killaura.mobinfront.isChecked())
+								{
+									mc.thePlayer.swingItem();
+									mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 									en, C02PacketUseEntity.Action.ATTACK));
+								} else
+									mc.clickMouse();
 								updateLastMS();
 							}
 						}
