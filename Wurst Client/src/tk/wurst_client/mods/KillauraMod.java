@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
+import net.minecraft.network.play.client.C03PacketPlayer;
 
 import org.darkstorm.minecraft.gui.component.BoundedRangeComponent.ValueDisplay;
 
@@ -49,6 +50,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		"Ignore ArmorLess Players", false);
 	public final CheckboxSetting friends = new CheckboxSetting(
 		"Attack Friends", false);
+	public final CheckboxSetting reach = new CheckboxSetting(
+		"Reach Exploit (Vanilla Only)", false);
 	
 	@Override
 	public void initSettings()
@@ -100,6 +103,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		settings.add(mobinfront);
 		settings.add(checkarmor);
 		settings.add(friends);
+		settings.add(reach);
 	}
 	
 	@Override
@@ -181,11 +185,23 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	
 	public void attack(EntityLivingBase en)
 	{
-		if(en == null || mc.thePlayer.getDistanceToEntity(en) > realRange)
+		if(en == null)
 			return;
-		mc.thePlayer.swingItem();
-	mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
-		en, C02PacketUseEntity.Action.ATTACK));
+		boolean canattack = en != null && mc.thePlayer.canEntityBeSeen(en) && 
+			(reach.isChecked() ? mc.thePlayer.getDistanceToEntity(en) <= 10 : 
+				mc.thePlayer.getDistanceToEntity(en) <= realRange);
+		if(canattack)
+		{
+			if(reach.isChecked() && mc.thePlayer.getDistanceToEntity(en) > 6)
+				mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
+					en.posX, en.posY, en.posZ, true));
+			mc.thePlayer.swingItem();
+			mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
+				en, C02PacketUseEntity.Action.ATTACK));
+			if(reach.isChecked() && mc.thePlayer.getDistanceToEntity(en) > 6)
+			mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
+				mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, true));
+		}
 	}
 	
 	@Override

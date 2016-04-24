@@ -22,7 +22,7 @@ import tk.wurst_client.mods.Mod.Info;
 	name = "Ghost")
 public class GhostMod extends Mod implements UpdateListener, PacketOutputListener, PacketInputListener
 {
-	boolean isdead;
+	boolean isdead = false;
 	
 	@Override
 	public void onEnable()
@@ -37,9 +37,9 @@ public class GhostMod extends Mod implements UpdateListener, PacketOutputListene
 	{
 		if (mc.theWorld == null)
 			return;
-		if(mc.thePlayer.getHealth() <= 0)
-			mc.thePlayer.setHealth(20.0F);
+		if(mc.thePlayer.getHealth() <= 0F)
 		{
+			mc.thePlayer.setHealth(20.0F);
 			mc.thePlayer.isDead = false;
 			isdead = true;
 			mc.displayGuiScreen(null);
