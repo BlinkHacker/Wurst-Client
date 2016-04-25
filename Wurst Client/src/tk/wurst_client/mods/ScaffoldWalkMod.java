@@ -27,7 +27,7 @@ import tk.wurst_client.utils.BlockUtils;
 	name = "ScaffoldWalk")
 public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateListener
 {
-	private BlockDataUtils blockData = null;
+	private BlockData blockData = null;
 	public final CheckboxSetting slower = new CheckboxSetting(
 		"Slower ScaffoldWalk", false);
 	
@@ -84,17 +84,17 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	      }
 	}
 	
-	public BlockDataUtils getBlockData(BlockPos blockpos)
+	public BlockData getBlockData(BlockPos blockpos)
 	{
 	    return mc.theWorld.getBlockState(blockpos.add(0, 0, 1)).getBlock() != Blocks.air ? 
-	    	new BlockDataUtils(blockpos.add(0, 0, 1), EnumFacing.NORTH) : mc.theWorld.getBlockState(
-	    		blockpos.add(0, 0, -1)).getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add
+	    	new BlockData(blockpos.add(0, 0, 1), EnumFacing.NORTH) : mc.theWorld.getBlockState(
+	    		blockpos.add(0, 0, -1)).getBlock() != Blocks.air ? new BlockData(blockpos.add
 	    			(0, 0, -1), EnumFacing.SOUTH) : mc.theWorld.getBlockState(blockpos.add(1, 0, 0)).
-	    			getBlock() != Blocks.air ? new BlockDataUtils(blockpos.add(1, 0, 0), EnumFacing.WEST) 
+	    			getBlock() != Blocks.air ? new BlockData(blockpos.add(1, 0, 0), EnumFacing.WEST) 
 	    				: mc.theWorld.getBlockState(blockpos.add(-1, 0, 0)).getBlock() != Blocks.air ? 
-	    					new BlockDataUtils(blockpos.add(-1, 0, 0), EnumFacing.EAST) : 
+	    					new BlockData(blockpos.add(-1, 0, 0), EnumFacing.EAST) : 
 	    						mc.theWorld.getBlockState(blockpos.add(0, -1, 0)).getBlock() != Blocks.air 
-	    						? new BlockDataUtils(blockpos.add(0, -1, 0), EnumFacing.UP) : null;
+	    						? new BlockData(blockpos.add(0, -1, 0), EnumFacing.UP) : null;
 	}
 	
 	@Override
@@ -104,12 +104,12 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 		wurst.events.remove(PostUpdateListener.class, this);
 	}
 	
-	public class BlockDataUtils
+	public class BlockData
 	{
 	  public BlockPos position;
 	  public EnumFacing face;
 	  
-	  public BlockDataUtils(BlockPos position, EnumFacing face)
+	  public BlockData(BlockPos position, EnumFacing face)
 	  {
 	    this.position = position;
 	    this.face = face;

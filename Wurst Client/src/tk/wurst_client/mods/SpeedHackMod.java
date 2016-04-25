@@ -26,12 +26,15 @@ import tk.wurst_client.utils.MathUtils;
 public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	private int mode = 0;
-	private String[] modes = new String[]{"Wurst", "Bhop", "Rapid", "YPort"};
+	private String[] modes = new String[]{"Wurst", "Bhop", "Rapid", "YPort", "YPort2"};
 	private int lateststage = -1;
 	private int ystage = 0;
 	private double moveSpeed;
 	private double lastDist;
 	private boolean changedtimer = false;
+	private boolean move;
+	private boolean hop;
+	private double prevY;
 	
 	@Override
 	public void initSettings()
@@ -60,11 +63,6 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 		switch(mode)
 		{
 		case 0:
-		// return if sneaking or not walking
-		if(mc.thePlayer.isSneaking() || mc.thePlayer.moveForward == 0
-			&& mc.thePlayer.moveStrafing == 0)
-			return;
-		
 		// activate sprint if walking forward
 		if(mc.thePlayer.moveForward > 0 && !mc.thePlayer.isCollidedHorizontally)
 			mc.thePlayer.setSprinting(true);
@@ -105,7 +103,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				(!mc.gameSettings.keyBindRight.pressed) && (!mc.gameSettings.keyBindBack.pressed) && (
 				(mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, 
 					mc.thePlayer.boundingBox.offset(0.0D, mc.thePlayer.motionY, 0.0D)).
-					size() > 0) || (mc.thePlayer.isCollidedVertically)))
+					size() > 0) || mc.thePlayer.isCollidedVertically))
 				lateststage = 1;
 			if (MathUtils.round(mc.thePlayer.posY - (int)mc.thePlayer.posY, 3) == 
 				MathUtils.round(0.138D, 3)) 
@@ -116,7 +114,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				EntityPlayerSP thePlayer2 = mc.thePlayer;
 				thePlayer2.posY -= 0.09316090325960147D;
 			}
-			if (lateststage == 1 && mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F) 
+			if (lateststage == 1) 
 			{
 				lateststage = 2;
 				mc.timer.timerSpeed = 1.0F;
@@ -146,7 +144,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 					if (mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F)
 						mc.timer.timerSpeed = 1.6F;
 					if ((mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, mc.thePlayer.boundingBox.offset(
-						0.0D, mc.thePlayer.motionY, 0.0D)).size() > 0) || (mc.thePlayer.isCollidedVertically)) {
+						0.0D, mc.thePlayer.motionY, 0.0D)).size() > 0) || mc.thePlayer.isCollidedVertically) {
 						lateststage = 1;
 						}
 					moveSpeed = (lastDist - lastDist / 159.0D);
@@ -175,7 +173,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 					forward = 1.0F;
 				else if (forward < 0.0F)
 				         forward = -1.0F;
-				}
+			}
 				     double mx = Math.cos(Math.toRadians(yaw + 90.0F));
 				     double mz = Math.sin(Math.toRadians(yaw + 90.0F));
 				     double motionX = forward * moveSpeed * mx + strafe * moveSpeed * mz;
@@ -187,7 +185,7 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				     {
 				    	 mc.timer.timerSpeed = 1.0F;
 				    	 changedtimer = false;
-				    	 }
+				     }
 				     if (mc.timer.timerSpeed != 1.0F) 
 				    	 changedtimer = true;
 				     break;
@@ -217,6 +215,46 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 				 ystage++;
 			}
 			break;
+		case 4:
+			if (hop && (mc.thePlayer.posY >= prevY + 0.399994D))
+			{
+				mc.thePlayer.motionY = -0.9D;
+			    mc.thePlayer.posY = prevY;
+			    hop = false;
+			}
+			if (mc.thePlayer.moveForward != 0.0F && !mc.thePlayer.isCollidedHorizontally && 
+				!mc.thePlayer.isEating())
+			{
+				if (mc.thePlayer.moveForward == 0.0F && mc.thePlayer.moveStrafing == 0.0F)
+				{
+					mc.thePlayer.motionX = 0.0D;
+			        mc.thePlayer.motionZ = 0.0D;
+			        if (mc.thePlayer.isCollidedVertically)
+			        {
+			          mc.thePlayer.jump();
+			          move = true;
+			        }
+			        if (move && mc.thePlayer.isCollidedVertically)
+			          move = false;
+			      }
+			      if (mc.thePlayer.isCollidedVertically)
+			      {
+			        mc.thePlayer.motionX *= 1.0379D;
+			        mc.thePlayer.motionZ *= 1.0379D;
+			        hop = true;
+			        prevY = mc.thePlayer.posY;
+			        mc.thePlayer.jump();
+			      }
+			      if (hop && !move && mc.thePlayer.posY >= prevY + 0.399994D)
+			      {
+			        mc.thePlayer.motionY = -100.0D;
+			        mc.thePlayer.posY = prevY;
+			        hop = false;
+			      }
+			    }
+			break;
+		case 5:
+			break;
 		default:
 			return;
 		}
@@ -225,7 +263,8 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	@Override
 	public void onPostUpdate()
 	{
-		if(mode == 3 && mc.thePlayer.fallDistance <= 3.994)
+		if(mode == 3 || mode == 4 && mc.thePlayer.fallDistance <= 3.994 
+			&& !mc.thePlayer.isCollidedHorizontally)
 		{
 			mc.thePlayer.jumpMovementFactor *= 1.3F;
 			mc.thePlayer.motionY = -100F;
@@ -234,7 +273,8 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 	
 	public boolean canSpeed()
 	{
-	      boolean moving = mc.thePlayer.movementInput.moveForward != 0.0F || mc.thePlayer.movementInput.moveStrafe != 0.0F;
+	      boolean moving = mc.thePlayer.movementInput.moveForward != 0.0F 
+	    	  || mc.thePlayer.movementInput.moveStrafe != 0.0F;
 	      return !mc.thePlayer.isInWater() && !BlockUtils.isInLiquid(mc.thePlayer) &&
 	    	  !BlockUtils.isOnLiquid(mc.thePlayer) && !mc.thePlayer.isCollidedHorizontally && 
 	    	  !BlockUtils.isOnLadder(mc.thePlayer) && 
