@@ -34,13 +34,19 @@ public class ParkourMod extends Mod implements UpdateListener
 	@Override
 	public void onUpdate()
 	{
-		if (!mc.thePlayer.isSneaking()) {
-			if (mc.thePlayer.onGround && mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, mc.thePlayer.getEntityBoundingBox().offset(mc.thePlayer.motionX, -0.1f, mc.thePlayer.motionZ)).isEmpty()) {
-				if (Boost.isChecked()) {
+		if (!mc.thePlayer.isSneaking() && !wurst.mods.flightMod.isActive() &&
+			!wurst.mods.glideMod.isActive()) {
+			if (mc.thePlayer.onGround && mc.theWorld.getCollidingBoundingBoxes(
+				mc.thePlayer, mc.thePlayer.getEntityBoundingBox().offset(
+					mc.thePlayer.motionX, -0.1f, mc.thePlayer.motionZ)).isEmpty()) 
+			{
+				if (Boost.isChecked()) 
+				{
 					double ox = mc.thePlayer.motionX*3;
 					double oy = 0;
 					double oz = mc.thePlayer.motionZ*3;
-					mc.thePlayer.setPositionAndUpdate(mc.thePlayer.posX+ox, mc.thePlayer.posY+oy, mc.thePlayer.posZ+oz);
+					mc.thePlayer.setPositionAndUpdate(mc.thePlayer.posX+ox, 
+						mc.thePlayer.posY+oy, mc.thePlayer.posZ+oz);
 				}
 				mc.thePlayer.jump();
 			}
