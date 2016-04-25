@@ -50,6 +50,8 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		"Ignore ArmorLess Players", false);
 	public final CheckboxSetting friends = new CheckboxSetting(
 		"Attack Friends", false);
+	public final CheckboxSetting walls = new CheckboxSetting(
+		"Hit through walls", false);
 	public final CheckboxSetting reach = new CheckboxSetting(
 		"Reach Exploit (Vanilla Only)", false);
 	
@@ -103,6 +105,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		settings.add(mobinfront);
 		settings.add(checkarmor);
 		settings.add(friends);
+		settings.add(walls);
 		settings.add(reach);
 	}
 	
@@ -188,7 +191,7 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 	{
 		if(en == null)
 			return;
-		boolean canattack = en != null && mc.thePlayer.canEntityBeSeen(en) && 
+		boolean canattack = en != null && 
 			(reach.isChecked() ? mc.thePlayer.getDistanceToEntity(en) <= 10 : 
 				mc.thePlayer.getDistanceToEntity(en) <= realRange);
 		if(canattack)

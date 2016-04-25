@@ -173,7 +173,7 @@ public class EntityUtils
 				return false;
 		
 		//ticks Existed check
-		if(ticksExisted && o instanceof Entity)
+		if(ticksExisted)
 			if(((Entity)o).ticksExisted < WurstClient.INSTANCE.mods.killauraMod.secondsExisted * 20)
 				return false;
 		
@@ -257,13 +257,15 @@ public class EntityUtils
 		EntityLivingBase closestEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
 			if(isCorrectEntity(o, ignoreFriends, ticksExisted, armorCheck)
-				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
+				&& getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2 ||
+				!useFOV)
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP)
 					&& !en.isDead
 					&& en.getHealth() > 0
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en) 
+						|| WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					&& (!en.getName().equals(
 						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
 					if(closestEntity == null
@@ -287,7 +289,8 @@ public class EntityUtils
 				if(!(o instanceof EntityPlayerSP)
 					&& !en.isDead
 					&& en.getHealth() > 0
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en) ||
+						WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					&& ((!en.getName().equals(
 						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
 					&& Minecraft.getMinecraft().thePlayer
@@ -326,7 +329,8 @@ public class EntityUtils
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && o != friend && !en.isDead
 					&& en.getHealth() <= 0 == false
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en))
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)) ||
+				WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					if(closestEnemy == null
 						|| Minecraft.getMinecraft().thePlayer
 							.getDistanceToEntity(en) < Minecraft.getMinecraft().thePlayer
@@ -358,7 +362,8 @@ public class EntityUtils
 			{
 				EntityLivingBase en = (EntityLivingBase)o;
 				if(!(o instanceof EntityPlayerSP) && !en.isDead
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en))
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)) ||
+				WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					if(newEntity == null && en.getName().equals(name))
 						newEntity = en;
 			}
@@ -385,12 +390,14 @@ public class EntityUtils
 		Entity closestNLEntity = null;
 		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList)
 			if(isCorrectNonlivingEntity(o, ignoreFriends, ticksExisted))
-			if (getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2)
+			if (getDistanceFromMouse((Entity)o) <= WurstClient.INSTANCE.mods.killauraMod.fov / 2 ||
+			!useFOV)
 			{
 				Entity en = (Entity)o;
 				if(o instanceof EntityFallingBlock)
 				if(!(o instanceof EntityPlayerSP)
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en))
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)) ||
+				WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					if(closestNLEntity == null
 						|| Minecraft.getMinecraft().thePlayer
 							.getDistanceToEntity(en) < Minecraft.getMinecraft().thePlayer
@@ -402,23 +409,14 @@ public class EntityUtils
 	
 	public static boolean isCorrectNonlivingEntity(Object o, boolean ignoreFriends, boolean ticksExisted)
 	{
-		// non-entities
-		if(!(o instanceof Entity))
-					return false;
+		// Non Falling Blocks
+		if(!(o instanceof EntityFallingBlock))
+			return false;
 				
 		//ticks Existed check
 		if(ticksExisted)
-		if(!(o instanceof Entity))
-		{
-			return false;
-		} else if(o instanceof Entity)
-		{
 			if(((Entity)o).ticksExisted < WurstClient.INSTANCE.mods.killauraMod.secondsExisted * 20)
-						return false;
-		}
-		if(!(o instanceof EntityFallingBlock) || !Minecraft.getMinecraft().thePlayer.
-			canEntityBeSeen((Entity)o))
-			return false;
+				return false;
 		return true;
 
 	}
@@ -527,7 +525,8 @@ public class EntityUtils
 				if(!(o instanceof EntityPlayerSP)
 					&& !en.isDead
 					&& en.getHealth() > 0
-					&& Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en)
+					&& (Minecraft.getMinecraft().thePlayer.canEntityBeSeen(en) ||
+						WurstClient.INSTANCE.mods.killauraMod.walls.isChecked())
 					&& ((!en.getName().equals(
 						Minecraft.getMinecraft().thePlayer.getName()) || !(en instanceof EntityPlayer)))
 					&& Minecraft.getMinecraft().thePlayer
@@ -537,7 +536,7 @@ public class EntityUtils
 		return closeEntities;
 	}
 
-	public static float[] faceEntityXYZ(Entity entity, double x, double y, double z) 
+	public static float[] facePosition(Entity entity, double x, double y, double z) 
 	{
 		double xdiff = x - entity.posX;
 		double zdiff = z - entity.posZ;
@@ -559,18 +558,5 @@ public class EntityUtils
 	{
 		pitch = pitchset;
 		lookChanged = true;
-	}
-
-	public static float[] facePosition(Entity entity, double x, double y, double z) 
-	{
-		double diffX = x - entity.posX;
-		double diffZ = z - entity.posZ;
-		double diffY = y - (entity.posY + entity.getEyeHeight());
-		double dist = MathHelper.sqrt_double(diffX * diffX + diffZ * diffZ);
-		float yaw = (float)(Math.atan2(diffZ, diffX) * 180.0D / Math.PI) - 90.0F;
-		float pitch = (float)-(Math.atan2(diffY, dist) * 180.0D / Math.PI);
-		return new float[] { entity.rotationYaw + MathHelper.wrapAngleTo180_float(
-			yaw - entity.rotationYaw), entity.rotationPitch + MathHelper.wrapAngleTo180_float(
-				pitch - entity.rotationPitch)};
 	}
 }
