@@ -24,6 +24,7 @@ public class PhaseMod extends Mod implements UpdateListener, BlockBBListener
 	private int mode = 0;
 	private String[] modes = new String[]{"Wurst", "InstaDoors"};
 	private int resetNext;
+	public boolean shouldmove = true;
 	
 	@Override
 	public void initSettings()
@@ -48,28 +49,31 @@ public class PhaseMod extends Mod implements UpdateListener, BlockBBListener
 	@Override
 	public void onUpdate()
 	{
-		if(mode == 0)
+		switch(mode)
 		{
-			mc.thePlayer.noClip = true;
-			mc.thePlayer.fallDistance = 0;
-			mc.thePlayer.onGround = true;
-		}
-		if(mode == 1)
-		{
-		resetNext -= 1;
-	    double xOff = 0.0D;
-	    double zOff = 0.0D;
-	    double multiplier = 2.6D;
-	    double mx = Math.cos(Math.toRadians(mc.thePlayer.rotationYaw + 90.0F));
-	    double mz = Math.sin(Math.toRadians(mc.thePlayer.rotationYaw + 90.0F));
-        xOff = mc.thePlayer.movementInput.moveForward * multiplier * mx + mc.thePlayer.movementInput.moveStrafe * 
-        	multiplier * mz;	
-        zOff = mc.thePlayer.movementInput.moveForward * multiplier * mz - mc.thePlayer.movementInput.moveStrafe * 
-        	multiplier * mx;
-	    if (BlockUtils.isInsideBlock(mc.thePlayer) && mc.thePlayer.isSneaking()) 
-	      resetNext = 1;
-	    if (resetNext > 0)
-	      mc.thePlayer.boundingBox.offsetAndUpdate(xOff, 0.0D, zOff);
+			case 0:
+				mc.thePlayer.noClip = true;
+				mc.thePlayer.fallDistance = 0;
+				mc.thePlayer.onGround = true;
+				break;
+			case 1:
+				resetNext -= 1;
+			    double xOff = 0.0D;
+			    double zOff = 0.0D;
+			    double multiplier = 2.6D;
+			    double mx = Math.cos(Math.toRadians(mc.thePlayer.rotationYaw + 90.0F));
+			    double mz = Math.sin(Math.toRadians(mc.thePlayer.rotationYaw + 90.0F));
+		        xOff = mc.thePlayer.movementInput.moveForward * multiplier * mx + 
+		        	mc.thePlayer.movementInput.moveStrafe * multiplier * mz;	
+		        zOff = mc.thePlayer.movementInput.moveForward * multiplier * mz - 
+		        	mc.thePlayer.movementInput.moveStrafe * multiplier * mx;
+			    if (BlockUtils.isInsideBlock(mc.thePlayer) && mc.thePlayer.isSneaking()) 
+			      resetNext = 1;
+			    if (resetNext > 0)
+			      mc.thePlayer.boundingBox.offsetAndUpdate(xOff, 0.0D, zOff);
+			    break;
+			default:
+				return;
 		}
 	}
 	
@@ -78,6 +82,7 @@ public class PhaseMod extends Mod implements UpdateListener, BlockBBListener
 	{
 		if(mc.thePlayer == null)
 			return;
+		if(mode == 1)
 		if(!BlockUtils.isInsideBlock(mc.thePlayer) && event.getBoundingBox() != null &&
 			event.getBoundingBox().maxY > mc.thePlayer.boundingBox.minY && mc.thePlayer.isSneaking())
 			event.setBoundingBox(null);

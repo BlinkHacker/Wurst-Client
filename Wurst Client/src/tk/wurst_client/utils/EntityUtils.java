@@ -173,15 +173,9 @@ public class EntityUtils
 				return false;
 		
 		//ticks Existed check
-		if(ticksExisted)
-		if(!(o instanceof Entity))
-		{
-			return false;
-		} else if(o instanceof Entity)
-		{
+		if(ticksExisted && o instanceof Entity)
 			if(((Entity)o).ticksExisted < WurstClient.INSTANCE.mods.killauraMod.secondsExisted * 20)
 				return false;
-		}
 		
 		if(armorCheck && o instanceof EntityPlayer)
 		{
