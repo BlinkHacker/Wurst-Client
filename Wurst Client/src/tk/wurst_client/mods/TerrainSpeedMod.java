@@ -29,10 +29,12 @@ public class TerrainSpeedMod extends Mod implements UpdateListener
 	{
 		if(BlockUtils.isOnIce(mc.thePlayer))
 		{
-			Blocks.ice.slipperiness = 0.6F;
-			Blocks.packed_ice.slipperiness = 0.6F;
-	        mc.thePlayer.motionX *= 2.5F;
-	        mc.thePlayer.motionZ *= 2.5F;
+			Blocks.ice.slipperiness = 0.4F;
+			Blocks.packed_ice.slipperiness = 0.4F;
+		} else
+		{
+			Blocks.ice.slipperiness = 0.98F;
+			Blocks.packed_ice.slipperiness = 0.98F;
 		}
 	}
 	
