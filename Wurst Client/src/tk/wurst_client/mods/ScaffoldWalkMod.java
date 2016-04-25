@@ -7,6 +7,10 @@
  */
 package tk.wurst_client.mods;
 
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
@@ -68,8 +72,7 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	{
 		updateMS();
 		if (blockData != null)
-	      {
-	      if(hasTimePassedS(slower.isChecked() ? 350 : 75))
+	      if(hasTimePassedM(slower.isChecked() ? 250 : 75))
 	      {
 	    	  mc.getNetHandler().addToSendQueue(new C0BPacketEntityAction(mc.thePlayer, 
 	    		  C0BPacketEntityAction.Action.START_SNEAKING));
@@ -81,19 +84,21 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	        	  C0BPacketEntityAction.Action.STOP_SNEAKING));
 	          updateLastMS();
 	      }
-	      }
 	}
 	
 	public BlockData getBlockData(BlockPos blockpos)
 	{
-	    return mc.theWorld.getBlockState(blockpos.add(0, 0, 1)).getBlock() != Blocks.air ? 
-	    	new BlockData(blockpos.add(0, 0, 1), EnumFacing.NORTH) : mc.theWorld.getBlockState(
-	    		blockpos.add(0, 0, -1)).getBlock() != Blocks.air ? new BlockData(blockpos.add
-	    			(0, 0, -1), EnumFacing.SOUTH) : mc.theWorld.getBlockState(blockpos.add(1, 0, 0)).
-	    			getBlock() != Blocks.air ? new BlockData(blockpos.add(1, 0, 0), EnumFacing.WEST) 
-	    				: mc.theWorld.getBlockState(blockpos.add(-1, 0, 0)).getBlock() != Blocks.air ? 
+		List<Block> blacklist = Arrays.asList(new Block[] { 
+			Blocks.air, Blocks.water, Blocks.flowing_water, Blocks.lava, Blocks.flowing_lava});
+	    return mc.theWorld.getBlockState(blockpos.add(0, 0, 1)).getBlock() != blacklist ? 
+	    	new BlockData(blockpos.add(0, 0, 1), EnumFacing.NORTH) : 
+	    		mc.theWorld.getBlockState(blockpos.add(0, 0, -1)).getBlock() != blacklist ? 
+	    			new BlockData(blockpos.add(0, 0, -1), EnumFacing.SOUTH) : 
+	    				mc.theWorld.getBlockState(blockpos.add(1, 0, 0)).getBlock() != blacklist ? 
+	    						new BlockData(blockpos.add(1, 0, 0), EnumFacing.WEST) 
+	    				: mc.theWorld.getBlockState(blockpos.add(-1, 0, 0)).getBlock() != blacklist ? 
 	    					new BlockData(blockpos.add(-1, 0, 0), EnumFacing.EAST) : 
-	    						mc.theWorld.getBlockState(blockpos.add(0, -1, 0)).getBlock() != Blocks.air 
+	    						mc.theWorld.getBlockState(blockpos.add(0, -1, 0)).getBlock() != blacklist 
 	    						? new BlockData(blockpos.add(0, -1, 0), EnumFacing.UP) : null;
 	}
 	

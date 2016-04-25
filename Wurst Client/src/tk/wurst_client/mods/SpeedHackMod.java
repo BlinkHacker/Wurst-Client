@@ -231,29 +231,27 @@ public class SpeedHackMod extends Mod implements UpdateListener, PostUpdateListe
 			        mc.thePlayer.motionZ = 0.0D;
 			        if (mc.thePlayer.isCollidedVertically)
 			        {
-			          mc.thePlayer.jump();
-			          move = true;
+			        	mc.thePlayer.jump();
+			        	move = true;
 			        }
 			        if (move && mc.thePlayer.isCollidedVertically)
 			          move = false;
-			      }
-			      if (mc.thePlayer.isCollidedVertically)
-			      {
-			        mc.thePlayer.motionX *= 1.0379D;
-			        mc.thePlayer.motionZ *= 1.0379D;
-			        hop = true;
-			        prevY = mc.thePlayer.posY;
-			        mc.thePlayer.jump();
-			      }
-			      if (hop && !move && mc.thePlayer.posY >= prevY + 0.399994D)
-			      {
-			        mc.thePlayer.motionY = -100.0D;
-			        mc.thePlayer.posY = prevY;
-			        hop = false;
-			      }
-			    }
-			break;
-		case 5:
+				}
+					if (mc.thePlayer.isCollidedVertically)
+					{
+						mc.thePlayer.motionX *= 1.0379D;
+						mc.thePlayer.motionZ *= 1.0379D;
+			    	  	hop = true;
+			    	  	prevY = mc.thePlayer.posY;
+			    	  	mc.thePlayer.jump();
+					}
+					if (hop && !move && mc.thePlayer.posY >= prevY + 0.399994D)
+					{
+						mc.thePlayer.motionY = -100.0D;
+						mc.thePlayer.posY = prevY;
+						hop = false;
+					}
+			    }	
 			break;
 		default:
 			return;
