@@ -50,21 +50,19 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	@Override
 	public void onUpdate()
 	{
-	      blockData = null;
-	      if ((mc.thePlayer.getHeldItem() != null) && (!mc.thePlayer.isSneaking()) && 
-	    	  (mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock))
-	      {
-	        BlockPos blockBelow = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
+		blockData = null;
+		if (mc.thePlayer.getHeldItem() != null && !mc.thePlayer.isSneaking() && 
+	    	  mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock)
+		{
+			BlockPos blockBelow = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
 	        if (mc.theWorld.getBlockState(blockBelow).getBlock() == Blocks.air)
 	        {
-	          blockData = getBlockData(blockBelow);
-	          if (blockData != null)
-	          {
-	            BlockUtils.faceBlockPacket(new BlockPos(blockData.position.getX(), blockData.position.getY(),
-	            	blockData.position.getZ()));
-	          }
+	        	blockData = getBlockData(blockBelow);
+	        	if (blockData != null)
+	        		BlockUtils.faceBlockPacket(new BlockPos(blockData.position.getX(), blockData.position.getY(),
+	        			blockData.position.getZ()));
 	        }
-	      }
+		}
 	}
 	
 	@Override
@@ -111,13 +109,13 @@ public class ScaffoldWalkMod extends Mod implements UpdateListener, PostUpdateLi
 	
 	public class BlockData
 	{
-	  public BlockPos position;
-	  public EnumFacing face;
+		public BlockPos position;
+		public EnumFacing face;
 	  
-	  public BlockData(BlockPos position, EnumFacing face)
-	  {
-	    this.position = position;
-	    this.face = face;
-	  }
+		public BlockData(BlockPos position, EnumFacing face)
+		{
+			this.position = position;
+			this.face = face;
+		}
 	}
 }
