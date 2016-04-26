@@ -9,6 +9,7 @@ package tk.wurst_client.mods;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C02PacketUseEntity;
+import tk.wurst_client.events.listeners.PostUpdateListener;
 import tk.wurst_client.events.listeners.UpdateListener;
 import tk.wurst_client.mods.Mod.Category;
 import tk.wurst_client.mods.Mod.Info;
@@ -23,8 +24,9 @@ import tk.wurst_client.utils.EntityUtils;
 		+ "TriggerBot instead.",
 	name = "ClickAura",
 	tags = "Click Aura,ClickAimbot,Click Aimbot")
-public class ClickAuraMod extends Mod implements UpdateListener
+public class ClickAuraMod extends Mod implements UpdateListener, PostUpdateListener
 {
+	private EntityLivingBase en;
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
@@ -54,33 +56,48 @@ public class ClickAuraMod extends Mod implements UpdateListener
 		if(wurst.mods.clickAimbotMod.isEnabled())
 			wurst.mods.clickAimbotMod.setEnabled(false);
 		wurst.events.add(UpdateListener.class, this);
+		wurst.events.add(PostUpdateListener.class, this);
 	}
 	
 	@Override
 	public void onUpdate()
 	{
-		updateMS();
-		EntityLivingBase en = EntityUtils.getClosestEntity(!wurst.mods.killauraMod.friends.isChecked(), 
+		en = EntityUtils.getClosestEntity(!wurst.mods.killauraMod.friends.isChecked(), 
 			true, true, wurst.mods.killauraMod.checkarmor.isChecked());
+		if (en != null && mc.thePlayer.getDistanceToEntity(en) <= 
+			wurst.mods.killauraMod.realRange)
+		{
+			if(wurst.mods.autoSwordMod.isActive())
+				AutoSwordMod.setSlot();
+			wurst.mods.criticalsMod.doCritical();
+			float[] rotations = EntityUtils.getRotationsNeeded(en);
+			EntityUtils.setYaw(rotations[0]);
+			EntityUtils.setPitch(rotations[1]);	
+			wurst.mods.criticalsMod.doCritical();
+			wurst.mods.armorBreakerMod.SwapItem();
+		}
+	}
+	
+	@Override
+	public void onPostUpdate()
+	{
+		updateMS();
 		if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null
 			&& mc.gameSettings.keyBindAttack.pressed)
 			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange)
-			{
-				if(wurst.mods.autoSwordMod.isActive())
-					AutoSwordMod.setSlot();
-				wurst.mods.criticalsMod.doCritical();
-				EntityUtils.faceEntityPacket(en);
-				wurst.mods.armorBreakerMod.SwapItem();
-				mc.thePlayer.swingItem();
-				mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
-					en, C02PacketUseEntity.Action.ATTACK));
-				updateLastMS();
-			}
+		{
+			wurst.mods.armorBreakerMod.SwapItem();
+			mc.thePlayer.swingItem();
+			mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
+				en, C02PacketUseEntity.Action.ATTACK));
+			updateLastMS();
+		}
 	}
 	
 	@Override
 	public void onDisable()
 	{
 		wurst.events.remove(UpdateListener.class, this);
+		wurst.events.remove(PostUpdateListener.class, this);
 	}
 }

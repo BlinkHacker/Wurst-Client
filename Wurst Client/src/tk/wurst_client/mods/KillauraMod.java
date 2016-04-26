@@ -147,50 +147,48 @@ public class KillauraMod extends Mod implements UpdateListener, PostUpdateListen
 		updateMS();
 		target = EntityUtils.getClosestEntity(!friends.isChecked(), 
 			true, true, checkarmor.isChecked());
-	          if (target != null && mc.thePlayer.getDistanceToEntity(target) <= 
-	        	  (reach.isChecked() ? 10 : realRange))
-	          {
-	            float[] rotations = EntityUtils.getRotationsNeeded(target);
-	            EntityUtils.setYaw(rotations[0]);
-	            EntityUtils.setPitch(rotations[1]);
-	          }
-	          if (setupTick)
-	          {
-	            if (hasTimePassedM(150))
-	            {
-	              switchingTargets = true;
-	              updateLastMS();
-	            }
-	          }
-	        setupTick = !setupTick;
-		if(wurst.mods.autoSwordMod.isActive())
-	 		AutoSwordMod.setSlot();
-	 	wurst.mods.criticalsMod.doCritical();
-	 	wurst.mods.armorBreakerMod.SwapItem();
+		if (target != null && mc.thePlayer.getDistanceToEntity(target) <= 
+			(reach.isChecked() ? 10 : realRange))
+		{
+			if(wurst.mods.autoSwordMod.isActive())
+		 		AutoSwordMod.setSlot();
+			float[] rotations = EntityUtils.getRotationsNeeded(target);
+			EntityUtils.setYaw(rotations[0]);
+	    	EntityUtils.setPitch(rotations[1]);
+	    	wurst.mods.criticalsMod.doCritical();
+		 	wurst.mods.armorBreakerMod.SwapItem();
+	    	if (setupTick)
+		  	{
+				if (hasTimePassedM(150))
+		     	{
+		         	switchingTargets = true;
+		          	updateLastMS();
+		      	}
+		  	}
+			setupTick = !setupTick;
+		}
 	}
 	
 	@Override
 	public void onPostUpdate()
 	{
 		updateMS();
-		if (hasTimePassedS(realSpeed)) 
+		if (hasTimePassedS(realSpeed) && target != null) 
 		{
-	            if (switchingTargets)
-	            {
-	              for (int i = 0; i < 2; i++) 
-	                attack(target);
-	              switchingTargets = false;
-	            }
-	            else
-	            	attack(target);
-	            updateLastMS();
+			if (switchingTargets)
+			{
+				for (int i = 0; i < 2; i++) 
+					attack(target);
+				switchingTargets = false;
+			}
+			else
+				attack(target);
+			updateLastMS();
 	     }
 	}
 	
 	public void attack(EntityLivingBase en)
 	{
-		if(en == null)
-			return;
 		boolean canattack = en != null && 
 			(reach.isChecked() ? mc.thePlayer.getDistanceToEntity(en) <= 10 : 
 				mc.thePlayer.getDistanceToEntity(en) <= realRange);
