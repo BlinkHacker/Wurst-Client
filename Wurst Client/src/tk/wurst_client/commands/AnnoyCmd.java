@@ -68,52 +68,54 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 	@Override
 	public void onReceivedMessage(ChatInputEvent event)
 	{
-		String message = new String(event.getComponent().getUnformattedText());
-		if(message.startsWith("§c[§6Wurst§c]§f "))
-			return;
-		if(message.startsWith("<" + name + ">") || message.contains(name + ">"))
-			start = 1;
-		else if(message.contains("] " + name + ":")
-			|| message.contains("]" + name + ":") || message.contains(name + ":"))
-			start = 2;
-		else if(message.contains(name + " §f"))
-			start = 3;				
-		else if (message.contains(name + "»"))
-			start = 4;
-		else 
-			start = 0;
-		if(start != 0)
+		if(name != null)
 		{
+			String message = new String(event.getComponent().getUnformattedText());
 			String repeatMessage;
-			if(start == 1)
+			String repeatMessageFinal;
+			if(message.startsWith("§c[§6Wurst§c]§f "))
+				return;
+			if(message.startsWith("<" + name + ">") || message.contains(name + ">"))
+			{
+				start = 1;
 				repeatMessage = message.substring(message.indexOf(">") + 1);
-			else if(start == 2)
+			}else if(message.contains(name + ":"))
+			{
+				start = 2;
 				repeatMessage = message.substring(message.indexOf(":") + 1);
-			else if(start == 3)
+			}else if(message.contains(name + " §f"))
+			{
+				start = 3;
 				repeatMessage = message.substring(message.indexOf("§f"));
-			else if(start == 4)
+			}else if (message.contains(name + "»"))
+			{
+				start = 4;
 				repeatMessage = message.substring(message.indexOf("»") + 1);
-			else
+			}else 
+			{
+				start = 0;
 				repeatMessage = "";
+			}
 			if(repeatMessage.startsWith("/"))
 				return;
 			if(repeatMessage.startsWith("."))
 				repeatMessage = ".say " + repeatMessage;
-			String repeatMessage2 = repeatMessage;
-			if (delay > 0)
-			{
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() 
+			repeatMessageFinal = repeatMessage;
+			if(start != 0)
+				if (delay > 0)
 				{
-					@Override
-					public void run()
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask() 
 					{
-						mc.thePlayer.sendChatMessage(repeatMessage2);
-					}
-				  
-				}, delay);
-			} else
-				mc.thePlayer.sendChatMessage(repeatMessage2);
+						@Override
+						public void run()
+						{
+							mc.thePlayer.sendChatMessage(repeatMessageFinal);
+						}
+					  
+					}, delay);
+				} else
+					mc.thePlayer.sendChatMessage(repeatMessageFinal);
 		}
 	}
 }
