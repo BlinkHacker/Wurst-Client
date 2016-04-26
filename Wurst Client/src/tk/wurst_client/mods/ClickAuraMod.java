@@ -27,6 +27,8 @@ import tk.wurst_client.utils.EntityUtils;
 public class ClickAuraMod extends Mod implements UpdateListener, PostUpdateListener
 {
 	private EntityLivingBase en;
+	private boolean shouldattack = false;
+	
 	@Override
 	public NavigatorItem[] getSeeAlso()
 	{
@@ -65,7 +67,7 @@ public class ClickAuraMod extends Mod implements UpdateListener, PostUpdateListe
 		en = EntityUtils.getClosestEntity(!wurst.mods.killauraMod.friends.isChecked(), 
 			true, true, wurst.mods.killauraMod.checkarmor.isChecked());
 		if (en != null && mc.thePlayer.getDistanceToEntity(en) <= 
-			wurst.mods.killauraMod.realRange)
+			wurst.mods.killauraMod.realRange && mc.gameSettings.keyBindAttack.pressed)
 		{
 			if(wurst.mods.autoSwordMod.isActive())
 				AutoSwordMod.setSlot();
@@ -75,6 +77,7 @@ public class ClickAuraMod extends Mod implements UpdateListener, PostUpdateListe
 			EntityUtils.setPitch(rotations[1]);	
 			wurst.mods.criticalsMod.doCritical();
 			wurst.mods.armorBreakerMod.SwapItem();
+			shouldattack = true;
 		}
 	}
 	
@@ -83,20 +86,21 @@ public class ClickAuraMod extends Mod implements UpdateListener, PostUpdateListe
 	{
 		updateMS();
 		if(hasTimePassedS(wurst.mods.killauraMod.realSpeed) && en != null
-			&& mc.gameSettings.keyBindAttack.pressed)
+			&& shouldattack)
 			if(mc.thePlayer.getDistanceToEntity(en) <= wurst.mods.killauraMod.realRange)
 		{
-			wurst.mods.armorBreakerMod.SwapItem();
 			mc.thePlayer.swingItem();
 			mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(
 				en, C02PacketUseEntity.Action.ATTACK));
 			updateLastMS();
+			shouldattack = false;
 		}
 	}
 	
 	@Override
 	public void onDisable()
 	{
+		shouldattack = false;
 		wurst.events.remove(UpdateListener.class, this);
 		wurst.events.remove(PostUpdateListener.class, this);
 	}
