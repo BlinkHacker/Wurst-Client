@@ -22,6 +22,7 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 	private boolean toggled;
 	private String name;
 	private int delay;
+	private int start;
 	
 	@Override
 	public void execute(String[] args) throws Error
@@ -32,6 +33,7 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 			if(args.length == 1)
 			{
 				name = args[0];
+				delay = 0;
 				wurst.chat.message("Now annoying " + name + ".");
 				if(name.equals(mc.thePlayer.getName()))
 					wurst.chat.warning("Annoying yourself is a bad idea!");
@@ -70,8 +72,29 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 		if(message.startsWith("§c[§6Wurst§c]§f "))
 			return;
 		if(message.startsWith("<" + name + ">") || message.contains(name + ">"))
+			start = 1;
+		else if(message.contains("] " + name + ":")
+			|| message.contains("]" + name + ":") || message.contains(name + ":"))
+			start = 2;
+		else if(message.contains(name + " §f"))
+			start = 3;				
+		else if (message.contains(name + "»"))
+			start = 4;
+		else 
+			start = 0;
+		if(start != 0)
 		{
-			String repeatMessage = message.substring(message.indexOf(">") + 1);
+			String repeatMessage;
+			if(start == 1)
+				repeatMessage = message.substring(message.indexOf(">") + 1);
+			else if(start == 2)
+				repeatMessage = message.substring(message.indexOf(":") + 1);
+			else if(start == 3)
+				repeatMessage = message.substring(message.indexOf("§f"));
+			else if(start == 4)
+				repeatMessage = message.substring(message.indexOf("»") + 1);
+			else
+				repeatMessage = "";
 			if(repeatMessage.startsWith("/"))
 				return;
 			if(repeatMessage.startsWith("."))
@@ -80,80 +103,17 @@ public class AnnoyCmd extends Cmd implements ChatInputListener
 			if (delay > 0)
 			{
 				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
+				timer.schedule(new TimerTask() 
+				{
 					@Override
 					public void run()
 					{
-					mc.thePlayer.sendChatMessage(repeatMessage2);
+						mc.thePlayer.sendChatMessage(repeatMessage2);
 					}
-					  
-					}, delay);
+				  
+				}, delay);
 			} else
-			mc.thePlayer.sendChatMessage(repeatMessage2);
-		}else if(message.contains(name + ":"))
-		{
-			String repeatMessage = message.substring(message.indexOf(":") + 1);
-			if(repeatMessage.startsWith("/"))
-				return;
-			if(repeatMessage.startsWith("."))
-				repeatMessage = ".say " + repeatMessage;
-			String repeatMessage2 = repeatMessage;
-			if (delay > 0)
-			{
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run()
-					{
-					mc.thePlayer.sendChatMessage(repeatMessage2);
-					}
-					  
-					}, delay);
-			} else
-			mc.thePlayer.sendChatMessage(repeatMessage2);
-		} else if(message.contains(name + " §f"))
-		{
-			String repeatMessage = message.substring(message.indexOf(" §f"));
-			if(repeatMessage.startsWith("/"))
-				return;
-			if(repeatMessage.startsWith("."))
-				repeatMessage = ".say " + repeatMessage;
-			String repeatMessage2 = repeatMessage;
-			if (delay > 0)
-			{
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run()
-					{
-					mc.thePlayer.sendChatMessage(repeatMessage2);
-					}
-					  
-					}, delay);
-			} else
-			mc.thePlayer.sendChatMessage(repeatMessage2);
-					
-		} else if (message.contains(name + "»"))
-		{
-			String repeatMessage = message.substring(message.indexOf("»") + 1);
-			if(repeatMessage.startsWith("/"))
-				return;
-			if(repeatMessage.startsWith("."))
-				repeatMessage = ".say " + repeatMessage;
-			String repeatMessage2 = repeatMessage;
-			if (delay > 0)
-			{
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run()
-					{
-					mc.thePlayer.sendChatMessage(repeatMessage2);
-					}
-					  
-					}, delay);
-			} else
-			mc.thePlayer.sendChatMessage(repeatMessage2);
+				mc.thePlayer.sendChatMessage(repeatMessage2);
 		}
 	}
 }
