@@ -23,7 +23,7 @@ import tk.wurst_client.utils.RenderUtils;
 @Info(category = Category.RENDER,
 	description = "Allows you to see blocks that have changed.\n"
 		+ "If more than 400 blocks have changed, the blocks reset.\n"
-		+ "Very good for PropHunt and tracking far players.\n"
+		+ "Very good for tracking far players.\n"
 		+ "Note: This will also show where players right clicked and left clicked.",
 	name = "BlockChangeESP")
 public class BlockChangeEspMod extends Mod implements RenderListener, PacketInputListener
@@ -57,26 +57,26 @@ public class BlockChangeEspMod extends Mod implements RenderListener, PacketInpu
 	public void onReceivedPacket(PacketInputEvent event)
 	{
 		updateMS();
-		    if(event.getPacket() instanceof S23PacketBlockChange) {
-		       S23PacketBlockChange blockchange = (S23PacketBlockChange)event.getPacket();
-		       matchingBlocks.add(blockchange.func_179827_b());
-					if(matchingBlocks.size() >= maxblocks && notify)
-					{
-						wurst.chat.warning(getName() + " found over " + maxblocks + " blocks.");
-						wurst.chat
-							.message("To prevent lag, the blocks highlighted have been reset.");
-						matchingBlocks.clear();
-						notify = false;
-					}else if(matchingBlocks.size() < maxblocks)
-						notify = true;
-		     }
-		    
-		    if(clearafterdelay.isChecked())
-		    if(hasTimePassedM(15000))
+		if(event.getPacket() instanceof S23PacketBlockChange) 
+		{
+			S23PacketBlockChange blockchange = (S23PacketBlockChange)event.getPacket();
+			matchingBlocks.add(blockchange.func_179827_b());
+			if(matchingBlocks.size() >= maxblocks && notify)
 			{
-		    	matchingBlocks.clear();
-		    	updateLastMS();
-			}
+				wurst.chat.warning(getName() + " found over " + maxblocks + " blocks.");
+				wurst.chat.message("To prevent lag, the blocks highlighted have been reset.");
+				matchingBlocks.clear();
+				notify = false;
+			}else if(matchingBlocks.size() < maxblocks)
+				notify = true;
+		}
+		    
+		if(clearafterdelay.isChecked())
+		if(hasTimePassedM(15000))
+		{
+			matchingBlocks.clear();
+			updateLastMS();
+		}
 		    	
 	}
 

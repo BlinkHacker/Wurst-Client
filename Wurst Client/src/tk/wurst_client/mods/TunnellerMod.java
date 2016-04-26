@@ -180,7 +180,7 @@ public class TunnellerMod extends Mod implements RenderListener, UpdateListener
 					if(fakeObjectMouseOver == null)
 						continue;
 					fakeObjectMouseOver.setBlockPos(blockPos);
-					if(Block.getIdFromBlock(block) != 0 && posY >= 0)
+					if(wurst.mods.nukerMod.isCorrectBlock(block) && posY >= 0)
 					{
 						if(wurst.mods.nukerMod.getMode() == 3
 							&& block.getPlayerRelativeBlockHardness(
@@ -216,7 +216,7 @@ public class TunnellerMod extends Mod implements RenderListener, UpdateListener
 					MovingObjectPosition fakeObjectMouseOver =
 						mc.objectMouseOver;
 					fakeObjectMouseOver.setBlockPos(blockPos);
-					if(Block.getIdFromBlock(block) != 0 && posY >= 0)
+					if(wurst.mods.nukerMod.isCorrectBlock(block) && posY >= 0)
 					{
 						if(wurst.mods.nukerMod.getMode() == 3
 							&& block.getPlayerRelativeBlockHardness(

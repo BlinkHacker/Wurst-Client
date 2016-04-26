@@ -34,7 +34,7 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 	public NavigatorItem[] getSeeAlso()
 	{
 		return new NavigatorItem[]{wurst.mods.prophuntAuraMod,
-			wurst.mods.blockChangeEspMod};
+			wurst.mods.blockChangeEspMod, wurst.mods.farmhuntEspMod};
 	}
 	
 	@Override
@@ -91,7 +91,8 @@ public class ProphuntEspMod extends Mod implements RenderListener, PacketInputLi
 	public void onReceivedPacket(PacketInputEvent event)
 	{
 		PacketInputEvent receive = (PacketInputEvent)event;
-	    if(receive.getPacket() instanceof S23PacketBlockChange) {
+	    if(receive.getPacket() instanceof S23PacketBlockChange) 
+	    {
 	       S23PacketBlockChange blockchange = (S23PacketBlockChange)receive.getPacket();
 	       changed.add(blockchange.func_179827_b());
 	    }

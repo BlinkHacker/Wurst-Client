@@ -39,18 +39,18 @@ public class ArmorBreakerMod extends Mod implements AttackEntityListener
 		updateMS();
 		if(wurst.mods.armorBreakerMod.isActive() && hasTimePassedM(200))
 		{
-		ItemStack current = mc.thePlayer.getCurrentEquippedItem();
-		 for(int i = 0; i < 45; i++)
-		 {
-	        ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
-	        if (current != null && toSwitch != null)
-	            if (current.getItem() instanceof ItemSword || current.getItem() instanceof ItemAxe ||
-	            	current.getItem() instanceof ItemPickaxe || current.getItem() instanceof ItemSpade)
-	                if (toSwitch.getItem() instanceof ItemSword || toSwitch.getItem() instanceof ItemAxe || 
-	                	toSwitch.getItem() instanceof ItemPickaxe || toSwitch.getItem() instanceof ItemSpade)
-	                    mc.playerController.windowClick(0, i, 0, 2, mc.thePlayer);
-		 }
-		 updateLastMS();
+			ItemStack current = mc.thePlayer.getCurrentEquippedItem();
+			for(int i = 0; i < 45; i++)
+			{
+				ItemStack toSwitch = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
+		        if (current != null && toSwitch != null)
+		        	if (current.getItem() instanceof ItemSword || current.getItem() instanceof ItemAxe ||
+		            	current.getItem() instanceof ItemPickaxe || current.getItem() instanceof ItemSpade)
+		                if (toSwitch.getItem() instanceof ItemSword || toSwitch.getItem() instanceof ItemAxe || 
+		                	toSwitch.getItem() instanceof ItemPickaxe || toSwitch.getItem() instanceof ItemSpade)
+		                    mc.playerController.windowClick(0, i, 0, 2, mc.thePlayer);
+			}
+			 updateLastMS();
 		}
 	}
 	

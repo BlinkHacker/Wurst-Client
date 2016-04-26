@@ -10,9 +10,7 @@ package tk.wurst_client.mods;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.MathHelper;
 import tk.wurst_client.events.listeners.RenderListener;
 import tk.wurst_client.mods.Mod.Category;
@@ -41,16 +39,16 @@ public class FarmhuntEspMod extends Mod implements RenderListener
 	public void onRender()
 	{
 		for(Object entity : mc.theWorld.loadedEntityList)
-			if(!(entity instanceof EntityPlayer) && entity instanceof EntityLivingBase)
+			if(entity instanceof EntityLiving)
 			{
-				EntityLivingBase mob = (EntityLivingBase)entity;
+				EntityLiving mob = (EntityLiving)entity;
 				if (mob.rotationPitch != 0.0F)
 				{
-				double x = ((Entity)entity).posX;
-				double y = ((Entity)entity).posY;
-				double z = ((Entity)entity).posZ;
+				double x = mob.posX;
+				double y = mob.posY;
+				double z = mob.posZ;
 				Color color;
-				if(mc.thePlayer.getDistanceToEntity((Entity)entity) >= 0.5)
+				if(mc.thePlayer.getDistanceToEntity(mob) >= 0.5)
 					color =
 						new Color(1F, 0F, 0F, 0.5F - MathHelper.abs(MathHelper
 							.sin(Minecraft.getSystemTime() % 1000L / 1000.0F

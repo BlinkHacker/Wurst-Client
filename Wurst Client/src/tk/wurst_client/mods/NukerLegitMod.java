@@ -28,7 +28,7 @@ import tk.wurst_client.utils.RenderUtils;
 
 @Info(category = Category.BLOCKS,
 	description = "Slower Nuker that bypasses any cheat prevention\n"
-		+ "PlugIn. Not required on most NoCheat+ servers!",
+		+ "Plugin. Not required on most NoCheat+ servers!",
 	name = "NukerLegit")
 public class NukerLegitMod extends Mod implements LeftClickListener,
 	RenderListener, UpdateListener
@@ -192,7 +192,7 @@ public class NukerLegitMod extends Mod implements LeftClickListener,
 			int currentID =
 				Block.getIdFromBlock(mc.theWorld.getBlockState(currentPos)
 					.getBlock());
-			if(currentID != 0)
+			if(wurst.mods.nukerMod.isCorrectBlock(mc.theWorld.getBlockState(currentPos).getBlock()))
 				switch(wurst.mods.nukerMod.getMode())
 				{
 					case 1:

@@ -57,26 +57,26 @@ public class HUDUtils
 
   private void initSize()
   {
-    elementH = (Math.max(Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT * 2, iconH));
+    elementH = Math.max(Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT * 2, iconH);
     if (itemStack != null)
     {
       int damage = 1;
       int maxDamage = 1;
       int percentdamage = 1;
-      if ((isArmor) || ((!isArmor) && (itemStack.isItemDamaged())))
+      if (isArmor || (!isArmor && itemStack.isItemDamaged()))
       {
         maxDamage = itemStack.getMaxDamage() + 1;
         damage = maxDamage - this.itemStack.getItemDamage();
         percentdamage = damage * 100 / maxDamage;
-        itemDamage = ("§" + getColorCode(percentdamage) + damage + "/" + maxDamage);
+        itemDamage = "§" + getColorCode(percentdamage) + damage + "/" + maxDamage;
       }
       itemDamageW = Minecraft.getMinecraft().fontRendererObj.getStringWidth
     	  (stripCtrl(itemDamage));
-      elementW = (padW + iconW + padW + itemDamageW);
+      elementW = padW + iconW + padW + itemDamageW;
       itemName = itemStack.getDisplayName();
-      elementW = (padW + iconW + padW + Math.max(Minecraft.getMinecraft()
+      elementW = padW + iconW + padW + Math.max(Minecraft.getMinecraft()
     	  .fontRendererObj.getStringWidth(
-        	(stripCtrl(itemName))), itemDamageW));
+        	(stripCtrl(itemName))), itemDamageW);
       itemNameW = Minecraft.getMinecraft().fontRendererObj.getStringWidth(stripCtrl(itemName));
     }
   }
@@ -111,11 +111,12 @@ public class HUDUtils
     return string.replaceAll("(?i)§[0-9a-fklmnor]", "");
   }
   
-  public void renderItemOverlayIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, int x, int y, boolean showDamageBar, boolean showCount)
+  public void renderItemOverlayIntoGUI(FontRenderer fontRenderer, ItemStack itemStack, 
+	  int x, int y, boolean showDamageBar, boolean showCount)
   {
-    if ((itemStack != null) && ((showDamageBar) || (showCount)))
+    if (itemStack != null && (showDamageBar || showCount))
     {
-      if ((itemStack.isItemDamaged()) && (showDamageBar))
+      if (itemStack.isItemDamaged() && showDamageBar)
       {
         int var11 = (int)Math.round(13.0D - itemStack.getItemDamage() * 13.0D / itemStack.getMaxDamage());
         int var7 = (int)Math.round(255.0D - itemStack.getItemDamage() * 255.0D / itemStack.getMaxDamage());
@@ -139,19 +140,19 @@ public class HUDUtils
       if (showCount)
       {
         int count = 0;
-        if (itemStack.getMaxStackSize() > 1) {
+        if (itemStack.getMaxStackSize() > 1) 
           count = countInInventory(Minecraft.getMinecraft().thePlayer, itemStack.getItem(), 
         	  itemStack.getItemDamage());
-        } else if (itemStack.getItem().equals(Items.bow)) {
+        else if (itemStack.getItem().equals(Items.bow))
           count = countInInventory(Minecraft.getMinecraft().thePlayer, Items.arrow);
-        }
         if (count > 1)
         {
           String var6 = "" + count;
           GlStateManager.disableLighting();
           GlStateManager.disableDepth();
           GlStateManager.disableBlend();
-          fontRenderer.drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.getStringWidth(var6), y + 6 + 3, 16777215);
+          fontRenderer.drawStringWithShadow(var6, x + 19 - 2 - fontRenderer.getStringWidth(var6), 
+        	  y + 6 + 3, 16777215);
           GlStateManager.enableLighting();
           GlStateManager.enableDepth();
         }
@@ -162,11 +163,10 @@ public class HUDUtils
   public int countInInventory(EntityPlayer player, Item item, int metadata)
   {
     int count = 0;
-    for (int i = 0; i < player.inventory.mainInventory.length; i++) {
+    for (int i = 0; i < player.inventory.mainInventory.length; i++) 
       if ((player.inventory.mainInventory[i] != null) && (item.equals(player.inventory.mainInventory[i].
     	  getItem())) && ((metadata == -1) || (player.inventory.mainInventory[i].getMetadata() == metadata)))
         count += player.inventory.mainInventory[i].stackSize;
-    }
     return count;
   }
   

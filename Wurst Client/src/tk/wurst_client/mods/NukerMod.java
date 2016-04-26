@@ -11,7 +11,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C07PacketPlayerDigging.Action;
 import net.minecraft.network.play.client.C0APacketAnimation;
@@ -253,7 +255,7 @@ public class NukerMod extends Mod implements LeftClickListener, RenderListener,
 			int currentID =
 				Block.getIdFromBlock(mc.theWorld.getBlockState(currentPos)
 					.getBlock());
-			if(currentID != 0)
+			if(isCorrectBlock(mc.theWorld.getBlockState(currentPos).getBlock()))
 				switch(mode)
 				{
 					case 1:
@@ -312,7 +314,7 @@ public class NukerMod extends Mod implements LeftClickListener, RenderListener,
 					if(fakeObjectMouseOver == null)
 						return;
 					fakeObjectMouseOver.setBlockPos(blockPos);
-					if(Block.getIdFromBlock(block) != 0 && posY >= 0
+					if(isCorrectBlock(block) && posY >= 0
 						&& currentDistance <= realRange)
 					{
 						if(mode == 1 && Block.getIdFromBlock(block) != id)
@@ -331,6 +333,24 @@ public class NukerMod extends Mod implements LeftClickListener, RenderListener,
 							mc.theWorld.getBlockState(blockPos));
 					}
 				}
+	}
+	
+	public boolean isCorrectBlock(Block block)
+	{
+		boolean canBreakLiquid = mc.thePlayer.capabilities.isCreativeMode && wurst.mods.liquidsMod.isActive();
+		if(block instanceof BlockAir)
+			return false;
+		else if(block instanceof BlockLiquid && !canBreakLiquid)
+			return false;
+		else if((block instanceof BlockBarrier || block instanceof BlockPortal 
+			|| block instanceof BlockEndPortal || block instanceof BlockEndPortalFrame ||
+			block instanceof BlockCommandBlock) && 
+			!mc.thePlayer.capabilities.isCreativeMode)
+			return false;
+		else if(block == Blocks.bedrock && !mc.thePlayer.capabilities.isCreativeMode)
+			return false;
+		else
+		return true;
 	}
 	
 	public int getMode()

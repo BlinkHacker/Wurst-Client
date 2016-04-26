@@ -171,7 +171,7 @@ public class SpeedNukerMod extends Mod implements LeftClickListener,
 					if(fakeObjectMouseOver == null)
 						continue;
 					fakeObjectMouseOver.setBlockPos(blockPos);
-					if(Block.getIdFromBlock(block) != 0 && posY >= 0
+					if(wurst.mods.nukerMod.isCorrectBlock(block) && posY >= 0
 						&& currentDistance <= wurst.mods.nukerMod.yesCheatRange)
 					{
 						if(nukerMode == 1
@@ -220,7 +220,7 @@ public class SpeedNukerMod extends Mod implements LeftClickListener,
 						mc.objectMouseOver;
 					fakeObjectMouseOver.setBlockPos(new BlockPos(posX, posY,
 						posZ));
-					if(Block.getIdFromBlock(block) != 0 && posY >= 0
+					if(wurst.mods.nukerMod.isCorrectBlock(block) && posY >= 0
 						&& currentDistance <= wurst.mods.nukerMod.normalRange)
 					{
 						if(nukerMode == 1
